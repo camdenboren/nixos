@@ -1,0 +1,83 @@
+{
+  lib,
+  hostname,
+  system,
+  ...
+}:
+
+let
+  isDarwin = lib.hasSuffix "-darwin" system;
+in
+{
+  programs.bash = {
+    enable = true;
+
+    # a nix config workflow is included:
+    #
+    #   cdf - cd into $NH_FLAKE
+    #   repl - enter nix repl with nixpkgs
+    #   fmt - format all nix files in $NH_FLAKE
+    #   check - evaluate $NH_FLAKE for all hosts
+    #   lgf - open lazygit in $NH_FLAKE
+    #   update - update $NH_FLAKE's inputs
+    #   build - build a derivation in cwd
+    #   sw - rebuild system
+
+    shellAliases =
+      {
+        bld = "nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'";
+        c = "cd ~ && clear";
+        cdf = "cd $NH_FLAKE";
+        cdh = "cd ~";
+        cdr = "cd ~/Documents/Repos";
+        cdt = "cd ~/Documents/Tests";
+        check = "nix flake check $NH_FLAKE";
+        ddg = "lynx -vikeys start.duckduckgo.com/lite/";
+        fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";
+        lg = "lazygit";
+        lgf = "lazygit -p $NH_FLAKE";
+        ls = "ls -a";
+        repl = "nix repl -f '<nixpkgs>'";
+        sw = if isDarwin then "nh darwin switch" else "nh os switch";
+        tr = if isDarwin then "trash" else "gio trash";
+        update = "nix flake update --flake $NH_FLAKE";
+        zed = "zeditor";
+        ":q" = "exit";
+      }
+      // (
+        if (hostname == "main") then
+          {
+            nixos = "quickemu --vm ~/vm/nixos-24.05-gnome.conf --status-quo";
+            ubuntu = "quickemu --vm ~/vm/ubuntu-24.04.conf --status-quo";
+            windows = "quickemu --vm ~/vm/windows-10.conf --status-quo";
+          }
+        else
+          { }
+      );
+
+    initExtra = ''
+      if (( SHLVL > 1 )); then
+        export PS1="\n\[\033[1;31m\][shell:\w]\$\[\033[0m\] "
+      fi
+
+      mkcd () {
+        mkdir $1
+        cd $1
+      }
+
+      run () {
+        nix run nixpkgs#$1
+      }
+
+      shell () {
+        NIXPKGS_STRING=""
+        for var in "$@"
+        do
+          VAR_STRING="nixpkgs#''${var} "
+          NIXPKGS_STRING+=$VAR_STRING
+        done
+        nix shell $NIXPKGS_STRING
+      }
+    '';
+  };
+}

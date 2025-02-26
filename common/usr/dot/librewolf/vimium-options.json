@@ -1,0 +1,6 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\nunmap b\nunmap s\nunmap d\nunmap u\nmap w nextTab\nmap b previousTab\nmap s Vomnibar.activateBookmarks\nmap d removeTab\nmap u restoreTab",
+  "searchUrl": "https://duckduckgo.com/?q=",
+  "settingsVersion": "2.1.2",
+  "exclusionRules": []
+}

@@ -1,0 +1,28 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0",
+  "schemes" : [
+    {
+      "scrolling" : {
+        "speed" : {
+          "vertical" : 15
+        },
+        "acceleration" : {
+          "vertical" : 0.5
+        }
+      },
+      "if" : {
+        "device" : {
+          "vendorID" : "0x46d",
+          "category" : "mouse",
+          "productName" : "Gaming Mouse G502",
+          "productID" : "0xc332",
+          "serialNumber" : "177A386D3137"
+        }
+      },
+      "pointer" : {
+        "speed" : 0.17,
+        "acceleration" : 0.65
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  virtualisation = {
+    spiceUSBRedirection = {
+      enable = true;
+    };
+  };
+}

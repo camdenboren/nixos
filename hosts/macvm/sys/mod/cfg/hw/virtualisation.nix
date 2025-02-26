@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  virtualisation = {
+    rosetta = {
+      enable = true;
+    };
+  };
+}

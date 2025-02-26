@@ -1,0 +1,105 @@
+{
+  "relay_settings": {
+    "normal": {
+      "location": {
+        "only": {
+          "location": {
+            "city": [
+              "us",
+              "dal"
+            ]
+          }
+        }
+      },
+      "providers": "any",
+      "ownership": "any",
+      "tunnel_protocol": "any",
+      "wireguard_constraints": {
+        "port": "any",
+        "ip_version": "any",
+        "use_multihop": false,
+        "entry_location": {
+          "only": {
+            "location": {
+              "country": "se"
+            }
+          }
+        }
+      },
+      "openvpn_constraints": {
+        "port": "any"
+      }
+    }
+  },
+  "bridge_settings": {
+    "bridge_type": "normal",
+    "normal": {
+      "location": "any",
+      "providers": "any",
+      "ownership": "any"
+    },
+    "custom": null
+  },
+  "obfuscation_settings": {
+    "selected_obfuscation": "auto",
+    "udp2tcp": {
+      "port": "any"
+    }
+  },
+  "bridge_state": "auto",
+  "custom_lists": {
+    "custom_lists": []
+  },
+  "api_access_methods": {
+    "direct": {
+      "id": "e018431f-ac9f-4588-afbb-53466b9c9c57",
+      "name": "Direct",
+      "enabled": true,
+      "access_method": {
+        "built_in": "direct"
+      }
+    },
+    "mullvad_bridges": {
+      "id": "b32317d6-eece-4724-9a83-d94c63889151",
+      "name": "Mullvad Bridges",
+      "enabled": true,
+      "access_method": {
+        "built_in": "bridge"
+      }
+    },
+    "custom": []
+  },
+  "allow_lan": true,
+  "block_when_disconnected": false,
+  "auto_connect": true,
+  "tunnel_options": {
+    "openvpn": {
+      "mssfix": null
+    },
+    "wireguard": {
+      "mtu": null,
+      "quantum_resistant": "auto",
+      "rotation_interval": null
+    },
+    "generic": {
+      "enable_ipv6": true
+    },
+    "dns_options": {
+      "state": "default",
+      "default_options": {
+        "block_ads": true,
+        "block_trackers": true,
+        "block_malware": true,
+        "block_adult_content": true,
+        "block_gambling": true,
+        "block_social_media": true
+      },
+      "custom_options": {
+        "addresses": []
+      }
+    }
+  },
+  "relay_overrides": [],
+  "show_beta_releases": false,
+  "settings_version": 10
+}

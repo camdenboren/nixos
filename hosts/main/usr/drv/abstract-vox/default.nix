@@ -4,7 +4,7 @@ stdenv.mkDerivation {
   pname = "abstract-vox";
   version = "1";
   src = fetchzip {
-    url = "https://www.dropbox.com/scl/fi/ukxp8icaf876080f1sxk6/Abstract_Vox_64bit.zip?rlkey=4sncl4yyouds8prdxb39wqgov&st=f36awygt&dl=1";
+    url = "https://www.dropbox.com/scl/fi/q8dwuevl0lmtdomwuz06o/Abstract_Vox_64bit.tar.gz?rlkey=6kcaii85yxb65fhf3drdrg02m&st=yby23907&dl=1";
     hash = "sha256-kkLZPWvMna4OUBjjbLodVvNM/lDd8hcsM7VXXKPNex0=";
     stripRoot = false;
   };

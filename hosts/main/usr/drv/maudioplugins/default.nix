@@ -4,7 +4,7 @@ stdenv.mkDerivation {
   pname = "maudioplugins";
   version = "16.11";
   src = fetchzip {
-    url = "https://www.dropbox.com/scl/fi/a949aljyzmu47w6yj45qm/maudioplugins.zip?rlkey=9fxlp9qh6viifsib4jtujsaec&st=l6vkw81i&dl=1";
+    url = "https://www.dropbox.com/scl/fi/6x5de2hea0izvrcg91qje/maudioplugins.tar.gz?rlkey=nt2ogqbbt60juxyc58ienryhb&st=hpkjgqbk&dl=1";
     hash = "sha256-+/g/JZeNilc0U0AOenji8cYVloFVL5BHXIrCMQz1rEI=";
     stripRoot = false;
   };

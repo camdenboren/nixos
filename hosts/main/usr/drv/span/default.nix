@@ -4,7 +4,7 @@ stdenv.mkDerivation {
   pname = "span";
   version = "3.21";
   src = fetchzip {
-    url = "https://www.dropbox.com/scl/fi/jz2snfxd4ho8icuhhy074/span.zip?rlkey=ibw5apcr05s36tr0yfhhv4v47&st=yh6xvt3y&dl=1";
+    url = "https://www.dropbox.com/scl/fi/cdyxhzcfs02s005497xe0/span.tar.gz?rlkey=e85n6hp1s3pebh6c1pmz5vo9u&st=lclvumjq&dl=1";
     hash = "sha256-8MtChkgRau9IaXEG5Ls4VqKgZbRl1E1A/w44oE9i6oE=";
     stripRoot = false;
   };

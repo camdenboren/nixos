@@ -1,5 +1,7 @@
 # ❄️ NixOS + Darwin Config ❄️
 
+[![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fgarnix-io%2Fhello-garnix)](https://garnix.io/repo/garnix-io/hello-garnix)
+
 ## Introduction
 
 This is a config for multiple hosts of varying degrees of specificity, but main is an audio-oriented, modular NixOS configuration relying on Home-Manager and Flakes and includes examples of

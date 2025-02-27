@@ -135,7 +135,17 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
    }
    ```
 
-4. Update hardware UUID's in hardware-config. Use as needed\
+4. Download Notes to `~/Documents/Repos/Notes`\
+   _Not needed on mac or vm's_
+
+   ```shell
+   {
+   cd ~/Documents
+   git clone https://github.com/camdenboren/Notes.git
+   }
+   ```
+
+5. Update hardware UUID's in hardware-config. Use as needed\
    _UUID and sd\* can be found in Gnome Disks_
 
    ```shell
@@ -144,7 +154,7 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
    sudo chown camdenboren:users ~/media -R
    ```
 
-5. Main local plugin sourcing\
+6. Main local plugin sourcing\
    _Instructions for local files, can do server instead once set up_\
    _Prepare the environment_
 

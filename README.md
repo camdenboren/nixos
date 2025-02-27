@@ -66,7 +66,7 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
               └── usr
   ```
 
-  <i>`usr` also includes subdirectories for dotfiles, custom derivations, development environments, scripts, and theming to enable convienent access. Some plugins are sourced locally due to a lack of availability of directly downloadable binaries</i>
+  <i>`usr` also includes subdirectories for dotfiles, custom derivations, development environments, scripts, and theming to enable convienent access</i>
 
 ### Systems
 
@@ -154,24 +154,6 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
    sudo fdisk /dev/sdb
    sudo mkfs -t ext4 /dev/sdb
    sudo chown camdenboren:users ~/media -R
-   ```
-
-6. Main local plugin sourcing\
-   _Instructions for local files, can do server instead once set up_\
-   _Prepare the environment_
-
-   ```shell
-   {
-   cd ~/Music/music/Plugins
-   dev -p
-   nix develop
-   }
-   ```
-
-   _Then serve_
-
-   ```shell
-   python3 -m http.server
    ```
 
 ### Rebuild

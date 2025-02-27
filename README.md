@@ -146,7 +146,6 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
 
 5. Main local plugin sourcing\
    _Instructions for local files, can do server instead once set up_\
-
    _Prepare the environment_
 
    ```shell

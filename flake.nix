@@ -1,6 +1,6 @@
 {
   inputs = {
-    # find time=traveling refs at www.nixhub.io and append after nixpkgs/
+    # find time-traveling refs at www.nixhub.io and append after nixpkgs/
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };

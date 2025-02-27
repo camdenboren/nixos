@@ -1,6 +1,6 @@
 # ❄️ NixOS + Darwin Config ❄️
 
-[![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fgarnix-io%2Fhello-garnix)](https://garnix.io/repo/garnix-io/hello-garnix)
+[![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fcamdenboren%2Fnixos%3Fbranch%3Dmain)](https://garnix.io/repo/camdenboren/nixos)
 
 ## Introduction
 

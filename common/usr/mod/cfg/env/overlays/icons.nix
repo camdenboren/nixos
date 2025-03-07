@@ -7,9 +7,6 @@
         postInstall =
           (o.postInstall or "")
           + ''
-            rm -f $out/share/icons/Dracula/scalable/apps/visualstudiocode.svg
-            cp -f ${../../../../rice/icons/codium/codium-${rice}.svg} $out/share/icons/Dracula/scalable/apps/vscodium.svg
-
             cp -f ${../../../../rice/icons/librewolf/librewolf-${rice}.svg} $out/share/icons/Dracula/scalable/apps/librewolf.svg
 
             cp -f ${../../../../rice/icons/ghostty/com.mitchellh.ghostty.svg} $out/share/icons/Dracula/scalable/apps/com.mitchellh.ghostty.svg

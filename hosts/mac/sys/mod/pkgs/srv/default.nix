@@ -3,7 +3,6 @@
 {
   imports = [
     # Host-specific
-    ./nix-daemon.nix
     ./ollama.nix
   ];
 

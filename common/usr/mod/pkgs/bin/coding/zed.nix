@@ -16,6 +16,7 @@ in
       "java"
       "ruff"
       "vue"
+      "zed-legacy-themes"
     ];
 
     userSettings = {

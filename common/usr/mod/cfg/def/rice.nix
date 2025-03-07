@@ -122,7 +122,7 @@ in
         programs.zed-editor.userSettings = {
           theme = {
             mode = "system";
-            dark = if coral then "Solarized Dark" else "Red";
+            dark = if coral then "Zed Legacy: Solarized Dark" else "Red";
             light = "One Light";
           };
 

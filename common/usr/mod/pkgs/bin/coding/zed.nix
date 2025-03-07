@@ -39,7 +39,7 @@ in
         button = false;
       };
       chat_panel = {
-        button = false;
+        button = "never";
       };
       collaboration_panel = {
         button = false;

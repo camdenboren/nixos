@@ -7,6 +7,9 @@
   # Set nix path
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
+  # Pin nixpkgs registry ref to flake input
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+
   # Enable flakes
   nix.settings = {
     experimental-features = [

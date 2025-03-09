@@ -151,7 +151,7 @@ in
             };
             "${keybindingsPath}custom3" = {
               name = "FreeTube";
-              command = "freetube" + lib.optionalString (hostname == "media") " --disable-gpu";
+              command = "freetube --disable-gpu";
               binding = "<Control><Alt>f";
             };
             "${keybindingsPath}custom4" = {

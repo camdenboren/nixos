@@ -16,8 +16,7 @@ let
   };
 in
 {
-  imports = [ ./custom-librewolf.nix ];
-  programs.custom-librewolf =
+  programs.librewolf =
     lib.recursiveUpdate
       {
         enable = true;

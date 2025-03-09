@@ -32,7 +32,7 @@ in
 
   imports =
     [
-      ./librewolf
+      ./librewolf.nix
     ]
     ++ lib.optionals isLinux [
       ./chromium.nix

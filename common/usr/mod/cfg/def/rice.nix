@@ -139,7 +139,7 @@ in
         };
 
         # darwin support is coming soon
-        programs.custom-librewolf.profiles.camdenboren = {
+        programs.librewolf.profiles.camdenboren = {
           containers = {
             container1.color = if coral then "blue" else "red";
             container2.color = if coral then "turquoise" else "orange";

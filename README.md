@@ -438,7 +438,15 @@ So launch them, clean up config errors, restart</i>
 
   - GE-Proton9-11
 
-- #### GTAV
+- #### GTAV Enhanced
+
+  - Proton Experimental
+  - Extra notes
+    - Also requires `SteamDeck=1` launch cmd
+    - <i>config saved in hm, manage consistent 60fps
+    - config path: `~/.steam/steam/steamapps/compatdata/3240220/pfx/drive_c/users/steamuser/Documents/Rockstar\ Games/GTAV\ Enhanced/settings.xml`</i>
+
+- #### GTAV Legacy
 
   - GEProton-9-19
   - Extra notes

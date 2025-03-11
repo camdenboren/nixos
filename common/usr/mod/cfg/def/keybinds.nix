@@ -31,6 +31,14 @@ let
       name = "${ctrl}-q";
       value = "zed::Quit";
     }
+    {
+      name = "${ctrl}-shift-s";
+      value = "workspace::ToggleLeftDock";
+    }
+    {
+      name = "${ctrl}-e";
+      value = "file_finder::Toggle";
+    }
   ];
 in
 {

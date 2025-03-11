@@ -52,7 +52,7 @@ in
       };
       features = {
         copilot = false;
-        edit_completion_provider = "none";
+        edit_prediction_provider = "none";
       };
       telemetry = {
         diagnostics = false;

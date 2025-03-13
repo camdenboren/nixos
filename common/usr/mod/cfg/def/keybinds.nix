@@ -101,8 +101,6 @@ in
                 cmd-b = "vim::PageUp";
                 cmd-d = "vim::ScrollDown";
                 cmd-u = "vim::ScrollUp";
-                cmd-e = "vim::LineDown";
-                cmd-y = "vim::LineUp";
                 "cmd-]" = "editor::GoToDefinition";
                 cmd-m = "vim::NextLineStart";
               };

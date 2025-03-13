@@ -95,9 +95,14 @@ in
         enabled = !isVM;
         default_model = {
           provider = "ollama";
-          model = if (hostname == "media") then "tinydolphin:latest" else "mistral-nemo:latest";
+          model = if (hostname == "media") then "mistral:latest" else "mistral-nemo:latest";
         };
         version = "2";
+      };
+      language_models = {
+        ollama = {
+          api_url = if (hostname == "media") then "http://192.168.1.65:11434" else "http://localhost:11434";
+        };
       };
     };
   };

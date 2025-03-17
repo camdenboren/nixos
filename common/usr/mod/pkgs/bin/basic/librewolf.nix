@@ -78,6 +78,10 @@ in
               "extensions.formautofill.addresses.enabled" = false;
               "extensions.formautofill.creditCards.enabled" = false;
               "signon.rememberSignons" = false;
+              "sidebar.verticalTabs" = true;
+              "sidebar.revamp" = true;
+              "sidebar.main.tools" = "";
+              "sidebar.visibility" = "always-show";
             };
 
             extensions.packages = with pkgs.firefox-addons; [

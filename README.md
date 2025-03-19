@@ -211,6 +211,16 @@ So launch them, clean up config errors, restart</i>
 
 - #### mac shortcuts
 
+  - Amethyst
+
+    - Delete all shortcuts except
+
+      - Move focus to counter clockwise creen = cmd-left
+      - Move focus to clockwise screen = cmd-right
+
+    - Rm all layouts except: Floating
+    - Disable: General -> Heads up Display
+
   - Settings -> Keyboard -> Keyboard Shortcuts...
 
     - Display
@@ -266,6 +276,7 @@ So launch them, clean up config errors, restart</i>
 
 - #### mac manual login items and accessibility access
 
+  - Amethyst.app
   - AutoRaise.app
   - BetterDisplay.app
   - Ice.app

@@ -94,7 +94,6 @@ in
       dynamic-opacity = false;
       opacity = 230;
       whitelist = [
-        "org.gnome.Terminal"
         "dev.zed.Zed"
         "com.mitchellh.ghostty"
       ];

@@ -176,25 +176,6 @@ in
                 accent-color = if coral then "teal" else "red";
               };
             };
-
-          # switching to ghostty soon. Terminal.app is configured manually atm
-          programs.gnome-terminal.profile.db844b4d-3964-4927-b431-58d2424b7f86 = {
-            allowBold = true;
-            boldIsBright = true;
-            colors = {
-              backgroundColor = "#" + clr.bg;
-              foregroundColor = "#" + clr.fg;
-              cursor = {
-                background = "#" + clr.cursor.color;
-                foreground = "#000000";
-              };
-              highlight = {
-                background = "#" + clr.highlight.bg;
-                foreground = "#" + clr.highlight.fg;
-              };
-              palette = lib.attrValues clr.terminal;
-            };
-          };
         }
       );
 }

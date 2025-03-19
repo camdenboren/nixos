@@ -18,6 +18,7 @@ in
       gnomeExtensions.one-window-wonderland
       gnomeExtensions.blur-my-shell
       gnomeExtensions.just-perfection
+      gnomeExtensions.focus-changer
       adw-gtk3
       dracula-icon-theme
       gnome-tweaks

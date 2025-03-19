@@ -170,6 +170,11 @@ in
               command = "reaper";
               binding = "<Control><Alt>r";
             };
+
+            "org/gnome/shell/extensions/focus-changer" = {
+              focus-left = [ "<Shift><Alt>Left" ];
+              focus-right = [ "<Shift><Alt>Right" ];
+            };
           };
         }
       )

@@ -3,8 +3,7 @@
 {
   imports = [
     # Common
-    ../../../../../../common/sys/mod/cfg/hw/networking.nix
-    ../../../../../../common/sys/mod/cfg/hw/printing.nix
+    ../../../../../../common/sys/mod/cfg/hw
 
     # Host-specific
     ./audio.nix

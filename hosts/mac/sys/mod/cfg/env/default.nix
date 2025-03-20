@@ -3,7 +3,7 @@
 {
   imports = [
     # Common
-    ../../../../../../common/sys/mod/cfg/env/nix-settings.nix
+    ../../../../../../common/sys/mod/cfg/env
 
     # Host-specific
     ./activation.nix

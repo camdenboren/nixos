@@ -10,7 +10,7 @@
 
     # Mullvad VPN GUI Config. Deeper settings in configuration.nix
     ".config/Mullvad VPN/gui_settings.json" = {
-      source = ../../../dot/Mullvad_VPN/gui_settings.json;
+      source = ../../../../../../common/usr/dot/Mullvad_VPN/gui_settings.json;
     };
 
     # Lynx config

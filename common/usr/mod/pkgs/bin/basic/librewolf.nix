@@ -16,6 +16,10 @@ let
   };
 in
 {
+  imports = [
+    ../../../cfg/env/overlays/firefox-addons.nix
+  ];
+
   programs.librewolf =
     lib.recursiveUpdate
       {

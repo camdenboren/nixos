@@ -11,6 +11,5 @@
 
     # Host-specific
     ./files.nix
-    ./overlays
   ];
 }

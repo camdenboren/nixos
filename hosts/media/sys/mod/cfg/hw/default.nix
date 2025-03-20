@@ -6,7 +6,6 @@
     ../../../../../../common/sys/mod/cfg/hw
 
     # Host-specific
-    ./audio.nix
     ./bluetooth.nix
     ./boot.nix
     ./controller.nix

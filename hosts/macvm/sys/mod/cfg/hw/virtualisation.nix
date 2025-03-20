@@ -1,9 +1,0 @@
-{ ... }:
-
-{
-  virtualisation = {
-    rosetta = {
-      enable = true;
-    };
-  };
-}

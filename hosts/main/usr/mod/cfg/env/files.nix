@@ -13,19 +13,6 @@
       source = ../../../dot/easyeffects;
     };
 
-    # Mullvad VPN GUI Config. Deeper settings in configuration.nix
-    ".config/Mullvad VPN/gui_settings.json" = {
-      source = ../../../../../../common/usr/dot/Mullvad_VPN/gui_settings.json;
-    };
-
-    # Lynx config
-    ".config/lynx/lynx.cfg" = {
-      source = ../../../../../../common/usr/dot/lynx/lynx.cfg;
-    };
-    ".config/lynx/lynx.lss" = {
-      source = ../../../../../../common/usr/dot/lynx/lynx.lss;
-    };
-
     # REAPER - most settings set in replaceConfigs (and activ.)
     ".config/REAPER/Effects/jsfx" = {
       source = ../../../dot/reaper/jsfx;

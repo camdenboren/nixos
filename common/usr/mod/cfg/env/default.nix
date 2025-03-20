@@ -11,6 +11,7 @@ in
 {
   imports =
     [
+      ./files.nix
       ./home-manager.nix
       ./nix-settings.nix
     ]

@@ -6,8 +6,6 @@
   imports = [
     # Common
     ../../../../../common/usr/mod/cfg/def
-
-    # Host-specific
-    ./env
+    ../../../../../common/usr/mod/cfg/env
   ];
 }

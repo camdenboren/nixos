@@ -20,7 +20,20 @@ in
       # Basic Apps
       bitwarden
       easyeffects
-      freetube
+      (freetube.overrideAttrs (old: rec {
+        version = "0.23.3";
+        src = fetchFromGitHub {
+          owner = "FreeTubeApp";
+          repo = "FreeTube";
+          tag = "v${version}-beta";
+          hash = "sha256-EpcYNUtGbEFvetroo1zAyfKxW70vD1Lk0aJKWcaV39I=";
+        };
+
+        yarnOfflineCache = fetchYarnDeps {
+          yarnLock = "${src}/yarn.lock";
+          hash = "sha256-xiJGzvmfrvvB6/rdwALOxhWSWAZ31cbySYygtG8+QpQ=";
+        };
+      }))
       lollypop
       qbittorrent
       tidal-hifi

@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
   lib,
   system,
   ...
@@ -20,7 +19,7 @@ in
       lynx
     ]
     ++ lib.optionals (!isDarwin) [
-      pkgs-stable.quickemu # dep ceph build broken as of 12/23: https://hydra.nixos.org/build/284315177
+      quickemu
     ]
     ++ lib.optionals isDarwin [
       jetbrains.idea-community

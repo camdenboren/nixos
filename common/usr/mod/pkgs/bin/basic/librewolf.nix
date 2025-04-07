@@ -131,7 +131,7 @@ in
             };
 
             search = {
-              default = "DuckDuckGo";
+              default = "ddg";
               force = true;
               order = [
                 "Nix Packages"

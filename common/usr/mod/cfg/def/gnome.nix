@@ -39,6 +39,9 @@ in
       focus-mode = "sloppy";
       num-workspaces = 4;
     };
+    "org/gnome/mutter" = {
+      dynamic-workspaces = false;
+    };
     "org/gnome/desktop/peripherals/mouse" = {
       natural-scroll = hasTrackpad;
       speed = if hasTrackpad then 0.85 else 1.0;

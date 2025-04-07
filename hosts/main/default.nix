@@ -8,10 +8,7 @@ let
   hostname = "main";
   system = "x86_64-linux";
   rice = "skyline";
-  pkgs-stable = import nixpkgs-stable {
-    inherit system;
-    config.allowUnfree = true;
-  };
+  pkgs-stable = nixpkgs-stable.legacyPackages.${system};
 in
 {
   specialArgs = {

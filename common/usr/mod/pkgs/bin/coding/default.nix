@@ -2,6 +2,7 @@
   pkgs,
   lib,
   system,
+  hostname,
   ...
 }:
 
@@ -18,7 +19,7 @@ in
       fd
       lynx
     ]
-    ++ lib.optionals (!isDarwin) [
+    ++ lib.optionals (hostname == "main") [
       quickemu
     ]
     ++ lib.optionals isDarwin [

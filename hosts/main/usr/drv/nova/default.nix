@@ -1,11 +1,12 @@
 { stdenv, fetchzip }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "nova";
-  version = "2.1.6";
+  version = "2.2.1";
+
   src = fetchzip {
-    url = "https://www.tokyodawn.net/labs/Nova/2.1.6/TDR%20Nova%20(no%20installer).zip";
-    hash = "sha256-+sEYwHS905RUIPsYU0pYYMNmUdlkFofnv+r6NIRJGm0=";
+    url = "https://www.tokyodawn.net/labs/Nova/${version}/TDR%20Nova%20(no%20installer).zip";
+    hash = "sha256-LXMWgLAPKHHvXxbEtk5rUeZehlPMLduf44aGCkmvzvY=";
   };
 
   installPhase = ''

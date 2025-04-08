@@ -41,6 +41,7 @@ in
     };
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
+      workspaces-only-on-primary = false;
     };
     "org/gnome/desktop/peripherals/mouse" = {
       natural-scroll = hasTrackpad;

@@ -17,3 +17,4 @@
 {"_id":"defaultTheatreMode","value":true}
 {"_id":"displayVideoPlayButton","value":false}
 {"_id":"externalPlayer","value":"mpv"}
+{"_id":"rememberSearchHistory","value":false}

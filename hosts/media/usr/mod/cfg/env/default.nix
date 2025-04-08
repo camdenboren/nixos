@@ -8,6 +8,5 @@
     # Host-specific
     ./activation.nix
     ./files.nix
-    ./xdg.nix
   ];
 }

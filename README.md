@@ -382,12 +382,6 @@ So launch them, clean up config errors, restart</i>
   find . -type f -exec md5sum {} + | LC_ALL=C sort | md5sum >> md5sum.txt
   ```
 
-- Initialize locate db
-
-  ```shell
-  sudo updatedb
-  ```
-
 - Remove rygel's ignored media files list (log out to take effect, also need: `nix shell nixpkgs#sqlite`)
 
   ```shell

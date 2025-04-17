@@ -19,6 +19,7 @@
           "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret"
         else
           "osxkeychain";
+      "remote \"origin\"".prune = true;
     };
   };
 }

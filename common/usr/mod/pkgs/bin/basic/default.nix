@@ -21,12 +21,12 @@ in
       bitwarden
       easyeffects
       (freetube.overrideAttrs (old: rec {
-        version = "0.23.4";
+        version = "0.23.5";
         src = fetchFromGitHub {
           owner = "FreeTubeApp";
           repo = "FreeTube";
           tag = "v${version}-beta";
-          hash = "sha256-JQob4NyZ00iOnRbSyNWjL4xyNQ14ixyZDXsJ7KBd9ZM=";
+          hash = "sha256-tVe//h20cTVgpHeo3IlfGfuAH+dM6H5MEfGny5Uhrjk=";
         };
         yarnOfflineCache = fetchYarnDeps {
           yarnLock = "${src}/yarn.lock";

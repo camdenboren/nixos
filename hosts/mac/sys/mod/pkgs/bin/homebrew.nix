@@ -20,6 +20,7 @@
       "pearcleaner"
       "qdirstat"
       "tidal"
+      "zoom"
     ];
   };
 }

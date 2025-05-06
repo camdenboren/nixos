@@ -23,7 +23,31 @@ in
       freetube
       lollypop
       qbittorrent
-      tidal-hifi
+      (tidal-hifi.overrideAttrs {
+        desktopItems = [
+          (makeDesktopItem {
+            exec = "tidal-hifi --disable-gpu";
+            name = "TIDAL Hi-Fi";
+            desktopName = "tidal-hifi";
+            genericName = "TIDAL Hi-Fi";
+            comment = "The web version of listen.tidal.com running in electron with hifi support thanks to widevine.";
+            icon = "tidal-hifi";
+            startupNotify = true;
+            terminal = false;
+            type = "Application";
+            categories = [
+              "Network"
+              "Application"
+              "AudioVideo"
+              "Audio"
+              "Video"
+            ];
+            startupWMClass = "tidal-hifi";
+            mimeTypes = [ "x-scheme-handler/tidal" ];
+            extraConfig.X-PulseAudio-Properties = "media.role=music";
+          })
+        ];
+      })
       vlc
     ]
     ++ lib.optionals (!isLinux) [

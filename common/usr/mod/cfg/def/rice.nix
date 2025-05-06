@@ -24,6 +24,21 @@ let
         "390000";
     fg = "f8f8f8";
 
+    accent =
+      if coral then
+        "2190a4"
+      else if nothin then
+        "9141ac"
+      else
+        "e62d42";
+    accent-bg =
+      if coral then
+        "247c90"
+      else if nothin then
+        "7d4698"
+      else
+        "be2f47";
+
     cursor = {
       color =
         if coral then
@@ -172,6 +187,18 @@ in
         home.file = {
           ".config/zed/themes/red.json" = {
             source = jsonFormat.generate "red-theme" red-theme;
+          };
+          ".config/gtk-3.0/gtk.css" = {
+            text = ''
+              @define-color accent_color #${clr.accent};
+              @define-color accent_bg_color #${clr.accent-bg};
+            '';
+          };
+          ".config/gtk-4.0/gtk.css" = {
+            text = ''
+              @define-color accent_color #${clr.accent};
+              @define-color accent_bg_color #${clr.accent-bg};
+            '';
           };
         };
 

@@ -7,6 +7,7 @@
 
 let
   isDarwin = lib.hasSuffix "-darwin" system;
+  isVM = lib.hasSuffix "-vm" hostname;
 in
 {
   programs.bash = {
@@ -33,7 +34,7 @@ in
         cdr = "cd ~/Documents/Repos";
         cdt = "cd ~/Documents/Tests";
         check = "nix flake check $NH_FLAKE";
-        clean = if isDarwin then "nh clean all" else "nh clean all -k 2";
+        clean = if (isDarwin || isVM) then "nh clean all" else "nh clean all -k 2";
         ddg = "lynx -vikeys start.duckduckgo.com/lite/";
         fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";
         lg = "lazygit";

@@ -36,6 +36,14 @@ let
       value = "workspace::ToggleLeftDock";
     }
     {
+      name = "${ctrl}-shift-e";
+      value = "project_panel::ToggleFocus";
+    }
+    {
+      name = "${ctrl}-shift-g";
+      value = "git_panel::ToggleFocus";
+    }
+    {
       name = "${ctrl}-e";
       value = "file_finder::Toggle";
     }

@@ -6,10 +6,11 @@
 
 This is a config for multiple hosts of varying degrees of specificity, but `main` is an audio-oriented, modular NixOS configuration relying on Home-Manager and Flakes and includes examples of
 
+- Custom Modules
+- Custom Scripts
 - Derivations
 - Overlays
-- Development Environments
-- Custom Scripts
+- DevShells
 
 You probably won't want to try installing any of these hosts directly due to UUID discrepancies in `hardware-configuration.nix`, so this repo primarily serves as a reference in creating your own config
 

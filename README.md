@@ -1,17 +1,26 @@
 # ❄️ NixOS + Darwin Config ❄️
 
-[![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fcamdenboren%2Fnixos%3Fbranch%3Dmain)](https://garnix.io/repo/camdenboren/nixos)
+[![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fcamdenboren%2Fnixos%3Fbranch%3Dmain&style=for-the-badge&color=grey&labelColor=grey)](https://garnix.io/repo/camdenboren/nixos)
 
 ## Introduction
 
-This is a config for multiple hosts of varying degrees of specificity, but main is an audio-oriented, modular NixOS configuration relying on Home-Manager and Flakes and includes examples of
+This is a config for multiple hosts of varying degrees of specificity, but `main` is an audio-oriented, modular NixOS configuration relying on Home-Manager and Flakes and includes examples of
 
 - Derivations
 - Overlays
 - Development Environments
 - Custom Scripts
 
-Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://github.com/ryan4yin/), and [PowerUser64](https://github.com/poweruser64/), as their content/configs were massively helpful for learning the basics of NixOS, flakes, home-manager, and linux audio
+You probably won't want to try installing any of these hosts directly due to UUID discrepancies in `hardware-configuration.nix`, so this repo primarily serves as a reference in creating your own config
+
+Some direct utility may be found in leveraging the binary cache by adding [Garnix] to your nix-config
+
+```nix
+nix.settings.substituters = [ "https://cache.garnix.io" ];
+nix.settings.trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+```
+
+Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/configs were massively helpful for learning the basics of NixOS, flakes, home-manager, and linux audio
 
 ### Sections
 
@@ -81,7 +90,7 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
 - #### main
 
   - Audio, Development and Productivity, Gaming
-  - DIY build
+  - 2024 DIY build
   - Ryzen 7 9700x
   - NVIDIA RTX 4070S
   - 4tb NVME storage
@@ -93,7 +102,7 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
   - Intel i7 2600k
   - AMD Radeon RX 570
   - 500gb SSD + 12tb HDD storage
-  - 12gb memory
+  - 8gb memory
 
 ## Installation
 
@@ -162,7 +171,7 @@ Special thanks to [vimjoyer](https://github.com/vimjoyer/), [ryan4yin](https://g
 sudo nixos-rebuild boot --flake ~/etc/nixos#hostName
 ```
 
-<i>Librewolf, Freetube, Tidal-Hifi configs won't be updated until they've been launched<br>
+<i>Freetube and Tidal-Hifi configs won't be updated until they've been launched<br>
 So launch them, clean up config errors, restart</i>
 
 ### Post-Install
@@ -215,8 +224,8 @@ So launch them, clean up config errors, restart</i>
 
     - Delete all shortcuts except
 
-      - Move focus to counter clockwise creen = cmd-left
-      - Move focus to clockwise screen = cmd-right
+      - Move focus to counter clockwise creen = cmd-shift-left
+      - Move focus to clockwise screen = cmd-shift-right
 
     - Rm all layouts except: Floating
     - Disable: General -> Heads up Display
@@ -241,7 +250,7 @@ So launch them, clean up config errors, restart</i>
     - Spotlight
 
       - Show Spotlight search = ctrl-Space
-      - Show Finder search window = ctrl-1
+      - Show Finder search window = cmd-alt-1
 
     - App Shortcuts -> All Applications
 
@@ -288,10 +297,12 @@ So launch them, clean up config errors, restart</i>
 
 ### Nix Management
 
-- Rebuilds system based on flake in ~/etc/nixos
+_More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
+
+- Rebuilds system based on flake in `~/etc/nixos`
 
   ```shell
-  nh os switch
+  sw
   ```
 
 - Uncomfy version
@@ -301,16 +312,15 @@ So launch them, clean up config errors, restart</i>
   ```
 
 - Updates flake inputs\
-  _`cd` into directory first_
 
   ```shell
-  nix flake update
+  update
   ```
 
 - Evaluates flake outputs
 
   ```shell
-  nix flake check
+  check
   ```
 
 - Lists all current generations
@@ -322,27 +332,26 @@ So launch them, clean up config errors, restart</i>
 - Removes old generations, derivations, etc.
 
   ```shell
-  sudo nix-collect-garbage -d
-  nix-collect-garbage -d
-  ```
-
-- Removes gens older than 3 days
-
-  ```shell
-  nix-collect-garbage --delete-older-than 3d
+  clean
   ```
 
 - Build a nixpkgs-style derivations\
   _cd into directory first_
 
   ```shell
-  nix-build -E "with import <nixpkgs> {}; callPackage ./default.nix {}"
+  bld
   ```
 
 - Try out a package w/o installing
 
   ```shell
-  nix shell nixpkgs#packageName
+  run packageName
+  ```
+
+- Enter a shell with a package w/o installing
+
+  ```shell
+  shell packageName
   ```
 
 ### Audio
@@ -382,19 +391,19 @@ So launch them, clean up config errors, restart</i>
   find . -type f -exec md5sum {} + | LC_ALL=C sort | md5sum >> md5sum.txt
   ```
 
-- Remove rygel's ignored media files list (log out to take effect, also need: `nix shell nixpkgs#sqlite`)
+- Remove rygel's ignored media files list (log out to take effect, also need: `shell sqlite`)
 
   ```shell
   echo "delete from ignorelist;" | sqlite3 ~/.cache/rygel/media-export.db
   ```
 
-- Mac Update
+- Mac Update\
+  _Brew upgrade needs to be run for individual casks, and Zoom screen sharing permissions often break_
 
   ```shell
-  darwin-rebuild switch --flake ~/etc/nixos
+  sw
   brew upgrade
   brew cleanup
-  xattr -d com.apple.quarantine /Applications/LibreWolf.app
   ```
 
 - Quickemu (no vpn for windows dl, scripts use opt `--status-quo`)
@@ -479,3 +488,13 @@ So launch them, clean up config errors, restart</i>
 - [x] add git plugin to nvim (unplanned)
 - [ ] ssh aliases or whatever
 - [ ] maybe pipes
+
+## License
+
+[GPLv3]
+
+[Garnix]: https://garnix.io/
+[vimjoyer]: https://github.com/vimjoyer/
+[ryan4yin]: https://github.com/ryan4yin/
+[PowerUser64]: https://github.com/poweruser64/
+[GPLv3]: COPYING

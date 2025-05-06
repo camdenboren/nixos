@@ -18,9 +18,10 @@ in
     #   repl - enter nix repl with nixpkgs
     #   fmt - format all nix files in $NH_FLAKE
     #   check - evaluate $NH_FLAKE for all hosts
+    #   clean - remove unused nix store roots
     #   lgf - open lazygit in $NH_FLAKE
     #   update - update $NH_FLAKE's inputs
-    #   build - build a derivation in cwd
+    #   bld - build a derivation in cwd
     #   sw - rebuild system
 
     shellAliases =
@@ -32,11 +33,13 @@ in
         cdr = "cd ~/Documents/Repos";
         cdt = "cd ~/Documents/Tests";
         check = "nix flake check $NH_FLAKE";
+        clean = if isDarwin then "nh clean all" else "nh clean all -k 2";
         ddg = "lynx -vikeys start.duckduckgo.com/lite/";
         fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";
         lg = "lazygit";
         lgf = "lazygit -p $NH_FLAKE";
         ls = "ls -a";
+        lsg = "ls | grep";
         repl = "nix repl -f '<nixpkgs>'";
         sw = if isDarwin then "nh darwin switch" else "nh os switch";
         tr = if isDarwin then "trash" else "gio trash";

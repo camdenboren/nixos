@@ -5,7 +5,7 @@
 }:
 
 let
-  isVM = lib.hasSuffix "-vm" hostname;
+  isVM = lib.hasSuffix "vm" hostname;
 in
 {
   programs.zed-editor = {

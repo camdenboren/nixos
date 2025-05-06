@@ -6,7 +6,7 @@
 }:
 
 let
-  isVM = lib.hasSuffix "-vm" hostname;
+  isVM = lib.hasSuffix "vm" hostname;
 in
 {
   # use x11 remaps in console

@@ -8,7 +8,7 @@
 
 let
   cfg = config.keybinds;
-  isVM = lib.hasSuffix "-vm" hostname;
+  isVM = lib.hasSuffix "vm" hostname;
   isDarwin = lib.hasSuffix "-darwin" system;
   isLinux = !isDarwin;
   ctrl = if isDarwin then "cmd" else "ctrl";

@@ -6,7 +6,7 @@
 }:
 
 let
-  isVM = lib.hasSuffix "-vm" hostname;
+  isVM = lib.hasSuffix "vm" hostname;
   hasTrackpad = (hostname == "media" || hostname == "macvm");
 in
 {

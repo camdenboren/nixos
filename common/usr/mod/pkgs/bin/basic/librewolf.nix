@@ -1,18 +1,20 @@
 {
   pkgs,
-  lib,
-  system,
+  hostname,
   ...
 }:
 
 let
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-  isDarwin = lib.hasSuffix "-darwin" system;
   homepage =
-    if isDarwin then
+    if hostname == "mac" then
       "moz-extension://1b0f4899-1e5e-4c97-8e53-bfc8ede4fc68/pages/blank.html"
+    else if hostname == "main" then
+      "moz-extension://04cc90c6-c702-4205-9ce0-b81be2036116/pages/blank.html"
+    else if hostname == "media" then
+      "moz-extension://b50b3a02-d24d-4ebe-bdce-c29d3978adbd/pages/blank.html"
     else
-      "moz-extension://04cc90c6-c702-4205-9ce0-b81be2036116/pages/blank.html";
+      "";
   query = {
     name = "query";
     value = "{searchTerms}";

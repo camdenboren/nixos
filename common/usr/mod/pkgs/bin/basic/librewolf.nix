@@ -1,15 +1,8 @@
-{
-  pkgs,
-  lib,
-  system,
-  ...
-}:
+{ pkgs, ... }:
 
 let
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-  isDarwin = lib.hasSuffix "-darwin" system;
-  home = if isDarwin then "Users" else "home";
-  homepage = "file:///${home}/camdenboren/etc/nixos/common/usr/dot/librewolf/newtab.html";
+  homepage = "moz-extension://1b0f4899-1e5e-4c97-8e53-bfc8ede4fc68/pages/blank.html";
   query = {
     name = "query";
     value = "{searchTerms}";

@@ -464,7 +464,6 @@ So launch them, clean up config errors, restart</i>
 
 ## ToDo
 
-- [ ] local file workaround for vimium on new tabs https://peterries.net/blog/firefox-ubuntu-local-file/
 - [x] nh vimjoyer thing
 - [x] use aliases instead of scripts for basic stuff
 - [x] services.xserver.xkb.options

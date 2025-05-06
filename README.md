@@ -311,7 +311,7 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
   sudo nixos-rebuild switch --flake ~/etc/nixos#hostName
   ```
 
-- Updates flake inputs\
+- Updates flake inputs
 
   ```shell
   update

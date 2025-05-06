@@ -9,6 +9,8 @@ let
   homepage =
     if hostname == "mac" then
       "moz-extension://1b0f4899-1e5e-4c97-8e53-bfc8ede4fc68/pages/blank.html"
+    else if hostname == "macvm" then
+      "moz-extension://95b3696c-386b-4e5a-ab96-556425d9a46f/pages/blank.html"
     else if hostname == "main" then
       "moz-extension://04cc90c6-c702-4205-9ce0-b81be2036116/pages/blank.html"
     else if hostname == "mainvm" then

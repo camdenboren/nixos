@@ -17,7 +17,6 @@ in
       hostname
       system
       pkgs-stable
-      rice
       ;
   };
   modules = [

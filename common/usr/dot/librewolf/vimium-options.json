@@ -1,6 +1,6 @@
 {
   "keyMappings": "# Insert your preferred key mappings here.\nunmap b\nunmap s\nunmap d\nunmap u\nmap w nextTab\nmap b previousTab\nmap s Vomnibar.activateBookmarks\nmap d removeTab\nmap u restoreTab",
-  "searchUrl": "https://duckduckgo.com/?q=",
-  "settingsVersion": "2.1.2",
+  "settingsVersion": "2.2.1",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#454545),\n  color-stop(100%,#404040));\nborder: 1px solid #202020;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: white;\nfont-weight: bold;\nfont-size: 14px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}",
   "exclusionRules": []
 }

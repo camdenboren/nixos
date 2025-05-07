@@ -7,7 +7,7 @@
 let
   hostname = "mac";
   system = "aarch64-darwin";
-  rice = "skyline";
+  rice = "nothin";
   pkgs-stable = nixpkgs-stable.legacyPackages.${system};
 in
 {
@@ -17,7 +17,6 @@ in
       hostname
       system
       pkgs-stable
-      rice
       ;
   };
   modules = [

@@ -9,25 +9,73 @@
 let
   cfg = config.rice;
   coral = cfg == "coral";
+  nothin = cfg == "nothin";
   jsonFormat = pkgs.formats.json { };
   red-theme = import ../../../dot/zed/red.nix { inherit lib system; };
+  rose-theme = import ../../../dot/zed/rose.nix;
   isLinux = lib.hasSuffix "-linux" system;
+  zed-variant = if isLinux then "" else " Transparent";
 
   clr = {
-    bg = if coral then "002b36" else "390000";
+    bg =
+      if coral then
+        "002b36"
+      else if nothin then
+        "232136"
+      else
+        "390000";
     fg = "f8f8f8";
 
+    accent =
+      if coral then
+        "2190a4"
+      else if nothin then
+        "9141ac"
+      else
+        "e62d42";
+    accent-bg =
+      if coral then
+        "247c90"
+      else if nothin then
+        "7d4698"
+      else
+        "be2f47";
+
     cursor = {
-      color = if coral then "278ad1" else "970000";
+      color =
+        if coral then
+          "278ad1"
+        else if nothin then
+          "9bced6"
+        else
+          "970000";
     };
 
     highlight = {
-      bg = if coral then "2380bd" else "750000";
+      bg =
+        if coral then
+          "2380bd"
+        else if nothin then
+          "44415a"
+        else
+          "750000";
       fg = "f8f8f8";
     };
 
-    prompt = if coral then "1;32" else "1;33";
-    mtx = if coral then "green" else "yellow";
+    prompt =
+      if coral then
+        "1;32"
+      else if nothin then
+        "1;35"
+      else
+        "1;33";
+    mtx =
+      if coral then
+        "green"
+      else if nothin then
+        "magenta"
+      else
+        "yellow";
 
     terminal = {
       a-black = "#000000";
@@ -62,11 +110,11 @@ in
       default = "skyline";
       type = lib.types.str;
       description = ''
-        Rice to use for the user. One of "coral", "skyline"
+        Rice to use for the user. One of "coral", "nothin", "skyline"
 
         Sets:
         - Wallpaper, accents, and icons on Linux
-        - LibreWolf container colors on Linux
+        - LibreWolf container colors
         - Bash, Ghostty, Zed colors, fonts
 
         Default:
@@ -122,7 +170,13 @@ in
         programs.zed-editor.userSettings = {
           theme = {
             mode = "system";
-            dark = if coral then "Zed Legacy: Solarized Dark" else "Red";
+            dark =
+              if coral then
+                "Zed Legacy: Solarized Dark"
+              else if nothin then
+                "Zed Legacy: Rosé Pine Moon" + zed-variant
+              else
+                "Red";
             light = "One Light";
           };
 
@@ -136,17 +190,68 @@ in
           ".config/zed/themes/red.json" = {
             source = jsonFormat.generate "red-theme" red-theme;
           };
+          ".config/zed/themes/rose.json" = {
+            source = jsonFormat.generate "rose-theme" rose-theme;
+          };
+          ".config/gtk-3.0/gtk.css" = {
+            text = ''
+              @define-color accent_color #${clr.accent};
+              @define-color accent_bg_color #${clr.accent-bg};
+            '';
+          };
+          ".config/gtk-4.0/gtk.css" = {
+            text = ''
+              @define-color accent_color #${clr.accent};
+              @define-color accent_bg_color #${clr.accent-bg};
+            '';
+          };
         };
 
         # darwin support is coming soon
         programs.librewolf.profiles.camdenboren = {
           containers = {
-            container1.color = if coral then "blue" else "red";
-            container2.color = if coral then "turquoise" else "orange";
-            container3.color = if coral then "green" else "yellow";
-            container4.color = if coral then "yellow" else "green";
-            container5.color = if coral then "orange" else "turquoise";
-            container6.color = if coral then "red" else "purple";
+            container1.color =
+              if coral then
+                "blue"
+              else if nothin then
+                "purple"
+              else
+                "red";
+            container2.color =
+              if coral then
+                "turquoise"
+              else if nothin then
+                "blue"
+              else
+                "orange";
+            container3.color =
+              if coral then
+                "green"
+              else if nothin then
+                "turquoise"
+              else
+                "yellow";
+            container4.color =
+              if coral then
+                "yellow"
+              else if nothin then
+                "green"
+              else
+                "green";
+            container5.color =
+              if coral then
+                "orange"
+              else if nothin then
+                "yellow"
+              else
+                "turquoise";
+            container6.color =
+              if coral then
+                "red"
+              else if nothin then
+                "red"
+              else
+                "purple";
           };
 
           settings = {
@@ -173,7 +278,13 @@ in
               };
 
               "org/gnome/desktop/interface" = {
-                accent-color = if coral then "teal" else "red";
+                accent-color =
+                  if coral then
+                    "teal"
+                  else if nothin then
+                    "purple"
+                  else
+                    "red";
               };
             };
         }

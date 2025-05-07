@@ -9,7 +9,6 @@
       "amethyst"
       "bitwarden"
       "clickup"
-      "desktoppr"
       "eloston-chromium"
       "freecad"
       "freetube"

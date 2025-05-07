@@ -7,7 +7,7 @@
 let
   hostname = "mainvm";
   system = "x86_64-linux";
-  rice = "skyline";
+  rice = "nothin";
   pkgs-stable = nixpkgs-stable.legacyPackages.${system};
 in
 {

@@ -17,3 +17,5 @@
 {"_id":"displayVideoPlayButton","value":false}
 {"_id":"externalPlayer","value":"mpv"}
 {"_id":"rememberSearchHistory","value":false}
+{"_id":"baseTheme","value":"black"}
+{"_id":"hideLabelsSideBar","value":true}

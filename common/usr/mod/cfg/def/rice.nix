@@ -12,7 +12,9 @@ let
   nothin = cfg == "nothin";
   jsonFormat = pkgs.formats.json { };
   red-theme = import ../../../dot/zed/red.nix { inherit lib system; };
+  rose-theme = import ../../../dot/zed/rose.nix;
   isLinux = lib.hasSuffix "-linux" system;
+  zed-variant = if isLinux then "" else " Transparent";
 
   clr = {
     bg =
@@ -172,7 +174,7 @@ in
               if coral then
                 "Zed Legacy: Solarized Dark"
               else if nothin then
-                "Zed Legacy: Rosé Pine Moon"
+                "Zed Legacy: Rosé Pine Moon" + zed-variant
               else
                 "Red";
             light = "One Light";
@@ -187,6 +189,9 @@ in
         home.file = {
           ".config/zed/themes/red.json" = {
             source = jsonFormat.generate "red-theme" red-theme;
+          };
+          ".config/zed/themes/rose.json" = {
+            source = jsonFormat.generate "rose-theme" rose-theme;
           };
           ".config/gtk-3.0/gtk.css" = {
             text = ''

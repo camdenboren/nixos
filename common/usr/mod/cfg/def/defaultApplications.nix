@@ -13,7 +13,7 @@
       # Browser
       "x-scheme-handler/http" = "librewolf.desktop";
       "text/html" = "librewolf.desktop";
-      "application/pdf" = "librewolf.desktop";
+      "application/pdf" = "org.gnome.Evince.desktop";
       "application/xhtml+xml" = "librewolf.desktop";
       "x-scheme-handler/https" = "librewolf.desktop";
 

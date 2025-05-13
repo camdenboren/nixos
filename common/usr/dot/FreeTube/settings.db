@@ -19,3 +19,5 @@
 {"_id":"rememberSearchHistory","value":false}
 {"_id":"baseTheme","value":"black"}
 {"_id":"hideLabelsSideBar","value":true}
+{"_id":"hideActiveSubscriptions","value":true}
+{"_id":"enableSubtitlesByDefault","value":true}

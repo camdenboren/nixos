@@ -25,7 +25,7 @@
 		"enableWaylandSupport": true,
 		"gpuRasterization": true
 	},
-	"menuBar": true,
+	"menuBar": false,
 	"minimizeOnClose": false,
 	"mpris": false,
 	"notifications": false,

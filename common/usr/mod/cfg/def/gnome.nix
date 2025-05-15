@@ -18,7 +18,7 @@ in
       clock-show-seconds = false;
       clock-show-weekday = true;
       color-scheme = "prefer-dark";
-      text-scaling-factor = 1.25;
+      text-scaling-factor = if (lib.hasPrefix "main" hostname) then 1.15 else 1.25;
     };
     "org/gnome/desktop/sound" = {
       event-sounds = false;

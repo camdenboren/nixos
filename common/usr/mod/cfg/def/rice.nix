@@ -3,6 +3,7 @@
   pkgs,
   lib,
   system,
+  hostname,
   ...
 }:
 
@@ -14,6 +15,7 @@ let
   red-theme = import ../../../dot/zed/red.nix { inherit lib system; };
   rose-theme = import ../../../dot/zed/rose.nix;
   isLinux = lib.hasSuffix "-linux" system;
+  isMain = lib.hasPrefix "main" hostname;
   zed-variant = if isLinux then "" else " Transparent";
 
   clr = {
@@ -143,7 +145,13 @@ in
             background-opacity = if isLinux then 1.0 else 0.85;
             bold-is-bright = true;
             font-family = fonts.mono;
-            font-size = if isLinux then 10 else 15;
+            font-size =
+              if isMain then
+                11
+              else if isLinux then
+                10
+              else
+                15;
             macos-titlebar-proxy-icon = "hidden"; # mac-only
             theme = "custom";
             title = "\" \"";

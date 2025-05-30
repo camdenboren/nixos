@@ -36,6 +36,10 @@
         GuestEnabled = false;
         SHOWFULLNAME = false;
       };
+      menuExtraClock = {
+        ShowDate = 2;
+        ShowDayOfWeek = false;
+      };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
         #AppleShowAllExtensions = true;

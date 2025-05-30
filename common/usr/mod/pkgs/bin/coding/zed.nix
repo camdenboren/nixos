@@ -55,6 +55,14 @@ in
         copilot = false;
         edit_prediction_provider = "none";
       };
+      tab_bar = {
+        show_nav_history_buttons = false;
+        show_tab_bar_buttons = false;
+      };
+      toolbar = {
+        breadcrumbs = false;
+        quick_actions = false;
+      };
       telemetry = {
         diagnostics = false;
         metrics = false;
@@ -93,6 +101,7 @@ in
       # ollama settings
       assistant = {
         enabled = !isVM;
+        button = false;
         default_model = {
           provider = "ollama";
           model = if (hostname == "media") then "mistral:latest" else "mistral-nemo:latest";

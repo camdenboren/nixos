@@ -143,9 +143,13 @@ in
                 ++ lib.optionals (!isVM) [
                   "/${keybindingsPath}custom3/"
                   "/${keybindingsPath}custom4/"
+                  "/${keybindingsPath}custom5/"
+                  "/${keybindingsPath}custom6/"
+                  "/${keybindingsPath}custom7/"
                 ]
                 ++ lib.optionals (hostname == "main") [
-                  "/${keybindingsPath}custom5/"
+                  "/${keybindingsPath}custom8/"
+                  "/${keybindingsPath}custom9/"
                 ];
             };
             "${keybindingsPath}custom0" = {
@@ -174,6 +178,26 @@ in
               binding = "<Control><Alt>v";
             };
             "${keybindingsPath}custom5" = {
+              name = "MullvadVPN";
+              command = "mullvad-gui";
+              binding = "<Control><Alt>m";
+            };
+            "${keybindingsPath}custom6" = {
+              name = "Tidal-HiFi";
+              command = "tidal-hifi --disable-gpu";
+              binding = "<Control><Alt>t";
+            };
+            "${keybindingsPath}custom7" = {
+              name = "Steam";
+              command = "steam";
+              binding = "<Control><Alt>s";
+            };
+            "${keybindingsPath}custom8" = {
+              name = "EasyEffects";
+              command = "easyeffects";
+              binding = "<Control><Alt>e";
+            };
+            "${keybindingsPath}custom9" = {
               name = "Reaper";
               command = "reaper";
               binding = "<Control><Alt>r";

@@ -23,7 +23,14 @@ in
       gnome-tweaks
     ]
     ++ lib.optionals isDarwin [
-      autoraise
+      (autoraise.overrideAttrs {
+        buildPhase = ''
+          runHook preBuild
+          $CXX -std=c++03 -fobjc-arc -D"EXPERIMENTAL_FOCUS_FIRST" -D"NS_FORMAT_ARGUMENT(A)=" -D"SKYLIGHT_AVAILABLE=1" -o AutoRaise AutoRaise.mm -framework AppKit -framework SkyLight
+          bash create-app-bundle.sh
+          runHook postBuild
+        '';
+      })
       betterdisplay
       ice-bar
       rectangle

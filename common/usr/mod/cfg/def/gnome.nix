@@ -16,7 +16,8 @@ in
       icon-theme = "Dracula";
       clock-format = "12h";
       clock-show-seconds = false;
-      clock-show-weekday = true;
+      clock-show-weekday = false;
+      clock-show-date = false;
       color-scheme = "prefer-dark";
       text-scaling-factor = if (lib.hasPrefix "main" hostname) then 1.15 else 1.25;
     };

@@ -127,8 +127,24 @@ in
       gap-size = 0;
     };
     "org/gnome/shell/extensions/just-perfection" = {
+      # visibility
       accessibility-menu = false;
       dash-separator = false;
+      world-clock = false;
+      weather = false;
+      events-button = false;
+      workspace-popup = false;
+      workspace = false;
+      window-preview-caption = false;
+
+      # icons
+      window-picker-icon = false;
+      power-icon = false;
+
+      # customize
+      startup-status = 0;
+      panel-button-padding-size = 1;
+      panel-indicator-padding-size = 1;
     };
     "org/gnome/shell/extensions/auto-move-windows" = {
       application-list = [

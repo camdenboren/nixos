@@ -76,7 +76,6 @@ in
         ];
       enabled-extensions =
         [
-          "appindicatorsupport@rgcjonas.gmail.com"
           "gnome-one-window-wonderland@jqno.nl"
           "blur-my-shell@aunetx"
           "just-perfection-desktop@just-perfection"
@@ -85,10 +84,6 @@ in
         ++ lib.optionals (hostname == "media") [
           "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
         ];
-    };
-    "org/gnome/shell/extensions/appindicator" = {
-      icon-brightness = 0.0;
-      icon-size = 18;
     };
     "org/gnome/shell/extensions/blur-my-shell" = {
       hacks-level = 2;

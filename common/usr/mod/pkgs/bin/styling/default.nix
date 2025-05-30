@@ -14,7 +14,6 @@ in
     with pkgs;
     lib.optionals isLinux [
       # Styling and Gnome
-      gnomeExtensions.appindicator
       gnomeExtensions.one-window-wonderland
       gnomeExtensions.blur-my-shell
       gnomeExtensions.just-perfection

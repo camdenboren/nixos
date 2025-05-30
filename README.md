@@ -246,7 +246,7 @@ So launch them, clean up config errors, restart</i>
     - Services -> General
 
       - cmd-alt-letter for the following (requires automator services)
-      - Bitwarden, ClickUp, FreeTube, Ghostty, LibreWolf, Notes, Slack, UTM, Zed
+      - Bitwarden, ClickUp, FreeTube, Ghostty, LibreWolf, Mullvad, Notes, Slack, UTM, Zed
 
     - Spotlight
 

@@ -55,6 +55,9 @@ in
         copilot = false;
         edit_prediction_provider = "none";
       };
+      scrollbar = {
+        show = if hostname == "media" then "never" else "auto";
+      };
       tab_bar = {
         show_nav_history_buttons = false;
         show_tab_bar_buttons = false;

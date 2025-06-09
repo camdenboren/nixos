@@ -2,19 +2,11 @@
 
 pkgs.writeShellScriptBin "dev" ''
   currentDirectory=$(pwd)
-  while getopts 'cfijp' OPTION; do 
+  while getopts 'cjp' OPTION; do 
     case "$OPTION" in
       c)
         echo "Adding C flake to: $currentDirectory"
         cp -r ~/etc/nixos/common/usr/dev/c/flake.nix $currentDirectory
-        ;;
-      f)
-        echo "Adding FTC flake to: $currentDirectory"
-        cp -r ~/etc/nixos/common/usr/dev/ftc/flake.nix $currentDirectory
-        ;;
-      i)
-        echo "Adding Ionic flake to: $currentDirectory"
-        cp -r ~/etc/nixos/common/usr/dev/ionic/flake.nix $currentDirectory
         ;;
       j)
         echo "Adding Java flake to: $currentDirectory"
@@ -31,7 +23,7 @@ pkgs.writeShellScriptBin "dev" ''
     esac
   done
   if [ "$OPTIND" -eq 1 ]; then
-    echo "Run this w/ -cfijp to add correct dev-env to the current directory. Use dev-env w/ nix develop"
+    echo "Run this w/ -cjp to add correct dev-env to the current directory. Use dev-env w/ nix develop"
   fi
   shift "$(($OPTIND -1))"
 ''

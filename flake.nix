@@ -29,11 +29,6 @@
     };
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
-      inputs.nixpkgs.follows = "nixpkgs";
-
-      # avoids registry-based nixpkgs from old nix-darwin
-      # fixed in https://github.com/LnL7/nix-darwin/commit/be18b76
-      inputs.nix-darwin.follows = "nix-darwin";
     };
   };
 

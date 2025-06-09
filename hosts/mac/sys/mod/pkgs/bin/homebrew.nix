@@ -19,7 +19,6 @@
       "pearcleaner"
       "qdirstat"
       "tidal"
-      "zoom"
     ];
   };
 }

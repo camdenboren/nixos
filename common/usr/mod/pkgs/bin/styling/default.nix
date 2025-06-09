@@ -14,6 +14,7 @@ in
     with pkgs;
     lib.optionals isLinux [
       # Styling and Gnome
+      gnomeExtensions.auto-move-windows
       gnomeExtensions.one-window-wonderland
       gnomeExtensions.blur-my-shell
       gnomeExtensions.just-perfection

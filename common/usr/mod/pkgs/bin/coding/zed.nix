@@ -58,9 +58,15 @@ in
       scrollbar = {
         show = if hostname == "media" then "never" else "auto";
       };
+      search = {
+        button = false;
+      };
       tab_bar = {
         show_nav_history_buttons = false;
         show_tab_bar_buttons = false;
+      };
+      title_bar = {
+        show_sign_in = false;
       };
       toolbar = {
         breadcrumbs = false;
@@ -102,7 +108,7 @@ in
       };
 
       # ollama settings
-      assistant = {
+      agent = {
         enabled = !isVM;
         button = false;
         default_model = {

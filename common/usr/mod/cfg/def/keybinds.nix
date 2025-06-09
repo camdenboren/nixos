@@ -17,7 +17,7 @@ let
   bindings = builtins.listToAttrs [
     {
       name = "${ctrl}-p";
-      value = "pane::ActivatePrevItem";
+      value = "pane::ActivatePreviousItem";
     }
     {
       name = "${ctrl}-n";
@@ -91,6 +91,12 @@ in
             {
               context = "Terminal";
               inherit bindings;
+            }
+            {
+              context = "MessageEditor > Editor";
+              bindings = {
+                "${ctrl}-w" = "workspace::ToggleRightDock";
+              };
             }
           ]
           ++ lib.optionals isDarwin [

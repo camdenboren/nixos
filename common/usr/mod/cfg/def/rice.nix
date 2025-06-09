@@ -101,7 +101,7 @@ let
 
   fonts = {
     mono = "JetBrainsMono Nerd Font";
-    serif = "Cantarell";
+    serif = "Adwaita Sans";
   };
 in
 {

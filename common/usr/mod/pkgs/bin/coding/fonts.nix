@@ -2,7 +2,11 @@
 
 {
   home.packages = with pkgs; [
-    cantarell-fonts
+    (adwaita-fonts.overrideAttrs (old: {
+      meta = (old.meta or { }) // {
+        platforms = lib.platforms.all;
+      };
+    }))
     nerd-fonts.jetbrains-mono
   ];
 

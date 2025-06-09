@@ -10,4 +10,6 @@
       shell = pkgs.bashInteractive;
     };
   };
+
+  system.primaryUser = "camdenboren";
 }

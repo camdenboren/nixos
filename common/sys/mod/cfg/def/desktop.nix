@@ -26,10 +26,6 @@ in
       # Enable the X11 windowing system.
       enable = true;
 
-      # Enable the GNOME Desktop Environment.
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-
       # Configure keymap in X11
       xkb = {
         layout = "us";
@@ -40,10 +36,17 @@ in
       };
     };
 
-    # Enable automatic login for the user.
-    displayManager.autoLogin = {
-      enable = lib.mkIf isVM true;
-      user = lib.mkIf isVM "camdenboren";
+    # Enable the GNOME Desktop Environment.
+    desktopManager.gnome.enable = true;
+
+    displayManager = {
+      gdm.enable = true;
+
+      # Enable automatic login for the user.
+      autoLogin = {
+        enable = lib.mkIf isVM true;
+        user = lib.mkIf isVM "camdenboren";
+      };
     };
   };
 

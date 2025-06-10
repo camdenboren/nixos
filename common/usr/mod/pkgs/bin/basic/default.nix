@@ -14,11 +14,11 @@ in
   home.packages =
     with pkgs;
     lib.optionals (!isVM) [
+      bitwarden
       mpv
     ]
     ++ lib.optionals (hostname == "main" || hostname == "media") [
       # Basic Apps
-      bitwarden
       easyeffects
       freetube
       lollypop

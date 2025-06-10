@@ -7,7 +7,6 @@
     caskArgs.no_quarantine = true;
     casks = [
       "amethyst"
-      "bitwarden"
       "clickup"
       "eloston-chromium"
       "freecad"

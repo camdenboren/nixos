@@ -12,7 +12,6 @@
       "eloston-chromium"
       "freecad"
       "freetube"
-      "ghostty"
       "languagetool"
       "linearmouse"
       "mullvadvpn"

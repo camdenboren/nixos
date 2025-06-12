@@ -189,8 +189,8 @@ in
               binding = "<Control><Alt>m";
             };
             "${keybindingsPath}custom6" = {
-              name = "Tidal-HiFi";
-              command = "tidal-hifi --disable-gpu";
+              name = "High Tide";
+              command = "high-tide";
               binding = "<Control><Alt>t";
             };
             "${keybindingsPath}custom7" = {

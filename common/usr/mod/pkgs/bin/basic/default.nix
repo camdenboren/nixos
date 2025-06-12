@@ -21,6 +21,7 @@ in
       # Basic Apps
       easyeffects
       freetube
+      high-tide
       lollypop
       qbittorrent
       (tidal-hifi.overrideAttrs {

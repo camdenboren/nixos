@@ -36,6 +36,8 @@
             rm -f $out/share/icons/Dracula/scalable/apps/qbittorrent.svg
             cp -f ${../../../../rice/icons/qbittorrent/qbittorrent-${rice}.svg} $out/share/icons/Dracula/scalable/apps/qbittorrent.svg
 
+            cp -f ${../../../../rice/icons/high-tide/io.github.nokse22.HighTide-${rice}.svg} $out/share/icons/Dracula/scalable/apps/io.github.nokse22.HighTide.svg
+
             rm -f $out/share/icons/Dracula/index.theme
             cp -f ${../../../../rice/icons/index.theme} $out/share/icons/Dracula/index.theme
 

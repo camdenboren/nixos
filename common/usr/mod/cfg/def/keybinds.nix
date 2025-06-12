@@ -140,6 +140,8 @@ in
         lib.optionalAttrs isLinux {
           dconf.settings = {
             "org/gnome/settings-daemon/plugins/media-keys" = {
+              logout = [ ];
+              shutdown = [ "<Control><Alt>Delete" ];
               custom-keybindings =
                 [
                   "/${keybindingsPath}custom0/"

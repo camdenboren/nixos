@@ -386,19 +386,25 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 
 ### Misc
 
-- Verify Directory Integrity
+- Inspect Home Manager errors
+
+  ```shell
+  systemctl status home-manager-camdenboren.service
+  ```
+
+- Verify directory integrity
 
   ```shell
   find . -type f -exec md5sum {} + | LC_ALL=C sort | md5sum >> md5sum.txt
   ```
 
-- Remove rygel's ignored media files list (log out to take effect, also need: `shell sqlite`)
+- Remove Rygel's ignored media files list (log out to take effect, also need: `shell sqlite`)
 
   ```shell
   echo "delete from ignorelist;" | sqlite3 ~/.cache/rygel/media-export.db
   ```
 
-- Mac Update\
+- Mac update\
   _Brew upgrade needs to be run for individual casks, and Zoom screen sharing permissions often break_
 
   ```shell

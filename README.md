@@ -256,6 +256,7 @@ So launch them, clean up config errors, restart</i>
     - App Shortcuts -> All Applications
 
       - Minimize = ctrl-h
+      - Shut Down... = cmd-alt-shift-d
 
     - App Shortcuts -> Notes.app
 

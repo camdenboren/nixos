@@ -44,7 +44,7 @@
 
       vim.cmd([[
         set notermguicolors
-        set relativenumber
+        set number relativenumber
         set fillchars=eob:\ 
         map <C-s> :Telescope find_files<CR>
         map <S-Left> :wincmd h<CR>

@@ -26,7 +26,7 @@
 
       require("nvim-tree").setup()
       require('telescope').setup()
-      require'nvim-web-devicons'.setup()
+      require('nvim-web-devicons').setup()
       require('lualine').setup()
       require("lspconfig").nixd.setup({
         cmd = { "nixd" },
@@ -47,6 +47,8 @@
         set relativenumber
         set fillchars=eob:\ 
         map <C-s> :Telescope find_files<CR>
+        map <S-Left> :wincmd h<CR>
+        map <S-Right> :wincmd l<CR>
       ]])
     '';
   };

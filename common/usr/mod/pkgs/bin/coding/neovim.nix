@@ -18,6 +18,7 @@
       vim-gitgutter
       lualine-nvim
       telescope-nvim
+      lazygit-nvim
     ];
 
     extraLuaConfig = ''
@@ -25,9 +26,10 @@
       vim.g.loaded_netrwPlugin = 1
 
       require("nvim-tree").setup()
-      require('telescope').setup()
       require('nvim-web-devicons').setup()
       require('lualine').setup()
+      require('telescope').setup()
+      require('lazygit')
       require("lspconfig").nixd.setup({
         cmd = { "nixd" },
         settings = {
@@ -49,6 +51,7 @@
         map <C-s> :Telescope find_files<CR>
         map <S-Left> :wincmd h<CR>
         map <S-Right> :wincmd l<CR>
+        map <C-l> :LazyGit<CR>
       ]])
     '';
   };

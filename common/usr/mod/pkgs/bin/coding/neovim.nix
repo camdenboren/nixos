@@ -26,10 +26,13 @@
       vim.g.loaded_netrwPlugin = 1
 
       require("nvim-tree").setup()
-      require('nvim-web-devicons').setup()
-      require('lualine').setup()
-      require('telescope').setup()
-      require('lazygit')
+      require("nvim-web-devicons").setup()
+      require("lualine").setup()
+      require("telescope").setup()
+      require("lazygit")
+      require("lspconfig").rust_analyzer.setup({
+        cmd = { "rust-analyzer" },
+      })
       require("lspconfig").nixd.setup({
         cmd = { "nixd" },
         settings = {
@@ -48,10 +51,11 @@
         set notermguicolors
         set number relativenumber
         set fillchars=eob:\ 
-        map <C-s> :Telescope find_files<CR>
         map <S-Left> :wincmd h<CR>
         map <S-Right> :wincmd l<CR>
-        map <C-l> :LazyGit<CR>
+        map <C-s> :Telescope find_files<CR>
+        map <C-g> :LazyGit<CR>
+        map <C-x> :lua vim.diagnostic.open_float()<CR>
       ]])
     '';
   };

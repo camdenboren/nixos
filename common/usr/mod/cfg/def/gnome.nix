@@ -62,7 +62,7 @@ in
         ++ lib.optionals (!isVM) [
           "bitwarden.desktop"
           "freetube.desktop"
-          "io.github.nokse22.HighTide.desktop"
+          "io.github.nokse22.high-tide.desktop"
           "com.github.wwmm.easyeffects.desktop"
         ]
         ++ lib.optionals (hostname == "main") [

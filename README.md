@@ -468,13 +468,6 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
     - <i>config saved in hm, manage consistent 60fps
     - config path: `~/.steam/steam/steamapps/compatdata/3240220/pfx/drive_c/users/steamuser/Documents/Rockstar\ Games/GTAV\ Enhanced/settings.xml`</i>
 
-- #### GTAV Legacy
-
-  - GEProton-9-19
-  - Extra notes
-    - <i>config saved in hm, manage pretty consistent 50-60fps
-    - config path: `~/.steam/steam/steamapps/compatdata/271590/pfx/drive_c/users/steamuser/Documents/Rockstar\ Games/GTA\ V/settings.xml`</i>
-
 - #### MCC
 
   - Proton 8.0-5

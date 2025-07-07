@@ -6,14 +6,14 @@
 
 stdenv.mkDerivation rec {
   pname = "neural-amp-modeler-lv2";
-  version = "0.1.7";
+  version = "0.1.9";
 
   src = fetchFromGitHub {
     owner = "mikeoliphant";
     repo = "neural-amp-modeler-lv2";
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-7l3EivmLaRdJ6MaOl9zCP03EQ2LoO1vQoRcS6+kWDek=";
+    hash = "sha256-hgHuN+cwFxaPuQLHbamdPtvsDE0ErTViJaCb5gYmLJE=";
   };
 
   cmakeFlags = [

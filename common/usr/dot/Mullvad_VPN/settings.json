@@ -13,7 +13,7 @@
       },
       "providers": "any",
       "ownership": "any",
-      "tunnel_protocol": "any",
+      "tunnel_protocol": "wireguard",
       "wireguard_constraints": {
         "port": "any",
         "ip_version": "any",
@@ -44,6 +44,9 @@
     "selected_obfuscation": "auto",
     "udp2tcp": {
       "port": "any"
+    },
+    "shadowsocks": {
+      "port": "any"
     }
   },
   "bridge_state": "auto",
@@ -52,7 +55,7 @@
   },
   "api_access_methods": {
     "direct": {
-      "id": "e018431f-ac9f-4588-afbb-53466b9c9c57",
+      "id": "1e5e19ac-289e-4275-9642-88e014a29235",
       "name": "Direct",
       "enabled": true,
       "access_method": {
@@ -60,11 +63,19 @@
       }
     },
     "mullvad_bridges": {
-      "id": "b32317d6-eece-4724-9a83-d94c63889151",
+      "id": "7e56b45b-ddc2-4ae4-979d-580fd4e4be97",
       "name": "Mullvad Bridges",
       "enabled": true,
       "access_method": {
         "built_in": "bridge"
+      }
+    },
+    "encrypted_dns_proxy": {
+      "id": "031be237-b604-4083-9c2e-4ae2c660c4e8",
+      "name": "Encrypted DNS proxy",
+      "enabled": true,
+      "access_method": {
+        "built_in": "encrypted_dns_proxy"
       }
     },
     "custom": []
@@ -79,6 +90,10 @@
     "wireguard": {
       "mtu": null,
       "quantum_resistant": "auto",
+      "daita": {
+        "enabled": false,
+        "use_multihop_if_necessary": true
+      },
       "rotation_interval": null
     },
     "generic": {
@@ -101,5 +116,5 @@
   },
   "relay_overrides": [],
   "show_beta_releases": false,
-  "settings_version": 10
+  "settings_version": 11
 }

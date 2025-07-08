@@ -80,6 +80,7 @@ in
           "blur-my-shell@aunetx"
           "just-perfection-desktop@just-perfection"
           "focus-changer@heartmire"
+          "date-menu-formatter@marcinjakubowski.github.com"
         ]
         ++ lib.optionals (hostname == "media") [
           "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
@@ -150,6 +151,11 @@ in
       application-list = [
         "com.github.wwmm.easyeffects.desktop:4"
       ];
+    };
+    "org/gnome/shell/extensions/date-menu-formatter" = {
+      font-size = if (lib.hasPrefix "main" hostname) then 10 else 11;
+      formatter = "01_luxon";
+      pattern = "h:mm";
     };
     "org/gnome/epiphany" = {
       start-in-incognito-mode = true;

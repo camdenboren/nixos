@@ -19,6 +19,7 @@ in
       gnomeExtensions.blur-my-shell
       gnomeExtensions.just-perfection
       gnomeExtensions.focus-changer
+      gnomeExtensions.date-menu-formatter
       adw-gtk3
       dracula-icon-theme
       gnome-tweaks

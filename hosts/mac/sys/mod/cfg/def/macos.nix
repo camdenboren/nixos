@@ -37,6 +37,7 @@
         SHOWFULLNAME = false;
       };
       menuExtraClock = {
+        ShowAMPM = false;
         ShowDate = 2;
         ShowDayOfWeek = false;
       };

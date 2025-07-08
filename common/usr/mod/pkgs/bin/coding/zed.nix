@@ -45,6 +45,9 @@ in
       collaboration_panel = {
         button = false;
       };
+      debugger = {
+        button = false;
+      };
       outline_panel = {
         button = false;
       };

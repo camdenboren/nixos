@@ -153,7 +153,7 @@ in
       ];
     };
     "org/gnome/shell/extensions/date-menu-formatter" = {
-      font-size = if (lib.hasPrefix "main" hostname) then 10 else 11;
+      font-size = 11;
       formatter = "01_luxon";
       pattern = "h:mm";
     };

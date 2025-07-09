@@ -2,7 +2,8 @@
 {"_id":"checkForUpdates","value":false}
 {"_id":"checkForBlogPosts","value":false}
 {"_id":"hideHeaderLogo","value":true}
-{"_id":"secColor","value":"Red"}
+{"_id":"mainColor","value":"Teal"}
+{"_id":"secColor","value":"CatppuccinFrappeTeal"}
 {"_id":"autoplayVideos","value":false}
 {"_id":"defaultQuality","value":"1080"}
 {"_id":"fetchSubscriptionsAutomatically","value":false}

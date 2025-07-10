@@ -14,6 +14,7 @@ in
   home.packages =
     with pkgs;
     lib.optionals (!isVM) [
+      alc-calc
       bitwarden
       mpv
     ]
@@ -53,6 +54,9 @@ in
     ]
     ++ lib.optionals (!isLinux) [
       vlc-bin
+    ]
+    ++ lib.optionals (hostname == "main" || !isLinux) [
+      chat-script
     ];
 
   imports =
@@ -61,5 +65,8 @@ in
     ]
     ++ lib.optionals isLinux [
       ./chromium.nix
+    ]
+    ++ lib.optionals (!isVM || !isLinux) [
+      ../../../cfg/env/overlays/personal.nix
     ];
 }

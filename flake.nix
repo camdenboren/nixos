@@ -23,6 +23,12 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    alc-calc = {
+      url = "github:camdenboren/alc-calc/feat-app-bundle";
+    };
+    chat-script = {
+      url = "github:camdenboren/chat-script";
+    };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";

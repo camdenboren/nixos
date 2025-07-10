@@ -30,6 +30,12 @@
       require("lualine").setup()
       require("telescope").setup()
       require("lazygit")
+      require("lspconfig").jdtls.setup({
+        cmd = { "jdtls" },
+      })
+      require("lspconfig").ruff.setup({
+        cmd = { "ruff", "server" },
+      })
       require("lspconfig").rust_analyzer.setup({
         cmd = { "rust-analyzer" },
       })

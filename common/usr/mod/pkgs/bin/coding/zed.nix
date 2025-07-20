@@ -22,7 +22,7 @@ in
     userSettings = {
       # basic
       auto_update = false;
-      vim_mode = true;
+      vim_mode = (hostname != "media");
       relative_line_numbers = true;
       soft_wrap = "editor_width";
       autosave = {

@@ -21,7 +21,6 @@ in
     ++ lib.optionals (hostname == "main" || hostname == "media") [
       # Basic Apps
       easyeffects
-      freetube
       high-tide
       lollypop
       qbittorrent
@@ -65,6 +64,9 @@ in
     ]
     ++ lib.optionals isLinux [
       ./chromium.nix
+    ]
+    ++ lib.optionals (!isVM) [
+      ./freetube.nix
     ]
     ++ lib.optionals (!isVM || !isLinux) [
       ../../../cfg/env/overlays/personal.nix

@@ -58,7 +58,6 @@ in
 
   # Exclude unwanted apps
   environment.gnome.excludePackages = with pkgs; [
-    gnome-calendar
     gnome-console
     gnome-contacts
     gnome-maps
@@ -67,7 +66,6 @@ in
     gnome-tour
     gnome-weather
     geary # email client
-    seahorse # password manager
     simple-scan # document scanner
     snapshot # camera app
     totem # video player

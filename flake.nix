@@ -28,8 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chat-script = {
-      url = "github:camdenboren/chat-script/dev";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:camdenboren/chat-script";
     };
     yt-x = {
       url = "github:Benexl/yt-x";

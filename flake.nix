@@ -24,10 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     alc-calc = {
-      url = "github:camdenboren/alc-calc/feat-app-bundle";
+      url = "github:camdenboren/alc-calc";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     chat-script = {
-      url = "github:camdenboren/chat-script";
+      url = "github:camdenboren/chat-script/dev";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
@@ -35,6 +37,7 @@
     };
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

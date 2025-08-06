@@ -54,9 +54,6 @@ in
     ]
     ++ lib.optionals (!isLinux) [
       vlc-bin
-    ]
-    ++ lib.optionals (hostname == "main" || !isLinux) [
-      chat-script
     ];
 
   imports =

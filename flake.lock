@@ -37,29 +37,6 @@
         "type": "github"
       }
     },
-    "chat-script": {
-      "inputs": {
-        "darwin-share": "darwin-share",
-        "linux-share": "linux-share",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1753998461,
-        "narHash": "sha256-khQci4e3I22DcXWJwBT3fX/ebyqDR+QKL5JbL2bmDU0=",
-        "owner": "camdenboren",
-        "repo": "chat-script",
-        "rev": "8e32431ff042ba926563572d0ebd5293e9e6c292",
-        "type": "github"
-      },
-      "original": {
-        "owner": "camdenboren",
-        "ref": "dev",
-        "repo": "chat-script",
-        "type": "github"
-      }
-    },
     "cl-nix-lite": {
       "locked": {
         "lastModified": 1728174978,
@@ -73,18 +50,6 @@
         "owner": "hraban",
         "repo": "cl-nix-lite",
         "type": "github"
-      }
-    },
-    "darwin-share": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-KpJ6WspXfwDKUATEBSm2CpLCD//kyFvaJGJqBASatcA=",
-        "type": "file",
-        "url": "https://cdn-media.huggingface.co/frpc-gradio-0.3/frpc_darwin_arm64"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://cdn-media.huggingface.co/frpc-gradio-0.3/frpc_darwin_arm64"
       }
     },
     "firefox-addons": {
@@ -182,18 +147,6 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
-      }
-    },
-    "linux-share": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-VY9i4vla8XmwC8jKwRxvnHduxR4dM9ixiMhFxzcAVDU=",
-        "type": "file",
-        "url": "https://cdn-media.huggingface.co/frpc-gradio-0.3/frpc_linux_amd64"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://cdn-media.huggingface.co/frpc-gradio-0.3/frpc_linux_amd64"
       }
     },
     "mac-app-util": {
@@ -313,7 +266,6 @@
     "root": {
       "inputs": {
         "alc-calc": "alc-calc",
-        "chat-script": "chat-script",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",

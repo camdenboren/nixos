@@ -17,6 +17,7 @@ in
       alc-calc
       bitwarden
       mpv
+      yt-x
     ]
     ++ lib.optionals (hostname == "main" || hostname == "media") [
       # Basic Apps

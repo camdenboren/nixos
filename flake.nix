@@ -31,6 +31,10 @@
       url = "github:camdenboren/chat-script/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    yt-x = {
+      url = "github:Benexl/yt-x";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";

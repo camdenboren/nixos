@@ -26,39 +26,38 @@ in
     #   bld - build a derivation in cwd
     #   sw - rebuild system
 
-    shellAliases =
-      {
-        bld = "nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'";
-        c = "cd ~ && clear";
-        cdf = "cd $NH_FLAKE";
-        cdh = "cd ~";
-        cdr = "cd ~/Documents/Repos";
-        cdt = "cd ~/Documents/Tests";
-        check = "nix flake check $NH_FLAKE";
-        clean = if (isDarwin || isVM) then "nh clean all" else "nh clean all -k 2";
-        ddg = "lynx -vikeys start.duckduckgo.com/lite/";
-        fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";
-        lg = "lazygit";
-        lgf = "lazygit -p $NH_FLAKE";
-        ls = "ls -a";
-        lsg = "ls | grep";
-        repl = "nix repl -f '<nixpkgs>'";
-        sw = if isDarwin then "nh darwin switch" else "nh os switch";
-        tr = if isDarwin then "trash" else "gio trash";
-        update = "nix flake update --flake $NH_FLAKE";
-        zed = "zeditor";
-        ":q" = "exit";
-      }
-      // (
-        if (hostname == "main") then
-          {
-            nixos = "quickemu --vm ~/vm/nixos-24.05-gnome.conf --status-quo";
-            ubuntu = "quickemu --vm ~/vm/ubuntu-24.04.conf --status-quo";
-            windows = "quickemu --vm ~/vm/windows-10.conf --status-quo";
-          }
-        else
-          { }
-      );
+    shellAliases = {
+      bld = "nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'";
+      c = "cd ~ && clear";
+      cdf = "cd $NH_FLAKE";
+      cdh = "cd ~";
+      cdr = "cd ~/Documents/Repos";
+      cdt = "cd ~/Documents/Tests";
+      check = "nix flake check $NH_FLAKE";
+      clean = if (isDarwin || isVM) then "nh clean all" else "nh clean all -k 2";
+      ddg = "lynx -vikeys start.duckduckgo.com/lite/";
+      fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";
+      lg = "lazygit";
+      lgf = "lazygit -p $NH_FLAKE";
+      ls = "ls -a";
+      lsg = "ls | grep";
+      repl = "nix repl -f '<nixpkgs>'";
+      sw = if isDarwin then "nh darwin switch" else "nh os switch";
+      tr = if isDarwin then "trash" else "gio trash";
+      update = "nix flake update --flake $NH_FLAKE";
+      zed = "zeditor";
+      ":q" = "exit";
+    }
+    // (
+      if (hostname == "main") then
+        {
+          nixos = "quickemu --vm ~/vm/nixos-24.05-gnome.conf --status-quo";
+          ubuntu = "quickemu --vm ~/vm/ubuntu-24.04.conf --status-quo";
+          windows = "quickemu --vm ~/vm/windows-10.conf --status-quo";
+        }
+      else
+        { }
+    );
 
     initExtra = ''
       if (( SHLVL > ${shlvl} )); then

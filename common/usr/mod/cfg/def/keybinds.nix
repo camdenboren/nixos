@@ -63,76 +63,74 @@ in
     lib.recursiveUpdate
       # all platforms
       {
-        programs.ghostty.settings.keybind =
-          [
-            "${ctrl}+q=quit"
-            "${ctrl}+w=close_surface"
-            "${ctrl}+n=next_tab"
-            "${ctrl}+p=previous_tab"
-            "${ctrl}+t=new_tab"
-            "${ctrl}+${alt}+n=move_tab:1"
-            "${ctrl}+${alt}+p=move_tab:-1"
-          ]
-          ++ lib.optionals isDarwin [
-            "${ctrl}+shift+c=copy_to_clipboard"
-            "${ctrl}+shift+v=paste_from_clipboard"
-          ];
+        programs.ghostty.settings.keybind = [
+          "${ctrl}+q=quit"
+          "${ctrl}+w=close_surface"
+          "${ctrl}+n=next_tab"
+          "${ctrl}+p=previous_tab"
+          "${ctrl}+t=new_tab"
+          "${ctrl}+${alt}+n=move_tab:1"
+          "${ctrl}+${alt}+p=move_tab:-1"
+        ]
+        ++ lib.optionals isDarwin [
+          "${ctrl}+shift+c=copy_to_clipboard"
+          "${ctrl}+shift+v=paste_from_clipboard"
+        ];
 
-        programs.zed-editor.userKeymaps =
-          [
-            {
-              context = "Editor";
-              inherit bindings;
-            }
-            {
-              context = "Workspace";
-              inherit bindings;
-            }
-            {
-              context = "Terminal";
-              inherit bindings;
-            }
-            {
-              context = "MessageEditor > Editor";
-              bindings = {
-                "${ctrl}-w" = "workspace::ToggleRightDock";
-              };
-            }
-          ]
-          ++ lib.optionals isDarwin [
-            {
-              context = "vim_mode == normal";
-              bindings = {
-                cmd-r = "vim::Redo";
-                cmd-a = "vim::Increment";
-                cmd-x = "vim::Decrement";
-              };
-            }
-            {
-              context = "VimControl && !menu";
-              bindings = {
-                cmd-f = "vim::PageDown";
-                cmd-b = "vim::PageUp";
-                cmd-d = "vim::ScrollDown";
-                cmd-u = "vim::ScrollUp";
-                "cmd-]" = "editor::GoToDefinition";
-                cmd-m = "vim::NextLineStart";
-              };
-            }
-            {
-              context = "Terminal";
-              bindings = {
-                cmd-shift-c = "terminal::Copy";
-                cmd-shift-v = "terminal::Paste";
-              };
-            }
-            {
-              context = "Editor";
-              bindings = {
-                ctrl-h = "zed::Minimize";
-              };
-            }
-          ];
+        programs.zed-editor.userKeymaps = [
+          {
+            context = "Editor";
+            inherit bindings;
+          }
+          {
+            context = "Workspace";
+            inherit bindings;
+          }
+          {
+            context = "Terminal";
+            inherit bindings;
+          }
+          {
+            context = "MessageEditor > Editor";
+            bindings = {
+              "${ctrl}-w" = "workspace::ToggleRightDock";
+            };
+          }
+        ]
+        ++ lib.optionals isDarwin [
+          {
+            context = "vim_mode == normal";
+            bindings = {
+              cmd-r = "vim::Redo";
+              cmd-a = "vim::Increment";
+              cmd-x = "vim::Decrement";
+            };
+          }
+          {
+            context = "VimControl && !menu";
+            bindings = {
+              cmd-f = "vim::PageDown";
+              cmd-b = "vim::PageUp";
+              cmd-d = "vim::ScrollDown";
+              cmd-u = "vim::ScrollUp";
+              "cmd-]" = "editor::GoToDefinition";
+              cmd-m = "vim::NextLineStart";
+            };
+          }
+          {
+            context = "Terminal";
+            bindings = {
+              cmd-shift-c = "terminal::Copy";
+              cmd-shift-v = "terminal::Paste";
+            };
+          }
+          {
+            context = "Editor";
+            bindings = {
+              ctrl-h = "zed::Minimize";
+            };
+          }
+        ];
       }
 
       # linux
@@ -142,23 +140,22 @@ in
             "org/gnome/settings-daemon/plugins/media-keys" = {
               logout = [ ];
               shutdown = [ "<Control><Alt>Delete" ];
-              custom-keybindings =
-                [
-                  "/${keybindingsPath}custom0/"
-                  "/${keybindingsPath}custom1/"
-                  "/${keybindingsPath}custom2/"
-                ]
-                ++ lib.optionals (!isVM) [
-                  "/${keybindingsPath}custom3/"
-                  "/${keybindingsPath}custom4/"
-                  "/${keybindingsPath}custom5/"
-                  "/${keybindingsPath}custom6/"
-                  "/${keybindingsPath}custom7/"
-                ]
-                ++ lib.optionals (hostname == "main") [
-                  "/${keybindingsPath}custom8/"
-                  "/${keybindingsPath}custom9/"
-                ];
+              custom-keybindings = [
+                "/${keybindingsPath}custom0/"
+                "/${keybindingsPath}custom1/"
+                "/${keybindingsPath}custom2/"
+              ]
+              ++ lib.optionals (!isVM) [
+                "/${keybindingsPath}custom3/"
+                "/${keybindingsPath}custom4/"
+                "/${keybindingsPath}custom5/"
+                "/${keybindingsPath}custom6/"
+                "/${keybindingsPath}custom7/"
+              ]
+              ++ lib.optionals (hostname == "main") [
+                "/${keybindingsPath}custom8/"
+                "/${keybindingsPath}custom9/"
+              ];
             };
             "${keybindingsPath}custom0" = {
               name = "LibreWolf";

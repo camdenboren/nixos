@@ -52,39 +52,37 @@ in
       lock-enabled = false;
     };
     "org/gnome/shell" = {
-      favorite-apps =
-        [
-          "org.gnome.Nautilus.desktop"
-          "librewolf.desktop"
-          "dev.zed.Zed.desktop"
-          "com.mitchellh.ghostty.desktop"
-        ]
-        ++ lib.optionals (!isVM) [
-          "bitwarden.desktop"
-          "freetube.desktop"
-          "io.github.nokse22.high-tide.desktop"
-          "com.github.wwmm.easyeffects.desktop"
-        ]
-        ++ lib.optionals (hostname == "main") [
-          "cockos-reaper.desktop"
-        ]
-        ++ lib.optionals (hostname == "media") [
-          "vlc.desktop"
-        ]
-        ++ lib.optionals (!isVM) [
-          "steam.desktop"
-        ];
-      enabled-extensions =
-        [
-          "gnome-one-window-wonderland@jqno.nl"
-          "blur-my-shell@aunetx"
-          "just-perfection-desktop@just-perfection"
-          "focus-changer@heartmire"
-          "date-menu-formatter@marcinjakubowski.github.com"
-        ]
-        ++ lib.optionals (hostname == "media") [
-          "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
-        ];
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "librewolf.desktop"
+        "dev.zed.Zed.desktop"
+        "com.mitchellh.ghostty.desktop"
+      ]
+      ++ lib.optionals (!isVM) [
+        "bitwarden.desktop"
+        "freetube.desktop"
+        "io.github.nokse22.high-tide.desktop"
+        "com.github.wwmm.easyeffects.desktop"
+      ]
+      ++ lib.optionals (hostname == "main") [
+        "cockos-reaper.desktop"
+      ]
+      ++ lib.optionals (hostname == "media") [
+        "vlc.desktop"
+      ]
+      ++ lib.optionals (!isVM) [
+        "steam.desktop"
+      ];
+      enabled-extensions = [
+        "gnome-one-window-wonderland@jqno.nl"
+        "blur-my-shell@aunetx"
+        "just-perfection-desktop@just-perfection"
+        "focus-changer@heartmire"
+        "date-menu-formatter@marcinjakubowski.github.com"
+      ]
+      ++ lib.optionals (hostname == "media") [
+        "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
+      ];
     };
     "org/gnome/shell/extensions/blur-my-shell" = {
       hacks-level = 2;

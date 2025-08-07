@@ -29,16 +29,15 @@ in
       wireshark
     ];
 
-  imports =
-    [
-      ./bash.nix
-      ./ghostty.nix
-      ./git.nix
-      ./lazygit.nix
-      ./neovim.nix
-      ./zed.nix
-    ]
-    ++ lib.optionals isDarwin [
-      ./fonts.nix
-    ];
+  imports = [
+    ./bash.nix
+    ./ghostty.nix
+    ./git.nix
+    ./lazygit.nix
+    ./neovim.nix
+    ./zed.nix
+  ]
+  ++ lib.optionals isDarwin [
+    ./fonts.nix
+  ];
 }

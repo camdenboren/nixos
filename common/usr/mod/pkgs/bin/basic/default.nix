@@ -56,17 +56,16 @@ in
       vlc-bin
     ];
 
-  imports =
-    [
-      ./librewolf.nix
-    ]
-    ++ lib.optionals isLinux [
-      ./chromium.nix
-    ]
-    ++ lib.optionals (!isVM) [
-      ./freetube.nix
-    ]
-    ++ lib.optionals (!isVM || !isLinux) [
-      ../../../cfg/env/overlays/personal.nix
-    ];
+  imports = [
+    ./librewolf.nix
+  ]
+  ++ lib.optionals isLinux [
+    ./chromium.nix
+  ]
+  ++ lib.optionals (!isVM) [
+    ./freetube.nix
+  ]
+  ++ lib.optionals (!isVM || !isLinux) [
+    ../../../cfg/env/overlays/personal.nix
+  ];
 }

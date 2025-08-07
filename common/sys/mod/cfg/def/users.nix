@@ -9,13 +9,12 @@
   users.users.camdenboren = {
     isNormalUser = true;
     description = "Camden Boren";
-    extraGroups =
-      [
-        "networkmanager"
-        "wheel"
-      ]
-      ++ lib.optionals (hostname == "main") [
-        "audio"
-      ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ]
+    ++ lib.optionals (hostname == "main") [
+      "audio"
+    ];
   };
 }

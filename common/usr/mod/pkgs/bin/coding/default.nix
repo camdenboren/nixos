@@ -24,7 +24,6 @@ in
     ]
     ++ lib.optionals isDarwin [
       jetbrains.idea-community
-      ollama
       utm
       wireshark
     ];

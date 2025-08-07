@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./bin
-    ./srv
+    ./ollama.nix
   ];
 }

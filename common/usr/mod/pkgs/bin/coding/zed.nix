@@ -34,6 +34,9 @@ in
         git_status = true;
       };
       max_tabs = 10;
+      project_panel = {
+        sticky_scroll = false;
+      };
 
       # disable crap
       notification_panel = {
@@ -48,6 +51,9 @@ in
       debugger = {
         button = false;
       };
+      git_panel = {
+        button = false;
+      };
       outline_panel = {
         button = false;
       };
@@ -55,11 +61,7 @@ in
         button = false;
       };
       features = {
-        copilot = false;
         edit_prediction_provider = "none";
-      };
-      scrollbar = {
-        show = if hostname == "media" then "never" else "auto";
       };
       search = {
         button = false;
@@ -118,7 +120,6 @@ in
           provider = "ollama";
           model = if (hostname == "media") then "mistral:latest" else "mistral-nemo:latest";
         };
-        version = "2";
       };
       language_models = {
         ollama = {

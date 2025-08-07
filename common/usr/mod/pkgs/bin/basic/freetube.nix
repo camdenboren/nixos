@@ -44,7 +44,7 @@ in
           color = "Green";
           skip = "doNothing";
         };
-        uiScale = if isDarwin then 110 else 125;
+        uiScale = 110;
         defaultViewingMode = "theatre";
         displayVideoPlayButton = false;
         externalPlayer = "mpv";

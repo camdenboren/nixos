@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754429828,
-        "narHash": "sha256-4kYV8BDdbuL7vDaIYbENfktfTxHK5h0AgZjI+HKgtEo=",
+        "lastModified": 1754772768,
+        "narHash": "sha256-mowYGGP5Zt3aGaqqW44hLbSfcGTNSSul1NtYigCR/DM=",
         "owner": "camdenboren",
         "repo": "alc-calc",
-        "rev": "f696f6323006121aff09e41e7fe2cd5bfd3bc4b7",
+        "rev": "2791b7d68ac75d893fa2d332d28a7f1b102b87d2",
         "type": "github"
       },
       "original": {

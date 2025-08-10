@@ -37,6 +37,26 @@
         "type": "github"
       }
     },
+    "chat-script": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754853402,
+        "narHash": "sha256-oaChpDLjTSAoZen3R2hpzvZ+ycQiytlMlpHO8iDlgms=",
+        "owner": "camdenboren",
+        "repo": "chat-script",
+        "rev": "2aab99b121e66fc735c8bfb51cc0d73169933ab0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "camdenboren",
+        "repo": "chat-script",
+        "type": "github"
+      }
+    },
     "cl-nix-lite": {
       "locked": {
         "lastModified": 1728174978,
@@ -266,6 +286,7 @@
     "root": {
       "inputs": {
         "alc-calc": "alc-calc",
+        "chat-script": "chat-script",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",

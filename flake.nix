@@ -27,6 +27,10 @@
       url = "github:camdenboren/alc-calc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chat-script = {
+      url = "github:camdenboren/chat-script";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     yt-x = {
       url = "github:Benexl/yt-x";
       inputs.nixpkgs.follows = "nixpkgs";

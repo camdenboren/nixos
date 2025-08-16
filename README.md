@@ -81,7 +81,6 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 ### Systems
 
 - #### mac
-
   - Development and Productivity
   - 2023 Macbook Pro 14"
   - M2 Pro
@@ -89,7 +88,6 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
   - 16gb memory
 
 - #### main
-
   - Audio, Development and Productivity, Gaming
   - 2024 DIY build
   - Ryzen 7 9700x
@@ -178,7 +176,6 @@ So launch them, clean up config errors, restart</i>
 ### Post-Install
 
 - #### VSTs
-
   - Install windows vsts on main\
     _Needs `~/Music/music` sourced from local server first_
 
@@ -187,9 +184,7 @@ So launch them, clean up config errors, restart</i>
     ```
 
 - #### macvm UTM setup
-
   - Initial
-
     - '+' sign -> virtualize -> linux<br>
     - boot iso image (aarch64)
     - 4g mem
@@ -199,7 +194,6 @@ So launch them, clean up config errors, restart</i>
     - name=NixOS
 
   - Network
-
     - Emulated VLAN
 
   - Before Starting
@@ -209,22 +203,17 @@ So launch them, clean up config errors, restart</i>
     ```
 
   - After Install
-
     - Clear iso from vm page
 
   - Display
-
     - upscaling=Linear<br>
     - start in fullscreen<br>
     - use 1920x1200 resolution<br>
     - virtio-gl-pci
 
 - #### mac shortcuts
-
   - Amethyst
-
     - Delete all shortcuts except
-
       - Move focus to counter clockwise creen = cmd-shift-left
       - Move focus to clockwise screen = cmd-shift-right
 
@@ -232,61 +221,49 @@ So launch them, clean up config errors, restart</i>
     - Disable: General -> Heads up Display
 
   - Settings -> Keyboard -> Keyboard Shortcuts...
-
     - Display
-
       - Decrease display brightness = F1
       - Increaes display brightness = F2
 
     - Mission Control -> Mission Control
-
       - Move left a space = cmd-alt-left
       - Move right a space = cmd-alt-right
 
     - Services -> General
-
       - cmd-alt-letter for the following (requires automator services)
       - Bitwarden, ClickUp, FreeTube, Ghostty, LibreWolf, Mullvad, Notes, Slack, UTM, Zed
 
     - Spotlight
-
       - Show Spotlight search = ctrl-Space
       - Show Finder search window = cmd-alt-1
 
     - App Shortcuts -> All Applications
-
       - Minimize = ctrl-h
       - Shut Down... = cmd-alt-shift-d
 
     - App Shortcuts -> Notes.app
-
       - Show Folders = ctrl-alt-s
       - Copy Style = ctrl-alt-shift-c
       - Note List Search... = ctrl-alt-shift-f
 
     - App Shortcuts -> Finder.app
-
       - Hide Sidebar = ctrl-alt-s
       - New Folder with Selection = ctrl-alt-n
       - Downloads = cmd-alt-d
       - New Finder Window = ctrl-shift-n
 
     - App Shortcuts -> Zed.app
-
       - Save All = ctrl-alt-shift-s
 
     - Modifier Keys
-
       - Control = cmd
       - Command = ctrl
 
 - #### mac display scaling
-
   - 32" LG -> 2288 x 1287
   - 19" Acer -> 774 x 1376
 
 - #### mac manual login items and accessibility access
-
   - Amethyst.app
   - AutoRaise.app
   - BetterDisplay.app
@@ -448,20 +425,24 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 ### Games
 
 - #### Assetto Corsa
-
   - GE-Proton8-32
-  - Extra cmds
+  - Extra cmds _(doesn't seem necessary anymore-here for reference)_
 
     ```shell
     protontricks --no-background-wineserver 244210 dotnet48
     ```
 
-- #### Black Myth: Wukong
+  - Input settings for Xbox One Controller
+    - Speed Sensitivity = 65%
+    - Steering Speed = 20%
+    - Gamma = 3
+    - Filter = 0.6
+    - Deadzone = 0.1
 
+- #### Black Myth: Wukong
   - GE-Proton9-11
 
 - #### GTAV Enhanced
-
   - Proton Experimental
   - Extra notes
     - Also requires `SteamDeck=1` launch cmd
@@ -469,7 +450,6 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
     - config path: `~/.steam/steam/steamapps/compatdata/3240220/pfx/drive_c/users/steamuser/Documents/Rockstar\ Games/GTAV\ Enhanced/settings.xml`</i>
 
 - #### MCC
-
   - Proton 8.0-5
 
 ## ToDo

@@ -18,7 +18,7 @@ in
       else
         (pkgs.freetube.overrideAttrs rec {
           version = "0.23.7";
-          src = {
+          src = pkgs.fetchFromGitHub {
             owner = "FreeTubeApp";
             repo = "FreeTube";
             tag = "v${version}-beta";

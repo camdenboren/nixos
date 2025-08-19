@@ -16,17 +16,19 @@ in
       if isDarwin then
         null
       else
-        (pkgs.freetube.overrideAttrs (old: rec {
+        (pkgs.freetube.overrideAttrs rec {
           version = "0.23.7";
-          src = old.src // {
-            tag = "v${version}";
+          src = {
+            owner = "FreeTubeApp";
+            repo = "FreeTube";
+            tag = "v${version}-beta";
             hash = "sha256-252d80xCWBZnPHnRESxRqYzT40Gu/LLBbzXr2nIJW/I=";
           };
-          yarnOfflineCache = old.yarnOfflineCache // {
+          yarnOfflineCache = pkgs.fetchYarnDeps {
             yarnLock = "${src}/yarn.lock";
             hash = "sha256-ia5wLRt3Hmo4/dsB1/rhGWGJ7LMnVR9ju9lSlQZDTTg=";
           };
-        }));
+        });
 
     # doesn't put settings.db in correct location on mac, so it's copied in replaceConfigs.nix
     settings = {

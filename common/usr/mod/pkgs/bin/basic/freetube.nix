@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   system,
   hostname,
@@ -11,7 +12,23 @@ in
 {
   programs.freetube = {
     enable = true;
-    package = lib.mkIf isDarwin null;
+    package =
+      if isDarwin then
+        null
+      else
+        (pkgs.freetube.overrideAttrs rec {
+          version = "0.23.7";
+          src = pkgs.fetchFromGitHub {
+            owner = "FreeTubeApp";
+            repo = "FreeTube";
+            tag = "v${version}-beta";
+            hash = "sha256-252d80xCWBZnPHnRESxRqYzT40Gu/LLBbzXr2nIJW/I=";
+          };
+          yarnOfflineCache = pkgs.fetchYarnDeps {
+            yarnLock = "${src}/yarn.lock";
+            hash = "sha256-ia5wLRt3Hmo4/dsB1/rhGWGJ7LMnVR9ju9lSlQZDTTg=";
+          };
+        });
 
     # doesn't put settings.db in correct location on mac, so it's copied in replaceConfigs.nix
     settings = {

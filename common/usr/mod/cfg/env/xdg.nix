@@ -66,7 +66,7 @@
       icon = "freetube";
       settings = {
         StartupWMClass = "FreeTube";
-        X-AppImage-Version = "0.23.3";
+        X-AppImage-Version = "0.23.7";
       };
       comment = "A private YouTube client";
       mimeType = [ "application/freetube" ];

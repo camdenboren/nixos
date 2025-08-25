@@ -426,6 +426,7 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 
 - #### Assetto Corsa
   - GE-Proton8-32
+  - Content Manager + CSP: https://github.com/sakaki91/Sakaki-AC-Linux-Guide/
   - Extra cmds _(doesn't seem necessary anymore-here for reference)_
 
     ```shell
@@ -435,9 +436,9 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
   - Input settings for Xbox One Controller
     - Speed Sensitivity = 65%
     - Steering Speed = 20%
-    - Gamma = 3
-    - Filter = 0.6
-    - Deadzone = 0.1
+    - Gamma = 300%
+    - Filter = 60%
+    - Deadzone = 10%
 
 - #### Black Myth: Wukong
   - GE-Proton9-11

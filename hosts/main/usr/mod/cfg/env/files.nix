@@ -8,7 +8,7 @@
     };
 
     # Set default eq preset for easyeffects
-    # in order: HFControlL, HFControlR, KEF, Bass, AKG
+    # in order: HFControlL, HFControlR (disabled), KEF, AKG (disabled)
     ".config/easyeffects/" = {
       source = ../../../dot/easyeffects;
     };

@@ -1,6 +1,0 @@
-{
-    "device": "alsa_output.usb-Solid_State_Logic_SSL_2_-00.analog-surround-40",
-    "device-description": "SSL 2+ Analog Surround 4.0",
-    "device-profile": "analog-output",
-    "preset-name": "HF_KEF_AKG"
-}

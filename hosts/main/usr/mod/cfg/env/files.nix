@@ -7,12 +7,6 @@
       source = ../../../dot/pipewire;
     };
 
-    # Set default eq preset for easyeffects
-    # in order: HFControlL, HFControlR (disabled), KEF, AKG (disabled)
-    ".config/easyeffects/" = {
-      source = ../../../dot/easyeffects;
-    };
-
     # REAPER - most settings set in replaceConfigs (and activ.)
     ".config/REAPER/Effects/jsfx" = {
       source = ../../../dot/reaper/jsfx;

@@ -21,7 +21,6 @@ in
     ]
     ++ lib.optionals (hostname == "main" || hostname == "media") [
       # Basic Apps
-      easyeffects
       high-tide
       lollypop
       qbittorrent

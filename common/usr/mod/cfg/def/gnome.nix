@@ -7,7 +7,6 @@
 
 let
   isVM = lib.hasSuffix "vm" hostname;
-  hasTrackpad = (hostname == "media" || hostname == "macvm");
 in
 {
   dconf.settings = {
@@ -45,8 +44,14 @@ in
       workspaces-only-on-primary = false;
     };
     "org/gnome/desktop/peripherals/mouse" = {
-      natural-scroll = hasTrackpad;
-      speed = if hasTrackpad then 0.85 else 1.0;
+      natural-scroll = (hostname == "macvm");
+      speed =
+        if (hostname == "media") then
+          0.0
+        else if (hostname == "macvm") then
+          0.85
+        else
+          1.0;
     };
     "org/gnome/desktop/screensaver" = {
       lock-enabled = false;

@@ -48,7 +48,7 @@
       drumgizmo
       hydrogen
       # Plugins - other
-      #carla
+      carla
       rnnoise-plugin
       noise-repellent
       sfizz
@@ -60,8 +60,5 @@
       winetricks
       yabridge
       yabridgectl
-
-      # carla is broken, see NixOS/nixpkgs#437077
-      carla
     ]);
 }

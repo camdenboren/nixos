@@ -34,7 +34,6 @@ in
         '';
       })
       betterdisplay
-      ice-bar
       rectangle
     ];
 }

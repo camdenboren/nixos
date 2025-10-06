@@ -43,6 +43,7 @@
       };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
+        AppleShowScrollBars = "WhenScrolling";
         #AppleShowAllExtensions = true;
         #AppleShowAllFiles = true;
         "com.apple.mouse.tapBehavior" = 1;

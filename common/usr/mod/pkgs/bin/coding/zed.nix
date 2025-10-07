@@ -42,9 +42,6 @@ in
       notification_panel = {
         button = false;
       };
-      chat_panel = {
-        button = "never";
-      };
       collaboration_panel = {
         button = false;
       };

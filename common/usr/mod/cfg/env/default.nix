@@ -1,9 +1,4 @@
-{
-  lib,
-  system,
-  hostname,
-  ...
-}:
+{ lib, system, ... }:
 
 let
   isLinux = lib.hasSuffix "-linux" system;
@@ -16,8 +11,6 @@ in
   ]
   ++ lib.optionals isLinux [
     ./sessionVariables.nix
-  ]
-  ++ lib.optionals (hostname == "main" || hostname == "media") [
     ./xdg.nix
   ];
 }

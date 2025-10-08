@@ -45,7 +45,11 @@ in
       sw = if isDarwin then "nh darwin switch" else "nh os switch";
       tr = if isDarwin then "trash" else "gio trash";
       update = "nix flake update --flake $NH_FLAKE";
-      zed = "zeditor";
+      zed =
+        lib.optionalString isVM (
+          "ZED_ALLOW_EMULATED_GPU=1 " + lib.optionalString (hostname == "macvm") ''WAYLAND_DISPLAY="" ''
+        )
+        + "zeditor";
       ":q" = "exit";
     }
     // (

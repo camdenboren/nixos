@@ -17,12 +17,12 @@ in
         null
       else
         (pkgs.freetube.overrideAttrs rec {
-          version = "0.23.10";
+          version = "0.23.12";
           src = pkgs.fetchFromGitHub {
             owner = "FreeTubeApp";
             repo = "FreeTube";
             tag = "v${version}-beta";
-            hash = "sha256-Q2CRqp8vdbfORwjNC5Fxx5bRk24VHObrSVTz/loKH5Y=";
+            hash = "sha256-DH5uT3dPDFZnFYoiMjxpNouNDRbWDctVqvDwHpUlnkY=";
           };
           yarnOfflineCache = pkgs.fetchYarnDeps {
             yarnLock = "${src}/yarn.lock";

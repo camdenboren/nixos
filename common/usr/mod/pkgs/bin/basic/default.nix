@@ -69,5 +69,8 @@ in
   ]
   ++ lib.optionals (!isVM || !isLinux) [
     ../../../cfg/env/overlays/personal.nix
+  ]
+  ++ lib.optionals (hostname == "main" || hostname == "media") [
+    ../../../cfg/env/overlays/tidalapi.nix
   ];
 }

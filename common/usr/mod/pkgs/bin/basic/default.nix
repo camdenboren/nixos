@@ -56,6 +56,9 @@ in
     ]
     ++ lib.optionals (hostname == "main" || !isLinux) [
       chat-script
+    ]
+    ++ lib.optionals (hostname == "media") [
+      jellyfin-ffmpeg
     ];
 
   imports = [

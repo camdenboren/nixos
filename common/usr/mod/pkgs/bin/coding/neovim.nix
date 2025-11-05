@@ -30,16 +30,16 @@
       require("lualine").setup()
       require("telescope").setup()
       require("lazygit")
-      require("lspconfig").jdtls.setup({
+      vim.lsp.config("jdtls", {
         cmd = { "jdtls" },
       })
-      require("lspconfig").ruff.setup({
+      vim.lsp.config("ruff", {
         cmd = { "ruff", "server" },
       })
-      require("lspconfig").rust_analyzer.setup({
+      vim.lsp.config("rust_analyzer", {
         cmd = { "rust-analyzer" },
       })
-      require("lspconfig").nixd.setup({
+      vim.lsp.config("nixd", {
         cmd = { "nixd" },
         settings = {
           nixd = {

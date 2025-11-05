@@ -4,6 +4,7 @@
 {
   config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }:
@@ -31,7 +32,8 @@
     device = "/dev/disk/by-uuid/8a1db73b-3918-42b6-9ba3-f29226b85d2d";
     fsType = "ext4";
   };
-  fileSystems."/home/camdenboren/media" = {
+
+  fileSystems."/mnt/media" = {
     device = "/dev/disk/by-uuid/a03c1a75-4921-44e4-b3b5-451049e7723a";
     fsType = "ext4";
   };

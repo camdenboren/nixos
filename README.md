@@ -383,7 +383,7 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
   ```
 
 - Mac update\
-  _Brew upgrade needs to be run for individual casks, and Zoom screen sharing permissions often break_
+  _Zoom screen sharing permissions often break_
 
   ```shell
   sw

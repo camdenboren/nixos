@@ -11,6 +11,7 @@
       "ungoogled-chromium"
       "freecad"
       "freetube"
+      "gimp"
       "languagetool-desktop"
       "linearmouse"
       "mullvad-vpn"

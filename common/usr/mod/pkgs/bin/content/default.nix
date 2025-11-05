@@ -14,13 +14,13 @@ in
     with pkgs;
     [
       # Content creation
-      gimp
       inkscape
     ]
     ++ lib.optionals isDarwin [
       libreoffice-bin
     ]
     ++ lib.optionals (!isDarwin) [
+      gimp
       libreoffice
     ]
     ++ lib.optionals (hostname == "main") [

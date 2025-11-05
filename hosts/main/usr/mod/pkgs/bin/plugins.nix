@@ -34,19 +34,12 @@
       lsp-plugins
       x42-plugins
       # Plugins - guitar
-      # proteus build failing due to deprecated cmake version: https://hydra.nixos.org/build/308878106#tabs-summary
-      (proteus.overrideAttrs (o: {
-        env.NIX_CFLAGS_COMPILE =
-          o.env.NIX_CFLAGS_COMPILE
-          + toString [
-            "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-          ];
-      }))
+      #proteus
       # Plugins - synth
       helm
       odin2
       cardinal
-      surge-XT
+      #surge-XT
       zynaddsubfx
       bespokesynth
       x42-gmsynth
@@ -67,5 +60,10 @@
       winetricks
       yabridge
       yabridgectl
+      # proteus and surge-XT builds failing due to deprecated cmake version
+      # https://hydra.nixos.org/build/308878106
+      # https://hydra.nixos.org/build/308928699
+      proteus
+      surge-XT
     ]);
 }

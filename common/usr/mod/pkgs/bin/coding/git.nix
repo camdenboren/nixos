@@ -8,12 +8,17 @@
 {
   programs.git = {
     enable = true;
-    userName = "camdenboren";
-    userEmail = "9UtEfABpSSrV3g.code@mailbox.org";
-    aliases = {
-      find = "log --name-status -i --grep";
-    };
-    extraConfig = {
+
+    settings = {
+      user = {
+        name = "camdenboren";
+        email = "9UtEfABpSSrV3g.code@mailbox.org";
+      };
+
+      alias = {
+        find = "log --name-status -i --grep";
+      };
+
       credential.helper =
         if lib.hasSuffix "-linux" system then
           "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret"

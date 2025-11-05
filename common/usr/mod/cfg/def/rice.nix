@@ -192,7 +192,8 @@ in
           ui_font_size = if isLinux then 18 else 17;
           buffer_font_family = fonts.mono;
           buffer_font_size = if isLinux then 17 else 16;
-          agent_font_size = if isLinux then 18 else 17;
+          agent_ui_font_size = if isLinux then 18 else 17;
+          agent_buffer_font_size = if isLinux then 17 else 16;
         };
 
         home.file = {

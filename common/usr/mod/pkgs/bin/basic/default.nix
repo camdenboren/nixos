@@ -15,7 +15,7 @@ in
     with pkgs;
     lib.optionals (!isVM) [
       alc-calc
-      bitwarden
+      bitwarden-desktop
       mpv
       yt-x
     ]

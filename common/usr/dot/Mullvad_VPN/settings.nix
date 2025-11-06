@@ -1,0 +1,122 @@
+{ hostname, ... }:
+
+{
+  relay_settings = {
+    normal = {
+      location = {
+        only = {
+          location = {
+            city = [
+              "us"
+              "dal"
+            ];
+          };
+        };
+      };
+      providers = "any";
+      ownership = "any";
+      tunnel_protocol = "wireguard";
+      wireguard_constraints = {
+        port = "any";
+        ip_version = "any";
+        use_multihop = false;
+        entry_location = {
+          only = {
+            location = {
+              country = "se";
+            };
+          };
+        };
+      };
+      openvpn_constraints = {
+        port = "any";
+      };
+    };
+  };
+  bridge_settings = {
+    bridge_type = "normal";
+    normal = {
+      location = "any";
+      providers = "any";
+      ownership = "any";
+    };
+    custom = null;
+  };
+  obfuscation_settings = {
+    selected_obfuscation = "auto";
+    udp2tcp = {
+      port = "any";
+    };
+    shadowsocks = {
+      port = "any";
+    };
+  };
+  bridge_state = "auto";
+  custom_lists = {
+    custom_lists = [ ];
+  };
+  api_access_methods = {
+    direct = {
+      id = "1e5e19ac-289e-4275-9642-88e014a29235";
+      name = "Direct";
+      enabled = true;
+      access_method = {
+        built_in = "direct";
+      };
+    };
+    mullvad_bridges = {
+      id = "7e56b45b-ddc2-4ae4-979d-580fd4e4be97";
+      name = "Mullvad Bridges";
+      enabled = true;
+      access_method = {
+        built_in = "bridge";
+      };
+    };
+    encrypted_dns_proxy = {
+      id = "031be237-b604-4083-9c2e-4ae2c660c4e8";
+      name = "Encrypted DNS proxy";
+      enabled = true;
+      access_method = {
+        built_in = "encrypted_dns_proxy";
+      };
+    };
+    custom = [ ];
+  };
+  allow_lan = true;
+  block_when_disconnected = false;
+  auto_connect = (hostname == "main");
+  tunnel_options = {
+    openvpn = {
+      mssfix = null;
+    };
+    wireguard = {
+      mtu = null;
+      quantum_resistant = "auto";
+      daita = {
+        enabled = false;
+        use_multihop_if_necessary = true;
+      };
+      rotation_interval = null;
+    };
+    generic = {
+      enable_ipv6 = true;
+    };
+    dns_options = {
+      state = "default";
+      default_options = {
+        block_ads = true;
+        block_trackers = true;
+        block_malware = true;
+        block_adult_content = true;
+        block_gambling = true;
+        block_social_media = true;
+      };
+      custom_options = {
+        addresses = [ ];
+      };
+    };
+  };
+  relay_overrides = [ ];
+  show_beta_releases = false;
+  settings_version = 11;
+}

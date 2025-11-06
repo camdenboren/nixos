@@ -1,5 +1,14 @@
-{ lib, hostname, ... }:
+{
+  pkgs,
+  lib,
+  hostname,
+  ...
+}:
 
+let
+  jsonFormat = pkgs.formats.json { };
+  gui-settings = import ../../../dot/Mullvad_VPN/gui-settings.nix { inherit hostname; };
+in
 {
   home.file = {
     # Lynx config
@@ -12,7 +21,7 @@
 
     # Mullvad VPN GUI Config. Deeper settings in configuration.nix
     ".config/Mullvad VPN/gui_settings.json" = lib.mkIf (hostname == "main" || hostname == "media") {
-      source = ../../../dot/Mullvad_VPN/gui_settings.json;
+      source = jsonFormat.generate "gui_settings" gui-settings;
     };
   };
 }

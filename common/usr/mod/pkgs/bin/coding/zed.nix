@@ -14,7 +14,6 @@ in
     extensions = [
       "nix"
       "java"
-      "ruff"
       "vue"
       "zed-legacy-themes"
     ];

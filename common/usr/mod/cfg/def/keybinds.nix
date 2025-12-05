@@ -151,9 +151,9 @@ in
                 "/${keybindingsPath}custom5/"
                 "/${keybindingsPath}custom6/"
                 "/${keybindingsPath}custom7/"
+                "/${keybindingsPath}custom8/"
               ]
               ++ lib.optionals (hostname == "main") [
-                "/${keybindingsPath}custom8/"
                 "/${keybindingsPath}custom9/"
               ];
             };

@@ -4,10 +4,8 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
-  imports = [
-    ./ollama.nix
-  ]
-  ++ lib.optionals (!isDarwin) [
+  imports = lib.optionals (!isDarwin) [
     ./easyeffects
+    ./ollama.nix
   ];
 }

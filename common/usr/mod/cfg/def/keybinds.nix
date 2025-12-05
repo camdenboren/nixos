@@ -174,7 +174,7 @@ in
             };
             "${keybindingsPath}custom3" = {
               name = "FreeTube";
-              command = "freetube --disable-gpu";
+              command = "freetube";
               binding = "<Control><Alt>f";
             };
             "${keybindingsPath}custom4" = {

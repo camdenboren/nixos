@@ -25,22 +25,7 @@ in
     ++ lib.optionals isDarwin [
       jetbrains.idea-community
       utm
-      (wireshark.overrideAttrs (
-        o:
-        let
-          fixExtcapDir = builtins.replaceStrings [ "lib/wireshark/extcap" ] [ "libexec/wireshark/extcap" ];
-        in
-        {
-          # Wireshark depends on Qt 6, which requires an SDK >= 12 on macOS
-          # This is specified on Qt 6 itself, but not correctly propagated
-          buildInputs = o.buildInputs or [ ] ++ [
-            pkgs.apple-sdk_15
-            (pkgs.darwinMinVersionHook "12.0")
-          ];
-          postInstall = fixExtcapDir o.postInstall or "";
-          postFixup = fixExtcapDir o.postFixup or "";
-        }
-      ))
+      wireshark
     ];
 
   imports = [

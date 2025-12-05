@@ -18,11 +18,16 @@ in
       "zed-legacy-themes"
     ];
 
+    mutableUserDebug = false;
+    mutableUserKeymaps = false;
+    mutableUserSettings = false;
+    mutableUserTasks = false;
+
     userSettings = {
       # basic
       auto_update = false;
       vim_mode = (hostname != "media");
-      relative_line_numbers = true;
+      relative_line_numbers = "enabled";
       soft_wrap = "editor_width";
       autosave = {
         after_delay = {

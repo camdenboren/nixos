@@ -62,7 +62,6 @@
       yabridgectl
       # proteus build failing due to deprecated cmake version
       # https://hydra.nixos.org/build/308878106
-      # https://hydra.nixos.org/build/308928699
       proteus
     ]);
 }

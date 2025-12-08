@@ -3,6 +3,15 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
+      # overriding nixpkgs
+      surge-XT = prev.surge-XT.overrideAttrs {
+        # NixOS/nixpkgs#455919 doesn't include LV2
+        patches = [ ];
+        cmakeFlags = [
+          "-DSURGE_BUILD_LV2=TRUE"
+        ];
+      };
+      # not in nixpkgs
       audiogridder = prev.callPackage ../../../../drv/audiogridder { };
       sitala = prev.callPackage ../../../../drv/sitala { };
       neural-amp-modeler-lv2 = prev.callPackage ../../../../drv/neural-amp-modeler-lv2 { };

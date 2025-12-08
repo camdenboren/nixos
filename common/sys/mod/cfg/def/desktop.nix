@@ -58,17 +58,17 @@ in
 
   # Exclude unwanted apps
   environment.gnome.excludePackages = with pkgs; [
+    decibels # audio player
     gnome-console
     gnome-contacts
-    gnome-maps
     gnome-music
     gnome-text-editor
     gnome-tour
     gnome-weather
     geary # email client
     simple-scan # document scanner
+    showtime # video player
     snapshot # camera app
-    totem # video player
     yelp # help viewer
   ];
 }

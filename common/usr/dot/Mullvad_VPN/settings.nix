@@ -19,6 +19,7 @@
       wireguard_constraints = {
         port = "any";
         ip_version = "any";
+        allowed_ips = "any";
         use_multihop = false;
         entry_location = {
           only = {
@@ -57,7 +58,7 @@
   };
   api_access_methods = {
     direct = {
-      id = "1e5e19ac-289e-4275-9642-88e014a29235";
+      id = "6acec7e9-9b36-4f08-87da-5e5f7bc8358d";
       name = "Direct";
       enabled = true;
       access_method = {
@@ -65,7 +66,7 @@
       };
     };
     mullvad_bridges = {
-      id = "7e56b45b-ddc2-4ae4-979d-580fd4e4be97";
+      id = "98dfb829-a241-4ef5-baf0-b10b6cec28ec";
       name = "Mullvad Bridges";
       enabled = true;
       access_method = {
@@ -73,7 +74,7 @@
       };
     };
     encrypted_dns_proxy = {
-      id = "031be237-b604-4083-9c2e-4ae2c660c4e8";
+      id = "46f628aa-8b36-46f6-8748-2896817a0b24";
       name = "Encrypted DNS proxy";
       enabled = true;
       access_method = {
@@ -82,8 +83,9 @@
     };
     custom = [ ];
   };
+  update_default_location = false;
   allow_lan = true;
-  block_when_disconnected = false;
+  lockdown_mode = false;
   auto_connect = (hostname == "main");
   tunnel_options = {
     openvpn = {
@@ -118,5 +120,7 @@
   };
   relay_overrides = [ ];
   show_beta_releases = false;
-  settings_version = 11;
+  settings_version = 12;
+  recents = [ ];
+  rollout_threshold_seed = 738145885;
 }

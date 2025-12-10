@@ -52,6 +52,7 @@ in
       vlc
     ]
     ++ lib.optionals (!isLinux) [
+      (lib.hiPrio chatbot-util) # cpython version conflicts w/ chat-script otw
       vlc-bin
     ]
     ++ lib.optionals (hostname == "main" || !isLinux) [

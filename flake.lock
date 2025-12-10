@@ -55,6 +55,26 @@
         "type": "github"
       }
     },
+    "chatbot-util": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765391822,
+        "narHash": "sha256-Trxg/5hk4wWzAkVsGf+9rZYOuK2up+swUnf8BAd8x3M=",
+        "owner": "collegiate-edu-nation",
+        "repo": "chatbot-util",
+        "rev": "0fc538ed9d707bb4ce55c8b04d5a2ca248c4d115",
+        "type": "github"
+      },
+      "original": {
+        "owner": "collegiate-edu-nation",
+        "repo": "chatbot-util",
+        "type": "github"
+      }
+    },
     "cl-nix-lite": {
       "locked": {
         "lastModified": 1728174978,
@@ -318,6 +338,7 @@
       "inputs": {
         "alc-calc": "alc-calc",
         "chat-script": "chat-script",
+        "chatbot-util": "chatbot-util",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",

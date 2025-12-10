@@ -30,6 +30,10 @@
     chat-script = {
       url = "github:camdenboren/chat-script";
     };
+    chatbot-util = {
+      url = "github:collegiate-edu-nation/chatbot-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     yt-x = {
       url = "github:Benexl/yt-x";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -37,8 +37,8 @@ in
       clean = if (isDarwin || isVM) then "nh clean all" else "nh clean all -k 2";
       ddg = "lynx -vikeys start.duckduckgo.com/lite/";
       fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";
-      lg = "unset DEVELOPER_DIR lazygit && lazygit";
-      lgf = "unset DEVELOPER_DIR lazygit && lazygit -p $NH_FLAKE";
+      lg = "lazygit";
+      lgf = "lazygit -p $NH_FLAKE";
       ls = "ls -a";
       lsg = "ls | grep";
       repl = "nix repl -f '<nixpkgs>'";

@@ -15,7 +15,7 @@
       "languagetool-desktop"
       "linearmouse"
       "mullvad-vpn"
-      "ollama"
+      "ollama-app"
       "pearcleaner"
       "qdirstat"
       "tidal"

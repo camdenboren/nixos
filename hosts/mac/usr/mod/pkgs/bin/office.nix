@@ -4,6 +4,6 @@
   home.packages = with pkgs; [
     # Office
     slack
-    zoom-us
+    #zoom-us - screensharing doesn't work
   ];
 }

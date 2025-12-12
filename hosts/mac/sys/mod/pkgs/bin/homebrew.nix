@@ -19,6 +19,7 @@
       "pearcleaner"
       "qdirstat"
       "tidal"
+      "zoom"
     ];
     greedyCasks = true;
   };

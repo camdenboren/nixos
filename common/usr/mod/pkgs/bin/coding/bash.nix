@@ -57,7 +57,7 @@ in
         {
           nixos = "quickemu --vm ~/vm/nixos-24.05-gnome.conf --status-quo";
           ubuntu = "quickemu --vm ~/vm/ubuntu-24.04.conf --status-quo";
-          windows = "quickemu --vm ~/vm/windows-10.conf --status-quo";
+          windows = "quickemu --vm ~/vm/windows-11.conf --display gtk --status-quo";
         }
       else
         { }

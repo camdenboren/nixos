@@ -1,4 +1,9 @@
-{ lib, hostname, ... }:
+{
+  config,
+  lib,
+  hostname,
+  ...
+}:
 
 let
   ports = [
@@ -28,6 +33,12 @@ in
     firewall = {
       allowedTCPPorts = ports;
       allowedUDPPorts = ports;
+    }
+    // lib.optionalAttrs (hostname == "media") {
+      interfaces."${config.services.tailscale.interfaceName}" = {
+        allowedTCPPorts = [ 53 ];
+        allowedUDPPorts = [ 53 ];
+      };
     };
 
     hosts =

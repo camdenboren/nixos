@@ -16,6 +16,7 @@ let
   domains = [
     "home.local"
     "www.home.local"
+    "chat.home.local"
     "media.home.local"
   ];
 in

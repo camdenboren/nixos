@@ -1,10 +1,15 @@
 { ... }:
 
+let
+  baseDomain = "home.local";
+  homeURL = "https://${baseDomain}";
+  mediaURL = "https://media.${baseDomain}/";
+in
 {
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    allowedHosts = "home.local";
+    allowedHosts = baseDomain;
 
     settings = {
       background = {
@@ -13,7 +18,7 @@
       };
       theme = "dark";
       color = "teal";
-      base = "http://home.local";
+      base = homeURL;
       statusStyle = "dot";
       layout = {
         Services = {
@@ -38,6 +43,7 @@
         datetime = {
           format = {
             timeStyle = "short";
+            timeZone = "America/Chicago";
           };
         };
       }
@@ -49,8 +55,8 @@
           {
             "Media" = {
               icon = "jellyfin";
-              href = "http://media.home.local/";
-              siteMonitor = "http://media.home.local/";
+              href = mediaURL;
+              siteMonitor = mediaURL;
             };
           }
         ];

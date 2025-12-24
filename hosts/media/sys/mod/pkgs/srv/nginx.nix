@@ -3,11 +3,13 @@
 let
   ports = {
     homepage = toString 8082;
+    chat = toString 8080;
     media = toString 8096;
   };
   baseURL = "http://127.0.0.1";
   baseDomain = "home.local";
   wwwDomain = "www.${baseDomain}";
+  chatDomain = "chat.${baseDomain}";
   mediaDomain = "media.${baseDomain}";
   baseHeaders = ''
     proxy_http_version 1.1;
@@ -56,6 +58,17 @@ in
         };
       };
 
+      "${chatDomain}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.chat}";
+            extraConfig = baseHeaders;
+          };
+        };
+      };
+
       "${mediaDomain}" = {
         forceSSL = true;
         useACMEHost = baseDomain;
@@ -78,7 +91,6 @@ in
         };
       };
     };
-
   };
 
   security.acme = {

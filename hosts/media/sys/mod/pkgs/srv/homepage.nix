@@ -3,6 +3,7 @@
 let
   baseDomain = "home.local";
   homeURL = "https://${baseDomain}";
+  chatURL = "https://chat.${baseDomain}/";
   mediaURL = "https://media.${baseDomain}/";
 in
 {
@@ -23,7 +24,7 @@ in
       layout = {
         Services = {
           style = "row";
-          columns = 1;
+          columns = 2;
         };
       };
     };
@@ -57,6 +58,13 @@ in
               icon = "jellyfin";
               href = mediaURL;
               siteMonitor = mediaURL;
+            };
+          }
+          {
+            "Chat" = {
+              icon = "open-webui";
+              href = chatURL;
+              siteMonitor = chatURL;
             };
           }
         ];

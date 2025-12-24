@@ -34,6 +34,10 @@
       url = "github:collegiate-edu-nation/chatbot-util";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixified-ai = {
+      url = "github:nixified-ai/flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     yt-x = {
       url = "github:Benexl/yt-x";
       inputs.nixpkgs.follows = "nixpkgs";

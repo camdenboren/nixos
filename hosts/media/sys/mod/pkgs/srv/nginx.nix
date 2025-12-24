@@ -19,10 +19,15 @@ let
     proxy_set_header X-Forwarded-Protocol $scheme;
     proxy_set_header X-Forwarded-Host $http_host;
   '';
+  websocketHeaders = ''
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  '';
 in
 {
   services.nginx = {
     enable = true;
+    proxyTimeout = "300s";
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
@@ -64,7 +69,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.chat}";
-            extraConfig = baseHeaders;
+            extraConfig = baseHeaders + websocketHeaders;
           };
         };
       };
@@ -82,11 +87,12 @@ in
 
           "/socket" = {
             proxyPass = "${baseURL}:${ports.media}";
-            extraConfig = baseHeaders + ''
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_set_header Host $host;
-            '';
+            extraConfig =
+              baseHeaders
+              + websocketHeaders
+              + ''
+                proxy_set_header Host $host;
+              '';
           };
         };
       };

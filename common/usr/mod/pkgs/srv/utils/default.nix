@@ -7,5 +7,6 @@ in
   imports = lib.optionals (!isDarwin) [
     ./easyeffects
     ./ollama.nix
+    ./syncthing.nix
   ];
 }

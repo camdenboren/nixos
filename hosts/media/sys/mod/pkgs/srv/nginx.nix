@@ -4,13 +4,18 @@ let
   ports = {
     homepage = toString 8082;
     chat = toString 8080;
+    sync = toString 8384;
     media = toString 8096;
+    image = toString 8188;
   };
   baseURL = "http://127.0.0.1";
+  mainURL = "http://192.168.1.88";
   baseDomain = "home.local";
   wwwDomain = "www.${baseDomain}";
   chatDomain = "chat.${baseDomain}";
+  syncDomain = "sync.${baseDomain}";
   mediaDomain = "media.${baseDomain}";
+  imageDomain = "image.${baseDomain}";
   baseHeaders = ''
     proxy_http_version 1.1;
     proxy_set_header X-Real-IP $remote_addr;
@@ -93,6 +98,28 @@ in
               + ''
                 proxy_set_header Host $host;
               '';
+          };
+        };
+      };
+
+      "${syncDomain}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.sync}";
+            extraConfig = baseHeaders;
+          };
+        };
+      };
+
+      "${imageDomain}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${mainURL}:${ports.image}";
+            extraConfig = baseHeaders;
           };
         };
       };

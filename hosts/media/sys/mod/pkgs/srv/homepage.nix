@@ -4,7 +4,9 @@ let
   baseDomain = "home.local";
   homeURL = "https://${baseDomain}";
   chatURL = "https://chat.${baseDomain}/";
+  syncURL = "https://sync.${baseDomain}/";
   mediaURL = "https://media.${baseDomain}/";
+  imageURL = "https://image.${baseDomain}/";
 in
 {
   services.homepage-dashboard = {
@@ -22,7 +24,11 @@ in
       base = homeURL;
       statusStyle = "dot";
       layout = {
-        Services = {
+        "Content & Utilities" = {
+          style = "row";
+          columns = 2;
+        };
+        AI = {
           style = "row";
           columns = 2;
         };
@@ -52,7 +58,7 @@ in
 
     services = [
       {
-        "Services" = [
+        "Content & Utilities" = [
           {
             "Media" = {
               icon = "jellyfin";
@@ -61,10 +67,28 @@ in
             };
           }
           {
+            "Sync" = {
+              icon = "syncthing";
+              href = syncURL;
+              siteMonitor = syncURL;
+            };
+          }
+        ];
+      }
+      {
+        "AI" = [
+          {
             "Chat" = {
               icon = "open-webui";
               href = chatURL;
               siteMonitor = chatURL;
+            };
+          }
+          {
+            "Image" = {
+              icon = "sh-comfyui";
+              href = imageURL;
+              siteMonitor = imageURL;
             };
           }
         ];

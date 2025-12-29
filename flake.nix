@@ -27,6 +27,10 @@
       url = "github:camdenboren/alc-calc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    appflowy-cloud = {
+      url = "github:Appflowy-IO/Appflowy-Cloud";
+      flake = false;
+    };
     chat-script = {
       url = "github:camdenboren/chat-script";
     };

@@ -3,6 +3,7 @@
 {
   imports = [
     # Host-specific
+    ./appflowy-cloud.nix
     ./homepage.nix
     ./jellyfin.nix
     ./nginx.nix

@@ -5,6 +5,7 @@ let
   homeURL = "https://${baseDomain}";
   chatURL = "https://chat.${baseDomain}/";
   syncURL = "https://sync.${baseDomain}/";
+  notesURL = "https://notes.${baseDomain}/console";
   mediaURL = "https://media.${baseDomain}/";
   imageURL = "https://image.${baseDomain}/";
 in
@@ -24,11 +25,15 @@ in
       base = homeURL;
       statusStyle = "dot";
       layout = {
-        "Content & Utilities" = {
+        AI = {
           style = "row";
           columns = 2;
         };
-        AI = {
+        Content = {
+          style = "row";
+          #columns = 2;
+        };
+        Utilities = {
           style = "row";
           columns = 2;
         };
@@ -58,24 +63,6 @@ in
 
     services = [
       {
-        "Content & Utilities" = [
-          {
-            "Media" = {
-              icon = "jellyfin";
-              href = mediaURL;
-              siteMonitor = mediaURL;
-            };
-          }
-          {
-            "Sync" = {
-              icon = "syncthing";
-              href = syncURL;
-              siteMonitor = syncURL;
-            };
-          }
-        ];
-      }
-      {
         "AI" = [
           {
             "Chat" = {
@@ -89,6 +76,35 @@ in
               icon = "comfy-ui";
               href = imageURL;
               siteMonitor = imageURL;
+            };
+          }
+        ];
+      }
+      {
+        "Content" = [
+          {
+            "Media" = {
+              icon = "jellyfin";
+              href = mediaURL;
+              siteMonitor = mediaURL;
+            };
+          }
+        ];
+      }
+      {
+        "Utilities" = [
+          {
+            "Notes" = {
+              icon = "appflowy";
+              href = notesURL;
+              siteMonitor = notesURL;
+            };
+          }
+          {
+            "Sync" = {
+              icon = "syncthing";
+              href = syncURL;
+              siteMonitor = syncURL;
             };
           }
         ];

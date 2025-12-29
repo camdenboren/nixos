@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "appflowy-cloud": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763301503,
+        "narHash": "sha256-0ki5La/Yrc6yROBFEpOAG5/YdDJFE5r4d/7VNu8frxU=",
+        "owner": "Appflowy-IO",
+        "repo": "Appflowy-Cloud",
+        "rev": "60cc2ba31bdabb6926fa99facdb182a675a3da60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Appflowy-IO",
+        "repo": "Appflowy-Cloud",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -423,6 +439,7 @@
     "root": {
       "inputs": {
         "alc-calc": "alc-calc",
+        "appflowy-cloud": "appflowy-cloud",
         "chat-script": "chat-script",
         "chatbot-util": "chatbot-util",
         "firefox-addons": "firefox-addons",

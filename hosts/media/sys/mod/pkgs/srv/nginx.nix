@@ -7,15 +7,18 @@ let
     sync = toString 8384;
     media = toString 8096;
     image = toString 8188;
+    notes = toString 90;
   };
   baseURL = "http://127.0.0.1";
   mainURL = "http://192.168.1.88";
+  mediaURL = "http://192.168.1.78";
   baseDomain = "home.local";
   wwwDomain = "www.${baseDomain}";
   chatDomain = "chat.${baseDomain}";
   syncDomain = "sync.${baseDomain}";
   mediaDomain = "media.${baseDomain}";
   imageDomain = "image.${baseDomain}";
+  notesDomain = "notes.${baseDomain}";
   baseHeaders = ''
     proxy_http_version 1.1;
     proxy_set_header X-Real-IP $remote_addr;
@@ -119,6 +122,17 @@ in
         locations = {
           "/" = {
             proxyPass = "${mainURL}:${ports.image}";
+            extraConfig = baseHeaders;
+          };
+        };
+      };
+
+      "${notesDomain}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${mediaURL}:${ports.notes}";
             extraConfig = baseHeaders;
           };
         };

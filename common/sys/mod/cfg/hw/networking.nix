@@ -16,7 +16,9 @@ let
   ]
   ++ lib.optionals (hostname == "media") [
     80 # Nginx
+    90 # AppFlowy-Cloud
     443 # Nginx
+    453 # AppFlowy-Cloud
   ];
   domains = [
     "home.local"
@@ -25,6 +27,7 @@ let
     "chat.home.local"
     "image.home.local"
     "media.home.local"
+    "notes.home.local"
   ];
 in
 {

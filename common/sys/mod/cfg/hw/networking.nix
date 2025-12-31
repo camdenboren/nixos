@@ -21,8 +21,10 @@ let
   domains = [
     "home.local"
     "www.home.local"
+    "dex.home.local"
     "sync.home.local"
     "chat.home.local"
+    "notes.home.local"
     "image.home.local"
     "media.home.local"
   ];

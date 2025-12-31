@@ -12,6 +12,8 @@ let
   mainURL = "http://192.168.1.88";
   baseDomain = "home.local";
   wwwDomain = "www.${baseDomain}";
+  dexDomain = "dex.${baseDomain}";
+  notesDomain = "notes.${baseDomain}";
   chatDomain = "chat.${baseDomain}";
   syncDomain = "sync.${baseDomain}";
   mediaDomain = "media.${baseDomain}";
@@ -121,6 +123,27 @@ in
             proxyPass = "${mainURL}:${ports.image}";
             extraConfig = baseHeaders;
           };
+        };
+      };
+
+      "${notesDomain}" = {
+        onlySSL = true;
+        useACMEHost = baseDomain;
+        locations."/" = {
+          proxyPass = "http://localhost:${toString config.services.outline.port}";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header X-Scheme $scheme;
+          '';
+        };
+      };
+
+      "${dexDomain}" = {
+        onlySSL = true;
+        useACMEHost = baseDomain;
+        locations."/" = {
+          proxyPass = "http://${config.services.dex.settings.web.http}";
+          proxyWebsockets = true;
         };
       };
     };

@@ -7,6 +7,7 @@
     ./jellyfin.nix
     ./nginx.nix
     ./open-webui.nix
+    ./outline.nix
     ./tailscale.nix
     ./unbound.nix
 

@@ -8,6 +8,7 @@ let
   notesURL = "https://notes.${baseDomain}/";
   mediaURL = "https://media.${baseDomain}/";
   imageURL = "https://image.${baseDomain}/";
+  photosURL = "https://photos.${baseDomain}/";
 in
 {
   services.homepage-dashboard = {
@@ -31,7 +32,7 @@ in
         };
         Content = {
           style = "row";
-          columns = 1;
+          columns = 2;
         };
         Utilities = {
           style = "row";
@@ -87,6 +88,13 @@ in
               icon = "jellyfin";
               href = mediaURL;
               siteMonitor = mediaURL;
+            };
+          }
+          {
+            "Photos" = {
+              icon = "immich";
+              href = photosURL;
+              siteMonitor = photosURL;
             };
           }
         ];

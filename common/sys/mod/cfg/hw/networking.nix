@@ -27,6 +27,7 @@ let
     "notes.home.local"
     "image.home.local"
     "media.home.local"
+    "photos.home.local"
   ];
 in
 {

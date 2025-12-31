@@ -13,5 +13,6 @@
     ./hardware-configuration.nix
     ./logitech.nix
     ./processor.nix
+    ./swap.nix
   ];
 }

@@ -3,10 +3,13 @@
 let
   ports = {
     homepage = toString 8082;
+    dex = toString 5556;
     chat = toString 8080;
     sync = toString 8384;
+    notes = toString 3000;
     media = toString 8096;
     image = toString 8188;
+    photos = toString 2283;
   };
   baseURL = "http://127.0.0.1";
   mainURL = "http://192.168.1.88";
@@ -18,6 +21,7 @@ let
   syncDomain = "sync.${baseDomain}";
   mediaDomain = "media.${baseDomain}";
   imageDomain = "image.${baseDomain}";
+  photosDomain = "photos.${baseDomain}";
   baseHeaders = ''
     proxy_http_version 1.1;
     proxy_set_header X-Real-IP $remote_addr;
@@ -127,10 +131,10 @@ in
       };
 
       "${notesDomain}" = {
-        onlySSL = true;
+        forceSSL = true;
         useACMEHost = baseDomain;
         locations."/" = {
-          proxyPass = "http://localhost:${toString config.services.outline.port}";
+          proxyPass = "${baseURL}:${ports.notes}";
           proxyWebsockets = true;
           extraConfig = ''
             proxy_set_header X-Scheme $scheme;
@@ -139,11 +143,26 @@ in
       };
 
       "${dexDomain}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations."/" = {
+          proxyPass = "${baseURL}:${ports.dex}";
+          proxyWebsockets = true;
+        };
+      };
+
+      "${photosDomain}" = {
         onlySSL = true;
         useACMEHost = baseDomain;
         locations."/" = {
-          proxyPass = "http://${config.services.dex.settings.web.http}";
+          proxyPass = "${baseURL}:${ports.photos}";
           proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 50000M;
+            proxy_read_timeout   600s;
+            proxy_send_timeout   600s;
+            send_timeout         600s;
+          '';
         };
       };
     };

@@ -4,6 +4,7 @@
   imports = [
     # Host-specific
     ./homepage.nix
+    ./immich.nix
     ./jellyfin.nix
     ./nginx.nix
     ./open-webui.nix

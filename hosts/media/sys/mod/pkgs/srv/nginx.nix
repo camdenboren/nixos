@@ -1,6 +1,9 @@
 { config, ... }:
 
 let
+  baseDomain = "home.local";
+  baseURL = "http://127.0.0.1";
+  mainURL = "http://192.168.1.88";
   ports = {
     homepage = toString 8082;
     dex = toString 5556;
@@ -11,17 +14,16 @@ let
     image = toString 8188;
     photos = toString 2283;
   };
-  baseURL = "http://127.0.0.1";
-  mainURL = "http://192.168.1.88";
-  baseDomain = "home.local";
-  wwwDomain = "www.${baseDomain}";
-  dexDomain = "dex.${baseDomain}";
-  notesDomain = "notes.${baseDomain}";
-  chatDomain = "chat.${baseDomain}";
-  syncDomain = "sync.${baseDomain}";
-  mediaDomain = "media.${baseDomain}";
-  imageDomain = "image.${baseDomain}";
-  photosDomain = "photos.${baseDomain}";
+  domains = {
+    www = "www.${baseDomain}";
+    dex = "dex.${baseDomain}";
+    notes = "notes.${baseDomain}";
+    chat = "chat.${baseDomain}";
+    sync = "sync.${baseDomain}";
+    media = "media.${baseDomain}";
+    image = "image.${baseDomain}";
+    photos = "photos.${baseDomain}";
+  };
   baseHeaders = ''
     proxy_http_version 1.1;
     proxy_set_header X-Real-IP $remote_addr;
@@ -64,7 +66,7 @@ in
       };
 
       # redirect wwwDomain -> baseDomain
-      "${wwwDomain}" = {
+      "${domains.www}" = {
         locations = {
           "/" = {
             extraConfig = ''
@@ -74,7 +76,7 @@ in
         };
       };
 
-      "${chatDomain}" = {
+      "${domains.chat}" = {
         forceSSL = true;
         useACMEHost = baseDomain;
         locations = {
@@ -85,7 +87,7 @@ in
         };
       };
 
-      "${mediaDomain}" = {
+      "${domains.media}" = {
         forceSSL = true;
         useACMEHost = baseDomain;
         locations = {
@@ -108,7 +110,7 @@ in
         };
       };
 
-      "${syncDomain}" = {
+      "${domains.sync}" = {
         forceSSL = true;
         useACMEHost = baseDomain;
         locations = {
@@ -119,7 +121,7 @@ in
         };
       };
 
-      "${imageDomain}" = {
+      "${domains.image}" = {
         forceSSL = true;
         useACMEHost = baseDomain;
         locations = {
@@ -130,7 +132,7 @@ in
         };
       };
 
-      "${notesDomain}" = {
+      "${domains.notes}" = {
         forceSSL = true;
         useACMEHost = baseDomain;
         locations."/" = {
@@ -142,7 +144,7 @@ in
         };
       };
 
-      "${dexDomain}" = {
+      "${domains.dex}" = {
         forceSSL = true;
         useACMEHost = baseDomain;
         locations."/" = {
@@ -151,8 +153,8 @@ in
         };
       };
 
-      "${photosDomain}" = {
-        onlySSL = true;
+      "${domains.photos}" = {
+        forceSSL = true;
         useACMEHost = baseDomain;
         locations."/" = {
           proxyPass = "${baseURL}:${ports.photos}";
@@ -172,15 +174,7 @@ in
     acceptTerms = true;
     defaults.email = "9UtEfABpSSrV3g.code@mailbox.org";
     certs."${baseDomain}" = {
-      extraDomainNames = [
-        dexDomain
-        notesDomain
-        chatDomain
-        syncDomain
-        mediaDomain
-        imageDomain
-        photosDomain
-      ];
+      extraDomainNames = builtins.attrValues domains;
       group = config.services.nginx.group;
     };
   };

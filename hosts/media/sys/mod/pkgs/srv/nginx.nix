@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 let
   baseDomain = "home.local";
@@ -127,6 +127,10 @@ in
           "/" = {
             proxyPass = "${mainURL}:${ports.image}";
             extraConfig = baseHeaders;
+            # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
+            basicAuthFile = (
+              pkgs.writeText "comfyui-secret" "admin:$2y$05$xBrlzmW.FiYGDI34FDStJuhKakzNawP.iiXhQXDlSUrkoUP/6NLda"
+            );
           };
         };
       };

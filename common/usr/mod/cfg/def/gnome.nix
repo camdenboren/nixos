@@ -165,9 +165,6 @@ in
       restore-session-policy = "crashed";
       homepage-url = "about:newtab";
     };
-    "org/gnome/epiphany/web" = {
-      remember-passwords = false;
-    };
     "org/gnome/nautilus/preferences" = {
       show-delete-permanently = true;
     };

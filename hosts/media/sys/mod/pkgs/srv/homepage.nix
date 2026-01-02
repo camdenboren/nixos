@@ -2,6 +2,7 @@
 
 let
   baseDomain = "home.local";
+  tailnetURL = "100.99.5.32:8082";
   homeURL = "https://${baseDomain}";
   chatURL = "https://chat.${baseDomain}/";
   syncURL = "https://sync.${baseDomain}/";
@@ -14,7 +15,7 @@ in
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    allowedHosts = baseDomain;
+    allowedHosts = "${baseDomain},${tailnetURL}";
 
     settings = {
       background = {

@@ -40,7 +40,6 @@ in
 {
   services.nginx = {
     enable = true;
-    proxyTimeout = "300s";
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 

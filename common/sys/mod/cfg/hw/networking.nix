@@ -31,6 +31,9 @@ let
   ];
 in
 {
+  # trust this cert on all devices
+  security.pki.certificateFiles = [ ../../../dot/acme/home-local.pem ];
+
   networking = {
     hostName = hostname;
     networkmanager.enable = true;

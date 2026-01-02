@@ -172,7 +172,15 @@ in
     acceptTerms = true;
     defaults.email = "9UtEfABpSSrV3g.code@mailbox.org";
     certs."${baseDomain}" = {
-      extraDomainNames = [ mediaDomain ];
+      extraDomainNames = [
+        dexDomain
+        notesDomain
+        chatDomain
+        syncDomain
+        mediaDomain
+        imageDomain
+        photosDomain
+      ];
       group = config.services.nginx.group;
     };
   };

@@ -5,6 +5,7 @@ let
   nothin = rice == "nothin";
   baseDomain = "home.local";
   tailnetURL = "100.99.5.32:8082";
+  mainURL = "http://192.168.1.88:8188";
   homeURL = "https://${baseDomain}";
   chatURL = "https://chat.${baseDomain}/";
   syncURL = "https://sync.${baseDomain}/";
@@ -99,8 +100,9 @@ in
           {
             "Image" = {
               icon = "sh-comfyui";
+              # monitor main for status, but link to nginx w/ auth
               href = imageURL;
-              siteMonitor = imageURL;
+              siteMonitor = mainURL;
             };
           }
         ];

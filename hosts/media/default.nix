@@ -16,6 +16,7 @@ in
       inputs
       hostname
       system
+      rice
       pkgs-stable
       ;
   };

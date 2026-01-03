@@ -1,6 +1,8 @@
-{ ... }:
+{ pkgs, rice, ... }:
 
 let
+  coral = rice == "coral";
+  nothin = rice == "nothin";
   baseDomain = "home.local";
   tailnetURL = "100.99.5.32:8082";
   homeURL = "https://${baseDomain}";
@@ -10,20 +12,41 @@ let
   mediaURL = "https://media.${baseDomain}/";
   imageURL = "https://image.${baseDomain}/";
   photosURL = "https://photos.${baseDomain}/";
+  backgrounds = {
+    coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
+    nothin = ../../../../../../common/usr/rice/wallpapers/nothin.jpg;
+    skyline = ../../../../../../common/usr/rice/wallpapers/skyline.jpg;
+  };
+  homepageImagesURI = "$out/share/homepage/public/images";
+  package = pkgs.homepage-dashboard.overrideAttrs (oldAttrs: {
+    postInstall = oldAttrs.postInstall or "" + ''
+      mkdir -p $out/share/homepage/public/images
+      ln -s ${backgrounds.coral} ${homepageImagesURI}/coral.jpg
+      ln -s ${backgrounds.nothin} ${homepageImagesURI}/nothin.jpg
+      ln -s ${backgrounds.skyline} ${homepageImagesURI}/skyline.jpg
+    '';
+  });
 in
 {
   services.homepage-dashboard = {
     enable = true;
+    package = package;
     openFirewall = true;
     allowedHosts = "${baseDomain},${tailnetURL}";
 
     settings = {
       background = {
-        image = "https://wallpapercave.com/wp/wp8975927.jpg";
+        image = "/images/${rice}.jpg";
         blur = "md";
       };
       theme = "dark";
-      color = "teal";
+      color =
+        if coral then
+          "teal"
+        else if nothin then
+          "purple"
+        else
+          "red";
       base = homeURL;
       statusStyle = "dot";
       layout = {

@@ -12,6 +12,5 @@
     # Host-specific
     ./office.nix
     ./scripts.nix
-    inputs.mac-app-util.homeManagerModules.default
   ];
 }

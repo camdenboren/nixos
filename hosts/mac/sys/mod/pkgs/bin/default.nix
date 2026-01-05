@@ -7,6 +7,5 @@
 
     # host-specific
     ./homebrew.nix
-    inputs.mac-app-util.darwinModules.default
   ];
 }

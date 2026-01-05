@@ -2,10 +2,13 @@
   config,
   lib,
   hostname,
+  system,
   ...
 }:
 
 let
+  isDarwin = lib.hasSuffix "-darwin" system;
+  isLinux = !isDarwin;
   ports = [
     22 # SSH
     1900 # Rygel
@@ -29,31 +32,50 @@ let
     "photos.home.local"
   ];
 in
-{
-  # trust this cert on all devices
-  security.pki.certificateFiles = [ ../../../dot/acme/home-local.pem ];
+lib.recursiveUpdate
+  # linux-only
+  (lib.optionalAttrs isLinux {
+    # trust this cert on all devices
+    security.pki.certificateFiles = [ ../../../dot/acme/home-local.pem ];
 
-  networking = {
-    hostName = hostname;
-    networkmanager.enable = true;
+    networking = {
+      hostName = hostname;
+      networkmanager.enable = true;
 
-    firewall = {
-      allowedTCPPorts = ports;
-      allowedUDPPorts = ports;
-    }
-    // lib.optionalAttrs (hostname == "media") {
-      interfaces."${config.services.tailscale.interfaceName}" = {
-        allowedTCPPorts = [ 53 ];
-        allowedUDPPorts = [ 53 ];
-      };
-    };
-
-    hosts =
-      lib.optionalAttrs (hostname != "media") {
-        "192.168.1.78" = domains;
+      firewall = {
+        allowedTCPPorts = ports;
+        allowedUDPPorts = ports;
       }
       // lib.optionalAttrs (hostname == "media") {
-        "127.0.0.1" = domains;
+        interfaces."${config.services.tailscale.interfaceName}" = {
+          allowedTCPPorts = [ 53 ];
+          allowedUDPPorts = [ 53 ];
+        };
       };
-  };
-}
+
+      hosts =
+        lib.optionalAttrs (hostname != "media") {
+          "192.168.1.78" = domains;
+        }
+        // lib.optionalAttrs (hostname == "media") {
+          "127.0.0.1" = domains;
+        };
+    };
+  })
+
+  # darwin-only
+  # networking.hosts was reverted
+  # requires $(sudo -s) + $(mv /etc/hosts /etc/hosts.before-nix-darwin)
+  # also need to manually drag and drop home-local.pem to keychain access and `Always Trust`
+  (
+    lib.optionalAttrs isDarwin {
+      environment.etc."hosts" = {
+        text = ''
+          127.0.0.1       localhost
+          255.255.255.255 broadcasthost
+          ::1             localhost
+          192.168.1.78    ${lib.strings.concatStringsSep " " domains}
+        '';
+      };
+    }
+  )

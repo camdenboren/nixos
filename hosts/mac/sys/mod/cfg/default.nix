@@ -4,5 +4,6 @@
   imports = [
     ./def
     ./env
+    ./hw
   ];
 }

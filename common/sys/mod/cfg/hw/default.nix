@@ -1,12 +1,22 @@
-{ lib, hostname, ... }:
+{
+  lib,
+  hostname,
+  system,
+  ...
+}:
 
+let
+  isLinux = lib.hasSuffix "-linux" system;
+in
 {
   imports = [
-    ./audio.nix
     ./networking.nix
+  ]
+  ++ lib.optionals isLinux [
+    ./audio.nix
     ./printing.nix
   ]
-  ++ lib.optionals (hostname != "media") [
+  ++ lib.optionals (isLinux && hostname != "media") [
     ./boot.nix
   ];
 }

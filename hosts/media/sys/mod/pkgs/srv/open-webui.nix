@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs-stable-new, ... }:
 
 let
   scheme = "http";
@@ -12,6 +12,7 @@ in
 {
   services.open-webui = {
     enable = true;
+    package = pkgs-stable-new.open-webui;
     environment = {
       DO_NOT_TRACK = "True";
       SCARF_NO_ANALYTICS = "True";

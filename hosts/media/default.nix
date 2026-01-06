@@ -9,6 +9,7 @@ let
   system = "x86_64-linux";
   rice = "coral";
   pkgs-stable = nixpkgs-stable.legacyPackages.${system};
+  pkgs-stable-new = nixpkgs-stable.legacyPackages.${system};
 in
 {
   specialArgs = {
@@ -18,6 +19,7 @@ in
       system
       rice
       pkgs-stable
+      pkgs-stable-new
       ;
   };
   modules = [
@@ -32,6 +34,7 @@ in
             system
             rice
             pkgs-stable
+            pkgs-stable-new
             ;
         };
         backupFileExtension = "backup";

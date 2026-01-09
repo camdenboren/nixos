@@ -8,7 +8,12 @@ let
   hostname = "media";
   system = "x86_64-linux";
   rice = "coral";
-  pkgs-stable = nixpkgs-stable.legacyPackages.${system};
+  pkgs-stable = import nixpkgs-stable {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
 in
 {
   specialArgs = {

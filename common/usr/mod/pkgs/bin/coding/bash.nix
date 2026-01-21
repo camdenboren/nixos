@@ -8,7 +8,6 @@
 let
   isDarwin = lib.hasSuffix "-darwin" system;
   isVM = lib.hasSuffix "vm" hostname;
-  shlvl = if isDarwin then "2" else "1";
 in
 {
   programs.bash = {
@@ -64,7 +63,7 @@ in
     );
 
     initExtra = ''
-      if (( SHLVL > ${shlvl} )); then
+      if (( SHLVL > 1 )); then
         export PS1="\n\[\033[1;31m\][shell:\w]\$\[\033[0m\] "
       fi
 

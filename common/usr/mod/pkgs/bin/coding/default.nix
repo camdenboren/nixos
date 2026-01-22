@@ -16,6 +16,7 @@ in
       # Programming
       nixd
       nixfmt-rfc-style
+      harper
       fd
       lynx
     ]

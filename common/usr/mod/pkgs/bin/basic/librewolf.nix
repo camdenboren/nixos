@@ -101,6 +101,7 @@ in
           easy-container-shortcuts
           new-tab-override
           vimium
+          private-grammar-checker-harper
         ];
 
         containersForce = true;

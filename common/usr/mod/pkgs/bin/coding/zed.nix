@@ -13,6 +13,7 @@ in
 
     extensions = [
       "nix"
+      "harper"
       "java"
       "vue"
       "zed-legacy-themes"

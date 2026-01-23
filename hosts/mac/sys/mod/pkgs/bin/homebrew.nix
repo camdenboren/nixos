@@ -18,6 +18,7 @@
       "ollama-app"
       "pearcleaner"
       "qdirstat"
+      "readest"
       "tailscale-app"
       "tidal"
       "zoom"

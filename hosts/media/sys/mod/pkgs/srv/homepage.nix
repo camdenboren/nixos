@@ -7,6 +7,7 @@ let
   tailnetURL = "100.99.5.32:8082";
   mainURL = "http://192.168.1.88:8188";
   homeURL = "https://${baseDomain}";
+  pdfURL = "https://pdf.${baseDomain}/";
   chatURL = "https://chat.${baseDomain}/";
   syncURL = "https://sync.${baseDomain}/";
   notesURL = "https://notes.${baseDomain}/";
@@ -61,7 +62,7 @@ in
         };
         Utilities = {
           style = "row";
-          columns = 2;
+          columns = 3;
         };
       };
     };
@@ -132,6 +133,13 @@ in
               icon = "outline";
               href = notesURL;
               siteMonitor = notesURL;
+            };
+          }
+          {
+            "PDF" = {
+              icon = "bentopdf";
+              href = pdfURL;
+              siteMonitor = pdfURL;
             };
           }
           {

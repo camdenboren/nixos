@@ -188,7 +188,6 @@ in
   qt = {
     enable = true;
     platformTheme.name = "gtk";
-    style.package = pkgs.adwaita-qt; # can use qt6 when vlc is ported
     style.name = "adwaita-dark";
   };
 }

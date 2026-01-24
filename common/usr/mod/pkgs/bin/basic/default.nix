@@ -23,6 +23,7 @@ in
       # Basic Apps
       high-tide
       lollypop
+      readest
       qbittorrent
       tidal-hifi
       vlc

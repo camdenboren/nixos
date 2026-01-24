@@ -17,6 +17,7 @@ let
   domains = {
     www = "www.${baseDomain}";
     dex = "dex.${baseDomain}";
+    pdf = "pdf.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
@@ -169,6 +170,25 @@ in
             send_timeout         600s;
           '';
         };
+      };
+
+      "${domains.pdf}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations."/" = {
+          root = "${pkgs.bentopdf}/dist";
+          index = "index.html";
+          tryFiles = "$uri $uri/ /index.html";
+          # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
+          basicAuthFile = (
+            pkgs.writeText "bentopdf-secret" "admin:$2y$05$L.k39A.LEJRTn6j4kQ1QIuqwvixyQgKPOJ4UxE5Bgg6zaZrABZi9y"
+          );
+        };
+        extraConfig = ''
+          add_header X-Frame-Options "SAMEORIGIN" always;
+          add_header X-Content-Type-Options "nosniff" always;
+          add_header X-XSS-Protection "1; mode=block" always;
+        '';
       };
     };
   };

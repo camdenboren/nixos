@@ -24,7 +24,6 @@ in
       high-tide
       lollypop
       readest
-      qbittorrent
       tidal-hifi
       vlc
     ]
@@ -37,6 +36,7 @@ in
     ]
     ++ lib.optionals (hostname == "media") [
       jellyfin-ffmpeg
+      qbittorrent
     ];
 
   imports = [

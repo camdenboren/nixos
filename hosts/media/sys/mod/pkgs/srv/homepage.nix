@@ -14,6 +14,7 @@ let
   mediaURL = "https://media.${baseDomain}/";
   imageURL = "https://image.${baseDomain}/";
   photosURL = "https://photos.${baseDomain}/";
+  torrentURL = "https://torrent.${baseDomain}/";
   backgrounds = {
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
     nothin = ../../../../../../common/usr/rice/wallpapers/nothin.jpg;
@@ -62,7 +63,7 @@ in
         };
         Utilities = {
           style = "row";
-          columns = 3;
+          columns = 2;
         };
       };
     };
@@ -147,6 +148,13 @@ in
               icon = "syncthing";
               href = syncURL;
               siteMonitor = syncURL;
+            };
+          }
+          {
+            "Torrent" = {
+              icon = "qbittorrent";
+              href = torrentURL;
+              siteMonitor = torrentURL;
             };
           }
         ];

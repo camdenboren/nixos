@@ -13,6 +13,7 @@ let
     media = toString 8096;
     image = toString 8188;
     photos = toString 2283;
+    torrent = toString 9080;
   };
   domains = {
     www = "www.${baseDomain}";
@@ -24,6 +25,7 @@ let
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     photos = "photos.${baseDomain}";
+    torrent = "torrent.${baseDomain}";
   };
   baseHeaders = ''
     proxy_http_version 1.1;
@@ -189,6 +191,17 @@ in
           add_header X-Content-Type-Options "nosniff" always;
           add_header X-XSS-Protection "1; mode=block" always;
         '';
+      };
+
+      "${domains.torrent}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.torrent}";
+            extraConfig = baseHeaders;
+          };
+        };
       };
     };
   };

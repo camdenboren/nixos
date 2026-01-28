@@ -31,6 +31,7 @@ let
     "image.home.local"
     "media.home.local"
     "photos.home.local"
+    "design.home.local"
     "torrent.home.local"
   ];
 in

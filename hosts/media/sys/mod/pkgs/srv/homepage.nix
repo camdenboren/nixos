@@ -14,6 +14,7 @@ let
   mediaURL = "https://media.${baseDomain}/";
   imageURL = "https://image.${baseDomain}/";
   photosURL = "https://photos.${baseDomain}/";
+  designURL = "https://design.${baseDomain}/";
   torrentURL = "https://torrent.${baseDomain}/";
   backgrounds = {
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
@@ -129,6 +130,13 @@ in
       }
       {
         Utilities = [
+          {
+            "Design" = {
+              icon = "penpot-light";
+              href = designURL;
+              siteMonitor = designURL;
+            };
+          }
           {
             "Notes" = {
               icon = "outline";

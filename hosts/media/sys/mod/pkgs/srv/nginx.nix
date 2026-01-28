@@ -13,6 +13,7 @@ let
     media = toString 8096;
     image = toString 8188;
     photos = toString 2283;
+    design = toString 9001;
     torrent = toString 9080;
   };
   domains = {
@@ -25,6 +26,7 @@ let
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     photos = "photos.${baseDomain}";
+    design = "design.${baseDomain}";
     torrent = "torrent.${baseDomain}";
   };
   baseHeaders = ''
@@ -200,6 +202,29 @@ in
           "/" = {
             proxyPass = "${baseURL}:${ports.torrent}";
             extraConfig = baseHeaders;
+          };
+        };
+      };
+
+      "${domains.design}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        extraConfig = ''
+          client_max_body_size 31457280;
+        '';
+
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.design}";
+            extraConfig = baseHeaders + ''
+              proxy_redirect off;
+              proxy_set_header X-Scheme $scheme;
+            '';
+          };
+
+          "/ws/notifications" = {
+            proxyPass = "${baseURL}:${ports.design}/ws/notifications";
+            extraConfig = websocketHeaders;
           };
         };
       };

@@ -3,6 +3,6 @@
 {
   imports = [
     # Host-specific
-    ./bentopdf.nix
+    ./homelab.nix
   ];
 }

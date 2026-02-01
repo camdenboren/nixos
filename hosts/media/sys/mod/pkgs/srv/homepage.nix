@@ -10,6 +10,7 @@ let
   pdfURL = "https://pdf.${baseDomain}/";
   chatURL = "https://chat.${baseDomain}/";
   syncURL = "https://sync.${baseDomain}/";
+  drawURL = "https://draw.${baseDomain}/";
   notesURL = "https://notes.${baseDomain}/";
   mediaURL = "https://media.${baseDomain}/";
   imageURL = "https://image.${baseDomain}/";
@@ -135,6 +136,13 @@ in
               icon = "penpot-light";
               href = designURL;
               siteMonitor = designURL;
+            };
+          }
+          {
+            "Draw" = {
+              icon = "draw-io";
+              href = drawURL;
+              siteMonitor = drawURL;
             };
           }
           {

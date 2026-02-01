@@ -9,6 +9,7 @@ let
     dex = toString 5556;
     chat = toString 8080;
     sync = toString 8384;
+    draw = toString 9040;
     notes = toString 3000;
     media = toString 8096;
     image = toString 8188;
@@ -23,6 +24,7 @@ let
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
+    draw = "draw.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     photos = "photos.${baseDomain}";
@@ -227,6 +229,25 @@ in
             extraConfig = websocketHeaders;
           };
         };
+      };
+
+      "${domains.draw}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations."/" = {
+          root = "${pkgs.drawio}/dist";
+          index = "index.html";
+          tryFiles = "$uri $uri/ /index.html";
+          # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
+          basicAuthFile = (
+            pkgs.writeText "drawio-secret" "admin:$2y$05$SyLEu0N/4us.L2gzmiMLKOpI9Rkiub8D5x0Fer/Y8K.cNV1H0Pg1O"
+          );
+        };
+        extraConfig = ''
+          add_header X-Frame-Options "SAMEORIGIN" always;
+          add_header X-Content-Type-Options "nosniff" always;
+          add_header X-XSS-Protection "1; mode=block" always;
+        '';
       };
     };
   };

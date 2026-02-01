@@ -27,6 +27,7 @@ let
     "pdf.home.local"
     "sync.home.local"
     "chat.home.local"
+    "draw.home.local"
     "notes.home.local"
     "image.home.local"
     "media.home.local"

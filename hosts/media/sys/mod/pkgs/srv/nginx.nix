@@ -185,10 +185,6 @@ in
           root = "${pkgs.bentopdf}/dist";
           index = "index.html";
           tryFiles = "$uri $uri/ /index.html";
-          # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
-          basicAuthFile = (
-            pkgs.writeText "bentopdf-secret" "admin:$2y$05$L.k39A.LEJRTn6j4kQ1QIuqwvixyQgKPOJ4UxE5Bgg6zaZrABZi9y"
-          );
         };
         extraConfig = ''
           add_header X-Frame-Options "SAMEORIGIN" always;
@@ -238,10 +234,6 @@ in
           root = "${pkgs.drawio}/dist";
           index = "index.html";
           tryFiles = "$uri $uri/ /index.html";
-          # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
-          basicAuthFile = (
-            pkgs.writeText "drawio-secret" "admin:$2y$05$SyLEu0N/4us.L2gzmiMLKOpI9Rkiub8D5x0Fer/Y8K.cNV1H0Pg1O"
-          );
         };
         extraConfig = ''
           add_header X-Frame-Options "SAMEORIGIN" always;

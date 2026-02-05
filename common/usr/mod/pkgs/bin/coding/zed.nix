@@ -27,6 +27,7 @@ in
     userSettings = {
       # basic
       auto_update = false;
+      colorize_brackets = true;
       vim_mode = true;
       relative_line_numbers = "enabled";
       soft_wrap = "editor_width";

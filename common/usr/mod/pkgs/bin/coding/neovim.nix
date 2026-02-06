@@ -15,6 +15,7 @@
       nvim-lspconfig
       nvim-tree-lua
       nvim-web-devicons
+      plenary-nvim
       vim-gitgutter
       lualine-nvim
       telescope-nvim

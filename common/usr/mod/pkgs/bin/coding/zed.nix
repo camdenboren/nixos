@@ -106,7 +106,7 @@ in
         };
       };
       lsp = {
-        pyright = {
+        basedpyright = {
           settings = {
             python.analysis = {
               diagnosticMode = "workspace";

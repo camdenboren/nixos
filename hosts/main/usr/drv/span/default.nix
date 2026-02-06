@@ -1,14 +1,14 @@
 { stdenv, fetchzip }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "span";
-  version = "3.21";
+  version = "3.23";
   src = fetchzip {
-    url = "https://www.dropbox.com/scl/fi/cdyxhzcfs02s005497xe0/span.tar.gz?rlkey=e85n6hp1s3pebh6c1pmz5vo9u&st=lclvumjq&dl=1";
-    hash = "sha256-8MtChkgRau9IaXEG5Ls4VqKgZbRl1E1A/w44oE9i6oE=";
+    url = "https://www.dropbox.com/scl/fi/hesfgdzzccsabvyhuvtc5/span-${version}.tar.gz?rlkey=fbpp9ajg2vd82dmziek5b9rd3&st=r7zjgxo4&dl=1";
+    hash = "sha256-91hUz0WDbz7kzT2BbEhfRgxmunNhnzIkWiBsHyVzTwY=";
     stripRoot = false;
   };
-  # installer url = "https://www.voxengo.com/files/VoxengoSPAN_321_Win32_64_VST_VST3_AAX_setup.exe";
+  # installer url = "https://www.voxengo.com/files/VoxengoSPAN_323_Win32_64_VST_VST3_AAX_setup.exe";
 
   installPhase = ''
     mkdir -p $out/lib/winvst3

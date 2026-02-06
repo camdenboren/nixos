@@ -29,6 +29,7 @@
     };
     chat-script = {
       url = "github:camdenboren/chat-script";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     chatbot-util = {
       url = "github:collegiate-edu-nation/chatbot-util";

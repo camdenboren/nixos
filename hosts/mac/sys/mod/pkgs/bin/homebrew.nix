@@ -12,6 +12,7 @@
       "freecad"
       "freetube"
       "gimp"
+      "intellij-idea"
       "languagetool-desktop"
       "linearmouse"
       "mullvad-vpn"

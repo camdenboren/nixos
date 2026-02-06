@@ -24,7 +24,7 @@ in
       quickemu
     ]
     ++ lib.optionals isDarwin [
-      jetbrains.idea-community
+      #jetbrains.idea-oss - now uses jetbrains jdk which has been broken on darwin for years
       utm
       wireshark
     ];

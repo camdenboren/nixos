@@ -7,6 +7,7 @@ let
   ports = {
     homepage = toString 8082;
     dex = toString 5556;
+    box = toString 7745;
     chat = toString 8080;
     sync = toString 8384;
     draw = toString 9040;
@@ -20,6 +21,7 @@ let
   domains = {
     www = "www.${baseDomain}";
     dex = "dex.${baseDomain}";
+    box = "box.${baseDomain}";
     pdf = "pdf.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
@@ -240,6 +242,17 @@ in
           add_header X-Content-Type-Options "nosniff" always;
           add_header X-XSS-Protection "1; mode=block" always;
         '';
+      };
+
+      "${domains.box}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.box}";
+            extraConfig = baseHeaders;
+          };
+        };
       };
     };
   };

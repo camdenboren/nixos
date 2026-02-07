@@ -24,6 +24,7 @@
 {
   imports = [
     # Host-specific
+    ./homebox.nix
     ./homepage.nix
     ./immich.nix
     ./jellyfin.nix

@@ -8,6 +8,7 @@ let
   mainURL = "http://192.168.1.88:8188";
   homeURL = "https://${baseDomain}";
   pdfURL = "https://pdf.${baseDomain}/";
+  boxURL = "https://box.${baseDomain}/";
   chatURL = "https://chat.${baseDomain}/";
   syncURL = "https://sync.${baseDomain}/";
   drawURL = "https://draw.${baseDomain}/";
@@ -131,6 +132,13 @@ in
       }
       {
         Utilities = [
+          {
+            "Box" = {
+              icon = "homebox";
+              href = boxURL;
+              siteMonitor = boxURL;
+            };
+          }
           {
             "Design" = {
               icon = "penpot-light";

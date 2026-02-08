@@ -28,6 +28,7 @@
     ./homepage.nix
     ./immich.nix
     ./jellyfin.nix
+    ./lubelogger.nix
     ./nginx.nix
     ./open-webui.nix
     ./outline.nix

@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  services.lubelogger = {
+    enable = true;
+  };
+}

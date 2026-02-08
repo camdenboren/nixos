@@ -9,6 +9,7 @@ let
   homeURL = "https://${baseDomain}";
   pdfURL = "https://pdf.${baseDomain}/";
   boxURL = "https://box.${baseDomain}/";
+  carURL = "https://car.${baseDomain}/";
   chatURL = "https://chat.${baseDomain}/";
   syncURL = "https://sync.${baseDomain}/";
   drawURL = "https://draw.${baseDomain}/";
@@ -137,6 +138,13 @@ in
               icon = "homebox";
               href = boxURL;
               siteMonitor = boxURL;
+            };
+          }
+          {
+            "Car" = {
+              icon = "lubelogger";
+              href = carURL;
+              siteMonitor = carURL;
             };
           }
           {

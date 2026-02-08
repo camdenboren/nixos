@@ -8,6 +8,7 @@ let
     homepage = toString 8082;
     dex = toString 5556;
     box = toString 7745;
+    car = toString 5000;
     chat = toString 8080;
     sync = toString 8384;
     draw = toString 9040;
@@ -22,6 +23,7 @@ let
     www = "www.${baseDomain}";
     dex = "dex.${baseDomain}";
     box = "box.${baseDomain}";
+    car = "car.${baseDomain}";
     pdf = "pdf.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
@@ -251,6 +253,23 @@ in
           "/" = {
             proxyPass = "${baseURL}:${ports.box}";
             extraConfig = baseHeaders;
+          };
+        };
+      };
+
+      "${domains.car}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.car}";
+            extraConfig =
+              baseHeaders
+              + websocketHeaders
+              + ''
+                client_max_body_size 50000M;
+                proxy_redirect off;
+              '';
           };
         };
       };

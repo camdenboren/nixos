@@ -25,6 +25,7 @@ let
     "www.home.local"
     "dex.home.local"
     "box.home.local"
+    "car.home.local"
     "pdf.home.local"
     "sync.home.local"
     "chat.home.local"

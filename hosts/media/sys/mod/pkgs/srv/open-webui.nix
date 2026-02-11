@@ -6,7 +6,7 @@ let
   domain = "chat.home.local";
   URLs = {
     main = "${scheme}://192.168.1.88:${port}";
-    windows = "${scheme}://192.168.1.65:${port}";
+    media = "${scheme}://localhost:${port}";
   };
 in
 {
@@ -18,7 +18,7 @@ in
       ANONYMIZED_TELEMETRY = "False";
       ENABLE_WEBSOCKET_SUPPORT = "True";
       CORS_ALLOW_ORIGIN = "https://${domain}";
-      OLLAMA_BASE_URLS = "${URLs.main};${URLs.windows}";
+      OLLAMA_BASE_URLS = "${URLs.main};${URLs.media}";
     };
   };
 }

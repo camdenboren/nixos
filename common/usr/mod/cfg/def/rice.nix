@@ -14,8 +14,8 @@ let
   jsonFormat = pkgs.formats.json { };
   red-theme = import ../../../dot/zed/red.nix { inherit lib system; };
   rose-theme = import ../../../dot/zed/rose.nix;
+  isVM = lib.hasSuffix "vm" hostname;
   isLinux = lib.hasSuffix "-linux" system;
-  isMain = lib.hasPrefix "main" hostname;
   zed-variant = if isLinux then "" else " Transparent";
 
   clr = {
@@ -146,10 +146,10 @@ in
             bold-is-bright = true;
             font-family = fonts.mono;
             font-size =
-              if isMain then
-                11
-              else if isLinux then
+              if isVM then
                 10
+              else if isLinux then
+                11
               else
                 15;
             macos-titlebar-proxy-icon = "hidden"; # mac-only

@@ -54,9 +54,6 @@ in
       hideActiveSubscriptions = true;
       enableSubtitlesByDefault = true;
     }
-    // lib.optionalAttrs (hostname == "media") {
-      defaultProfile = "C8kpmytTeH7aRdKy";
-    }
     // lib.optionalAttrs isDarwin {
       externalPlayerExecutable = "/Users/camdenboren/.nix-profile/bin/mpv";
     };

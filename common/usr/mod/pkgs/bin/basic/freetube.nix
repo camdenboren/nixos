@@ -29,7 +29,7 @@ in
       hideHeaderLogo = true;
       mainColor = if (hostname == "media") then "Teal" else "Red";
       secColor = if (hostname == "media") then "CatppuccinFrappeTeal" else "Red";
-      autoplayVideos = false;
+      autoplayVideos = true;
       defaultQuality = "1080";
       fetchSubscriptionsAutomatically = false;
       saveWatchedProgress = false;

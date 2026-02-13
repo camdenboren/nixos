@@ -44,7 +44,7 @@ in
       nix-homebrew = {
         enable = true;
         user = "camdenboren";
-        autoMigrate = true;
+        autoMigrate = false;
       };
     }
   ];

@@ -16,6 +16,7 @@ let
   notesURL = "https://notes.${baseDomain}/";
   mediaURL = "https://media.${baseDomain}/";
   imageURL = "https://image.${baseDomain}/";
+  moneyURL = "https://money.${baseDomain}/";
   photosURL = "https://photos.${baseDomain}/";
   designURL = "https://design.${baseDomain}/";
   torrentURL = "https://torrent.${baseDomain}/";
@@ -159,6 +160,13 @@ in
               icon = "draw-io";
               href = drawURL;
               siteMonitor = drawURL;
+            };
+          }
+          {
+            "Money" = {
+              icon = "actual-budget";
+              href = moneyURL;
+              siteMonitor = moneyURL;
             };
           }
           {

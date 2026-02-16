@@ -32,6 +32,7 @@ let
     "draw.home.local"
     "notes.home.local"
     "image.home.local"
+    "money.home.local"
     "media.home.local"
     "photos.home.local"
     "design.home.local"

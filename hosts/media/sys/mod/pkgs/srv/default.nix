@@ -24,6 +24,7 @@
 {
   imports = [
     # Host-specific
+    ./actual.nix
     ./homebox.nix
     ./homepage.nix
     ./immich.nix

@@ -15,6 +15,7 @@ let
     notes = toString 3000;
     media = toString 8096;
     image = toString 8188;
+    money = toString 4000;
     photos = toString 2283;
     design = toString 9001;
     torrent = toString 9080;
@@ -31,6 +32,7 @@ let
     draw = "draw.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
+    money = "money.${baseDomain}";
     photos = "photos.${baseDomain}";
     design = "design.${baseDomain}";
     torrent = "torrent.${baseDomain}";
@@ -270,6 +272,26 @@ in
                 client_max_body_size 50000M;
                 proxy_redirect off;
               '';
+          };
+        };
+      };
+
+      "${domains.money}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.money}";
+            extraConfig = baseHeaders + ''
+              # Prevents header duplication between Upstream and Proxy
+              proxy_hide_header Cross-Origin-Embedder-Policy;
+              proxy_hide_header Cross-Origin-Opener-Policy;
+
+              # Explicitly set mandatory security headers
+              add_header Cross-Origin-Embedder-Policy "require-corp" always;
+              add_header Cross-Origin-Opener-Policy "same-origin" always;
+              add_header Origin-Agent-Cluster "?1" always;
+            '';
           };
         };
       };

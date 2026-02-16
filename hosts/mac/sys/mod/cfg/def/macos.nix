@@ -1,5 +1,9 @@
 { ... }:
 
+let
+  appsURI = "/Applications";
+  hmAppsURI = "/Users/camdenboren/Applications/Home Manager Apps";
+in
 {
   system = {
     defaults = {
@@ -21,7 +25,18 @@
         mouse-over-hilite-stack = false;
         mru-spaces = false;
 
-        #persistent-apps = [];
+        persistent-apps = [
+          "${hmAppsURI}/LibreWolf.app"
+          "${hmAppsURI}/Zed.app"
+          "${hmAppsURI}/Ghostty.app"
+          "${hmAppsURI}/Bitwarden.app"
+          "${appsURI}/FreeTube.app"
+          "${hmAppsURI}/VLC.app"
+          "${hmAppsURI}/Slack.app"
+          "${appsURI}/ClickUp.app"
+          "${appsURI}/zoom.us.app"
+          "${hmAppsURI}/UTM.app"
+        ];
       };
       finder = {
         AppleShowAllExtensions = true;
@@ -41,11 +56,16 @@
         ShowDate = 2;
         ShowDayOfWeek = false;
       };
+      CustomUserPreferences = {
+        NSGlobalDomain = {
+          AppleAccentColor = 5;
+          AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
+        };
+      };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
+        AppleIconAppearanceTheme = "TintedDark";
         AppleShowScrollBars = "WhenScrolling";
-        #AppleShowAllExtensions = true;
-        #AppleShowAllFiles = true;
         "com.apple.mouse.tapBehavior" = 1;
         "com.apple.trackpad.scaling" = 2.5;
         "com.apple.trackpad.enableSecondaryClick" = true;

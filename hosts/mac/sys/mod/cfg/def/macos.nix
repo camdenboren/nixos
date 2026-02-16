@@ -68,6 +68,7 @@ in
         AppleShowScrollBars = "WhenScrolling";
         "com.apple.mouse.tapBehavior" = 1;
         "com.apple.trackpad.scaling" = 2.5;
+        "com.apple.swipescrolldirection" = false;
         "com.apple.trackpad.enableSecondaryClick" = true;
         NSDisableAutomaticTermination = false;
         NSScrollAnimationEnabled = true;

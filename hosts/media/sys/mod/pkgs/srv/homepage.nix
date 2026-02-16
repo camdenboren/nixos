@@ -4,22 +4,24 @@ let
   coral = rice == "coral";
   nothin = rice == "nothin";
   baseDomain = "home.local";
-  tailnetURL = "100.99.5.32:8082";
-  mainURL = "http://192.168.1.88:8188";
-  homeURL = "https://${baseDomain}";
-  pdfURL = "https://pdf.${baseDomain}/";
-  boxURL = "https://box.${baseDomain}/";
-  carURL = "https://car.${baseDomain}/";
-  chatURL = "https://chat.${baseDomain}/";
-  syncURL = "https://sync.${baseDomain}/";
-  drawURL = "https://draw.${baseDomain}/";
-  notesURL = "https://notes.${baseDomain}/";
-  mediaURL = "https://media.${baseDomain}/";
-  imageURL = "https://image.${baseDomain}/";
-  moneyURL = "https://money.${baseDomain}/";
-  photosURL = "https://photos.${baseDomain}/";
-  designURL = "https://design.${baseDomain}/";
-  torrentURL = "https://torrent.${baseDomain}/";
+  tailnetAddress = "100.99.5.32:8082";
+  URLs = {
+    main = "http://192.168.1.88:8188";
+    home = "https://${baseDomain}";
+    pdf = "https://pdf.${baseDomain}/";
+    box = "https://box.${baseDomain}/";
+    car = "https://car.${baseDomain}/";
+    chat = "https://chat.${baseDomain}/";
+    sync = "https://sync.${baseDomain}/";
+    draw = "https://draw.${baseDomain}/";
+    notes = "https://notes.${baseDomain}/";
+    media = "https://media.${baseDomain}/";
+    image = "https://image.${baseDomain}/";
+    money = "https://money.${baseDomain}/";
+    photos = "https://photos.${baseDomain}/";
+    design = "https://design.${baseDomain}/";
+    torrent = "https://torrent.${baseDomain}/";
+  };
   backgrounds = {
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
     nothin = ../../../../../../common/usr/rice/wallpapers/nothin.jpg;
@@ -38,9 +40,9 @@ in
 {
   services.homepage-dashboard = {
     enable = true;
-    package = package;
+    inherit package;
     openFirewall = true;
-    allowedHosts = "${baseDomain},${tailnetURL}";
+    allowedHosts = "${baseDomain},${tailnetAddress}";
 
     settings = {
       background = {
@@ -55,7 +57,7 @@ in
           "purple"
         else
           "red";
-      base = homeURL;
+      base = URLs.home;
       statusStyle = "dot";
       layout = {
         AI = {
@@ -63,6 +65,14 @@ in
           columns = 2;
         };
         Content = {
+          style = "row";
+          columns = 2;
+        };
+        Graphics = {
+          style = "row";
+          columns = 2;
+        };
+        Tracking = {
           style = "row";
           columns = 2;
         };
@@ -96,20 +106,20 @@ in
 
     services = [
       {
-        "AI" = [
+        AI = [
           {
-            "Chat" = {
+            Chat = {
               icon = "open-webui";
-              href = chatURL;
-              siteMonitor = chatURL;
+              href = URLs.chat;
+              siteMonitor = URLs.chat;
             };
           }
           {
-            "Image" = {
+            Image = {
               icon = "sh-comfyui";
               # monitor main for status, but link to nginx w/ auth
-              href = imageURL;
-              siteMonitor = mainURL;
+              href = URLs.image;
+              siteMonitor = URLs.main;
             };
           }
         ];
@@ -117,17 +127,60 @@ in
       {
         Content = [
           {
-            "Media" = {
+            Media = {
               icon = "jellyfin";
-              href = mediaURL;
-              siteMonitor = mediaURL;
+              href = URLs.media;
+              siteMonitor = URLs.media;
             };
           }
           {
-            "Photos" = {
+            Photos = {
               icon = "immich";
-              href = photosURL;
-              siteMonitor = photosURL;
+              href = URLs.photos;
+              siteMonitor = URLs.photos;
+            };
+          }
+        ];
+      }
+      {
+        Graphics = [
+          {
+            Design = {
+              icon = "penpot-light";
+              href = URLs.design;
+              siteMonitor = URLs.design;
+            };
+          }
+          {
+            Draw = {
+              icon = "draw-io";
+              href = URLs.draw;
+              siteMonitor = URLs.draw;
+            };
+          }
+        ];
+      }
+      {
+        Tracking = [
+          {
+            Box = {
+              icon = "homebox";
+              href = URLs.box;
+              siteMonitor = URLs.box;
+            };
+          }
+          {
+            Car = {
+              icon = "lubelogger";
+              href = URLs.car;
+              siteMonitor = URLs.car;
+            };
+          }
+          {
+            Money = {
+              icon = "actual-budget";
+              href = URLs.money;
+              siteMonitor = URLs.money;
             };
           }
         ];
@@ -135,66 +188,31 @@ in
       {
         Utilities = [
           {
-            "Box" = {
-              icon = "homebox";
-              href = boxURL;
-              siteMonitor = boxURL;
-            };
-          }
-          {
-            "Car" = {
-              icon = "lubelogger";
-              href = carURL;
-              siteMonitor = carURL;
-            };
-          }
-          {
-            "Design" = {
-              icon = "penpot-light";
-              href = designURL;
-              siteMonitor = designURL;
-            };
-          }
-          {
-            "Draw" = {
-              icon = "draw-io";
-              href = drawURL;
-              siteMonitor = drawURL;
-            };
-          }
-          {
-            "Money" = {
-              icon = "actual-budget";
-              href = moneyURL;
-              siteMonitor = moneyURL;
-            };
-          }
-          {
-            "Notes" = {
+            Notes = {
               icon = "outline";
-              href = notesURL;
-              siteMonitor = notesURL;
+              href = URLs.notes;
+              siteMonitor = URLs.notes;
             };
           }
           {
-            "PDF" = {
+            PDF = {
               icon = "bentopdf";
-              href = pdfURL;
-              siteMonitor = pdfURL;
+              href = URLs.pdf;
+              siteMonitor = URLs.pdf;
             };
           }
           {
-            "Sync" = {
+            Sync = {
               icon = "syncthing";
-              href = syncURL;
-              siteMonitor = syncURL;
+              href = URLs.sync;
+              siteMonitor = URLs.sync;
             };
           }
           {
-            "Torrent" = {
+            Torrent = {
               icon = "qbittorrent";
-              href = torrentURL;
-              siteMonitor = torrentURL;
+              href = URLs.torrent;
+              siteMonitor = URLs.torrent;
             };
           }
         ];

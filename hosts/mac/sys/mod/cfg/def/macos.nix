@@ -1,12 +1,24 @@
-{ ... }:
+{ pkgs, ... }:
 
-let
-  appsURI = "/Applications";
-  hmAppsURI = "/Users/camdenboren/Applications/Home Manager Apps";
-in
 {
+  power.sleep = {
+    computer = "never";
+    display = "never";
+  };
+
   system = {
     defaults = {
+      CustomUserPreferences = {
+        "com.apple.screensaver" = {
+          idleTime = 0;
+        };
+        NSGlobalDomain = {
+          AppleAccentColor = 5;
+          AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
+          "com.apple.sound.uiaudio.enabled" = 0;
+        };
+      };
+
       dock = {
         tilesize = 54;
         magnification = false;
@@ -25,19 +37,26 @@ in
         mouse-over-hilite-stack = false;
         mru-spaces = false;
 
+        # set hot corners, where 1 = disabled and 2 = mission control
+        wvous-bl-corner = 1;
+        wvous-br-corner = 1;
+        wvous-tl-corner = 2;
+        wvous-tr-corner = 1;
+
         persistent-apps = [
-          "${hmAppsURI}/LibreWolf.app"
-          "${hmAppsURI}/Zed.app"
-          "${hmAppsURI}/Ghostty.app"
-          "${hmAppsURI}/Bitwarden.app"
-          "${appsURI}/FreeTube.app"
-          "${hmAppsURI}/VLC.app"
-          "${hmAppsURI}/Slack.app"
-          "${appsURI}/ClickUp.app"
-          "${appsURI}/zoom.us.app"
-          "${hmAppsURI}/UTM.app"
+          "${pkgs.librewolf}/Applications/LibreWolf.app"
+          "${pkgs.zed-editor}/Applications/Zed.app"
+          "${pkgs.ghostty-bin}/Applications/Ghostty.app"
+          "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app"
+          "/Applications/FreeTube.app"
+          "${pkgs.vlc-bin}/Applications/VLC.app"
+          "${pkgs.slack}/Applications/Slack.app"
+          "/Applications/ClickUp.app"
+          "/Applications/zoom.us.app"
+          "${pkgs.utm}/Applications/UTM.app"
         ];
       };
+
       finder = {
         AppleShowAllExtensions = true;
         AppleShowAllFiles = true;
@@ -46,22 +65,20 @@ in
         _FXShowPosixPathInTitle = true;
         QuitMenuItem = true;
       };
+
       LaunchServices.LSQuarantine = false;
+
       loginwindow = {
         GuestEnabled = false;
         SHOWFULLNAME = false;
       };
+
       menuExtraClock = {
         ShowAMPM = false;
         ShowDate = 2;
         ShowDayOfWeek = false;
       };
-      CustomUserPreferences = {
-        NSGlobalDomain = {
-          AppleAccentColor = 5;
-          AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
-        };
-      };
+
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
         AppleIconAppearanceTheme = "TintedDark";
@@ -73,16 +90,18 @@ in
         NSDisableAutomaticTermination = false;
         NSScrollAnimationEnabled = true;
       };
+
       screencapture.location = "~/Downloads/Images";
+
       spaces.spans-displays = true;
+
       trackpad = {
         FirstClickThreshold = 1;
         SecondClickThreshold = 1;
         Clicking = true;
       };
-      universalaccess = {
-        reduceTransparency = true; # requires full disk access for terminal
-      };
+
+      universalaccess.reduceTransparency = true; # requires full disk access for terminal
     };
 
     # keyboard remappings
@@ -90,5 +109,7 @@ in
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
     };
+
+    startup.chime = false;
   };
 }

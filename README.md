@@ -221,55 +221,33 @@ So launch them, clean up config errors, restart</i>
     - Disable: General -> Heads up Display
 
   - Settings -> Keyboard -> Keyboard Shortcuts...
-    - Display
-      - Decrease display brightness = F1
-      - Increaes display brightness = F2
-
-    - Mission Control -> Mission Control
-      - Move left a space = cmd-alt-left
-      - Move right a space = cmd-alt-right
-
     - Services -> General
       - cmd-alt-letter for the following (requires automator services)
-      - Bitwarden, ClickUp, FreeTube, Ghostty, LibreWolf, Mullvad, Notes, Slack, UTM, Zed
-
-    - Spotlight
-      - Show Spotlight search = ctrl-Space
-      - Show Finder search window = cmd-alt-1
-
-    - App Shortcuts -> All Applications
-      - Minimize = ctrl-h
-      - Shut Down... = cmd-alt-shift-d
-
-    - App Shortcuts -> Notes.app
-      - Show Folders = ctrl-alt-s
-      - Copy Style = ctrl-alt-shift-c
-      - Note List Search... = ctrl-alt-shift-f
+      - Bitwarden, ClickUp, FreeTube, Ghostty, LibreWolf, Mullvad, Slack, UTM, Zed
 
     - App Shortcuts -> Finder.app
       - Hide Sidebar = ctrl-alt-s
-      - New Folder with Selection = ctrl-alt-n
       - Downloads = cmd-alt-d
       - New Finder Window = ctrl-shift-n
 
     - App Shortcuts -> Zed.app
       - Save All = ctrl-alt-shift-s
 
-    - Modifier Keys
-      - Control = cmd
-      - Command = ctrl
-
 - #### mac display scaling
   - 32" LG -> 2288 x 1287
-  - 19" Acer -> 774 x 1376
 
-- #### mac manual login items and accessibility access
+- #### mac login items
+  - Amethyst.app
+  - AutoRaise.app
+  - LinearMouse.app
+  - MullvadVPN.app
+  - Rectangle.app
+
+- #### mac privacy & security accessibility access
   - Amethyst.app
   - AutoRaise.app
   - BetterDisplay.app
-  - Ice.app
   - LinearMouse.app
-  - MullvadVPN.app
   - Rectangle.app
 
 ## Useful Commands
@@ -409,6 +387,15 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
   gsettings reset org.gnome.desktop.input-sources xkb-options
   gsettings reset org.gnome.desktop.input-sources sources
   }
+  ```
+
+- Reset Git Keychain on macOS
+
+  ```shell
+  git credential-osxkeychain erase ⏎
+  host=github.com ⏎
+  protocol=https ⏎
+  ⏎
   ```
 
 ## Gaming

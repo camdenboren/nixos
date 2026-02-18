@@ -20,6 +20,7 @@ let
     money = "https://money.${baseDomain}/";
     photos = "https://photos.${baseDomain}/";
     design = "https://design.${baseDomain}/";
+    people = "https://people.${baseDomain}/";
     torrent = "https://torrent.${baseDomain}/";
   };
   backgrounds = {
@@ -181,6 +182,13 @@ in
               icon = "actual-budget";
               href = URLs.money;
               siteMonitor = URLs.money;
+            };
+          }
+          {
+            People = {
+              icon = "monica";
+              href = URLs.people;
+              siteMonitor = URLs.people;
             };
           }
         ];

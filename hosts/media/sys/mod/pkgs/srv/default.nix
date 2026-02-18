@@ -30,6 +30,7 @@
     ./immich.nix
     ./jellyfin.nix
     ./lubelogger.nix
+    ./monica.nix
     ./nginx.nix
     ./open-webui.nix
     ./outline.nix

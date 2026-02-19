@@ -9,6 +9,14 @@
   system = {
     defaults = {
       CustomUserPreferences = {
+        "com.apple.finder" = {
+          NSUserKeyEquivalents = {
+            Downloads = "@~d";
+            "Hide Sidebar" = "~^s";
+            "New Finder Window" = "@$n";
+          };
+        };
+
         "com.apple.screensaver" = {
           idleTime = 0;
         };
@@ -129,6 +137,12 @@
           };
         };
 
+        "dev.zed.Zed" = {
+          NSUserKeyEquivalents = {
+            "Save All" = "~^$s";
+          };
+        };
+
         NSGlobalDomain = {
           AppleAccentColor = 5;
           AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
@@ -136,6 +150,92 @@
           NSUserKeyEquivalents = {
             Minimize = "^h";
             "Shut Down" = "@~$d";
+          };
+        };
+
+        pbs = {
+          NSServicesStatus = {
+            # a function for this would be great
+            "(null) - LaunchBitwarden - runWorkflowAsService" = {
+              "key_equivalent" = "@~b";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchClickUp - runWorkflowAsService" = {
+              "key_equivalent" = "@~c";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchFreeTube - runWorkflowAsService" = {
+              "key_equivalent" = "@~f";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchGhostty - runWorkflowAsService" = {
+              "key_equivalent" = "@~g";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchLibreWolf - runWorkflowAsService" = {
+              "key_equivalent" = "@~l";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchMullvad - runWorkflowAsService" = {
+              "key_equivalent" = "@~m";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchSlack - runWorkflowAsService" = {
+              "key_equivalent" = "@~s";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchUTM - runWorkflowAsService" = {
+              "key_equivalent" = "@~u";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
+
+            "(null) - LaunchZed - runWorkflowAsService" = {
+              "key_equivalent" = "@~z";
+              "presentation_modes" = {
+                ContextMenu = 1;
+                ServicesMenu = 1;
+                TouchBar = 1;
+              };
+            };
           };
         };
       };

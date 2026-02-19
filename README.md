@@ -211,28 +211,6 @@ So launch them, clean up config errors, restart</i>
     - use 1920x1200 resolution<br>
     - virtio-gl-pci
 
-- #### mac shortcuts
-  - Amethyst
-    - Delete all shortcuts except
-      - Move focus to counter clockwise creen = cmd-shift-left
-      - Move focus to clockwise screen = cmd-shift-right
-
-    - Rm all layouts except: Floating
-    - Disable: General -> Heads up Display
-
-  - Settings -> Keyboard -> Keyboard Shortcuts...
-    - Services -> General
-      - cmd-alt-letter for the following (requires automator services)
-      - Bitwarden, ClickUp, FreeTube, Ghostty, LibreWolf, Mullvad, Slack, UTM, Zed
-
-    - App Shortcuts -> Finder.app
-      - Hide Sidebar = ctrl-alt-s
-      - Downloads = cmd-alt-d
-      - New Finder Window = ctrl-shift-n
-
-    - App Shortcuts -> Zed.app
-      - Save All = ctrl-alt-shift-s
-
 - #### mac display scaling
   - 32" LG -> 2288 x 1287
 
@@ -367,6 +345,7 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
   sw
   brew upgrade
   brew cleanup
+  replaceConfigs
   ```
 
 - Quickemu (no vpn for windows dl, scripts use opt `--status-quo`)

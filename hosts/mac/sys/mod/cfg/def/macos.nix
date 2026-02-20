@@ -1,5 +1,32 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
+let
+  # these workflows are created in `hosts/mac/usr/mod/cfg/env/activation.nix`
+  # the first letter of the app is used as the shortcut (i.e., "Bitwarden" ->
+  # cmd-alt-b)
+  appsNeedingShortcuts = [
+    "Bitwarden"
+    "ClickUp"
+    "FreeTube"
+    "Ghostty"
+    "LibreWolf"
+    "Mullvad"
+    "Slack"
+    "UTM"
+    "Zed"
+  ];
+  makeShortcutEntry = app: {
+    name = "(null) - Launch${app} - runWorkflowAsService";
+    value = {
+      key_equivalent = "@~${builtins.substring 0 1 (lib.strings.toLower app)}";
+      presentation_modes = {
+        ContextMenu = 1;
+        ServicesMenu = 1;
+        TouchBar = 1;
+      };
+    };
+  };
+in
 {
   power.sleep = {
     computer = "never";
@@ -147,97 +174,14 @@
           AppleAccentColor = 5;
           AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
           "com.apple.sound.uiaudio.enabled" = 0;
+          CGDisableCursorLocationMagnification = true;
           NSUserKeyEquivalents = {
             Minimize = "^h";
             "Shut Down" = "@~$d";
           };
         };
 
-        pbs = {
-          NSServicesStatus = {
-            # a function for this would be great
-            "(null) - LaunchBitwarden - runWorkflowAsService" = {
-              "key_equivalent" = "@~b";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchClickUp - runWorkflowAsService" = {
-              "key_equivalent" = "@~c";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchFreeTube - runWorkflowAsService" = {
-              "key_equivalent" = "@~f";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchGhostty - runWorkflowAsService" = {
-              "key_equivalent" = "@~g";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchLibreWolf - runWorkflowAsService" = {
-              "key_equivalent" = "@~l";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchMullvad - runWorkflowAsService" = {
-              "key_equivalent" = "@~m";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchSlack - runWorkflowAsService" = {
-              "key_equivalent" = "@~s";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchUTM - runWorkflowAsService" = {
-              "key_equivalent" = "@~u";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-
-            "(null) - LaunchZed - runWorkflowAsService" = {
-              "key_equivalent" = "@~z";
-              "presentation_modes" = {
-                ContextMenu = 1;
-                ServicesMenu = 1;
-                TouchBar = 1;
-              };
-            };
-          };
-        };
+        pbs.NSServicesStatus = builtins.listToAttrs (map makeShortcutEntry appsNeedingShortcuts);
       };
 
       dock = {
@@ -323,6 +267,8 @@
       };
 
       universalaccess.reduceTransparency = true; # requires full disk access for terminal
+
+      WindowManager.EnableStandardClickToShowDesktop = false;
     };
 
     # keyboard remappings

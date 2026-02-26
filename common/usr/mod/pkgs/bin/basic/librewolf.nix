@@ -16,7 +16,7 @@ let
     else if hostname == "mainvm" then
       "moz-extension://40d2adc1-a6c5-4500-9c07-c8ec2725d78e/pages/blank.html"
     else if hostname == "media" then
-      "moz-extension://b50b3a02-d24d-4ebe-bdce-c29d3978adbd/pages/blank.html"
+      "moz-extension://c1504a64-56ca-4a20-836e-8500344f2aa9/pages/blank.html"
     else
       "";
   query = {

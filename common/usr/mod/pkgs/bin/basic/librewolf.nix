@@ -14,7 +14,7 @@ let
     else if hostname == "main" then
       "moz-extension://1cfd3900-c2b9-4091-898d-8854473a52db/pages/blank.html"
     else if hostname == "mainvm" then
-      "moz-extension://40d2adc1-a6c5-4500-9c07-c8ec2725d78e/pages/blank.html"
+      "moz-extension://c2e7d16e-3f38-4257-9f03-b1fedd512002/pages/blank.html"
     else if hostname == "media" then
       "moz-extension://c1504a64-56ca-4a20-836e-8500344f2aa9/pages/blank.html"
     else

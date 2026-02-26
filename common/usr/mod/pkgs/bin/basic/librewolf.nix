@@ -90,8 +90,9 @@ in
           "extensions.formautofill.creditCards.enabled" = false;
           "signon.rememberSignons" = false;
           "sidebar.verticalTabs" = true;
+          "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
           "sidebar.revamp" = true;
-          "sidebar.main.tools" = "";
+          "sidebar.main.tools" = [ ];
           "sidebar.visibility" = "always-show";
           "browser.uiCustomization.state" = {
             placements = {

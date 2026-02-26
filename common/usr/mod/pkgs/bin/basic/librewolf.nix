@@ -12,7 +12,7 @@ let
     else if hostname == "macvm" then
       "moz-extension://95b3696c-386b-4e5a-ab96-556425d9a46f/pages/blank.html"
     else if hostname == "main" then
-      "moz-extension://04cc90c6-c702-4205-9ce0-b81be2036116/pages/blank.html"
+      "moz-extension://1cfd3900-c2b9-4091-898d-8854473a52db/pages/blank.html"
     else if hostname == "mainvm" then
       "moz-extension://40d2adc1-a6c5-4500-9c07-c8ec2725d78e/pages/blank.html"
     else if hostname == "media" then

@@ -93,6 +93,60 @@ in
           "sidebar.revamp" = true;
           "sidebar.main.tools" = "";
           "sidebar.visibility" = "always-show";
+          "browser.uiCustomization.state" = {
+            placements = {
+              widget-overflow-fixed-list = [ ];
+              unified-extensions-area = [
+                "ublock0_raymondhill_net-browser-action"
+                "newtaboverride_agenedia_com-browser-action"
+                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+                "harper_writewithharper_com-browser-action"
+                "7esoorv3_alefvanoon_anonaddy_me-browser-action"
+                "addon_darkreader_org-browser-action"
+              ];
+              nav-bar = [
+                "back-button"
+                "forward-button"
+                "stop-reload-button"
+                "urlbar-container"
+                "vertical-spacer"
+                "unified-extensions-button"
+              ];
+              TabsToolbar = [ ];
+              vertical-tabs = [ "tabbrowser-tabs" ];
+              PersonalToolbar = [ "personal-bookmarks" ];
+            };
+            seen = [
+              "harper_writewithharper_com-browser-action"
+              "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+              "7esoorv3_alefvanoon_anonaddy_me-browser-action"
+              "addon_darkreader_org-browser-action"
+              "newtaboverride_agenedia_com-browser-action"
+              "developer-button"
+              "ublock0_raymondhill_net-browser-action"
+              "screenshot-button"
+            ];
+            dirtyAreaCache = [
+              "unified-extensions-area"
+              "nav-bar"
+              "TabsToolbar"
+              "vertical-tabs"
+              "PersonalToolbar"
+            ];
+            currentVersion = 23;
+            newElementCount = 5;
+          };
+          "browser.uiCustomization.navBarWhenVerticalTabs" = [
+            "unified-extensions-button"
+            "urlbar-container"
+            "vertical-spacer"
+            "forward-button"
+            "back-button"
+          ];
+          "browser.uiCustomization.horizontalTabstrip" = [
+            "tabbrowser-tabs"
+            "new-tab-button"
+          ];
         };
 
         extensions.packages = with pkgs.firefox-addons; [

@@ -10,7 +10,7 @@ let
     if hostname == "mac" then
       "moz-extension://20ee2473-6c28-43cd-a2a0-3a8bfd639c75/pages/blank.html"
     else if hostname == "macvm" then
-      "moz-extension://95b3696c-386b-4e5a-ab96-556425d9a46f/pages/blank.html"
+      "moz-extension://99e7c650-7472-4b5e-96e9-014a1a73fc86/pages/blank.html"
     else if hostname == "main" then
       "moz-extension://1cfd3900-c2b9-4091-898d-8854473a52db/pages/blank.html"
     else if hostname == "mainvm" then

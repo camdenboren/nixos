@@ -43,6 +43,7 @@ in
       repl = "nix repl -f '<nixpkgs>'";
       sw = if isDarwin then "nh darwin switch" else "nh os switch";
       tr = if isDarwin then "trash" else "gio trash";
+      travel = "nh os switch -s travel";
       update = "nix flake update --flake $NH_FLAKE";
       zed =
         lib.optionalString isVM (

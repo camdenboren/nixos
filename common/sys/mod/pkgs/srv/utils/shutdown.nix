@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, config, ... }:
 
 {
-  systemd.services."shutdown" = {
+  systemd.services."shutdown" = lib.mkIf (config.specialisation == { }) {
     script = ''
       set -eu
       shutdown

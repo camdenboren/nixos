@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  specialisation = {
+    travel.configuration = { };
+  };
+}

@@ -1,399 +1,534 @@
 diff --git a/package-lock.json b/package-lock.json
-index 80dae04..9b3cb07 100644
+index 7093f8b..01b0060 100644
 --- a/package-lock.json
 +++ b/package-lock.json
 @@ -1,12 +1,12 @@
  {
    "name": "bento-pdf",
--  "version": "1.15.4",
-+  "version": "1.16.0",
+-  "version": "1.16.1",
++  "version": "2.1.0",
    "lockfileVersion": 3,
    "requires": true,
    "packages": {
      "": {
        "name": "bento-pdf",
--      "version": "1.15.4",
-+      "version": "1.16.0",
+-      "version": "1.16.1",
++      "version": "2.1.0",
        "license": "AGPL-3.0-only",
        "dependencies": {
-         "@bentopdf/gs-wasm": "^0.1.0",
-@@ -30,7 +30,7 @@
+         "@fontsource/cedarville-cursive": "^5.2.7",
+@@ -28,7 +28,7 @@
          "archiver": "^7.0.1",
          "blob-stream": "^0.1.3",
          "cropperjs": "^1.6.1",
--        "embedpdf-snippet": "file:vendor/embedpdf/embedpdf-snippet-1.5.0.tgz",
-+        "embedpdf-snippet-i18n": "^1.5.0-1",
+-        "embedpdf-snippet": "file:vendor/embedpdf/embedpdf-snippet-2.3.0.tgz",
++        "embedpdf-snippet-i18n": "^2.3.0-1",
          "heic2any": "^0.0.4",
          "highlight.js": "^11.11.1",
          "html2canvas": "^1.4.1",
-@@ -67,7 +67,7 @@
-         "tiff": "^7.1.2",
-         "utif": "^3.1.0",
-         "vite-plugin-static-copy": "^3.1.4",
--        "xlsx": "file:vendor/sheetjs/xlsx-0.20.2.tgz",
-+        "xlsx": "^0.18.5",
-         "zgapdfsigner": "^2.7.5"
-       },
-       "devDependencies": {
-@@ -4444,6 +4444,15 @@
-         "acorn": "^6.0.0 || ^7.0.0 || ^8.0.0"
-       }
-     },
-+    "node_modules/adler-32": {
-+      "version": "1.3.1",
-+      "resolved": "https://registry.npmjs.org/adler-32/-/adler-32-1.3.1.tgz",
-+      "integrity": "sha512-ynZ4w/nUUv5rrsR8UUGoe1VC9hZj6V5hU9Qw1HlMDJGEJw5S7TfTErWTjMys6M7vr0YWcPqs3qAr4ss0nDfP+A==",
-+      "license": "Apache-2.0",
-+      "engines": {
-+        "node": ">=0.8"
-+      }
-+    },
-     "node_modules/agent-base": {
-       "version": "7.1.4",
-       "resolved": "https://registry.npmjs.org/agent-base/-/agent-base-7.1.4.tgz",
-@@ -5154,6 +5163,19 @@
-         "url": "https://github.com/sponsors/wooorm"
-       }
-     },
-+    "node_modules/cfb": {
-+      "version": "1.2.2",
-+      "resolved": "https://registry.npmjs.org/cfb/-/cfb-1.2.2.tgz",
-+      "integrity": "sha512-KfdUZsSOw19/ObEWasvBP/Ac4reZvAGauZhs6S/gqNhXhI7cKwvlH7ulj+dOEYnca4bm4SGo8C1bTAQvnTjgQA==",
-+      "license": "Apache-2.0",
-+      "dependencies": {
-+        "adler-32": "~1.3.0",
-+        "crc-32": "~1.2.0"
-+      },
-+      "engines": {
-+        "node": ">=0.8"
-+      }
-+    },
-     "node_modules/chai": {
-       "version": "5.3.3",
-       "resolved": "https://registry.npmjs.org/chai/-/chai-5.3.3.tgz",
-@@ -5371,6 +5393,15 @@
-         "node": ">=6"
-       }
-     },
-+    "node_modules/codepage": {
-+      "version": "1.15.0",
-+      "resolved": "https://registry.npmjs.org/codepage/-/codepage-1.15.0.tgz",
-+      "integrity": "sha512-3g6NUTPd/YtuuGrhMnOMRjFc+LJw/bnMp3+0r/Wcz3IXUuCosKRJvMphm5+Q+bvTVGcJJuRvVLuYba+WojaFaA==",
-+      "license": "Apache-2.0",
-+      "engines": {
-+        "node": ">=0.8"
-+      }
-+    },
-     "node_modules/color-convert": {
-       "version": "2.0.1",
-       "resolved": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
-@@ -6336,9 +6367,9 @@
-       }
-     },
-     "node_modules/devalue": {
--      "version": "5.6.1",
--      "resolved": "https://registry.npmjs.org/devalue/-/devalue-5.6.1.tgz",
--      "integrity": "sha512-jDwizj+IlEZBunHcOuuFVBnIMPAEHvTsJj0BcIp94xYguLRVBcXO853px/MyIJvbVzWdsGvrRweIUWJw8hBP7A==",
-+      "version": "5.6.2",
-+      "resolved": "https://registry.npmjs.org/devalue/-/devalue-5.6.2.tgz",
-+      "integrity": "sha512-nPRkjWzzDQlsejL1WVifk5rvcFi/y1onBRxjaFMjZeR9mFpqu2gmAZ9xUB9/IEanEP/vBtGeGganC/GO1fmufg==",
-       "license": "MIT"
-     },
-     "node_modules/devlop": {
-@@ -6453,10 +6484,10 @@
+@@ -265,6 +265,7 @@
+       "integrity": "sha512-ZsOJqu4HOG5BlvIFnMU0YKjQ9ZI6r3C31dg2jk5kMWPSdhJpYL9xa5hEe7aieE+707dXeMI4ej3diy6mXdZpgA==",
        "dev": true,
-       "license": "MIT"
-     },
--    "node_modules/embedpdf-snippet": {
--      "version": "1.0.0",
--      "resolved": "file:vendor/embedpdf/embedpdf-snippet-1.5.0.tgz",
--      "integrity": "sha512-33SKBKkJEpGpo6Msuq2T7fBkHCzqLc58xI+Ui1C3DLWDmMynwT81/RoB2IQga3Ul1uU07CJRl1/OAwXhrlYWyA==",
-+    "node_modules/embedpdf-snippet-i18n": {
-+      "version": "1.5.0-1",
-+      "resolved": "https://registry.npmjs.org/embedpdf-snippet-i18n/-/embedpdf-snippet-i18n-1.5.0-1.tgz",
-+      "integrity": "sha512-ZpUZif1cs1OTTzx2RRCnuwZmnxIHwU6qw1n3btl4Hk1zcrzDq+R6Misv/3H8dXQpZArSRG3EQbOx4DKWL57sqQ==",
        "license": "MIT",
++      "peer": true,
        "dependencies": {
-         "@embedpdf/core": "^1.5.0",
-@@ -6486,7 +6517,10 @@
-         "@embedpdf/plugin-ui": "^1.5.0",
-         "@embedpdf/plugin-viewport": "^1.5.0",
-         "@embedpdf/plugin-zoom": "^1.5.0",
--        "preact": "^10.17.0"
-+        "i18next": "^25.6.0",
-+        "i18next-browser-languagedetector": "^8.2.0",
-+        "preact": "^10.17.0",
-+        "react-i18next": "^16.2.1"
-       }
-     },
-     "node_modules/emoji-regex": {
-@@ -6779,9 +6813,9 @@
-       }
-     },
-     "node_modules/esrap": {
--      "version": "2.2.1",
--      "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.1.tgz",
--      "integrity": "sha512-GiYWG34AN/4CUyaWAgunGt0Rxvr1PTMlGC0vvEov/uOQYWne2bpN03Um+k8jT+q3op33mKouP2zeJ6OlM+qeUg==",
-+      "version": "2.2.2",
-+      "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.2.tgz",
-+      "integrity": "sha512-zA6497ha+qKvoWIK+WM9NAh5ni17sKZKhbS5B3PoYbBvaYHZWoS33zmFybmyqpn07RLUxSmn+RCls2/XF+d0oQ==",
-       "license": "MIT",
-       "dependencies": {
-         "@jridgewell/sourcemap-codec": "^1.4.15"
-@@ -7077,6 +7111,15 @@
-         "url": "https://github.com/sponsors/isaacs"
-       }
-     },
-+    "node_modules/frac": {
-+      "version": "1.1.2",
-+      "resolved": "https://registry.npmjs.org/frac/-/frac-1.1.2.tgz",
-+      "integrity": "sha512-w/XBfkibaTl3YDqASwfDUqkna4Z2p9cFSr1aHDt0WoMTECnRfBOv2WArlZILlqgWlmdIlALXGpM2AOhEk5W3IA==",
-+      "license": "Apache-2.0",
-+      "engines": {
-+        "node": ">=0.8"
-+      }
-+    },
-     "node_modules/fs-extra": {
-       "version": "10.1.0",
-       "resolved": "https://registry.npmjs.org/fs-extra/-/fs-extra-10.1.0.tgz",
-@@ -7486,6 +7529,15 @@
-       "dev": true,
-       "license": "MIT"
-     },
-+    "node_modules/html-parse-stringify": {
-+      "version": "3.0.1",
-+      "resolved": "https://registry.npmjs.org/html-parse-stringify/-/html-parse-stringify-3.0.1.tgz",
-+      "integrity": "sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==",
-+      "license": "MIT",
-+      "dependencies": {
-+        "void-elements": "3.1.0"
-+      }
-+    },
-     "node_modules/html-void-elements": {
-       "version": "3.0.0",
-       "resolved": "https://registry.npmjs.org/html-void-elements/-/html-void-elements-3.0.0.tgz",
-@@ -7580,6 +7632,7 @@
+         "@algolia/client-common": "5.46.2",
+         "@algolia/requester-browser-xhr": "5.46.2",
+@@ -649,6 +650,7 @@
          }
        ],
        "license": "MIT",
 +      "peer": true,
-       "dependencies": {
-         "@babel/runtime": "^7.28.4"
+       "engines": {
+         "node": ">=18"
        },
-@@ -10270,6 +10323,33 @@
-         "react": "^18.3.1"
+@@ -692,6 +694,7 @@
+         }
+       ],
+       "license": "MIT",
++      "peer": true,
+       "engines": {
+         "node": ">=18"
        }
+@@ -752,6 +755,7 @@
+       "resolved": "https://registry.npmjs.org/@embedpdf/core/-/core-2.3.0.tgz",
+       "integrity": "sha512-aPD7lNSCOLc5Nos9xGA3qAT5jFZdrTT7IVcpxtM1BOKa1FI0XmotJ8vgzcRxH/FLwUASC4xwR9QxzTKp2aLsZQ==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@embedpdf/engines": "2.3.0",
+         "@embedpdf/models": "2.3.0"
+@@ -989,6 +993,7 @@
+       "resolved": "https://registry.npmjs.org/@embedpdf/plugin-history/-/plugin-history-2.3.0.tgz",
+       "integrity": "sha512-+fr/kjK2Z9BiC53IMlUZvWjkD6iilcI3XCUKQPXRgS5MDAuwpVlgdAtc+3VAMlG3IddElxVFdvvxRO9R89k5Mg==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@embedpdf/models": "2.3.0"
+       },
+@@ -1023,6 +1028,7 @@
+       "resolved": "https://registry.npmjs.org/@embedpdf/plugin-interaction-manager/-/plugin-interaction-manager-2.3.0.tgz",
+       "integrity": "sha512-1/tDLPoQm6skNe/WOd6QD7SA0XRKphbJHi/s9XY4fhGgBvlD5XHFrYxtmrsaheYjqIBFtAWWZ3m5lAXRaO/igA==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@embedpdf/models": "2.3.0"
+       },
+@@ -1096,6 +1102,7 @@
+       "resolved": "https://registry.npmjs.org/@embedpdf/plugin-render/-/plugin-render-2.3.0.tgz",
+       "integrity": "sha512-UyQncK5NTokuEVISUcxPOXpZP4SItn4MjfeEaPsTXJkSRjHL4g3mU3iWy0nXJMCOT10OB+5m7qQ0/KkF4f+b5w==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@embedpdf/models": "2.3.0"
+       },
+@@ -1130,6 +1137,7 @@
+       "resolved": "https://registry.npmjs.org/@embedpdf/plugin-scroll/-/plugin-scroll-2.3.0.tgz",
+       "integrity": "sha512-8pdaSY9QuqdX22Ykw2jKn07Rx6FIsDdj/O0+mlbccY/ISofj9WEFNeQgnOY64OUTDyurJYqpYvq6QqvgbGLs+A==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@embedpdf/models": "2.3.0"
+       },
+@@ -1165,6 +1173,7 @@
+       "resolved": "https://registry.npmjs.org/@embedpdf/plugin-selection/-/plugin-selection-2.3.0.tgz",
+       "integrity": "sha512-+emaY4vff3ynAf5C3PfCOlleQIqiImbBpb6zkG5SVUa9Vn5x0SfYGT4Jumtbzq8XBknC1QIRKVlplC9BcnjcmQ==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@embedpdf/models": "2.3.0",
+         "@embedpdf/utils": "2.3.0"
+@@ -1259,6 +1268,7 @@
+       "resolved": "https://registry.npmjs.org/@embedpdf/plugin-viewport/-/plugin-viewport-2.3.0.tgz",
+       "integrity": "sha512-3NQp3hVfRF7DMUPNAVOfZsqQQrugEfY0voRUrQI90eyi16GFntN3CP9Mc5cOp2jnUICMYlirQ/om+KCseMHS2Q==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@embedpdf/models": "2.3.0"
+       },
+@@ -2962,7 +2972,6 @@
+       "resolved": "https://registry.npmjs.org/@sveltejs/acorn-typescript/-/acorn-typescript-1.0.8.tgz",
+       "integrity": "sha512-esgN+54+q0NjB0Y/4BomT9samII7jGwNy/2a3wNZbT2A2RpmXsXwUt24LvLhx6jUq2gVk4cWEvcRO6MFQbOfNA==",
+       "license": "MIT",
+-      "peer": true,
+       "peerDependencies": {
+         "acorn": "^8.9.0"
+       }
+@@ -3652,6 +3661,7 @@
+       "resolved": "https://registry.npmjs.org/@types/markdown-it/-/markdown-it-14.1.2.tgz",
+       "integrity": "sha512-promo4eFwuiW+TfGxhi+0x3czqTYJkG8qB17ZUJiVF10Xm7NLVRSLUsfRTU/6h1e24VvRnXCx+hG7li58lkzog==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@types/linkify-it": "^5",
+         "@types/mdurl": "^2"
+@@ -3806,6 +3816,7 @@
+       "integrity": "sha512-3xP4XzzDNQOIqBMWogftkwxhg5oMKApqY0BAflmLZiFYHqyhSOxv/cd/zPQLTcCXr4AkaKb25joocY0BD1WC6A==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@typescript-eslint/scope-manager": "8.51.0",
+         "@typescript-eslint/types": "8.51.0",
+@@ -4177,6 +4188,7 @@
+       "integrity": "sha512-hGISOaP18plkzbWEcP/QvtRW1xDXF2+96HbEX6byqQhAUbiS5oH6/9JwW+QsQCIYON2bI6QZBF+2PvOmrRZ9wA==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@vitest/utils": "3.2.4",
+         "fflate": "^0.8.2",
+@@ -4491,6 +4503,7 @@
+       "resolved": "https://registry.npmjs.org/acorn/-/acorn-8.15.0.tgz",
+       "integrity": "sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==",
+       "license": "MIT",
++      "peer": true,
+       "bin": {
+         "acorn": "bin/acorn"
+       },
+@@ -4541,6 +4554,7 @@
+       "integrity": "sha512-qqAXW9QvKf2tTyhpDA4qXv1IfBwD2eduSW6tUEBFIfCeE9gn9HQ9I5+MaKoenRuHrzk5sQoNh1/iof8mY7uD6Q==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@algolia/abtesting": "1.12.2",
+         "@algolia/client-abtesting": "5.46.2",
+@@ -4755,7 +4769,6 @@
+       "resolved": "https://registry.npmjs.org/axobject-query/-/axobject-query-4.1.0.tgz",
+       "integrity": "sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==",
+       "license": "Apache-2.0",
+-      "peer": true,
+       "engines": {
+         "node": ">= 0.4"
+       }
+@@ -5431,7 +5444,6 @@
+       "resolved": "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz",
+       "integrity": "sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==",
+       "license": "MIT",
+-      "peer": true,
+       "engines": {
+         "node": ">=6"
+       }
+@@ -5758,6 +5770,7 @@
+       "resolved": "https://registry.npmjs.org/cytoscape/-/cytoscape-3.33.1.tgz",
+       "integrity": "sha512-iJc4TwyANnOGR1OmWhsS9ayRS3s+XQ185FmuHObThD+5AeJCakAAbWv8KimMTt08xCCLNgneQwFp+JRJOr9qGQ==",
+       "license": "MIT",
++      "peer": true,
+       "engines": {
+         "node": ">=0.10"
+       }
+@@ -6167,6 +6180,7 @@
+       "resolved": "https://registry.npmjs.org/d3-selection/-/d3-selection-3.0.0.tgz",
+       "integrity": "sha512-fmTRWbNMmsmWq6xJV8D19U/gw/bwrHfNXxrIN+HfZgnzqTHp9jOmKMhsTUjXOJnZOdZY9Q28y4yebKzqDKlxlQ==",
+       "license": "ISC",
++      "peer": true,
+       "engines": {
+         "node": ">=12"
+       }
+@@ -6402,8 +6416,7 @@
+       "version": "5.6.2",
+       "resolved": "https://registry.npmjs.org/devalue/-/devalue-5.6.2.tgz",
+       "integrity": "sha512-nPRkjWzzDQlsejL1WVifk5rvcFi/y1onBRxjaFMjZeR9mFpqu2gmAZ9xUB9/IEanEP/vBtGeGganC/GO1fmufg==",
+-      "license": "MIT",
+-      "peer": true
++      "license": "MIT"
      },
-+    "node_modules/react-i18next": {
-+      "version": "16.5.3",
-+      "resolved": "https://registry.npmjs.org/react-i18next/-/react-i18next-16.5.3.tgz",
-+      "integrity": "sha512-fo+/NNch37zqxOzlBYrWMx0uy/yInPkRfjSuy4lqKdaecR17nvCHnEUt3QyzA8XjQ2B/0iW/5BhaHR3ZmukpGw==",
+     "node_modules/devlop": {
+       "version": "1.1.0",
+@@ -6517,41 +6530,41 @@
+       "dev": true,
+       "license": "MIT"
+     },
+-    "node_modules/embedpdf-snippet": {
+-      "version": "2.3.0",
+-      "resolved": "file:vendor/embedpdf/embedpdf-snippet-2.3.0.tgz",
+-      "integrity": "sha512-1rhNxdAcbj3OXqkjXVfo6IrhH67bIikHvrN97vBtlkIGCi5w9lsIYs5eXdgwOLKzWJGI1plMfjQV47l4hzteag==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "@embedpdf/core": "^2.3.0",
+-        "@embedpdf/engines": "^2.3.0",
+-        "@embedpdf/models": "^2.3.0",
+-        "@embedpdf/pdfium": "^2.3.0",
+-        "@embedpdf/plugin-annotation": "^2.3.0",
+-        "@embedpdf/plugin-attachment": "^2.3.0",
+-        "@embedpdf/plugin-bookmark": "^2.3.0",
+-        "@embedpdf/plugin-capture": "^2.3.0",
+-        "@embedpdf/plugin-commands": "^2.3.0",
+-        "@embedpdf/plugin-document-manager": "^2.3.0",
+-        "@embedpdf/plugin-export": "^2.3.0",
+-        "@embedpdf/plugin-fullscreen": "^2.3.0",
+-        "@embedpdf/plugin-history": "^2.3.0",
+-        "@embedpdf/plugin-i18n": "^2.3.0",
+-        "@embedpdf/plugin-interaction-manager": "^2.3.0",
+-        "@embedpdf/plugin-pan": "^2.3.0",
+-        "@embedpdf/plugin-print": "^2.3.0",
+-        "@embedpdf/plugin-redaction": "^2.3.0",
+-        "@embedpdf/plugin-render": "^2.3.0",
+-        "@embedpdf/plugin-rotate": "^2.3.0",
+-        "@embedpdf/plugin-scroll": "^2.3.0",
+-        "@embedpdf/plugin-search": "^2.3.0",
+-        "@embedpdf/plugin-selection": "^2.3.0",
+-        "@embedpdf/plugin-spread": "^2.3.0",
+-        "@embedpdf/plugin-thumbnail": "^2.3.0",
+-        "@embedpdf/plugin-tiling": "^2.3.0",
+-        "@embedpdf/plugin-ui": "^2.3.0",
+-        "@embedpdf/plugin-viewport": "^2.3.0",
+-        "@embedpdf/plugin-zoom": "^2.3.0",
++    "node_modules/embedpdf-snippet-i18n": {
++      "version": "2.3.0-1",
++      "resolved": "https://registry.npmjs.org/embedpdf-snippet-i18n/-/embedpdf-snippet-i18n-2.3.0-1.tgz",
++      "integrity": "sha512-TcPixGv/WYIzMcrtY0By8UkrteH9O9voAzW0v/CSQuMx4SXrSRqhGvZzf8SaiTEChhmHZzajNVTwBpNXS72nfQ==",
 +      "license": "MIT",
 +      "dependencies": {
-+        "@babel/runtime": "^7.28.4",
-+        "html-parse-stringify": "^3.0.1",
-+        "use-sync-external-store": "^1.6.0"
-+      },
-+      "peerDependencies": {
-+        "i18next": ">= 25.6.2",
-+        "react": ">= 16.8.0",
-+        "typescript": "^5"
-+      },
-+      "peerDependenciesMeta": {
-+        "react-dom": {
-+          "optional": true
-+        },
-+        "react-native": {
-+          "optional": true
-+        },
-+        "typescript": {
-+          "optional": true
-+        }
-+      }
-+    },
-     "node_modules/react-is": {
-       "version": "17.0.2",
-       "resolved": "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz",
-@@ -10537,7 +10617,6 @@
-       "resolved": "https://registry.npmjs.org/rollup/-/rollup-4.55.1.tgz",
-       "integrity": "sha512-wDv/Ht1BNHB4upNbK74s9usvl7hObDnvVzknxqY/E/O3X6rW1U1rV1aENEfJ54eFZDTNo7zv1f5N4edCluH7+A==",
++        "@embedpdf/core": "2.3.0",
++        "@embedpdf/engines": "2.3.0",
++        "@embedpdf/models": "2.3.0",
++        "@embedpdf/pdfium": "2.3.0",
++        "@embedpdf/plugin-annotation": "2.3.0",
++        "@embedpdf/plugin-attachment": "2.3.0",
++        "@embedpdf/plugin-bookmark": "2.3.0",
++        "@embedpdf/plugin-capture": "2.3.0",
++        "@embedpdf/plugin-commands": "2.3.0",
++        "@embedpdf/plugin-document-manager": "2.3.0",
++        "@embedpdf/plugin-export": "2.3.0",
++        "@embedpdf/plugin-fullscreen": "2.3.0",
++        "@embedpdf/plugin-history": "2.3.0",
++        "@embedpdf/plugin-i18n": "2.3.0",
++        "@embedpdf/plugin-interaction-manager": "2.3.0",
++        "@embedpdf/plugin-pan": "2.3.0",
++        "@embedpdf/plugin-print": "2.3.0",
++        "@embedpdf/plugin-redaction": "2.3.0",
++        "@embedpdf/plugin-render": "2.3.0",
++        "@embedpdf/plugin-rotate": "2.3.0",
++        "@embedpdf/plugin-scroll": "2.3.0",
++        "@embedpdf/plugin-search": "2.3.0",
++        "@embedpdf/plugin-selection": "2.3.0",
++        "@embedpdf/plugin-spread": "2.3.0",
++        "@embedpdf/plugin-thumbnail": "2.3.0",
++        "@embedpdf/plugin-tiling": "2.3.0",
++        "@embedpdf/plugin-ui": "2.3.0",
++        "@embedpdf/plugin-viewport": "2.3.0",
++        "@embedpdf/plugin-zoom": "2.3.0",
+         "preact": "^10.17.0",
+         "tailwind-merge": "^3.4.0"
+       }
+@@ -6707,6 +6720,7 @@
+       "integrity": "sha512-LEyamqS7W5HB3ujJyvi0HQK/dtVINZvd5mAAp9eT5S/ujByGjiZLCzPcHVzuXbpJDJF/cxwHlfceVUDZ2lnSTw==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@eslint-community/eslint-utils": "^4.8.0",
+         "@eslint-community/regexpp": "^4.12.1",
+@@ -6811,8 +6825,7 @@
+       "version": "1.2.2",
+       "resolved": "https://registry.npmjs.org/esm-env/-/esm-env-1.2.2.tgz",
+       "integrity": "sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==",
+-      "license": "MIT",
+-      "peer": true
++      "license": "MIT"
+     },
+     "node_modules/espree": {
+       "version": "10.4.0",
+@@ -6850,7 +6863,6 @@
+       "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.2.tgz",
+       "integrity": "sha512-zA6497ha+qKvoWIK+WM9NAh5ni17sKZKhbS5B3PoYbBvaYHZWoS33zmFybmyqpn07RLUxSmn+RCls2/XF+d0oQ==",
        "license": "MIT",
 -      "peer": true,
        "dependencies": {
-         "@types/estree": "1.0.8"
-       },
-@@ -10961,6 +11040,18 @@
-         "node": ">=0.10.0"
+         "@jridgewell/sourcemap-codec": "^1.4.15"
        }
+@@ -7071,6 +7083,7 @@
+       "integrity": "sha512-Pkp8m55GjxBLnhBoT6OXdMvfRr4TjMAKLvFM566zlIryq5plbhaTmLAJWTGR0EkRwLjEte1lCOG9MxF1ipJrOg==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "tabbable": "^6.4.0"
+       }
+@@ -7923,7 +7936,6 @@
+       "resolved": "https://registry.npmjs.org/is-reference/-/is-reference-3.0.3.tgz",
+       "integrity": "sha512-ixkJoqQvAP88E6wLydLGGqCJsrFUnqoH6HnaczB8XmDH1oaWU+xxdptvikTgaEhtZ53Ky6YXiBuUI2WXLMCwjw==",
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "@types/estree": "^1.0.6"
+       }
+@@ -8126,6 +8138,7 @@
+       "integrity": "sha512-mjzqwWRD9Y1J1KUi7W97Gja1bwOOM5Ug0EZ6UDK3xS7j7mndrkwozHtSblfomlzyB4NepioNt+B2sOSzczVgtQ==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@acemir/cssom": "^0.9.28",
+         "@asamuzakjp/dom-selector": "^6.7.6",
+@@ -8199,6 +8212,7 @@
+       "resolved": "https://registry.npmjs.org/jspdf/-/jspdf-4.0.0.tgz",
+       "integrity": "sha512-w12U97Z6edKd2tXDn3LzTLg7C7QLJlx0BPfM3ecjK2BckUl9/81vZ+r5gK4/3KQdhAcEZhENUxRhtgYBj75MqQ==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@babel/runtime": "^7.28.4",
+         "fast-png": "^6.2.0",
+@@ -8781,8 +8795,7 @@
+       "version": "3.0.0",
+       "resolved": "https://registry.npmjs.org/locate-character/-/locate-character-3.0.0.tgz",
+       "integrity": "sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==",
+-      "license": "MIT",
+-      "peer": true
++      "license": "MIT"
      },
-+    "node_modules/ssf": {
-+      "version": "0.11.2",
-+      "resolved": "https://registry.npmjs.org/ssf/-/ssf-0.11.2.tgz",
-+      "integrity": "sha512-+idbmIXoYET47hH+d7dfm2epdOMUDjqcB4648sTZ+t2JwoyBFL/insLfB/racrDmsKB3diwsDA696pZMieAC5g==",
-+      "license": "Apache-2.0",
-+      "dependencies": {
-+        "frac": "~1.1.2"
-+      },
-+      "engines": {
-+        "node": ">=0.8"
-+      }
-+    },
-     "node_modules/stackback": {
-       "version": "0.0.2",
-       "resolved": "https://registry.npmjs.org/stackback/-/stackback-0.0.2.tgz",
-@@ -11262,9 +11353,9 @@
+     "node_modules/locate-path": {
+       "version": "6.0.0",
+@@ -8900,7 +8913,6 @@
+       "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz",
+       "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "js-tokens": "^3.0.0 || ^4.0.0"
+       },
+@@ -8990,6 +9002,7 @@
+       "resolved": "https://registry.npmjs.org/markdown-it/-/markdown-it-14.1.0.tgz",
+       "integrity": "sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "argparse": "^2.0.1",
+         "entities": "^4.4.0",
+@@ -10118,6 +10131,7 @@
+       "resolved": "https://registry.npmjs.org/preact/-/preact-10.28.2.tgz",
+       "integrity": "sha512-lbteaWGzGHdlIuiJ0l2Jq454m6kcpI1zNje6d8MlGAFlYvP2GO4ibnat7P74Esfz4sPTdM6UxtTwh/d3pwM9JA==",
+       "license": "MIT",
++      "peer": true,
+       "funding": {
+         "type": "opencollective",
+         "url": "https://opencollective.com/preact"
+@@ -10713,7 +10727,6 @@
+       "resolved": "https://registry.npmjs.org/scheduler/-/scheduler-0.23.2.tgz",
+       "integrity": "sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==",
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "loose-envify": "^1.1.0"
+       }
+@@ -10966,7 +10979,8 @@
+       "version": "1.15.6",
+       "resolved": "https://registry.npmjs.org/sortablejs/-/sortablejs-1.15.6.tgz",
+       "integrity": "sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==",
+-      "license": "MIT"
++      "license": "MIT",
++      "peer": true
+     },
+     "node_modules/source-map": {
+       "version": "0.6.1",
+@@ -11318,9 +11332,9 @@
        }
      },
      "node_modules/svelte": {
--      "version": "5.46.1",
--      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.46.1.tgz",
--      "integrity": "sha512-ynjfCHD3nP2el70kN5Pmg37sSi0EjOm9FgHYQdC4giWG/hzO3AatzXXJJgP305uIhGQxSufJLuYWtkY8uK/8RA==",
-+      "version": "5.48.0",
-+      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.48.0.tgz",
-+      "integrity": "sha512-+NUe82VoFP1RQViZI/esojx70eazGF4u0O/9ucqZ4rPcOZD+n5EVp17uYsqwdzjUjZyTpGKunHbDziW6AIAVkQ==",
+-      "version": "5.48.2",
+-      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.48.2.tgz",
+-      "integrity": "sha512-VPWD+UyoSFZ7Nxix5K/F8yWiKWOiROkLlWYXOZReE0TUycw+58YWB3D6lAKT+57xmN99wRX4H3oZmw0NPy7y3Q==",
++      "version": "5.49.2",
++      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.49.2.tgz",
++      "integrity": "sha512-PYLwnngYzyhKzqDlGVlCH4z+NVI8mC0/bTv15vw25CcdOhxENsOHIbQ36oj5DIf3oBazM+STbCAvaskpxtBmWA==",
        "license": "MIT",
        "peer": true,
        "dependencies": {
-@@ -11276,7 +11367,7 @@
-         "aria-query": "^5.3.1",
-         "axobject-query": "^4.1.0",
+@@ -11334,7 +11348,7 @@
          "clsx": "^2.1.1",
--        "devalue": "^5.5.0",
-+        "devalue": "^5.6.2",
+         "devalue": "^5.6.2",
          "esm-env": "^1.2.1",
-         "esrap": "^2.2.1",
+-        "esrap": "^2.2.1",
++        "esrap": "^2.2.2",
          "is-reference": "^3.0.3",
-@@ -11954,6 +12045,15 @@
-       "dev": true,
-       "license": "MIT"
-     },
-+    "node_modules/use-sync-external-store": {
-+      "version": "1.6.0",
-+      "resolved": "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.6.0.tgz",
-+      "integrity": "sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==",
-+      "license": "MIT",
-+      "peerDependencies": {
-+        "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
-+      }
-+    },
-     "node_modules/utif": {
-       "version": "3.1.0",
-       "resolved": "https://registry.npmjs.org/utif/-/utif-3.1.0.tgz",
-@@ -13362,6 +13462,15 @@
-       "dev": true,
-       "license": "MIT"
-     },
-+    "node_modules/void-elements": {
-+      "version": "3.1.0",
-+      "resolved": "https://registry.npmjs.org/void-elements/-/void-elements-3.1.0.tgz",
-+      "integrity": "sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==",
-+      "license": "MIT",
-+      "engines": {
-+        "node": ">=0.10.0"
-+      }
-+    },
-     "node_modules/vscode-jsonrpc": {
-       "version": "8.2.0",
-       "resolved": "https://registry.npmjs.org/vscode-jsonrpc/-/vscode-jsonrpc-8.2.0.tgz",
-@@ -13540,6 +13649,24 @@
-         "node": ">=8"
-       }
-     },
-+    "node_modules/wmf": {
-+      "version": "1.0.2",
-+      "resolved": "https://registry.npmjs.org/wmf/-/wmf-1.0.2.tgz",
-+      "integrity": "sha512-/p9K7bEh0Dj6WbXg4JG0xvLQmIadrner1bi45VMJTfnbVHsc7yIajZyoSoK60/dtVBs12Fm6WkUI5/3WAVsNMw==",
-+      "license": "Apache-2.0",
-+      "engines": {
-+        "node": ">=0.8"
-+      }
-+    },
-+    "node_modules/word": {
-+      "version": "0.3.0",
-+      "resolved": "https://registry.npmjs.org/word/-/word-0.3.0.tgz",
-+      "integrity": "sha512-OELeY0Q61OXpdUfTp+oweA/vtLVg5VDOXh+3he3PNzLGG/y0oylSOC1xRVj0+l4vQ3tj/bB1HVHv1ocXkQceFA==",
-+      "license": "Apache-2.0",
-+      "engines": {
-+        "node": ">=0.8"
-+      }
-+    },
-     "node_modules/word-wrap": {
-       "version": "1.2.5",
-       "resolved": "https://registry.npmjs.org/word-wrap/-/word-wrap-1.2.5.tgz",
-@@ -13668,10 +13795,19 @@
-       }
-     },
-     "node_modules/xlsx": {
--      "version": "0.20.2",
--      "resolved": "file:vendor/sheetjs/xlsx-0.20.2.tgz",
--      "integrity": "sha512-+nKZ39+nvK7Qq6i0PvWWRA4j/EkfWOtkP/YhMtupm+lJIiHxUrgTr1CcKv1nBk1rHtkRRQ3O2+Ih/q/sA+FXZA==",
-+      "version": "0.18.5",
-+      "resolved": "https://registry.npmjs.org/xlsx/-/xlsx-0.18.5.tgz",
-+      "integrity": "sha512-dmg3LCjBPHZnQp5/F/+nnTa+miPJxUXB6vtk42YjBBKayDNagxGEeIdWApkYPOf3Z3pm3k62Knjzp7lMeTEtFQ==",
+         "locate-character": "^3.0.0",
+         "magic-string": "^0.30.11",
+@@ -11349,7 +11363,6 @@
+       "resolved": "https://registry.npmjs.org/aria-query/-/aria-query-5.3.2.tgz",
+       "integrity": "sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==",
        "license": "Apache-2.0",
-+      "dependencies": {
-+        "adler-32": "~1.3.0",
-+        "cfb": "~1.2.1",
-+        "codepage": "~1.15.0",
-+        "crc-32": "~1.2.1",
-+        "ssf": "~0.11.2",
-+        "wmf": "~1.0.1",
-+        "word": "~0.3.0"
-+      },
-       "bin": {
-         "xlsx": "bin/xlsx.njs"
+-      "peer": true,
+       "engines": {
+         "node": ">= 0.4"
+       }
+@@ -11423,6 +11436,7 @@
+       "resolved": "https://registry.npmjs.org/terser/-/terser-5.44.1.tgz",
+       "integrity": "sha512-t/R3R/n0MSwnnazuPpPNVO60LX0SKL45pyl9YlvxIdkH0Of7D5qM2EVe+yASRIlY5pZ73nclYJfNANGWPwFDZw==",
+       "license": "BSD-2-Clause",
++      "peer": true,
+       "dependencies": {
+         "@jridgewell/source-map": "^0.3.3",
+         "acorn": "^8.15.0",
+@@ -11614,6 +11628,7 @@
+       "resolved": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.3.tgz",
+       "integrity": "sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==",
+       "license": "MIT",
++      "peer": true,
+       "engines": {
+         "node": ">=12"
        },
+@@ -11814,6 +11829,7 @@
+       "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
+       "devOptional": true,
+       "license": "Apache-2.0",
++      "peer": true,
+       "bin": {
+         "tsc": "bin/tsc",
+         "tsserver": "bin/tsserver"
+@@ -12104,6 +12120,7 @@
+       "resolved": "https://registry.npmjs.org/vite/-/vite-7.3.0.tgz",
+       "integrity": "sha512-dZwN5L1VlUBewiP6H9s2+B3e3Jg96D0vzN+Ry73sOefebhYr9f94wwkMNN/9ouoU8pV1BqA1d1zGk8928cx0rg==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "esbuild": "^0.27.0",
+         "fdir": "^6.5.0",
+@@ -12769,6 +12786,7 @@
+       "resolved": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.3.tgz",
+       "integrity": "sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==",
+       "license": "MIT",
++      "peer": true,
+       "engines": {
+         "node": ">=12"
+       },
+@@ -13268,6 +13286,7 @@
+       "integrity": "sha512-o5a9xKjbtuhY6Bi5S3+HvbRERmouabWbyUcpXXUA1u+GNUKoROi9byOJ8M0nHbHYHkYICiMlqxkg1KkYmm25Sw==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "esbuild": "^0.21.3",
+         "postcss": "^8.4.43",
+@@ -13328,6 +13347,7 @@
+       "integrity": "sha512-LUCP5ev3GURDysTWiP47wRRUpLKMOfPh+yKTx3kVIEiu5KOMeqzpnYNsKyOoVrULivR8tLcks4+lga33Whn90A==",
+       "dev": true,
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@types/chai": "^5.2.2",
+         "@vitest/expect": "3.2.4",
+@@ -13476,6 +13496,7 @@
+       "resolved": "https://registry.npmjs.org/vue/-/vue-3.5.26.tgz",
+       "integrity": "sha512-SJ/NTccVyAoNUJmkM9KUqPcYlY+u8OVL1X5EW9RIs3ch5H2uERxyyIUI4MRxVCSOiEcupX9xNGde1tL9ZKpimA==",
+       "license": "MIT",
++      "peer": true,
+       "dependencies": {
+         "@vue/compiler-dom": "3.5.26",
+         "@vue/compiler-sfc": "3.5.26",
+@@ -13810,8 +13831,7 @@
+       "version": "1.1.4",
+       "resolved": "https://registry.npmjs.org/zimmerframe/-/zimmerframe-1.1.4.tgz",
+       "integrity": "sha512-B58NGBEoc8Y9MWWCQGl/gq9xBCe4IiKM0a2x7GZdQKOW5Exr8S1W24J6OgM1njK8xCRGvAJIL/MxXHf6SkmQKQ==",
+-      "license": "MIT",
+-      "peer": true
++      "license": "MIT"
+     },
+     "node_modules/zip-stream": {
+       "version": "6.0.1",
 diff --git a/package.json b/package.json
-index 30c10ae..3851247 100644
+index be6f44e..18b2e92 100644
 --- a/package.json
 +++ b/package.json
-@@ -85,7 +85,7 @@
+@@ -84,7 +84,7 @@
      "archiver": "^7.0.1",
      "blob-stream": "^0.1.3",
      "cropperjs": "^1.6.1",
--    "embedpdf-snippet": "file:vendor/embedpdf/embedpdf-snippet-1.5.0.tgz",
-+    "embedpdf-snippet-i18n": "^1.5.0-1",
+-    "embedpdf-snippet": "file:vendor/embedpdf/embedpdf-snippet-2.3.0.tgz",
++    "embedpdf-snippet-i18n": "^2.3.0-1",
      "heic2any": "^0.0.4",
      "highlight.js": "^11.11.1",
      "html2canvas": "^1.4.1",
-@@ -122,7 +122,7 @@
-     "tiff": "^7.1.2",
-     "utif": "^3.1.0",
-     "vite-plugin-static-copy": "^3.1.4",
--    "xlsx": "file:vendor/sheetjs/xlsx-0.20.2.tgz",
-+    "xlsx": "^0.18.5",
-     "zgapdfsigner": "^2.7.5"
-   },
-   "lint-staged": {
 diff --git a/src/js/logic/edit-pdf-page.ts b/src/js/logic/edit-pdf-page.ts
-index f0ab56f..ba53100 100644
+index d6a7e98..4a25a8c 100644
 --- a/src/js/logic/edit-pdf-page.ts
 +++ b/src/js/logic/edit-pdf-page.ts
 @@ -4,7 +4,7 @@ import { showAlert, showLoader, hideLoader } from '../ui.js';
- import { formatBytes } from '../utils/helpers.js';
+ import { formatBytes, downloadFile } from '../utils/helpers.js';
  
  const embedPdfWasmUrl = new URL(
--    'embedpdf-snippet/dist/pdfium.wasm',
-+    'embedpdf-snippet-i18n/dist/pdfium.wasm',
-     import.meta.url
+-  'embedpdf-snippet/dist/pdfium.wasm',
++  'embedpdf-snippet-i18n/dist/pdfium.wasm',
+   import.meta.url
  ).href;
  
-@@ -126,7 +126,7 @@ async function handleFiles(files: FileList) {
-         const fileURL = URL.createObjectURL(file);
-         currentPdfUrl = fileURL;
+@@ -118,7 +118,7 @@ async function handleFiles(files: FileList) {
+       pdfContainer.textContent = '';
+       pdfWrapper.classList.remove('hidden');
  
--        const { default: EmbedPDF } = await import('embedpdf-snippet');
-+        const { default: EmbedPDF } = await import('embedpdf-snippet-i18n');
-         EmbedPDF.init({
-             type: 'container',
-             target: pdfContainer,
+-      const { default: EmbedPDF } = await import('embedpdf-snippet');
++      const { default: EmbedPDF } = await import('embedpdf-snippet-i18n');
+       viewerInstance = EmbedPDF.init({
+         type: 'container',
+         target: pdfContainer,
 diff --git a/vite.config.ts b/vite.config.ts
-index 0375820..6a46e61 100644
+index a1f8c2f..e4939a5 100644
 --- a/vite.config.ts
 +++ b/vite.config.ts
-@@ -303,7 +303,7 @@ export default defineConfig(() => {
-       dest: 'ghostscript-wasm',
-     },
+@@ -278,7 +278,7 @@ export default defineConfig(() => {
+ 
+   const staticCopyTargets = [
      {
 -      src: 'node_modules/embedpdf-snippet/dist/pdfium.wasm',
 +      src: 'node_modules/embedpdf-snippet-i18n/dist/pdfium.wasm',

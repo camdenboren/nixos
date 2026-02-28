@@ -29,7 +29,7 @@ in
       hideHeaderLogo = true;
       mainColor = if (hostname == "media") then "Teal" else "Red";
       secColor = if (hostname == "media") then "CatppuccinFrappeTeal" else "Red";
-      autoplayVideos = false;
+      autoplayVideos = true;
       defaultQuality = "1080";
       fetchSubscriptionsAutomatically = false;
       saveWatchedProgress = false;
@@ -53,9 +53,6 @@ in
       hideLabelsSideBar = true;
       hideActiveSubscriptions = true;
       enableSubtitlesByDefault = true;
-    }
-    // lib.optionalAttrs (hostname == "media") {
-      defaultProfile = "C8kpmytTeH7aRdKy";
     }
     // lib.optionalAttrs isDarwin {
       externalPlayerExecutable = "/Users/camdenboren/.nix-profile/bin/mpv";

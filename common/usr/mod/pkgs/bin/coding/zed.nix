@@ -27,6 +27,7 @@ in
     userSettings = {
       # basic
       auto_update = false;
+      colorize_brackets = true;
       vim_mode = true;
       relative_line_numbers = "enabled";
       soft_wrap = "editor_width";
@@ -105,7 +106,7 @@ in
         };
       };
       lsp = {
-        pyright = {
+        basedpyright = {
           settings = {
             python.analysis = {
               diagnosticMode = "workspace";
@@ -125,7 +126,7 @@ in
       };
       language_models = {
         ollama = {
-          api_url = if (hostname == "media") then "http://192.168.1.65:11434" else "http://localhost:11434";
+          api_url = "http://localhost:11434";
           available_models = [
             {
               name = if (hostname == "media") then "mistral:latest" else "mistral-nemo:latest";

@@ -7,12 +7,15 @@ let
   ports = {
     homepage = toString 8082;
     dex = toString 5556;
+    box = toString 7745;
+    car = toString 5000;
     chat = toString 8080;
     sync = toString 8384;
     draw = toString 9040;
     notes = toString 3000;
     media = toString 8096;
     image = toString 8188;
+    money = toString 4000;
     photos = toString 2283;
     design = toString 9001;
     torrent = toString 9080;
@@ -20,6 +23,8 @@ let
   domains = {
     www = "www.${baseDomain}";
     dex = "dex.${baseDomain}";
+    box = "box.${baseDomain}";
+    car = "car.${baseDomain}";
     pdf = "pdf.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
@@ -27,21 +32,22 @@ let
     draw = "draw.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
+    money = "money.${baseDomain}";
     photos = "photos.${baseDomain}";
     design = "design.${baseDomain}";
     torrent = "torrent.${baseDomain}";
   };
-  baseHeaders = ''
-    proxy_http_version 1.1;
+  proxyHeaders = ''
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-Protocol $scheme;
     proxy_set_header X-Forwarded-Host $http_host;
   '';
-  websocketHeaders = ''
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
+  staticHeaders = ''
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
   '';
 in
 {
@@ -64,7 +70,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.homepage}";
-            extraConfig = baseHeaders + ''
+            extraConfig = proxyHeaders + ''
               proxy_set_header Host $host;
             '';
           };
@@ -88,7 +94,8 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.chat}";
-            extraConfig = baseHeaders + websocketHeaders;
+            proxyWebsockets = true;
+            extraConfig = proxyHeaders;
           };
         };
       };
@@ -99,19 +106,17 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.media}";
-            extraConfig = baseHeaders + ''
+            extraConfig = proxyHeaders + ''
               proxy_buffering off;
             '';
           };
 
           "/socket" = {
             proxyPass = "${baseURL}:${ports.media}";
-            extraConfig =
-              baseHeaders
-              + websocketHeaders
-              + ''
-                proxy_set_header Host $host;
-              '';
+            proxyWebsockets = true;
+            extraConfig = proxyHeaders + ''
+              proxy_set_header Host $host;
+            '';
           };
         };
       };
@@ -122,7 +127,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.sync}";
-            extraConfig = baseHeaders;
+            extraConfig = proxyHeaders;
           };
         };
       };
@@ -133,7 +138,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${mainURL}:${ports.image}";
-            extraConfig = baseHeaders;
+            extraConfig = proxyHeaders;
             # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
             basicAuthFile = (
               pkgs.writeText "comfyui-secret" "admin:$2y$05$xBrlzmW.FiYGDI34FDStJuhKakzNawP.iiXhQXDlSUrkoUP/6NLda"
@@ -186,11 +191,7 @@ in
           index = "index.html";
           tryFiles = "$uri $uri/ /index.html";
         };
-        extraConfig = ''
-          add_header X-Frame-Options "SAMEORIGIN" always;
-          add_header X-Content-Type-Options "nosniff" always;
-          add_header X-XSS-Protection "1; mode=block" always;
-        '';
+        extraConfig = staticHeaders;
       };
 
       "${domains.torrent}" = {
@@ -199,7 +200,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.torrent}";
-            extraConfig = baseHeaders;
+            extraConfig = proxyHeaders;
           };
         };
       };
@@ -214,7 +215,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.design}";
-            extraConfig = baseHeaders + ''
+            extraConfig = proxyHeaders + ''
               proxy_redirect off;
               proxy_set_header X-Scheme $scheme;
             '';
@@ -222,7 +223,7 @@ in
 
           "/ws/notifications" = {
             proxyPass = "${baseURL}:${ports.design}/ws/notifications";
-            extraConfig = websocketHeaders;
+            proxyWebsockets = true;
           };
         };
       };
@@ -235,11 +236,53 @@ in
           index = "index.html";
           tryFiles = "$uri $uri/ /index.html";
         };
-        extraConfig = ''
-          add_header X-Frame-Options "SAMEORIGIN" always;
-          add_header X-Content-Type-Options "nosniff" always;
-          add_header X-XSS-Protection "1; mode=block" always;
-        '';
+        extraConfig = staticHeaders;
+      };
+
+      "${domains.box}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.box}";
+            extraConfig = proxyHeaders;
+          };
+        };
+      };
+
+      "${domains.car}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.car}";
+            proxyWebsockets = true;
+            extraConfig = proxyHeaders + ''
+              client_max_body_size 50000M;
+              proxy_redirect off;
+            '';
+          };
+        };
+      };
+
+      "${domains.money}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.money}";
+            extraConfig = proxyHeaders + ''
+              # Prevents header duplication between Upstream and Proxy
+              proxy_hide_header Cross-Origin-Embedder-Policy;
+              proxy_hide_header Cross-Origin-Opener-Policy;
+
+              # Explicitly set mandatory security headers
+              add_header Cross-Origin-Embedder-Policy "require-corp" always;
+              add_header Cross-Origin-Opener-Policy "same-origin" always;
+              add_header Origin-Agent-Cluster "?1" always;
+            '';
+          };
+        };
       };
     };
   };

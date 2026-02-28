@@ -15,7 +15,6 @@
       };
       providers = "any";
       ownership = "any";
-      tunnel_protocol = "wireguard";
       wireguard_constraints = {
         port = "any";
         ip_version = "any";
@@ -28,9 +27,8 @@
             };
           };
         };
-      };
-      openvpn_constraints = {
-        port = "any";
+        entry_providers = "any";
+        entry_ownership = "any";
       };
     };
   };
@@ -52,13 +50,12 @@
       port = "any";
     };
   };
-  bridge_state = "auto";
   custom_lists = {
     custom_lists = [ ];
   };
   api_access_methods = {
     direct = {
-      id = "6acec7e9-9b36-4f08-87da-5e5f7bc8358d";
+      id = "5dda2926-ee0f-4efe-89fb-4701e000b8af";
       name = "Direct";
       enabled = true;
       access_method = {
@@ -66,7 +63,7 @@
       };
     };
     mullvad_bridges = {
-      id = "98dfb829-a241-4ef5-baf0-b10b6cec28ec";
+      id = "a394d202-ba0c-46d4-9e48-83e3d1381d3b";
       name = "Mullvad Bridges";
       enabled = true;
       access_method = {
@@ -74,7 +71,7 @@
       };
     };
     encrypted_dns_proxy = {
-      id = "46f628aa-8b36-46f6-8748-2896817a0b24";
+      id = "fa5a434d-19c5-4693-ae43-b7747315255d";
       name = "Encrypted DNS proxy";
       enabled = true;
       access_method = {
@@ -93,7 +90,7 @@
     };
     wireguard = {
       mtu = null;
-      quantum_resistant = "auto";
+      quantum_resistant = "on";
       daita = {
         enabled = false;
         use_multihop_if_necessary = true;
@@ -120,7 +117,7 @@
   };
   relay_overrides = [ ];
   show_beta_releases = false;
-  settings_version = 12;
+  settings_version = 13;
   recents = [ ];
-  rollout_threshold_seed = 738145885;
+  rollout_threshold_seed = 1644152406;
 }

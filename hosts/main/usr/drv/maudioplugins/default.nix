@@ -1,14 +1,14 @@
 { stdenv, fetchzip }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "maudioplugins";
-  version = "16.11";
+  version = "17.07.04";
   src = fetchzip {
-    url = "https://www.dropbox.com/scl/fi/6x5de2hea0izvrcg91qje/maudioplugins.tar.gz?rlkey=nt2ogqbbt60juxyc58ienryhb&st=hpkjgqbk&dl=1";
-    hash = "sha256-+/g/JZeNilc0U0AOenji8cYVloFVL5BHXIrCMQz1rEI=";
+    url = "https://www.dropbox.com/scl/fi/l0qgcbz59cizs8wqu349v/maudioplugins-${version}.tar.gz?rlkey=72odhz9hp45t1ptimjlf82imp&st=h4ag092x&dl=1";
+    hash = "sha256-Tq2yUV/cPsZAF+iZCNhHys08X5R8bFUGEErkglcB4UY=";
     stripRoot = false;
   };
-  # installer url = "https://www.meldaproduction.com/downloads/down?name=maudioplugins&platform=win&version=16.11&mirror=bunnycdn&url=https%3A%2F%2Fmeldaproduction.b-cdn.net%2Fdownload%2Fmaudioplugins%2Fmaudioplugins_16_11_setup.exe&checksum=2d8f56f8c0450c020e3ef1c818d9d662f3fc8877";
+  # installer url = "https://www.meldaproduction.com/downloads/down?name=offline%2Fmaudioplugins_17_07_04.zip&platform=offline&version=17_07_04&mirror=bunnycdn&url=https%3A%2F%2Fmeldaproduction.b-cdn.net%2Fdownload%2Foffline%2Fmaudioplugins_17_07_04.zip&checksum=1a711ccaf476af6ef120148ceafd48cf571baf36";
 
   installPhase = ''
     mkdir -p $out/lib/winvst3

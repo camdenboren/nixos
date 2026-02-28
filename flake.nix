@@ -8,7 +8,7 @@
       url = "github:nixos/nixpkgs/nixos-25.11";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -29,6 +29,7 @@
     };
     chat-script = {
       url = "github:camdenboren/chat-script";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     chatbot-util = {
       url = "github:collegiate-edu-nation/chatbot-util";

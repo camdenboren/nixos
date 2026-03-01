@@ -40,7 +40,10 @@ in
     desktopManager.gnome.enable = true;
 
     displayManager = {
-      gdm.enable = true;
+      gdm = {
+        enable = true;
+        autoSuspend = false;
+      };
 
       # Enable automatic login for the user.
       autoLogin = {

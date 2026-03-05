@@ -6,18 +6,19 @@
   unzip,
 }:
 
+let
+  baseURL = "https://draw.home.local";
+  preConfigPath = "src/main/webapp/js/PreConfig.js";
+in
 stdenv.mkDerivation rec {
   pname = "drawio";
-  version = "29.3.6";
+  version = "29.5.2";
   src = fetchFromGitHub {
     owner = "jgraph";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-C3d8G+FZYEpaI51xRO29qHwEGeHO7Si4C0mcKU1IAeQ=";
+    hash = "sha256-MJze21tMDwx6NKb6alfcMWUY9rsNg8m3idx/X6aYpR0=";
   };
-
-  # override hardcoded env vars which would otw. be patched via `docker-entrypoint.sh`
-  patches = [ ./url.patch ];
 
   nativeBuildInputs = [
     ant
@@ -26,6 +27,11 @@ stdenv.mkDerivation rec {
   ];
 
   buildPhase = ''
+    # enable local share links
+    sed -i 's|DRAWIO_BASE_URL = null|DRAWIO_BASE_URL = "${baseURL}"|g' ${preConfigPath}
+    sed -i 's|DRAWIO_VIEWER_URL = null|DRAWIO_VIEWER_URL = "${baseURL}/js/viewer.min.js"|g' ${preConfigPath}
+    sed -i 's|DRAWIO_LIGHTBOX_URL = null|DRAWIO_LIGHTBOX_URL = "${baseURL}"|g' ${preConfigPath}
+
     cd etc/build
     ant war
     cd ../../build

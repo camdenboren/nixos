@@ -1,24 +1,8 @@
-{
-  pkgs,
-  hostname,
-  ...
-}:
+{ pkgs, ... }:
 
 let
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-  homepage =
-    if hostname == "mac" then
-      "moz-extension://20ee2473-6c28-43cd-a2a0-3a8bfd639c75/pages/blank.html"
-    else if hostname == "macvm" then
-      "moz-extension://99e7c650-7472-4b5e-96e9-014a1a73fc86/pages/blank.html"
-    else if hostname == "main" then
-      "moz-extension://1cfd3900-c2b9-4091-898d-8854473a52db/pages/blank.html"
-    else if hostname == "mainvm" then
-      "moz-extension://c2e7d16e-3f38-4257-9f03-b1fedd512002/pages/blank.html"
-    else if hostname == "media" then
-      "moz-extension://c1504a64-56ca-4a20-836e-8500344f2aa9/pages/blank.html"
-    else
-      "";
+  homepage = "https://vimium.github.io/new-tab/";
   query = {
     name = "query";
     value = "{searchTerms}";
@@ -156,6 +140,7 @@ in
           easy-container-shortcuts
           new-tab-override
           vimium
+          vimium-new-tab-page
           private-grammar-checker-harper
         ];
 

@@ -341,11 +341,13 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 - Mac update\
   _Zoom screen sharing permissions often break_
 
+  > [!NOTE]
+  > `homebrew.greedyCasks` does not seem to be working, so explicitly passing `--greedy` is needed (for now)
+
   ```shell
   sw
-  brew upgrade
+  brew upgrade --greedy
   brew cleanup
-  replaceConfigs
   ```
 
 - Quickemu (no vpn for windows dl, scripts use opt `--status-quo`)

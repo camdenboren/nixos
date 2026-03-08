@@ -16,6 +16,9 @@
           easy-container-shortcuts = (
             prev.callPackage ../../../../drv/easy-container-shortcuts { inherit buildFirefoxXpiAddon; }
           );
+          vimium-new-tab-page = (
+            prev.callPackage ../../../../drv/vimium-new-tab-page { inherit buildFirefoxXpiAddon; }
+          );
         };
       }
     )

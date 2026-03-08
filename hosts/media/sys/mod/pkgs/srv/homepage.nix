@@ -14,6 +14,7 @@ let
     chat = "https://chat.${baseDomain}/";
     sync = "https://sync.${baseDomain}/";
     draw = "https://draw.${baseDomain}/";
+    mail = "https://mail.${baseDomain}/";
     notes = "https://notes.${baseDomain}/";
     media = "https://media.${baseDomain}/";
     image = "https://image.${baseDomain}/";
@@ -200,6 +201,13 @@ in
               icon = "outline";
               href = URLs.notes;
               siteMonitor = URLs.notes;
+            };
+          }
+          {
+            Mail = {
+              icon = "mailpit";
+              href = URLs.mail;
+              siteMonitor = URLs.mail;
             };
           }
           {

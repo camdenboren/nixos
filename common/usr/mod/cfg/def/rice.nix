@@ -276,7 +276,6 @@ in
       (
         lib.optionalAttrs isLinux {
           # nix-darwin is needed to set macOS wallpaper
-          # see hosts/mac/sys/mod/cfg/env/activation.nix
           dconf.settings =
             let
               uri = "file://" + "/home/camdenboren/etc/nixos/common/usr/rice/wallpapers/${cfg}.jpg";

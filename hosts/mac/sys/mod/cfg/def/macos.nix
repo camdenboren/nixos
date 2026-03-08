@@ -1,5 +1,32 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
+let
+  # these workflows are created in `hosts/mac/usr/mod/cfg/env/activation.nix`
+  # the first letter of the app is used as the shortcut (i.e., "Bitwarden" ->
+  # cmd-alt-b)
+  appsNeedingShortcuts = [
+    "Bitwarden"
+    "ClickUp"
+    "FreeTube"
+    "Ghostty"
+    "LibreWolf"
+    "Mullvad"
+    "Slack"
+    "UTM"
+    "Zed"
+  ];
+  makeShortcutEntry = app: {
+    name = "(null) - Launch${app} - runWorkflowAsService";
+    value = {
+      key_equivalent = "@~${builtins.substring 0 1 (lib.strings.toLower app)}";
+      presentation_modes = {
+        ContextMenu = 1;
+        ServicesMenu = 1;
+        TouchBar = 1;
+      };
+    };
+  };
+in
 {
   power.sleep = {
     computer = "never";
@@ -9,14 +36,152 @@
   system = {
     defaults = {
       CustomUserPreferences = {
+        "com.apple.finder" = {
+          NSUserKeyEquivalents = {
+            Downloads = "@~d";
+            "Hide Sidebar" = "~^s";
+            "New Finder Window" = "@$n";
+          };
+        };
+
         "com.apple.screensaver" = {
           idleTime = 0;
         };
+
+        "com.apple.symbolichotkeys" = {
+          AppleSymbolicHotKeys = {
+            # Schema is:
+            #
+            # «ACTION» =         {
+            #   enabled = «IS_ENABLED»;
+            #   value = {
+            #     parameters = [
+            #       «ASCII»
+            #       «KEY_CODE»
+            #       «MODIFIERS»
+            #     ];
+            #     type = "standard";
+            #   };
+            # };
+            #
+            # With the vars from the following links:
+            # ACTION: https://github.com/NUIKit/CGSInternal/blob/master/CGSHotKeys.h
+            # KEY_CODE: https://eastmanreference.com/complete-list-of-applescript-key-codes
+            # MODIFIERS: https://gist.github.com/stephancasas/74c4621e2492fb875f0f42778d432973
+
+            # remap kCGSHotKeyDecreaseDisplayBrightness to F1
+            "53" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  65535 # non-ascii
+                  122 # F1
+                  8388608 # Fn
+                ];
+                type = "standard";
+              };
+            };
+
+            # remap kCGSHotKeyIncreaseDisplayBrightness to F2
+            "54" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  65535 # non-ascii
+                  120 # F2
+                  8388608 # Fn
+                ];
+                type = "standard";
+              };
+            };
+
+            # disable kCGSHotKeySelectPreviousInputSource on ctrl-spacebar
+            # to prevent duplication due to spotlight's remap
+            "60" = {
+              enabled = false;
+              value = {
+                parameters = [
+                  32 # space
+                  49 # spacebar
+                  262144 # control
+                ];
+                type = "standard";
+              };
+            };
+
+            # remap kCGSHotKeySpotlightSearchField to control-spacebar
+            "64" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  32 # space
+                  49 # spacebar
+                  262144 # control
+                ];
+                type = "standard";
+              };
+            };
+
+            # remap kCGSHotKeySpotlightWindow to command-option-1
+            # idk if this is needed
+            "65" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  49 # 1
+                  18 # 1
+                  1572864 # command-option
+                ];
+                type = "standard";
+              };
+            };
+
+            # remap kCGSHotKeySpaceLeft to option-command-left
+            "79" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  65535 # non-ascii
+                  123 # left
+                  9961472 # option-command-fn
+                ];
+                type = "standard";
+              };
+            };
+
+            # remap kCGSHotKeySpaceRight to option-command-right
+            "81" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  65535 # non-ascii
+                  124 # right
+                  9961472 # option-command-fn
+                ];
+                type = "standard";
+              };
+            };
+          };
+        };
+
+        "dev.zed.Zed" = {
+          NSUserKeyEquivalents = {
+            "Save All" = "~^$s";
+          };
+        };
+
         NSGlobalDomain = {
           AppleAccentColor = 5;
           AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
           "com.apple.sound.uiaudio.enabled" = 0;
+          CGDisableCursorLocationMagnification = true;
+          NSUserKeyEquivalents = {
+            Minimize = "^h";
+            "Shut Down" = "@~$d";
+          };
         };
+
+        pbs.NSServicesStatus = builtins.listToAttrs (map makeShortcutEntry appsNeedingShortcuts);
       };
 
       dock = {
@@ -102,6 +267,8 @@
       };
 
       universalaccess.reduceTransparency = true; # requires full disk access for terminal
+
+      WindowManager.EnableStandardClickToShowDesktop = false;
     };
 
     # keyboard remappings

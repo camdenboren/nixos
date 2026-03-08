@@ -12,6 +12,7 @@ let
     chat = toString 8080;
     sync = toString 8384;
     draw = toString 9040;
+    mail = toString 8025;
     notes = toString 3000;
     media = toString 8096;
     image = toString 8188;
@@ -30,6 +31,7 @@ let
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
     draw = "draw.${baseDomain}";
+    mail = "mail.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
@@ -281,6 +283,17 @@ in
               add_header Cross-Origin-Opener-Policy "same-origin" always;
               add_header Origin-Agent-Cluster "?1" always;
             '';
+          };
+        };
+      };
+
+      "${domains.mail}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.mail}";
+            extraConfig = proxyHeaders;
           };
         };
       };

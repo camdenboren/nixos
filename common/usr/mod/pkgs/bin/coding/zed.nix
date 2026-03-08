@@ -63,8 +63,8 @@ in
       terminal = {
         button = false;
       };
-      features = {
-        edit_prediction_provider = "none";
+      edit_predictions = {
+        provider = "none";
       };
       search = {
         button = false;

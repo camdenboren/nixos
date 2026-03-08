@@ -1,24 +1,8 @@
-{
-  pkgs,
-  hostname,
-  ...
-}:
+{ pkgs, ... }:
 
 let
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-  homepage =
-    if hostname == "mac" then
-      "moz-extension://20ee2473-6c28-43cd-a2a0-3a8bfd639c75/pages/blank.html"
-    else if hostname == "macvm" then
-      "moz-extension://95b3696c-386b-4e5a-ab96-556425d9a46f/pages/blank.html"
-    else if hostname == "main" then
-      "moz-extension://04cc90c6-c702-4205-9ce0-b81be2036116/pages/blank.html"
-    else if hostname == "mainvm" then
-      "moz-extension://40d2adc1-a6c5-4500-9c07-c8ec2725d78e/pages/blank.html"
-    else if hostname == "media" then
-      "moz-extension://b50b3a02-d24d-4ebe-bdce-c29d3978adbd/pages/blank.html"
-    else
-      "";
+  homepage = "https://vimium.github.io/new-tab/";
   query = {
     name = "query";
     value = "{searchTerms}";
@@ -90,9 +74,64 @@ in
           "extensions.formautofill.creditCards.enabled" = false;
           "signon.rememberSignons" = false;
           "sidebar.verticalTabs" = true;
+          "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
           "sidebar.revamp" = true;
-          "sidebar.main.tools" = "";
+          "sidebar.main.tools" = [ ];
           "sidebar.visibility" = "always-show";
+          "browser.uiCustomization.state" = {
+            placements = {
+              widget-overflow-fixed-list = [ ];
+              unified-extensions-area = [
+                "ublock0_raymondhill_net-browser-action"
+                "newtaboverride_agenedia_com-browser-action"
+                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+                "harper_writewithharper_com-browser-action"
+                "7esoorv3_alefvanoon_anonaddy_me-browser-action"
+                "addon_darkreader_org-browser-action"
+              ];
+              nav-bar = [
+                "back-button"
+                "forward-button"
+                "stop-reload-button"
+                "urlbar-container"
+                "vertical-spacer"
+                "unified-extensions-button"
+              ];
+              TabsToolbar = [ ];
+              vertical-tabs = [ "tabbrowser-tabs" ];
+              PersonalToolbar = [ "personal-bookmarks" ];
+            };
+            seen = [
+              "harper_writewithharper_com-browser-action"
+              "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+              "7esoorv3_alefvanoon_anonaddy_me-browser-action"
+              "addon_darkreader_org-browser-action"
+              "newtaboverride_agenedia_com-browser-action"
+              "developer-button"
+              "ublock0_raymondhill_net-browser-action"
+              "screenshot-button"
+            ];
+            dirtyAreaCache = [
+              "unified-extensions-area"
+              "nav-bar"
+              "TabsToolbar"
+              "vertical-tabs"
+              "PersonalToolbar"
+            ];
+            currentVersion = 23;
+            newElementCount = 5;
+          };
+          "browser.uiCustomization.navBarWhenVerticalTabs" = [
+            "unified-extensions-button"
+            "urlbar-container"
+            "vertical-spacer"
+            "forward-button"
+            "back-button"
+          ];
+          "browser.uiCustomization.horizontalTabstrip" = [
+            "tabbrowser-tabs"
+            "new-tab-button"
+          ];
         };
 
         extensions.packages = with pkgs.firefox-addons; [
@@ -101,6 +140,7 @@ in
           easy-container-shortcuts
           new-tab-override
           vimium
+          vimium-new-tab-page
           private-grammar-checker-harper
         ];
 

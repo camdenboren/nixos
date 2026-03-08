@@ -31,6 +31,7 @@
     ./jellyfin.nix
     ./lubelogger.nix
     ./monica.nix
+    ./mailpit.nix
     ./nginx.nix
     ./open-webui.nix
     ./outline.nix

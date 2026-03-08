@@ -44,7 +44,7 @@
       helm
       odin2
       cardinal
-      surge-XT
+      surge-xt
       zynaddsubfx
       bespokesynth
       x42-gmsynth

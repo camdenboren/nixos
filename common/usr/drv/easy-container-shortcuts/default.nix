@@ -2,7 +2,7 @@
 
 buildFirefoxXpiAddon rec {
   pname = "easy-container-shortcuts";
-  version = "1.7.0";
+  version = "1.8.0";
   addonId = "firefox.container-shortcuts@strategery.io";
 
   url = "https://addons.mozilla.org/firefox/downloads/file/4068015/${pname}-${version}.xpi";

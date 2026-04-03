@@ -19,6 +19,7 @@ let
     photos = toString 2283;
     design = toString 9001;
     torrent = toString 9080;
+    youtube = toString 9050;
   };
   domains = {
     www = "www.${baseDomain}";
@@ -36,6 +37,7 @@ let
     photos = "photos.${baseDomain}";
     design = "design.${baseDomain}";
     torrent = "torrent.${baseDomain}";
+    youtube = "youtube.${baseDomain}";
   };
   proxyHeaders = ''
     proxy_set_header X-Real-IP $remote_addr;
@@ -281,6 +283,18 @@ in
               add_header Cross-Origin-Opener-Policy "same-origin" always;
               add_header Origin-Agent-Cluster "?1" always;
             '';
+          };
+        };
+      };
+
+      "${domains.youtube}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.youtube}";
+            proxyWebsockets = true;
+            extraConfig = proxyHeaders;
           };
         };
       };

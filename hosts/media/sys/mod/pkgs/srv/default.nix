@@ -28,6 +28,7 @@
     ./homebox.nix
     ./homepage.nix
     ./immich.nix
+    ./invidious.nix
     ./jellyfin.nix
     ./lubelogger.nix
     ./nginx.nix

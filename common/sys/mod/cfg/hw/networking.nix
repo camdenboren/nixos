@@ -37,6 +37,7 @@ let
     "photos.home.local"
     "design.home.local"
     "torrent.home.local"
+    "youtube.home.local"
   ];
 in
 lib.recursiveUpdate

@@ -21,6 +21,7 @@ let
     photos = "https://photos.${baseDomain}/";
     design = "https://design.${baseDomain}/";
     torrent = "https://torrent.${baseDomain}/";
+    youtube = "https://youtube.${baseDomain}/";
   };
   backgrounds = {
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
@@ -138,6 +139,13 @@ in
               icon = "immich";
               href = URLs.photos;
               siteMonitor = URLs.photos;
+            };
+          }
+          {
+            YouTube = {
+              icon = "invidious";
+              href = URLs.youtube;
+              siteMonitor = URLs.youtube;
             };
           }
         ];

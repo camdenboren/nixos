@@ -3,7 +3,7 @@
 {
   imports = [
     # Host-specific
-    ./comfyui.nix
+    #./comfyui.nix
 
     # Common
     ../../../../../../common/sys/mod/pkgs/srv/utils

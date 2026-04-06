@@ -34,12 +34,7 @@
       lsp-plugins
       x42-plugins
       # Plugins - guitar
-      (proteus.overrideAttrs {
-        cmakeFlags = [
-          # Fix the build with CMake 4.
-          "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-        ];
-      })
+      proteus
       # Plugins - synth
       helm
       odin2

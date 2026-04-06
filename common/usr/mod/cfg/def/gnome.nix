@@ -1,5 +1,5 @@
 {
-  pkgs,
+  config,
   lib,
   hostname,
   ...
@@ -182,6 +182,7 @@ in
     enable = true;
     theme.name = "adw-gtk3";
     iconTheme.name = "Dracula";
+    gtk4.theme = config.gtk.theme;
   };
 
   # qt styling

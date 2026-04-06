@@ -27,10 +27,6 @@
       url = "github:camdenboren/alc-calc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chat-script = {
-      url = "github:camdenboren/chat-script";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
     chatbot-util = {
       url = "github:collegiate-edu-nation/chatbot-util";
       inputs.nixpkgs.follows = "nixpkgs";

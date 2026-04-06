@@ -31,9 +31,6 @@ in
       (lib.hiPrio chatbot-util) # cpython version conflicts w/ chat-script otw
       vlc-bin
     ]
-    ++ lib.optionals (hostname == "main" || !isLinux) [
-      chat-script
-    ]
     ++ lib.optionals (hostname == "media") [
       jellyfin-ffmpeg
       qbittorrent

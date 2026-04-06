@@ -37,26 +37,6 @@
         "type": "github"
       }
     },
-    "chat-script": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-stable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1754957719,
-        "narHash": "sha256-/jufqnZEdcaDp0qG3lPIwww8Z6G9uuFtYaZ3VTQKmeU=",
-        "owner": "camdenboren",
-        "repo": "chat-script",
-        "rev": "3f23b7d79497e85dc273c062166c8dd0f3981758",
-        "type": "github"
-      },
-      "original": {
-        "owner": "camdenboren",
-        "repo": "chat-script",
-        "type": "github"
-      }
-    },
     "chatbot-util": {
       "inputs": {
         "nixpkgs": [
@@ -316,7 +296,6 @@
     "root": {
       "inputs": {
         "alc-calc": "alc-calc",
-        "chat-script": "chat-script",
         "chatbot-util": "chatbot-util",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",

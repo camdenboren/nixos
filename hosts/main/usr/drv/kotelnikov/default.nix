@@ -1,11 +1,11 @@
 { stdenv, fetchzip }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "kotelnikov";
-  version = "1.6.5";
+  version = "1.6.7";
   src = fetchzip {
-    url = "https://www.tokyodawn.net/labs/Kotelnikov/1.6.5/TDR%20Kotelnikov%20(no%20installer).zip";
-    hash = "sha256-f05T44uMAvxJVoDyoEUW2P9v7yo2I8HjBEaJYFzgLUQ=";
+    url = "https://www.tokyodawn.net/labs/Kotelnikov/${version}/TDR%20Kotelnikov%20(no%20installer).zip";
+    hash = "sha256-sKjy4AZaEDpthKn8ndqK8TjxIuUIpoCYGk+JCZRdYPU=";
     stripRoot = false;
   };
 

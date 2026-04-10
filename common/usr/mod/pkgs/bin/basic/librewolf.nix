@@ -95,6 +95,7 @@ in
                 "stop-reload-button"
                 "urlbar-container"
                 "vertical-spacer"
+                "downloads-button"
                 "unified-extensions-button"
               ];
               TabsToolbar = [ ];
@@ -119,7 +120,7 @@ in
               "PersonalToolbar"
             ];
             currentVersion = 23;
-            newElementCount = 5;
+            newElementCount = 8;
           };
           "browser.uiCustomization.navBarWhenVerticalTabs" = [
             "unified-extensions-button"

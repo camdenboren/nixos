@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 let
+  ddg-icon = "https://duckduckgo.com/assets/logo_header.v109.svg";
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
   homepage = "https://vimium.github.io/new-tab/";
   query = {
@@ -24,6 +25,7 @@ in
           "browser.urlbar.suggest.history" = false;
           "browser.urlbar.suggest.openpage" = false;
           "browser.urlbar.suggest.topsites" = false;
+          "browser.search.separatePrivateDefault" = false;
           "browser.search.suggest.enabled" = false;
           "browser.urlbar.suggest.searches" = false;
           "browser.aboutConfig.showWarning" = false;
@@ -180,7 +182,7 @@ in
         };
 
         search = {
-          default = "ddg";
+          default = "DuckDuckGo (HTML)";
           force = true;
           order = [
             "Nix Packages"
@@ -189,6 +191,23 @@ in
           ];
 
           engines = {
+            ddg.metaData.alias = "@d";
+
+            "DuckDuckGo (HTML)" = {
+              icon = ddg-icon;
+              urls = [
+                {
+                  template = "https://html.duckduckgo.com/html/";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+            };
+
             "Nix Packages" = {
               icon = nixos-icon;
               definedAliases = [ "@np" ];

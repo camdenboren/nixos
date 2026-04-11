@@ -14,6 +14,7 @@ let
     draw = toString 9040;
     notes = toString 3000;
     media = toString 8096;
+    music = toString 9020;
     image = toString 8188;
     money = toString 4000;
     photos = toString 2283;
@@ -31,6 +32,7 @@ let
     sync = "sync.${baseDomain}";
     draw = "draw.${baseDomain}";
     media = "media.${baseDomain}";
+    music = "music.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
     photos = "photos.${baseDomain}";
@@ -283,6 +285,17 @@ in
             '';
           };
         };
+      };
+
+      "${domains.music}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations."/" = {
+          root = "${pkgs.monochrome}/dist";
+          index = "index.html";
+          tryFiles = "$uri $uri/ /index.html";
+        };
+        extraConfig = staticHeaders;
       };
     };
   };

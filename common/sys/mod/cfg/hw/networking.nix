@@ -34,6 +34,7 @@ let
     "image.home.local"
     "money.home.local"
     "media.home.local"
+    "music.home.local"
     "photos.home.local"
     "design.home.local"
     "torrent.home.local"

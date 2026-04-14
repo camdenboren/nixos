@@ -170,8 +170,8 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 sudo nixos-rebuild boot --flake ~/etc/nixos#hostName
 ```
 
-<i>Freetube and Tidal-Hifi configs won't be updated until they've been launched<br>
-So launch them, clean up config errors, restart</i>
+<i>Freetube config won't be updated until it's been launched<br>
+So launch it, clean up config errors, restart</i>
 
 ### Post-Install
 

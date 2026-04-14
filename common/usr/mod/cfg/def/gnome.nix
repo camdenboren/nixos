@@ -66,7 +66,7 @@ in
       ++ lib.optionals (!isVM) [
         "bitwarden.desktop"
         "freetube.desktop"
-        "io.github.nokse22.high-tide.desktop"
+        "org.gnome.Lollypop.desktop"
         "com.github.wwmm.easyeffects.desktop"
       ]
       ++ lib.optionals (hostname == "main") [
@@ -164,6 +164,16 @@ in
       start-in-incognito-mode = true;
       restore-session-policy = "crashed";
       homepage-url = "about:newtab";
+    };
+    "org/gnome/Lollypop" = {
+      show-sidebar-labels = false;
+      # open playlists on startup
+      startup-id = -16;
+      # show `All tracks` in playlists
+      shown-playlists = [
+        (-2)
+        (-99)
+      ];
     };
     "org/gnome/nautilus/preferences" = {
       show-delete-permanently = true;

@@ -215,8 +215,8 @@ in
                 binding = "<Control><Alt>m";
               };
               "${keybindingsPath}custom6" = {
-                name = "High Tide";
-                command = "high-tide";
+                name = "Lollypop";
+                command = "lollypop";
                 binding = "<Control><Alt>t";
               };
               "${keybindingsPath}custom7" = {

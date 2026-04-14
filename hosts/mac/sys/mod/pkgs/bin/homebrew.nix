@@ -21,7 +21,6 @@
       "qdirstat"
       "readest"
       "tailscale-app"
-      "tidal"
       "zoom"
     ];
     greedyCasks = true;

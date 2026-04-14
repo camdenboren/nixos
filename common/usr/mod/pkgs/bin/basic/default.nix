@@ -21,10 +21,8 @@ in
     ]
     ++ lib.optionals (hostname == "main" || hostname == "media") [
       # Basic Apps
-      high-tide
       lollypop
       readest
-      tidal-hifi
       vlc
     ]
     ++ lib.optionals (!isLinux) [

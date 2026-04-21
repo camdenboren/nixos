@@ -132,68 +132,124 @@ in
     lib.recursiveUpdate
       # all platforms
       {
-        programs.bash = {
-          shellAliases.matrix = "${pkgs.cmatrix}/bin/cmatrix -C ${clr.mtx}";
-          bashrcExtra = ''
-            export PS1="\n\[\033[${clr.prompt}m\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\$\[\033[0m\] "
-          '';
-        };
-
-        programs.ghostty = {
-          # non-theme settings are in ghostty.nix
-          settings = {
-            background-opacity = if isLinux then 1.0 else 0.85;
-            bold-is-bright = true;
-            font-family = fonts.mono;
-            font-size =
-              if isVM then
-                10
-              else if isLinux then
-                11
-              else
-                15;
-            macos-titlebar-proxy-icon = "hidden"; # mac-only
-            theme = "custom";
-            title = "\" \"";
-            shell-integration-features = "no-cursor";
-            window-theme = "ghostty"; # linux-only
-            window-title-font-family = fonts.serif;
+        programs = {
+          bash = {
+            shellAliases.matrix = "${pkgs.cmatrix}/bin/cmatrix -C ${clr.mtx}";
+            bashrcExtra = ''
+              export PS1="\n\[\033[${clr.prompt}m\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\$\[\033[0m\] "
+            '';
           };
 
-          themes = {
-            custom = {
-              background = clr.bg;
-              foreground = clr.fg;
-              cursor-color = clr.cursor.color;
-              cursor-style = "block";
-              selection-background = clr.highlight.bg;
-              selection-foreground = clr.highlight.fg;
+          ghostty = {
+            # non-theme settings are in ghostty.nix
+            settings = {
+              background-opacity = if isLinux then 1.0 else 0.85;
+              bold-is-bright = true;
+              font-family = fonts.mono;
+              font-size =
+                if isVM then
+                  10
+                else if isLinux then
+                  11
+                else
+                  15;
+              macos-titlebar-proxy-icon = "hidden"; # mac-only
+              theme = "custom";
+              title = "\" \"";
+              shell-integration-features = "no-cursor";
+              window-theme = "ghostty"; # linux-only
+              window-title-font-family = fonts.serif;
+            };
 
-              # prepend 'i=' for each color to conform to iterm2 schema
-              palette = lib.lists.imap0 (i: x: toString i + "=" + x) (lib.attrValues clr.terminal);
+            themes = {
+              custom = {
+                background = clr.bg;
+                foreground = clr.fg;
+                cursor-color = clr.cursor.color;
+                cursor-style = "block";
+                selection-background = clr.highlight.bg;
+                selection-foreground = clr.highlight.fg;
+
+                # prepend 'i=' for each color to conform to iterm2 schema
+                palette = lib.lists.imap0 (i: x: toString i + "=" + x) (lib.attrValues clr.terminal);
+              };
             };
           };
-        };
 
-        programs.zed-editor.userSettings = {
-          theme = {
-            mode = "system";
-            dark =
-              if coral then
-                "Zed Legacy: Solarized Dark"
-              else if nothin then
-                "Zed Legacy: Rosé Pine Moon" + zed-variant
-              else
-                "Red";
-            light = "One Light";
+          zed-editor.userSettings = {
+            theme = {
+              mode = "system";
+              dark =
+                if coral then
+                  "Zed Legacy: Solarized Dark"
+                else if nothin then
+                  "Zed Legacy: Rosé Pine Moon" + zed-variant
+                else
+                  "Red";
+              light = "One Light";
+            };
+
+            ui_font_family = fonts.serif;
+            ui_font_size = if isLinux then 18 else 17;
+            buffer_font_family = fonts.mono;
+            buffer_font_size = if isLinux then 17 else 16;
+            agent_ui_font_size = if isLinux then 18 else 17;
+            agent_buffer_font_size = if isLinux then 17 else 16;
           };
 
-          ui_font_family = fonts.serif;
-          ui_font_size = if isLinux then 18 else 17;
-          buffer_font_family = fonts.mono;
-          buffer_font_size = if isLinux then 17 else 16;
-          agent_ui_font_size = if isLinux then 18 else 17;
-          agent_buffer_font_size = if isLinux then 17 else 16;
+          # darwin support is coming soon
+          librewolf.profiles.camdenboren = {
+            containers = {
+              container1.color =
+                if coral then
+                  "blue"
+                else if nothin then
+                  "purple"
+                else
+                  "red";
+              container2.color =
+                if coral then
+                  "turquoise"
+                else if nothin then
+                  "blue"
+                else
+                  "orange";
+              container3.color =
+                if coral then
+                  "green"
+                else if nothin then
+                  "turquoise"
+                else
+                  "yellow";
+              container4.color =
+                if coral then
+                  "yellow"
+                else if nothin then
+                  "green"
+                else
+                  "green";
+              container5.color =
+                if coral then
+                  "orange"
+                else if nothin then
+                  "yellow"
+                else
+                  "turquoise";
+              container6.color =
+                if coral then
+                  "red"
+                else if nothin then
+                  "red"
+                else
+                  "purple";
+            };
+
+            settings = {
+              "font.name.serif.x-western" = fonts.serif;
+              "font.name.sans-serif.x-western" = fonts.serif;
+              "font.name.monospace.x-western" = fonts.mono;
+            };
+          };
         };
 
         home.file = {
@@ -214,60 +270,6 @@ in
               @define-color accent_color #${clr.accent};
               @define-color accent_bg_color #${clr.accent-bg};
             '';
-          };
-        };
-
-        # darwin support is coming soon
-        programs.librewolf.profiles.camdenboren = {
-          containers = {
-            container1.color =
-              if coral then
-                "blue"
-              else if nothin then
-                "purple"
-              else
-                "red";
-            container2.color =
-              if coral then
-                "turquoise"
-              else if nothin then
-                "blue"
-              else
-                "orange";
-            container3.color =
-              if coral then
-                "green"
-              else if nothin then
-                "turquoise"
-              else
-                "yellow";
-            container4.color =
-              if coral then
-                "yellow"
-              else if nothin then
-                "green"
-              else
-                "green";
-            container5.color =
-              if coral then
-                "orange"
-              else if nothin then
-                "yellow"
-              else
-                "turquoise";
-            container6.color =
-              if coral then
-                "red"
-              else if nothin then
-                "red"
-              else
-                "purple";
-          };
-
-          settings = {
-            "font.name.serif.x-western" = fonts.serif;
-            "font.name.sans-serif.x-western" = fonts.serif;
-            "font.name.monospace.x-western" = fonts.mono;
           };
         };
       }

@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   # Enable homebrew and install specified casks

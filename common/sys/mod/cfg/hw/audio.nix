@@ -1,11 +1,11 @@
 { hostname, ... }:
 
 let
-  isMain = (hostname == "main");
+  isMain = hostname == "main";
 in
 {
   services.pulseaudio.enable = false;
-  security.rtkit.enable = (!isMain);
+  security.rtkit.enable = !isMain;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

@@ -142,9 +142,7 @@ in
             proxyPass = "${mainURL}:${ports.image}";
             extraConfig = proxyHeaders;
             # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
-            basicAuthFile = (
-              pkgs.writeText "comfyui-secret" "admin:$2y$05$xBrlzmW.FiYGDI34FDStJuhKakzNawP.iiXhQXDlSUrkoUP/6NLda"
-            );
+            basicAuthFile = pkgs.writeText "comfyui-secret" "admin:$2y$05$xBrlzmW.FiYGDI34FDStJuhKakzNawP.iiXhQXDlSUrkoUP/6NLda";
           };
         };
       };
@@ -305,7 +303,7 @@ in
     defaults.email = "9UtEfABpSSrV3g.code@mailbox.org";
     certs."${baseDomain}" = {
       extraDomainNames = builtins.attrValues domains;
-      group = config.services.nginx.group;
+      inherit (config.services.nginx) group;
     };
   };
 }

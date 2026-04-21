@@ -1,8 +1,8 @@
-{ ... }:
+_:
 
 {
   nixpkgs.overlays = [
-    (final: prev: {
+    (_final: prev: {
       # not in nixpkgs
       audiogridder = prev.callPackage ../../../../drv/audiogridder { };
       sitala = prev.callPackage ../../../../drv/sitala { };

@@ -83,7 +83,7 @@
   update_default_location = false;
   allow_lan = true;
   lockdown_mode = false;
-  auto_connect = (hostname == "main");
+  auto_connect = hostname == "main";
   tunnel_options = {
     openvpn = {
       mssfix = null;

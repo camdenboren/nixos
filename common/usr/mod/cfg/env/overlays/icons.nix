@@ -2,7 +2,7 @@
 
 {
   nixpkgs.overlays = [
-    (final: prev: {
+    (_final: prev: {
       dracula-icon-theme = prev.dracula-icon-theme.overrideAttrs (o: {
         postInstall = (o.postInstall or "") + ''
           cp -f ${../../../../rice/icons/librewolf/librewolf-${rice}.svg} $out/share/icons/Dracula/scalable/apps/librewolf.svg

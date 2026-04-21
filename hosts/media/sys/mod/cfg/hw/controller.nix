@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   # Xbox one driver w/ BT support

@@ -18,7 +18,7 @@ in
     #   cdf - cd into $NH_FLAKE
     #   repl - enter nix repl with nixpkgs
     #   fmt - format all nix files in $NH_FLAKE
-    #   check - evaluate $NH_FLAKE for all hosts
+    #   check - run statix + deadnix checks and evaluate $NH_FLAKE for all hosts
     #   clean - remove unused nix store roots
     #   lgf - open lazygit in $NH_FLAKE
     #   update - update $NH_FLAKE's inputs
@@ -32,7 +32,6 @@ in
       cdh = "cd ~";
       cdr = "cd ~/Documents/Repos";
       cdt = "cd ~/Documents/Tests";
-      check = "nix flake check $NH_FLAKE";
       clean = if (isDarwin || isVM) then "nh clean all" else "nh clean all -k 2";
       ddg = "lynx -vikeys start.duckduckgo.com/lite/";
       fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";

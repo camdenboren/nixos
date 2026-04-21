@@ -2,7 +2,7 @@
 
 {
   preferredLocale = "system";
-  autoConnect = (hostname == "main");
+  autoConnect = hostname == "main";
   enableSystemNotifications = true;
   monochromaticIcon = true;
   startMinimized = true;

@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   # Enable CUPS, AVAHI to print documents.

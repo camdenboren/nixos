@@ -6,6 +6,6 @@
 {
   nixpkgs.config = {
     allowUnfree = true;
-    allowUnsupportedSystem = (hostname == "macvm");
+    allowUnsupportedSystem = hostname == "macvm";
   };
 }

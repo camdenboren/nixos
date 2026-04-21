@@ -14,11 +14,13 @@ in
     with pkgs;
     [
       # Programming
+      deadnix
       nixd
       nixfmt
       harper
       fd
       lynx
+      statix
     ]
     ++ lib.optionals (hostname == "main") [
       quickemu

@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   # The platform the configuration will be used on.

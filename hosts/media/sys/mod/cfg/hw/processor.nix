@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   security.allowSimultaneousMultithreading = false;

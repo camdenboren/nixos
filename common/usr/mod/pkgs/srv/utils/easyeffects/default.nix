@@ -5,11 +5,11 @@ let
   extraPresets =
     if (hostname == "main") then
       {
-        hf-kef-akg = (import ./HF_KEF_AKG.nix);
+        hf-kef-akg = import ./HF_KEF_AKG.nix;
       }
     else
       {
-        pioneer = (import ./Pioneer.nix);
+        pioneer = import ./Pioneer.nix;
       };
 in
 {

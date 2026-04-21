@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   # Enable logitech unifying receiver

@@ -44,7 +44,7 @@ in
       workspaces-only-on-primary = false;
     };
     "org/gnome/desktop/peripherals/mouse" = {
-      natural-scroll = (hostname == "macvm");
+      natural-scroll = hostname == "macvm";
       speed =
         if (hostname == "media") then
           0.0

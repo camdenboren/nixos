@@ -6,7 +6,9 @@
     ./mod/pkgs
   ];
 
-  home.username = "camdenboren";
-  home.homeDirectory = "/Users/camdenboren";
-  home.stateVersion = "25.11";
+  home = {
+    username = "camdenboren";
+    homeDirectory = "/Users/camdenboren";
+    stateVersion = "25.11";
+  };
 }

@@ -16,7 +16,6 @@ let
     draw = "https://draw.${baseDomain}/";
     notes = "https://notes.${baseDomain}/";
     media = "https://media.${baseDomain}/";
-    music = "https://music.${baseDomain}/";
     image = "https://image.${baseDomain}/";
     money = "https://money.${baseDomain}/";
     photos = "https://photos.${baseDomain}/";
@@ -132,13 +131,6 @@ in
               icon = "jellyfin";
               href = URLs.media;
               siteMonitor = URLs.media;
-            };
-          }
-          {
-            Music = {
-              icon = "https://raw.githubusercontent.com/camdenboren/monochrome/refs/heads/main/public/assets/logo.svg";
-              href = URLs.music;
-              siteMonitor = URLs.music;
             };
           }
           {

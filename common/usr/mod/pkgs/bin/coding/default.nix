@@ -28,7 +28,14 @@ in
     ++ lib.optionals isDarwin [
       #jetbrains.idea-oss - now uses jetbrains jdk which has been broken on darwin for years
       utm
-      wireshark
+      (wireshark.overrideAttrs {
+        src = pkgs.fetchFromGitLab {
+          repo = "wireshark";
+          owner = "wireshark";
+          tag = "v4.6.5";
+          hash = "sha256-Zvrwxjp4LK2J3QnxmPxKKrU01YHQvPyp54UWzeGNCjA=";
+        };
+      })
     ];
 
   imports = [

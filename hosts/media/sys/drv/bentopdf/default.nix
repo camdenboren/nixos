@@ -2,12 +2,12 @@
 
 buildNpmPackage rec {
   pname = "bentopdf";
-  version = "2.8.2";
+  version = "2.8.4";
   src = fetchFromGitHub {
     owner = "alam00000";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-ZSBO+EO+ZKLqWjTHhKvfqJnbDO1S8UY2bZLaKoQKyqo=";
+    hash = "sha256-kVCzIFINN+Qs4TfLMqon8A9mQQ8kCRqdmu1CrzaRqf0=";
   };
 
   # regenerate in most recent repo tag via
@@ -16,7 +16,7 @@ buildNpmPackage rec {
   patches = [ ./unvendored-deps.patch ];
 
   npmFlags = [ "--legacy-peer-deps" ];
-  npmDepsHash = "sha256-+RwEq2nnECD0R9uuyDUgYs0BwPvvYTt17g2RCRUSqJ8=";
+  npmDepsHash = "sha256-r5k9AlG7FrT5JzVUyJY/TY4ZTKzk8zeGB54z1oGE2v0=";
 
   # setting `env.SIMPLE_MODE = true;` didn't work
   buildPhase = ''

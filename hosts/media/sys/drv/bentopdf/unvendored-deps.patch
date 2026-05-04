@@ -1,34 +1,34 @@
 diff --git a/package-lock.json b/package-lock.json
-index 90a3ecb..fcd21c0 100644
+index b15c357..6c8d364 100644
 --- a/package-lock.json
 +++ b/package-lock.json
 @@ -1,14 +1,15 @@
  {
    "name": "bento-pdf",
--  "version": "2.8.1",
-+  "version": "2.8.2",
+-  "version": "2.8.2",
++  "version": "2.8.4",
    "lockfileVersion": 3,
    "requires": true,
    "packages": {
      "": {
        "name": "bento-pdf",
--      "version": "2.8.1",
-+      "version": "2.8.2",
+-      "version": "2.8.2",
++      "version": "2.8.4",
        "license": "AGPL-3.0-only",
        "dependencies": {
 +        "@embedpdf/snippet": "^2.9.1",
          "@fontsource/cedarville-cursive": "^5.2.7",
          "@fontsource/dancing-script": "^5.2.8",
          "@fontsource/dm-sans": "^5.2.8",
-@@ -31,7 +32,6 @@
-         "bwip-js": "^4.8.0",
+@@ -32,7 +33,6 @@
          "cropperjs": "^1.6.2",
          "diff": "^8.0.3",
+         "dompurify": "^3.4.0",
 -        "embedpdf-snippet": "file:vendor/embedpdf/embedpdf-snippet-2.9.1.tgz",
+         "fast-xml-parser": "^5.7.1",
          "heic2any": "^0.0.4",
          "highlight.js": "^11.11.1",
-         "html2canvas": "^1.4.1",
-@@ -1299,6 +1299,45 @@
+@@ -1303,6 +1303,45 @@
          "vue": ">=3.2.0"
        }
      },
@@ -74,7 +74,28 @@ index 90a3ecb..fcd21c0 100644
      "node_modules/@embedpdf/utils": {
        "version": "2.9.1",
        "resolved": "https://registry.npmjs.org/@embedpdf/utils/-/utils-2.9.1.tgz",
-@@ -6570,45 +6609,6 @@
+@@ -3889,6 +3928,7 @@
+       "version": "8.57.1",
+       "resolved": "https://registry.npmjs.org/@typescript-eslint/types/-/types-8.57.1.tgz",
+       "integrity": "sha512-S29BOBPJSFUiblEl6RzPPjJt6w25A6XsBqRVDt53tA/tlL8q7ceQNZHTjPeONt/3S7KRI4quk+yP9jK2WjBiPQ==",
++      "devOptional": true,
+       "license": "MIT",
+       "engines": {
+         "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+@@ -6416,9 +6456,9 @@
+       }
+     },
+     "node_modules/devalue": {
+-      "version": "5.6.4",
+-      "resolved": "https://registry.npmjs.org/devalue/-/devalue-5.6.4.tgz",
+-      "integrity": "sha512-Gp6rDldRsFh/7XuouDbxMH3Mx8GMCcgzIb1pDTvNyn8pZGQ22u+Wa+lGV9dQCltFQ7uVw0MhRyb8XDskNFOReA==",
++      "version": "5.8.0",
++      "resolved": "https://registry.npmjs.org/devalue/-/devalue-5.8.0.tgz",
++      "integrity": "sha512-2zA9pFEsnp7vWBZbXF5JAgAq0fsUIt/1XPbRiAmRV3lp/2C3upzH+sADiyy66aFCihoLEsrQHxNM5w1gIDfsBg==",
+       "license": "MIT",
+       "peer": true
+     },
+@@ -6543,45 +6583,6 @@
        "dev": true,
        "license": "MIT"
      },
@@ -120,20 +141,46 @@ index 90a3ecb..fcd21c0 100644
      "node_modules/emoji-regex": {
        "version": "9.2.2",
        "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-9.2.2.tgz",
-@@ -11394,9 +11394,9 @@
+@@ -6855,14 +6856,21 @@
+       }
+     },
+     "node_modules/esrap": {
+-      "version": "2.2.4",
+-      "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.4.tgz",
+-      "integrity": "sha512-suICpxAmZ9A8bzJjEl/+rLJiDKC0X4gYWUxT6URAWBLvlXmtbZd5ySMu/N2ZGEtMCAmflUDPSehrP9BQcsGcSg==",
++      "version": "2.2.6",
++      "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.6.tgz",
++      "integrity": "sha512-WN0clHt0a4mzC780UBVVBpsj4vSSjOFNRd2WjYtduB9HeKxm1sjHMNUwLEHVjI3FdCQD/Hurgz9ftbKEzP79Ow==",
+       "license": "MIT",
+       "peer": true,
+       "dependencies": {
+-        "@jridgewell/sourcemap-codec": "^1.4.15",
++        "@jridgewell/sourcemap-codec": "^1.4.15"
++      },
++      "peerDependencies": {
+         "@typescript-eslint/types": "^8.2.0"
++      },
++      "peerDependenciesMeta": {
++        "@typescript-eslint/types": {
++          "optional": true
++        }
+       }
+     },
+     "node_modules/esrecurse": {
+@@ -11469,9 +11477,9 @@
        }
      },
      "node_modules/svelte": {
 -      "version": "5.54.1",
 -      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.54.1.tgz",
 -      "integrity": "sha512-ow8tncN097Ty8U1H+C3bM1xNlsCbnO2UZeN0lWBnv8f3jKho7QTTQ2LWbMXrPQDodLjH91n4kpNnLolyRhVE6A==",
-+      "version": "5.55.1",
-+      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.55.1.tgz",
-+      "integrity": "sha512-QjvU7EFemf6mRzdMGlAFttMWtAAVXrax61SZYHdkD6yoVGQ89VeyKfZD4H1JrV1WLmJBxWhFch9H6ig/87VGjw==",
++      "version": "5.55.5",
++      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.55.5.tgz",
++      "integrity": "sha512-2uCs/LZ9us+AktdzYJM8OcxQ8qnPS1kpaO7syGT/MgO+6Qr1Ybl+TqPq+97u7PHqmmMlye5ZkoyXONy5mjjAbw==",
        "license": "MIT",
        "peer": true,
        "dependencies": {
-@@ -11411,7 +11411,7 @@
+@@ -11486,7 +11494,7 @@
          "clsx": "^2.1.1",
          "devalue": "^5.6.4",
          "esm-env": "^1.2.1",
@@ -143,10 +190,10 @@ index 90a3ecb..fcd21c0 100644
          "locate-character": "^3.0.0",
          "magic-string": "^0.30.11",
 diff --git a/package.json b/package.json
-index d2726a7..c25cab8 100644
+index c73c5d2..dbbe40c 100644
 --- a/package.json
 +++ b/package.json
-@@ -64,6 +64,7 @@
+@@ -70,6 +70,7 @@
      "vue": "^3.5.29"
    },
    "dependencies": {
@@ -154,14 +201,14 @@ index d2726a7..c25cab8 100644
      "@fontsource/cedarville-cursive": "^5.2.7",
      "@fontsource/dancing-script": "^5.2.8",
      "@fontsource/dm-sans": "^5.2.8",
-@@ -86,7 +87,6 @@
-     "bwip-js": "^4.8.0",
+@@ -93,7 +94,6 @@
      "cropperjs": "^1.6.2",
      "diff": "^8.0.3",
+     "dompurify": "^3.4.0",
 -    "embedpdf-snippet": "file:vendor/embedpdf/embedpdf-snippet-2.9.1.tgz",
+     "fast-xml-parser": "^5.7.1",
      "heic2any": "^0.0.4",
      "highlight.js": "^11.11.1",
-     "html2canvas": "^1.4.1",
 diff --git a/src/js/logic/edit-pdf-page.ts b/src/js/logic/edit-pdf-page.ts
 index 3ce1512..76b7cef 100644
 --- a/src/js/logic/edit-pdf-page.ts
@@ -190,10 +237,10 @@ index 3ce1512..76b7cef 100644
        viewerInstance = EmbedPDF.init({
          disabledCategories,
 diff --git a/vite.config.ts b/vite.config.ts
-index 4a1c901..71389ef 100644
+index feecd73..b45dc7d 100644
 --- a/vite.config.ts
 +++ b/vite.config.ts
-@@ -361,7 +361,7 @@ export default defineConfig(() => {
+@@ -455,7 +455,7 @@ export default defineConfig(() => {
  
    const staticCopyTargets = [
      {

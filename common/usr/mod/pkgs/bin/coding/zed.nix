@@ -45,9 +45,6 @@ in
       };
 
       # disable crap
-      notification_panel = {
-        button = false;
-      };
       collaboration_panel = {
         button = false;
       };

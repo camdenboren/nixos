@@ -42,6 +42,7 @@ in
       max_tabs = 10;
       project_panel = {
         sticky_scroll = false;
+        dock = "left";
       };
 
       # disable crap
@@ -116,6 +117,8 @@ in
       agent = {
         enabled = !isVM;
         button = false;
+        dock = "right";
+        sidebar_side = "right";
         default_model = {
           provider = "ollama";
           model = if (hostname == "media") then "mistral:latest" else "mistral-nemo:latest";

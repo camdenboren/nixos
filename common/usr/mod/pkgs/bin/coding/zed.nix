@@ -121,16 +121,16 @@ in
         sidebar_side = "right";
         default_model = {
           provider = "ollama";
-          model = if (hostname == "media") then "mistral:latest" else "mistral-nemo:latest";
+          model = "gpt-oss:latest";
         };
       };
       language_models = {
         ollama = {
-          api_url = "http://localhost:11434";
+          api_url = "http://192.168.1.88:11434";
           available_models = [
             {
-              name = if (hostname == "media") then "mistral:latest" else "mistral-nemo:latest";
-              max_tokens = if (hostname == "media") then 4096 else 16384;
+              name = "gpt-oss:latest";
+              max_tokens = 32768;
               supports_tools = true;
               keep_alive = "5m";
             }

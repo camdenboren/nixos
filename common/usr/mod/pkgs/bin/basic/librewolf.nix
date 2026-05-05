@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 let
+  localURL = "home.local";
   ddg-icon = "https://duckduckgo.com/assets/logo_header.v109.svg";
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
   homepage = "https://vimium.github.io/new-tab/";
@@ -69,6 +70,7 @@ in
           "security.OCSP.require" = true;
           "browser.contentblocking.category" = "strict";
           "dom.security.https_only_mode" = true;
+          "network.lna.skip-domains" = "*.${localURL}";
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
           "browser.newtabpage.activity-stream.feeds.topsites" = false;

@@ -71,6 +71,7 @@ in
           "browser.contentblocking.category" = "strict";
           "dom.security.https_only_mode" = true;
           "network.lna.skip-domains" = "*.${localURL}";
+          "security.enterprise_roots.enabled" = true;
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
           "browser.newtabpage.activity-stream.feeds.topsites" = false;

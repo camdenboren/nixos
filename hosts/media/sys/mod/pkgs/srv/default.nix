@@ -18,6 +18,7 @@
     ./penpot.nix
     ./tailscale.nix
     ./unbound.nix
+    ./ups.nix
 
     # Common
     ../../../../../../common/sys/mod/pkgs/srv/utils

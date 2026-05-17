@@ -14,7 +14,7 @@ let
     draw = toString 9040;
     notes = toString 3000;
     media = toString 8096;
-    image = toString 8188;
+    image = toString 9090;
     money = toString 4000;
     photos = toString 2283;
     design = toString 9001;
@@ -139,8 +139,6 @@ in
           "/" = {
             proxyPass = "${mainURL}:${ports.image}";
             extraConfig = proxyHeaders;
-            # generate hash w/ $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c FILENAME admin')
-            basicAuthFile = pkgs.writeText "comfyui-secret" "admin:$2y$05$xBrlzmW.FiYGDI34FDStJuhKakzNawP.iiXhQXDlSUrkoUP/6NLda";
           };
         };
       };

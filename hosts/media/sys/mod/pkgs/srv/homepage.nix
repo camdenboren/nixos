@@ -6,7 +6,6 @@ let
   baseDomain = "home.local";
   tailnetAddress = "100.99.5.32:8082";
   URLs = {
-    main = "http://192.168.1.88:8188";
     home = "https://${baseDomain}";
     pdf = "https://pdf.${baseDomain}/";
     box = "https://box.${baseDomain}/";
@@ -116,10 +115,9 @@ in
           }
           {
             Image = {
-              icon = "sh-comfyui";
-              # monitor main for status, but link to nginx w/ auth
+              icon = "invoke-ai";
               href = URLs.image;
-              siteMonitor = URLs.main;
+              siteMonitor = URLs.image;
             };
           }
         ];

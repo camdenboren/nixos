@@ -40,6 +40,5 @@ in
       };
     }
     inputs.musnix.nixosModules.musnix
-    inputs.nixified-ai.nixosModules.comfyui
   ];
 }

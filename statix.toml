@@ -1,1 +1,1 @@
-ignore = ["**/penpot.nix", "**/hardware-configuration.nix"]
+ignore = ["**/invokeai.nix", "**/penpot.nix", "**/hardware-configuration.nix"]

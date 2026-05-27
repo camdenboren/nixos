@@ -44,6 +44,7 @@ in
         sticky_scroll = false;
         dock = "left";
       };
+      cli_default_open_behavior = "new_window";
 
       # disable crap
       collaboration_panel = {

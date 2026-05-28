@@ -13,8 +13,14 @@
         "flakes"
       ];
 
-      substituters = [ "https://cache.garnix.io" ];
-      trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+      substituters = [
+        "https://camdenboren.cachix.org"
+        "https://edu-nation.cachix.org"
+      ];
+      trusted-public-keys = [
+        "camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA="
+        "edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0="
+      ];
     };
   };
 

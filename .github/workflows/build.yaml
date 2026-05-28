@@ -1,0 +1,54 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host-name: main
+            cfg-key: nixos
+            os-label: ubuntu-latest
+
+          - host-name: mainvm
+            cfg-key: nixos
+            os-label: ubuntu-latest
+
+          - host-name: media
+            cfg-key: nixos
+            os-label: ubuntu-latest
+
+          - host-name: mac
+            cfg-key: darwin
+            os-label: macos-latest
+
+          - host-name: macvm
+            cfg-key: nixos
+            os-label: ubuntu-24.04-arm
+
+    name: ${{ matrix.host-name }}
+    runs-on: ${{ matrix.os-label }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
+          restore-prefixes-first-match: nix-${{ matrix.host-name }}-
+          gc-max-store-size-linux: 1G
+          purge: true
+          purge-prefixes: nix-${{ matrix.host-name }}-
+          purge-created: 0
+          purge-last-accessed: P1DT12H
+          purge-primary-key: never
+
+      - run: nix build .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel

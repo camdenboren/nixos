@@ -1,6 +1,6 @@
 # ❄️ NixOS + Darwin Config ❄️
 
-[![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fcamdenboren%2Fnixos%3Fbranch%3Dmain&style=for-the-badge&color=grey&labelColor=grey)](https://garnix.io/repo/camdenboren/nixos)
+![Dynamic Badge](https://img.shields.io/github/actions/workflow/status/camdenboren/nixos/build.yaml?branch=main&style=for-the-badge&color=grey&labelColor=grey)
 
 ## Introduction
 
@@ -13,13 +13,6 @@ This is a config for multiple hosts of varying degrees of specificity, but `main
 - DevShells
 
 You probably won't want to try installing any of these hosts directly due to UUID discrepancies in `hardware-configuration.nix`, so this repo primarily serves as a reference in creating your own config
-
-Some direct utility may be found in leveraging the binary cache by adding [Garnix] to your nix-config
-
-```nix
-nix.settings.substituters = [ "https://cache.garnix.io" ];
-nix.settings.trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-```
 
 Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/configs were massively helpful for learning the basics of NixOS, flakes, home-manager, and linux audio
 
@@ -443,7 +436,6 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 
 [GPLv3]
 
-[Garnix]: https://garnix.io/
 [vimjoyer]: https://github.com/vimjoyer/
 [ryan4yin]: https://github.com/ryan4yin/
 [PowerUser64]: https://github.com/poweruser64/

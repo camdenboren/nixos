@@ -51,7 +51,7 @@
       }
 
       $DRY_RUN_CMD echo -e $VERBOSE_ARG "Replacing Applications' workflows"
-      replace_workflow Bitwarden ${pkgs.bitwarden-desktop}
+      replace_workflow Bitwarden
       replace_workflow ClickUp
       replace_workflow FreeTube
       replace_workflow Ghostty ${pkgs.ghostty-bin}

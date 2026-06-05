@@ -212,7 +212,7 @@ in
           "${pkgs.librewolf}/Applications/LibreWolf.app"
           "${pkgs.zed-editor}/Applications/Zed.app"
           "${pkgs.ghostty-bin}/Applications/Ghostty.app"
-          "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app"
+          "/Applications/Bitwarden.app"
           "/Applications/FreeTube.app"
           "${pkgs.vlc-bin}/Applications/VLC.app"
           "${pkgs.slack}/Applications/Slack.app"

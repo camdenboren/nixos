@@ -8,6 +8,7 @@
 let
   isDarwin = lib.hasSuffix "-darwin" system;
   isVM = lib.hasSuffix "vm" hostname;
+  needsBuilder = system == "x86_64-linux" && hostname != "main";
 in
 {
   programs.bash = {
@@ -23,7 +24,8 @@ in
     #   lgf - open lazygit in $NH_FLAKE
     #   update - update $NH_FLAKE's inputs
     #   bld - build a derivation in cwd
-    #   sw - rebuild system
+    #   sw - rebuild system and switch immediately
+    #   bo - rebuild system and switch on boot
 
     shellAliases = {
       bld = "nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'";
@@ -40,7 +42,11 @@ in
       ls = "ls -a";
       lsg = "ls | grep";
       repl = "nix repl -f '<nixpkgs>'";
-      sw = if isDarwin then "nh darwin switch" else "nh os switch";
+      sw =
+        if isDarwin then
+          "nh darwin switch"
+        else
+          "nh os switch" + lib.optionalString needsBuilder " --build-host main";
       tr = if isDarwin then "trash" else "gio trash";
       travel = "nh os switch -s travel";
       update = "nix flake update --flake $NH_FLAKE";
@@ -51,12 +57,22 @@ in
         + "zeditor";
       ":q" = "exit";
     }
+    # main-specific aliases
     // (
       if (hostname == "main") then
         {
           nixos = "quickemu --vm ~/vm/nixos-24.05-gnome.conf --status-quo";
           ubuntu = "quickemu --vm ~/vm/ubuntu-24.04.conf --status-quo";
           windows = "quickemu --vm ~/vm/windows-11.conf --display spice --fullscreen --status-quo";
+        }
+      else
+        { }
+    )
+    # linux-specific aliases
+    // (
+      if (!isDarwin) then
+        {
+          bo = "nh os boot" + lib.optionalString needsBuilder " --build-host main";
         }
       else
         { }

@@ -37,9 +37,12 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
       - uses: nix-community/cache-nix-action@v7
         with:
-          primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
           restore-prefixes-first-match: nix-${{ matrix.host-name }}-
           gc-max-store-size-linux: 1G
           purge: true

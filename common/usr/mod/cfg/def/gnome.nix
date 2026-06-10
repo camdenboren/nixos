@@ -57,6 +57,7 @@ in
       lock-enabled = false;
     };
     "org/gnome/shell" = {
+      always-show-log-out = true;
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
         "librewolf.desktop"

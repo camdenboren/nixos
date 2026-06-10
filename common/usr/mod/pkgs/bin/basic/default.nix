@@ -15,18 +15,18 @@ in
     with pkgs;
     lib.optionals (!isVM) [
       alc-calc
-      bitwarden-desktop
+      # bitwarden-desktop # using homebrew version since compiler-rt-libc fix hasn't yet landed in nixpkgs
       mpv
       yt-x
     ]
     ++ lib.optionals (hostname == "main" || hostname == "media") [
       # Basic Apps
+      bitwarden-desktop
       lollypop
       readest
       vlc
     ]
     ++ lib.optionals (!isLinux) [
-      (lib.hiPrio chatbot-util) # cpython version conflicts w/ chat-script otw
       vlc-bin
     ]
     ++ lib.optionals (hostname == "media") [

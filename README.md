@@ -1,6 +1,6 @@
 # ❄️ NixOS + Darwin Config ❄️
 
-![Dynamic Badge](https://img.shields.io/github/actions/workflow/status/camdenboren/nixos/build.yaml?branch=main&style=for-the-badge&color=grey&labelColor=grey)
+![Dynamic Badge](https://img.shields.io/github/actions/workflow/status/camdenboren/nixos/build.yaml?branch=main&style=for-the-badge)
 
 ## Introduction
 

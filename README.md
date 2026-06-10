@@ -429,7 +429,7 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 - [x] try vim ext for vsc (unplanned)
 - [x] remap $ and 0 in nvim (unplanned)
 - [x] add git plugin to nvim (unplanned)
-- [ ] ssh aliases or whatever
+- [x] ssh aliases or whatever
 - [ ] maybe pipes
 
 ## License

@@ -12,6 +12,7 @@ _:
       "freecad"
       "freetube"
       "gimp"
+      "inkscape"
       "intellij-idea"
       "languagetool-desktop"
       "linearmouse"

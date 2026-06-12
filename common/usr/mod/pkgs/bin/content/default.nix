@@ -12,14 +12,16 @@ in
 {
   home.packages =
     with pkgs;
-    [
-      # Content creation
-      inkscape
-    ]
-    ++ lib.optionals isDarwin [
+    #[
+    # Content creation
+    #inkscape - broken on darwin at the moment
+    #]
+    #++ lib.optionals isDarwin [
+    lib.optionals isDarwin [
       libreoffice-bin
     ]
     ++ lib.optionals (!isDarwin) [
+      inkscape
       gimp
       libreoffice
     ]

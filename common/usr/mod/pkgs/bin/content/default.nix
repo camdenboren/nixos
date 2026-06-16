@@ -27,7 +27,7 @@ in
     ]
     ++ lib.optionals (hostname == "main") [
       blender
-      #darktable - waiting on libsoup to be patched https://github.com/NixOS/nixpkgs/pull/429473
+      darktable
       handbrake
     ]
     ++ lib.optionals (isDarwin || hostname == "main") [

@@ -5,10 +5,10 @@ let
 in
 {
   imports = [
-    ./mullvad.nix
     ./openssh.nix
   ]
   ++ lib.optionals (!isVM) [
+    ./mullvad.nix
     ./shutdown.nix
   ];
 }

@@ -1,19 +1,19 @@
 diff --git a/package-lock.json b/package-lock.json
-index 076a73e..10b8ba6 100644
+index 3f8a7fd..2e94f3d 100644
 --- a/package-lock.json
 +++ b/package-lock.json
 @@ -1,14 +1,15 @@
  {
    "name": "bento-pdf",
 -  "version": "2.8.4",
-+  "version": "2.8.5",
++  "version": "2.8.6",
    "lockfileVersion": 3,
    "requires": true,
    "packages": {
      "": {
        "name": "bento-pdf",
 -      "version": "2.8.4",
-+      "version": "2.8.5",
++      "version": "2.8.6",
        "license": "AGPL-3.0-only",
        "dependencies": {
 +        "@embedpdf/snippet": "^2.9.1",
@@ -148,9 +148,9 @@ index 076a73e..10b8ba6 100644
 -      "version": "2.2.4",
 -      "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.4.tgz",
 -      "integrity": "sha512-suICpxAmZ9A8bzJjEl/+rLJiDKC0X4gYWUxT6URAWBLvlXmtbZd5ySMu/N2ZGEtMCAmflUDPSehrP9BQcsGcSg==",
-+      "version": "2.2.11",
-+      "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.11.tgz",
-+      "integrity": "sha512-gPdx+I+BjYEinNMQaBXFjbaJVyoPMU4ZODg5mE+M4DqVG9VusAVHHjcBX+zqyITlI0DIARwDMMzZwAWj36dRoQ==",
++      "version": "2.2.13",
++      "resolved": "https://registry.npmjs.org/esrap/-/esrap-2.2.13.tgz",
++      "integrity": "sha512-m8jH5hZgJE2RRUK/jjkGPcJEDAV+dYnZYFkosQaPTcE+Yw4xynXHOo6FUdwaWBtdR3b1MMa7wEDTSHeR2VWsGA==",
        "license": "MIT",
        "peer": true,
        "dependencies": {
@@ -174,9 +174,9 @@ index 076a73e..10b8ba6 100644
 -      "version": "5.55.7",
 -      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.55.7.tgz",
 -      "integrity": "sha512-ymI5ykLPwIHW839E053FQbI1G+jnRFJEw3Kv5Y4njixVWywQBx+NUFpkkKyk5LIb36Fg9DVXSYpqiGekLD0hyw==",
-+      "version": "5.56.3",
-+      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.56.3.tgz",
-+      "integrity": "sha512-w7JvrM5IFl5cmfbY0TLik9o7mjRUJmRMhOR51tBPu708Gr/MjbGs7VnJnr/B0CaXeI4vtnOh7RKxDr0cwhMdDA==",
++      "version": "5.56.4",
++      "resolved": "https://registry.npmjs.org/svelte/-/svelte-5.56.4.tgz",
++      "integrity": "sha512-/d0QHehmRuJW8gVz395MTkPcPozxzdjBMBE8oEYGz8O3b9KTMzzQ9ZHJQLuFKOHOPQbU6kx/X4iid/EBBzH7iw==",
        "license": "MIT",
        "peer": true,
        "dependencies": {
@@ -192,7 +192,7 @@ index 076a73e..10b8ba6 100644
          "devalue": "^5.8.1",
          "esm-env": "^1.2.1",
 -        "esrap": "^2.2.4",
-+        "esrap": "^2.2.11",
++        "esrap": "^2.2.12",
          "is-reference": "^3.0.3",
          "locate-character": "^3.0.0",
          "magic-string": "^0.30.11",
@@ -210,7 +210,7 @@ index 076a73e..10b8ba6 100644
        "funding": {
          "type": "github",
 diff --git a/package.json b/package.json
-index 13dfce4..241675e 100644
+index cbaad4d..50433db 100644
 --- a/package.json
 +++ b/package.json
 @@ -71,6 +71,7 @@
@@ -257,10 +257,10 @@ index 3ce1512..76b7cef 100644
        viewerInstance = EmbedPDF.init({
          disabledCategories,
 diff --git a/vite.config.ts b/vite.config.ts
-index 9c8e587..d7f2a26 100644
+index 9bfe50a..0d86f16 100644
 --- a/vite.config.ts
 +++ b/vite.config.ts
-@@ -460,7 +460,7 @@ export default defineConfig(() => {
+@@ -461,7 +461,7 @@ export default defineConfig(() => {
  
    const staticCopyTargets = [
      {

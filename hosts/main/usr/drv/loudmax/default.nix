@@ -2,11 +2,12 @@
 
 stdenv.mkDerivation {
   pname = "loudmax";
-  version = "v1.46";
+  version = "v1.47";
 
   src = fetchzip {
-    url = "https://www.dropbox.com/scl/fi/f4oyldvfs5bc5yzd4dddu/LoudMax_v1_46_Linux_x86_LADSPA.tar.gz?rlkey=ugykl90lzbrq9yl42oryz0b21&st=e5h5aqk6&dl=1";
-    hash = "sha256-jwox6f7FBSnjcugrf+gFijsk0N41dJkyKZgVo+WNQWk=";
+    url = "https://www.dropbox.com/scl/fi/s6aawowxty7gpj0crvjq3/LoudMax_v1_47_Linux_x86_LADSPA.tar.gz?rlkey=0lyxstuwvi8pwadlp2nouw4ns&st=0wsjtp1f&dl=1";
+    hash = "sha256-Pxdq3h4SjNLlwhlW9laTv4U6QWI8XQUdsihsGwc1yi4=";
+
     stripRoot = false;
   };
 

@@ -2,10 +2,16 @@
 
 stdenv.mkDerivation rec {
   pname = "maudioplugins";
-  version = "17.08.02";
+  version = "17.09.02";
+
+  # dropbox url params
+  id = "nacw7exmgd61fzr4qbzla";
+  rlKey = "44cmzg8b8oir3926n053tb9k7";
+  st = "30o9t5r3";
+
   src = fetchzip {
-    url = "www.dropbox.com/scl/fi/gca9nr38rwg7rokydh3xm/maudioplugins-${version}.tar.gz?rlkey=qozv5cczgn6xbxdhbzdrsd0v1&st=rmkv2zl8&dl=1";
-    hash = "sha256-/N0HhUgCfNEIDf7jJNXQT0EexB/uuAZdAhyaN/ND0+w=";
+    url = "www.dropbox.com/scl/fi/${id}/maudioplugins-${version}.tar.gz?rlkey=${rlKey}&st=${st}&dl=1";
+    hash = "sha256-dcnJ21cN4xUE35D9WcSnxcqvlPRoW5QAGCdfrPidTEU=";
     stripRoot = false;
   };
 

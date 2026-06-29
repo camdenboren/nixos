@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   lib,
   system,
   hostname,
@@ -20,7 +21,8 @@ in
       harper
       fd
       lynx
-      statix
+      # unstable is broken on darwin - https://hydra.nixos.org/build/333610201
+      #statix
     ]
     ++ lib.optionals (hostname == "main") [
       quickemu
@@ -29,7 +31,10 @@ in
       #jetbrains.idea-oss - now uses jetbrains jdk which has been broken on darwin for years
       utm
       wireshark
-    ];
+    ]
+    ++ (with pkgs-stable; [
+      statix
+    ]);
 
   imports = [
     ./bash.nix

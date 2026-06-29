@@ -14,7 +14,7 @@
     ./lubelogger.nix
     ./nginx.nix
     ./open-webui.nix
-    ./outline.nix
+    ./outline
     ./penpot.nix
     ./tailscale.nix
     ./unbound.nix

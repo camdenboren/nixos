@@ -229,6 +229,7 @@ in
         FXPreferredViewStyle = "NIsv";
         _FXShowPosixPathInTitle = true;
         QuitMenuItem = true;
+        ShowExternalHardDrivesOnDesktop = false;
       };
 
       LaunchServices.LSQuarantine = false;

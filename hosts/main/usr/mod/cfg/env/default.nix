@@ -9,5 +9,6 @@
     ./activation.nix
     ./files.nix
     ./overlays
+    ./xdg.nix
   ];
 }

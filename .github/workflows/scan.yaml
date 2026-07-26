@@ -1,0 +1,49 @@
+name: scan
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "45 10 * 4-10 1-5"
+    - cron: "45 11 * 1-3,11-12 1-5"
+
+jobs:
+  scan:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host-name: main
+            cfg-key: nixos
+            os-label: ubuntu-latest
+
+          - host-name: mainvm
+            cfg-key: nixos
+            os-label: ubuntu-latest
+
+          - host-name: media
+            cfg-key: nixos
+            os-label: ubuntu-latest
+
+          - host-name: mac
+            cfg-key: darwin
+            os-label: macos-latest
+
+          - host-name: macvm
+            cfg-key: nixos
+            os-label: ubuntu-24.04-arm
+
+    name: ${{ matrix.host-name }}
+    runs-on: ${{ matrix.os-label }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: |
+          nix shell nixpkgs#sbomnix nixpkgs#python3 --command sh -c \
+            "vulnxscan .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel && \
+            echo "" && \
+            cat vulns.csv | python common/usr/scr/vulnxscan.py"

@@ -36,13 +36,24 @@ jobs:
     name: ${{ matrix.host-name }}
     runs-on: ${{ matrix.os-label }}
     steps:
+      - if: ${{ matrix.host-name == 'main' }}
+        uses: insightsengineering/disk-space-reclaimer@v1
+
       - uses: actions/checkout@v6
 
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: |
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
+          restore-prefixes-first-match: nix-${{ matrix.host-name }}-
+          gc-max-store-size-linux: 1G
+          purge: false
+
+      - name: install deps via nixpkgs and run vulnxscan + script
+        run: |
           nix shell nixpkgs#sbomnix nixpkgs#python3 --command sh -c \
             "vulnxscan .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel && \
             echo "" && \

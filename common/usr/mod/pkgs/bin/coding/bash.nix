@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   hostname,
   system,
@@ -7,6 +8,7 @@
 
 let
   isDarwin = lib.hasSuffix "-darwin" system;
+  cfgKey = if isDarwin then "darwin" else "nixos";
   isVM = lib.hasSuffix "vm" hostname;
   needsBuilder = system == "x86_64-linux" && hostname != "main";
 in
@@ -24,6 +26,7 @@ in
     #   lgf - open lazygit in $NH_FLAKE
     #   update - update $NH_FLAKE's inputs
     #   bld - build a derivation in cwd
+    #   scan - run vulnxscan on the current host
     #   sw - rebuild system and switch immediately
     #   bo - rebuild system and switch on boot
 
@@ -42,6 +45,12 @@ in
       ls = "ls -a";
       lsg = "ls | grep";
       repl = "nix repl -f '<nixpkgs>'";
+      scan = ''
+        cd $NH_FLAKE && \
+        ${pkgs.sbomnix}/bin/vulnxscan \
+          .#${cfgKey}Configurations.${hostname}.config.system.build.toplevel && \
+          ${pkgs.python3Minimal}/bin/python ./common/usr/scr/vulnxscan.py
+      '';
       sw =
         if isDarwin then
           "nh darwin switch"

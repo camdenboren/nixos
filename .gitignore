@@ -3,3 +3,6 @@
 **/result*
 .vscode
 .zed
+**/http_cache.sqlite
+**/vulns.csv
+**/summary.md

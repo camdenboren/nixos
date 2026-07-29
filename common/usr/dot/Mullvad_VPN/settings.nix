@@ -16,14 +16,13 @@
       providers = "any";
       ownership = "any";
       wireguard_constraints = {
-        port = "any";
         ip_version = "any";
         allowed_ips = "any";
         use_multihop = false;
         entry_location = {
           only = {
             location = {
-              country = "se";
+              country = "us";
             };
           };
         };
@@ -32,21 +31,18 @@
       };
     };
   };
-  bridge_settings = {
-    bridge_type = "normal";
-    normal = {
-      location = "any";
-      providers = "any";
-      ownership = "any";
-    };
-    custom = null;
-  };
   obfuscation_settings = {
     selected_obfuscation = "auto";
+    lwo = {
+      port = "any";
+    };
     udp2tcp = {
       port = "any";
     };
     shadowsocks = {
+      port = "any";
+    };
+    wireguard_port = {
       port = "any";
     };
   };
@@ -55,7 +51,7 @@
   };
   api_access_methods = {
     direct = {
-      id = "5dda2926-ee0f-4efe-89fb-4701e000b8af";
+      id = "4f2a3a41-3e37-4516-bf8c-792a1f94578f";
       name = "Direct";
       enabled = true;
       access_method = {
@@ -63,7 +59,7 @@
       };
     };
     mullvad_bridges = {
-      id = "a394d202-ba0c-46d4-9e48-83e3d1381d3b";
+      id = "83de3353-fcb6-4d41-98d3-54bc36ce5921";
       name = "Mullvad Bridges";
       enabled = true;
       access_method = {
@@ -71,7 +67,7 @@
       };
     };
     encrypted_dns_proxy = {
-      id = "fa5a434d-19c5-4693-ae43-b7747315255d";
+      id = "28bc46fc-fcb3-4559-8fdf-1f58381f577b";
       name = "Encrypted DNS proxy";
       enabled = true;
       access_method = {
@@ -85,9 +81,6 @@
   lockdown_mode = false;
   auto_connect = hostname == "main";
   tunnel_options = {
-    openvpn = {
-      mssfix = null;
-    };
     wireguard = {
       mtu = null;
       quantum_resistant = "on";
@@ -96,6 +89,7 @@
         use_multihop_if_necessary = true;
       };
       rotation_interval = null;
+      userspace = false;
     };
     generic = {
       enable_ipv6 = true;
@@ -117,7 +111,7 @@
   };
   relay_overrides = [ ];
   show_beta_releases = false;
-  settings_version = 13;
+  settings_version = 15;
   recents = [ ];
-  rollout_threshold_seed = 1644152406;
+  rollout_threshold_seed = 3738083069;
 }

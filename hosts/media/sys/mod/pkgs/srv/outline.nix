@@ -6,10 +6,7 @@ let
   outlineURL = "https://notes.${baseDomain}";
 in
 {
-  # needed until https://github.com/NixOS/nixpkgs/pull/536063 lands
-  imports = [ ./custom-outline.nix ];
-
-  services.custom-outline = {
+  services.outline = {
     enable = true;
     forceHttps = false;
     publicUrl = outlineURL;

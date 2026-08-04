@@ -228,7 +228,7 @@ in
         forceSSL = true;
         useACMEHost = baseDomain;
         locations."/" = {
-          root = "${pkgs.drawio}/dist";
+          root = "${pkgs.drawio}";
           index = "index.html";
           tryFiles = "$uri $uri/ /index.html";
         };

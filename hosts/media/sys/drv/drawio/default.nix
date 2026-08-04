@@ -12,12 +12,12 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "drawio";
-  version = "30.2.6";
+  version = "31.1.5";
   src = fetchFromGitHub {
     owner = "jgraph";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-TfaAvhLqa73kmQI4KpFnymjTW26SwQEseLSLQiQ3KGE=";
+    hash = "sha256-CdEV0b5nTO8eP8PVn/jkKa8qPmvOFpHuq7vzoTRb2a4=";
   };
 
   nativeBuildInputs = [
@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
   '';
 
   postInstall = ''
-    mkdir -p $out/dist
-    cp -r build/* $out/dist
+    mkdir -p $out
+    cp -r build/* $out/
   '';
 }

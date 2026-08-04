@@ -7,6 +7,7 @@
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.camdenboren = {
+    linger = true;
     isNormalUser = true;
     description = "Camden Boren";
     extraGroups = [

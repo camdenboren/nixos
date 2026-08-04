@@ -25,7 +25,6 @@ let
     dex = "dex.${baseDomain}";
     box = "box.${baseDomain}";
     car = "car.${baseDomain}";
-    pdf = "pdf.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
@@ -177,17 +176,6 @@ in
             send_timeout         600s;
           '';
         };
-      };
-
-      "${domains.pdf}" = {
-        forceSSL = true;
-        useACMEHost = baseDomain;
-        locations."/" = {
-          root = "${pkgs.bentopdf}/dist";
-          index = "index.html";
-          tryFiles = "$uri $uri/ /index.html";
-        };
-        extraConfig = staticHeaders;
       };
 
       "${domains.torrent}" = {

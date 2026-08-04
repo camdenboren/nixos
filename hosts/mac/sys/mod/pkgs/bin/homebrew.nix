@@ -6,7 +6,6 @@ _:
     enable = true;
     casks = [
       "amethyst"
-      "bitwarden"
       "clickup"
       "ungoogled-chromium"
       "freecad"

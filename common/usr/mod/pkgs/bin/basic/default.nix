@@ -15,13 +15,12 @@ in
     with pkgs;
     lib.optionals (!isVM) [
       alc-calc
-      # bitwarden-desktop # using homebrew version since compiler-rt-libc fix hasn't yet landed in nixpkgs
+      bitwarden-desktop
       mpv
       yt-x
     ]
     ++ lib.optionals (hostname == "main" || hostname == "media") [
       # Basic Apps
-      bitwarden-desktop
       lollypop
       readest
       vlc

@@ -11,7 +11,7 @@ in
 {
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      gtk-theme = "adw-gtk3";
+      gtk-theme = "adw-gtk3-dark";
       icon-theme = "Dracula";
       clock-format = "12h";
       clock-show-seconds = false;
@@ -191,7 +191,7 @@ in
   # gtk styling
   gtk = {
     enable = true;
-    theme.name = "adw-gtk3";
+    theme.name = "adw-gtk3-dark";
     iconTheme.name = "Dracula";
     gtk4.theme = config.gtk.theme;
   };
@@ -199,7 +199,7 @@ in
   # qt styling
   qt = {
     enable = true;
-    platformTheme.name = "gtk3";
+    platformTheme.name = "adwaita";
     style.name = "adwaita-dark";
   };
 }

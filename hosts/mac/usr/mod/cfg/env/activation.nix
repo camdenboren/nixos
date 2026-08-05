@@ -1,11 +1,20 @@
 {
   pkgs,
+  pkgs-stable,
   lib,
   ...
 }:
 
 {
   home.activation = {
+    updateCaCert = lib.hm.dag.entryAfter [ "installPackages" ] ''
+      if test ~/.config/gam/gam.cfg; then
+        ${pkgs.gnused}/bin/sed -i \
+          "s|^\(cacerts_pem\s*=\s*\).*|\1${pkgs-stable.cacert}/etc/ssl/certs/ca-bundle.crt|" \
+          ~/.config/gam/gam.cfg
+      fi
+    '';
+
     replaceConfigs = lib.hm.dag.entryAfter [ "installPackages" ] ''
       if test -d ~/Library/Application\ Support/FreeTube; then
         $DRY_RUN_CMD echo $VERBOSE_ARG "Removing configs for: freetube"

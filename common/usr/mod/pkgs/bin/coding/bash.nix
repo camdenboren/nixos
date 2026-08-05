@@ -97,6 +97,17 @@ in
         cd $1
       }
 
+      nix () {
+        case "$1" in
+          build|shell|develop|copy|flake)
+            ${pkgs.nix-output-monitor}/bin/nom "$@"
+          ;;
+          *)
+            command -p nix "$@"
+          ;;
+        esac
+      }
+
       run () {
         nix run nixpkgs#$1
       }

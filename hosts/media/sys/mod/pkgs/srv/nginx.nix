@@ -12,6 +12,7 @@ let
     chat = toString 8080;
     sync = toString 8384;
     draw = toString 9040;
+    ntfy = toString 2586;
     notes = toString 3000;
     media = toString 8096;
     image = toString 9090;
@@ -29,6 +30,7 @@ let
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
     draw = "draw.${baseDomain}";
+    ntfy = "ntfy.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
@@ -54,6 +56,12 @@ in
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
+    # the nginx logs indicated the default of 64 is
+    # insufficient, presumably because i'm hitting a large
+    # number of sites
+    appendHttpConfig = ''
+      proxy_headers_hash_bucket_size 128;
+    '';
 
     virtualHosts = {
       # redirect http -> https
@@ -221,6 +229,24 @@ in
           tryFiles = "$uri $uri/ /index.html";
         };
         extraConfig = staticHeaders;
+      };
+
+      "${domains.ntfy}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.ntfy}";
+            proxyWebsockets = true;
+            extraConfig = proxyHeaders + ''
+              proxy_connect_timeout 3m;
+              proxy_send_timeout 3m;
+              proxy_read_timeout 3m;
+
+              client_max_body_size 0; # Stream request body to backend
+            '';
+          };
+        };
       };
 
       "${domains.box}" = {

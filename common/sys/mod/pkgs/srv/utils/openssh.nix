@@ -14,6 +14,7 @@ let
     ];
     media = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK8GvQ8ynrx87GuJf/9QPwQZLkVrOfb2jEUIU2I8jgsV camdenboren@main"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDpmm2MT7INoy28MJHDUkl2TFzoXiqcK4ObxeQo1yMgmohyU5VeJwZsSkH+/ZW+r9zG+HpZAccRzaL2vEMscBT/6mkl5S+fU+e7V+wwO9bV3hcfTdyq62Jfk6ejkIPRT3bNQRYWCY7alUyCD2Xpt8JWAfYKhgIDuSxXnEwjbtE4+9Eoxi2/F0wjbfpBHp365FueHiqO1/pNyCYl38BMdp9DV1SGyg4LyDr5gJVFbINiG7NaElCBOXucsBESoZsmbUeFBMMrwKoHj89HXtkQ5fGtGrptF2CyFyKeCYDhySQ8so8vgFQU3AzMDjromiMZReoYv9wGU7EPIRBvZvasCbdW2PI30ty3nyogpCx1sFcIkCRRZNNTtcNlRCMudJTtCxNVDvVrtcvdtwCbr5XAAajxiX1TfDPwxt8TZ3vjWv74JPthO19exLU1H1RB/KJJhU2K13r+YlamIKB9OygZbBx0j2hB4qtI5iZNQeHlnr1EXQBUdtZhWm/NCNoDIdzNzDk= mobile@localhost"
     ];
   };
 in

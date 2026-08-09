@@ -3,10 +3,9 @@
 let
   port = toString 22;
   user = "camdenboren";
-  ip = {
-    main = "192.168.1.88";
-    media = "192.168.1.78";
-  };
+  needsBuilder = hostname == "media" || hostname == "mainvm";
+  sshServer = if needsBuilder then "main" else "media";
+  ip = if needsBuilder then "192.168.1.88" else "192.168.1.78";
   authorizedKeys = {
     main = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBrva9LWtBQwBUbc6HxC1DPzPsx32eAP83GS0qNe4M3w camdenboren@media"
@@ -27,16 +26,13 @@ in
     settings.KbdInteractiveAuthentication = false;
   };
 
-  programs.ssh.extraConfig = ''
-    Host main
-      HostName ${ip.main}
+  programs.ssh.extraConfig = lib.optionals (hostname != "macvm") ''
+    Host ${sshServer}
+      HostName ${ip}
       Port ${port}
       User ${user}
-
-    Host media
-      HostName ${ip.media}
-      Port ${port}
-      User ${user}
+      IdentitiesOnly yes
+      IdentityFile ~/.ssh/${sshServer}
   '';
 
   # This places the clients' public keys on the servers, but you still need to copy

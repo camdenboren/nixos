@@ -6,6 +6,14 @@ let
   needsBuilder = hostname == "media" || hostname == "mainvm";
   sshServer = if needsBuilder then "main" else "media";
   ip = if needsBuilder then "192.168.1.88" else "192.168.1.78";
+  knownHost = {
+    inherit ip;
+    key =
+      if needsBuilder then
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIII9Jj5lzEGNu4vVmXT9xJINftPnfmObOw5OLZD3r+Ye"
+      else
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8gWsB+UZNmn8CDd2FbsoOpTQBGLRg0QXr5t13FPoUP";
+  };
   authorizedKeys = {
     main = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBrva9LWtBQwBUbc6HxC1DPzPsx32eAP83GS0qNe4M3w camdenboren@media"
@@ -26,14 +34,19 @@ in
     settings.KbdInteractiveAuthentication = false;
   };
 
-  programs.ssh.extraConfig = lib.optionals (hostname != "macvm") ''
-    Host ${sshServer}
-      HostName ${ip}
-      Port ${port}
-      User ${user}
-      IdentitiesOnly yes
-      IdentityFile ~/.ssh/${sshServer}
-  '';
+  programs.ssh = {
+    extraConfig = lib.optionals (hostname != "macvm") ''
+      Host ${sshServer}
+        HostName ${ip}
+        Port ${port}
+        User ${user}
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/${sshServer}
+    '';
+    knownHosts = lib.mkIf (hostname != "macvm") {
+      "${knownHost.ip}".publicKey = knownHost.key;
+    };
+  };
 
   # This places the clients' public keys on the servers, but you still need to copy
   # each client's private key to it's homedir (from bitwarden) before hitting a

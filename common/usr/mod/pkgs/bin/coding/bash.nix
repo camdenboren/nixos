@@ -103,7 +103,7 @@ in
             ${pkgs.nix-output-monitor}/bin/nom "$@"
           ;;
           *)
-            command -p nix "$@"
+            command nix "$@"
           ;;
         esac
       }

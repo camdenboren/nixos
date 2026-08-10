@@ -56,6 +56,18 @@ in
           "nh darwin switch"
         else
           "nh os switch" + lib.optionalString needsBuilder " --build-host main";
+      tm = lib.optionalString (hostname == "media") ''
+        tailscale down && \
+          mullvad connect && \
+          mullvad lockdown-mode set on && \
+          mullvad relay set location us nyc
+      '';
+      mt = lib.optionalString (hostname == "media") ''
+        mullvad lockdown-mode set off && \
+          mullvad disconnect && \
+          tailscale up && \
+          systemctl restart unbound
+      '';
       tr = if isDarwin then "trash" else "gio trash";
       travel = "nh os switch -s travel";
       update = "nix flake update --flake $NH_FLAKE";

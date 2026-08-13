@@ -1,11 +1,14 @@
 {
-  hostname,
+  pkgs,
   lib,
+  system,
+  hostname,
   ...
 }:
 
 let
   isVM = lib.hasSuffix "vm" hostname;
+  isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
   programs.zed-editor = {
@@ -136,6 +139,14 @@ in
               keep_alive = "5m";
             }
           ];
+        };
+      };
+
+      # add codex on mac
+      agent_servers = lib.mkIf isDarwin {
+        Codex = {
+          type = "custom";
+          command = "${pkgs.codex-acp}/bin/codex-acp";
         };
       };
     };

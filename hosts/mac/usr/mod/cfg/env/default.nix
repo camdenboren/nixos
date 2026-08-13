@@ -8,6 +8,7 @@
     # Host-specific
     ./activation.nix
     ./files.nix
+    ./overlays
     ./sessionVariables.nix
   ];
 }

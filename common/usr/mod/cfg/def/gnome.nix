@@ -96,6 +96,8 @@ in
     };
     "org/gnome/shell/extensions/blur-my-shell/applications" = {
       blur = true;
+      sigma = 0;
+      brightness = 0.60;
       customize = false;
       dynamic-opacity = false;
       opacity = 230;
@@ -138,6 +140,7 @@ in
       world-clock = false;
       weather = false;
       events-button = false;
+      support-notifier-type = 0;
       workspace-popup = false;
       workspace = false;
       window-preview-caption = false;
@@ -147,7 +150,6 @@ in
       power-icon = false;
 
       # customize
-      startup-status = 0;
       panel-button-padding-size = 1;
       panel-indicator-padding-size = 1;
     };

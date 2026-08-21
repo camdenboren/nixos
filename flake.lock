@@ -57,6 +57,27 @@
         "type": "github"
       }
     },
+    "fetch-rs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787319922,
+        "narHash": "sha256-Ax63kl9C1YoFRw0i9kkWNfmKPPxtkdDWuw5DdpNMnQ4=",
+        "owner": "camdenboren",
+        "repo": "fetch-rs",
+        "rev": "f913ca61962fb83b9321dff6b64067b762ab6974",
+        "type": "github"
+      },
+      "original": {
+        "owner": "camdenboren",
+        "ref": "service",
+        "repo": "fetch-rs",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -211,6 +232,7 @@
       "inputs": {
         "alc-calc": "alc-calc",
         "chatbot-util": "chatbot-util",
+        "fetch-rs": "fetch-rs",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "musnix": "musnix",

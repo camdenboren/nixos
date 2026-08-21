@@ -21,6 +21,7 @@ in
   };
   modules = [
     ./sys
+    inputs.fetch-rs.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     {
       home-manager = {

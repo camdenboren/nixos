@@ -11,7 +11,7 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
-  imports = [
+  imports = lib.optionals (hostname != "media") [
     ../../../cfg/env/overlays/kiwix-mcp.nix
   ];
 
@@ -155,10 +155,17 @@ in
       };
 
       context_servers = {
-        kiwix-mcp = {
-          command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
-          env.KIWIX_BASE_URL = "https://archive.home.local";
-        };
+        kiwix-mcp =
+          # avoids conflicting w/ media's service used by open-webui
+          if (hostname != "media") then
+            {
+              command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
+              env.KIWIX_BASE_URL = "https://archive.home.local";
+            }
+          else
+            {
+              url = "http://localhost:8000/mcp";
+            };
 
         mcp-nixos = {
           command = "${pkgs.mcp-nixos}/bin/mcp-nixos";

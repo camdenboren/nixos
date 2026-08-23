@@ -20,12 +20,14 @@ let
     photos = toString 2283;
     design = toString 9001;
     torrent = toString 9080;
+    archive = toString 9095;
   };
   domains = {
     www = "www.${baseDomain}";
     dex = "dex.${baseDomain}";
     box = "box.${baseDomain}";
     car = "car.${baseDomain}";
+    mcp = "mcp.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
@@ -37,6 +39,7 @@ let
     photos = "photos.${baseDomain}";
     design = "design.${baseDomain}";
     torrent = "torrent.${baseDomain}";
+    archive = "archive.${baseDomain}";
   };
   proxyHeaders = ''
     proxy_set_header X-Real-IP $remote_addr;
@@ -192,6 +195,17 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.torrent}";
+            extraConfig = proxyHeaders;
+          };
+        };
+      };
+
+      "${domains.archive}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.archive}";
             extraConfig = proxyHeaders;
           };
         };

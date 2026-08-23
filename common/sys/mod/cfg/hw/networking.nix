@@ -38,6 +38,7 @@ let
     "photos.home.local"
     "design.home.local"
     "torrent.home.local"
+    "archive.home.local"
   ];
 in
 lib.recursiveUpdate

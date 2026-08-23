@@ -11,6 +11,10 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
+  imports = [
+    ../../../cfg/env/overlays/kiwix-mcp.nix
+  ];
+
   programs.zed-editor = {
     enable = true;
 
@@ -147,6 +151,18 @@ in
         Codex = {
           type = "custom";
           command = "${pkgs.codex-acp}/bin/codex-acp";
+        };
+      };
+
+      context_servers = {
+        kiwix-mcp = {
+          command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
+          env.KIWIX_BASE_URL = "https://archive.home.local";
+        };
+
+        mcp-nixos = {
+          command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
+          env.MCP_NIXOS_PORT = "9050";
         };
       };
     };

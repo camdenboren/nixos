@@ -11,6 +11,8 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
+  # media uses the streamable http version since open-webui
+  # needs it anyway
   imports = lib.optionals (hostname != "media") [
     ../../../cfg/env/overlays/kiwix-mcp.nix
   ];

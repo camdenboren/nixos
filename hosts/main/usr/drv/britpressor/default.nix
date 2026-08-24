@@ -13,4 +13,11 @@ stdenv.mkDerivation {
     mkdir -p $out/lib/winvst3
     cp -r Britpressor.vst3 $out/lib/winvst3
   '';
+
+  passthru.updateScript = [
+    ../../../../../common/usr/scr/updateScriptAO.sh
+    "79798060"
+    "Britpressor"
+    "britpressor/default.nix"
+  ];
 }

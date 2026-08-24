@@ -15,4 +15,6 @@ stdenv.mkDerivation {
     mkdir -p $out/lib/vst
     cp -r lib/libAudioGridder.so $out/lib/vst
   '';
+
+  passthru.updateScript = ./update.sh;
 }

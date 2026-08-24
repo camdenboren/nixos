@@ -1,0 +1,89 @@
+name: update
+
+on:
+  push:
+  schedule:
+    - cron: "45 11 5 * *" # Monthly on the 5th at 8am CST
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: nix profile add nixpkgs#nix-update nixpkgs#nixfmt nixpkgs#fd
+
+      - name: Prepare git
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Update linux derivations and commit changes
+        run: |
+          PKGS=(
+            "drawio system nixos media"
+            "kiwix-mcp user nixos"
+            "audiogridder user nixos"
+            "britpressor user nixos"
+            "fetish user nixos"
+            "freq-echo user nixos"
+            "kotelnikov user nixos"
+            "loudmax user nixos"
+            "neural-amp-modeler-lv2 user nixos"
+            "nova user nixos"
+            "rare user nixos"
+            "span user nixos"
+            "ssq user nixos"
+          )
+          for entry in "${PKGS[@]}"; do
+            set -- $entry
+            ./common/usr/scr/updatePkg.sh "$@"
+            fd -t f -e nix . . -x nixfmt '{}'
+            git add -A
+            git commit -m "update: bump ${entry%% *}"
+          done
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: updatePkgs-linux
+
+  darwin:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: nix profile add nixpkgs#nix-update nixpkgs#nixfmt nixpkgs#fd
+
+      - name: Prepare git
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Update darwin derivations and commit changes
+        run: |
+          PKGS=(
+            "codex-acp user darwin mac"
+          )
+          for entry in "${PKGS[@]}"; do
+            set -- $entry
+            ./common/usr/scr/updatePkg.sh "$@"
+            fd -t f -e nix . . -x nixfmt '{}'
+            git add -A
+            git commit -m "update: bump ${entry%% *}"
+          done
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: updatePkgs-darwin

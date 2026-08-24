@@ -133,6 +133,10 @@ in
         done
         nix shell $NIXPKGS_STRING
       }
+
+      updatePkg () {
+        $NH_FLAKE/common/usr/scr/updatePkg.sh "$@"
+      }
     '';
   };
 }

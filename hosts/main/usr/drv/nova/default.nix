@@ -13,4 +13,11 @@ stdenv.mkDerivation rec {
     mkdir -p $out/lib/winvst3
     cp -r VST3/x64/TDR\ Nova.vst3 $out/lib/winvst3
   '';
+
+  passthru.updateScript = [
+    ../../../../../common/usr/scr/updateScriptTDR.sh
+    "tdr-nova"
+    "Nova"
+    "nova/default.nix"
+  ];
 }

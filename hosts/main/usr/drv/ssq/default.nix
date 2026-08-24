@@ -13,4 +13,11 @@ stdenv.mkDerivation {
     mkdir -p $out/lib/winvst3
     cp -r SSQ.vst3 $out/lib/winvst3
   '';
+
+  passthru.updateScript = [
+    ../../../../../common/usr/scr/updateScriptAO.sh
+    "54598496"
+    "SSQ"
+    "ssq/default.nix"
+  ];
 }

@@ -13,4 +13,11 @@ stdenv.mkDerivation {
     mkdir -p $out/lib/winvst3
     cp -r Rare.vst3 $out/lib/winvst3
   '';
+
+  passthru.updateScript = [
+    ../../../../../common/usr/scr/updateScriptAO.sh
+    "90832098"
+    "RB_Rare"
+    "rare/default.nix"
+  ];
 }

@@ -15,4 +15,6 @@ stdenv.mkDerivation {
     mkdir -p $out/lib/ladspa
     cp -r la_LoudMax64.so $out/lib/ladspa
   '';
+
+  passthru.updateScript = ./update.sh;
 }

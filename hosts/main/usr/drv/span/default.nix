@@ -1,17 +1,36 @@
-{ stdenv, fetchzip }:
+{
+  lib,
+  stdenvNoCC,
+  fetchurl,
+  innoextract,
+}:
 
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "span";
   version = "3.24";
-  src = fetchzip {
-    url = "https://www.dropbox.com/scl/fi/ssytkknumojc0p87zuyce/span-${version}.tar.gz?rlkey=lboa5ig3ubsvlyv18stlnzhby&st=m5i01973&dl=1";
-    hash = "sha256-6/LKon/WrgvSOYXFpYE14rBgnP8GMkBLEFwh3jh0XnA=";
-    stripRoot = false;
+
+  src = fetchurl {
+    url = "https://www.voxengo.com/files/VoxengoSPAN_${
+      lib.replaceStrings [ "." ] [ "" ] version
+    }_Win32_64_VST_VST3_AAX_setup.exe";
+    hash = "sha256-3GIiGo8HhBZa4P8Ugsapb5kRtdyeav6tpns9RvQ4XsI=";
   };
-  # installer url = "https://www.voxengo.com/files/VoxengoSPAN_324_Win32_64_VST_VST3_AAX_setup.exe";
+
+  nativeBuildInputs = [ innoextract ];
+
+  dontConfigure = true;
+  dontBuild = true;
+
+  unpackPhase = ''
+    runHook preUnpack
+    innoextract --extract --silent "$src"
+    runHook postUnpack
+  '';
 
   installPhase = ''
     mkdir -p $out/lib/winvst3
-    cp -r $src/span/SPAN.vst3 $out/lib/winvst3
+    cp -r cf64/VST3/SPAN.vst3 $out/lib/winvst3
   '';
+
+  passthru.updateScript = ./update.sh;
 }

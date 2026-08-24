@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   system,
   hostname,
@@ -21,4 +22,12 @@ in
   ++ lib.optionals isVM [
     ./xdg.nix
   ];
+
+  # exposes pkgs installed via home-manager overlays
+  # under config.home-manager.users.camdenboren.home.packageSet
+  # useful for updating via `nix-update`
+  options.home.packageSet = lib.mkOption {
+    type = lib.types.raw;
+  };
+  config.home.packageSet = pkgs;
 }

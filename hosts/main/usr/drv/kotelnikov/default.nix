@@ -13,4 +13,11 @@ stdenv.mkDerivation rec {
     mkdir -p $out/lib/winvst3
     cp -r TDR\ Kotelnikov\ \(no\ installer\)/VST3/x64/TDR\ Kotelnikov.vst3 $out/lib/winvst3
   '';
+
+  passthru.updateScript = [
+    ../../../../../common/usr/scr/updateScriptTDR.sh
+    "tdr-kotelnikov"
+    "Kotelnikov"
+    "kotelnikov/default.nix"
+  ];
 }

@@ -13,4 +13,11 @@ stdenv.mkDerivation {
     mkdir -p $out/lib/winvst3
     cp -r FETish.vst3 $out/lib/winvst3
   '';
+
+  passthru.updateScript = [
+    ../../../../../common/usr/scr/updateScriptAO.sh
+    "51962024"
+    "FETish"
+    "fetish/default.nix"
+  ];
 }

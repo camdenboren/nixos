@@ -20,8 +20,8 @@ download_url="$(
   curl -LfsS \
     -A 'nix-analog-obsession-updater/1' \
     "https://www.patreon.com/api/posts/$post_id" |
-    jq -er '
-      first(
+    jq -er --arg archive_stem "$archive_stem" '
+      [
         .data.attributes.content_json_string
         | fromjson
         | ..
@@ -30,7 +30,22 @@ download_url="$(
         | .marks[]?
         | select(.type == "link")
         | .attrs.href
-      )
+        | select(type == "string")
+        | . as $url
+        | ($url | split("?")[0] | split("/")[-1]) as $archive
+        | select(
+            ($archive | startswith($archive_stem + "_"))
+            and ($archive | endswith(".zip"))
+          )
+      ]
+      | unique
+      | if length == 1 then
+          .[0]
+        else
+          error(
+            "expected exactly one Windows Zip link for \($archive_stem), found \(length)"
+          )
+        end
     '
 )"
 

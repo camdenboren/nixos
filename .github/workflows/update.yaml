@@ -7,13 +7,12 @@ on:
 
 jobs:
   pkgs:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
 
       - uses: cachix/install-nix-action@v31
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
@@ -24,7 +23,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
 
-      - name: Update linux derivations and commit changes
+      - name: Update derivations and commit each change
         run: |
           PKGS=(
             "drawio"
@@ -44,8 +43,8 @@ jobs:
           )
           for entry in "${PKGS[@]}"; do
             set -- $entry
-            nix-update nixosConfigurations.main.pkgs."$@" \
-              --flake --use-update-script 
+            nix-update darwinConfigurations.mac.pkgs."$@" \
+              --flake --use-update-script
             fd -t f -e nix . . -x nixfmt '{}'
             git add -A
             git commit -m "update: bump ${entry%% *}"

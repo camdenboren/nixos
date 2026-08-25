@@ -29,22 +29,21 @@ jobs:
             "drawio"
             "kiwix-mcp"
             "codex-acp"
-            "audiogridder"
-            "britpressor"
-            "fetish"
-            "freq-echo"
-            "kotelnikov"
-            "loudmax"
+            "audiogridder -u"
+            "britpressor -u"
+            "fetish -u"
+            "freq-echo -u"
+            "kotelnikov -u"
+            "loudmax -u"
             "neural-amp-modeler-lv2"
-            "nova"
-            "rare"
-            "span"
-            "ssq"
+            "nova -u"
+            "rare -u"
+            "span -u"
+            "ssq -u"
           )
           for entry in "${PKGS[@]}"; do
             set -- $entry
-            nix-update nixosConfigurations.main.pkgs."$@" \
-              --flake --use-update-script
+            nix-update nixosConfigurations.main.pkgs."$@" --flake
             fd -t f -e nix . . -x nixfmt '{}'
             git add -A
             git commit -m "update: bump ${entry%% *}"
@@ -54,3 +53,4 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           branch: updatePkgs-test
+          title: Update custom packages

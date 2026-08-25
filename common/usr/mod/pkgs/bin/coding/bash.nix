@@ -136,8 +136,7 @@ in
 
       updatePkg () {
         ${pkgs.nix-update}/bin/nix-update \
-          nixosConfigurations.main.pkgs.$1 \
-          --flake --use-update-script
+          nixosConfigurations.main.pkgs."$@" --flake
       }
     '';
   };

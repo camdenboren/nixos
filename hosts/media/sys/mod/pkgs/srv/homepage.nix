@@ -20,6 +20,7 @@ let
     photos = "https://photos.${baseDomain}/";
     design = "https://design.${baseDomain}/";
     torrent = "https://torrent.${baseDomain}/";
+    archive = "https://archive.${baseDomain}/";
   };
   backgrounds = {
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
@@ -124,6 +125,13 @@ in
       }
       {
         Content = [
+          {
+            Archive = {
+              icon = "kiwix";
+              href = URLs.archive;
+              siteMonitor = URLs.archive;
+            };
+          }
           {
             Media = {
               icon = "jellyfin";

@@ -11,6 +11,12 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
+  # media uses the streamable http version since open-webui
+  # needs it anyway
+  imports = lib.optionals (hostname != "media") [
+    ../../../cfg/env/overlays/kiwix-mcp.nix
+  ];
+
   programs.zed-editor = {
     enable = true;
 
@@ -148,6 +154,20 @@ in
           type = "custom";
           command = "${pkgs.codex-acp}/bin/codex-acp";
         };
+      };
+
+      context_servers = {
+        kiwix-mcp =
+          # avoids conflicting w/ media's service used by open-webui
+          if (hostname != "media") then
+            {
+              command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
+              env.KIWIX_BASE_URL = "https://archive.home.local";
+            }
+          else
+            {
+              url = "http://localhost:8000/mcp";
+            };
       };
     };
   };

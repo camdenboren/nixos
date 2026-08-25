@@ -5,7 +5,7 @@ set -Eeuo pipefail
 
 page_slug="${1:?missing Tokyo Dawn page slug}"
 lab_name="${2:?missing Tokyo Dawn lab name}"
-relative_package_file="hosts/main/usr/drv/${3:?missing package filename}"
+relative_package_file="common/drv/${3:?missing package filename}"
 
 die() {
   echo "Tokyo Dawn updater: $*" >&2

@@ -1,5 +1,5 @@
 #!/usr/bin/env nix
-#!nix shell nixpkgs#curl nixpkgs#htmlq inixpkgs#nnoextract nixpkgs#jq nixpkgs#perl nixpkgs#gitMinimal --command bash
+#!nix shell nixpkgs#curl nixpkgs#htmlq nixpkgs#innoextract nixpkgs#jq nixpkgs#perl nixpkgs#gitMinimal --command bash
 
 set -Eeuo pipefail
 
@@ -9,7 +9,7 @@ die() {
 }
 
 repo_root="$(git rev-parse --show-toplevel)"
-package_file="$repo_root/hosts/main/usr/drv/span/default.nix"
+package_file="$repo_root/common/drv/span/default.nix"
 
 [[ -f "$package_file" ]] || die "package file not found: $package_file"
 

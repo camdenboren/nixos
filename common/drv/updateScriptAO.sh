@@ -5,7 +5,7 @@ set -Eeuo pipefail
 
 post_id="${1:?missing Patreon post ID}"
 archive_stem="${2:?missing archive stem}"
-relative_package_file="hosts/main/usr/drv/${3:?missing package filename}"
+relative_package_file="common/drv/${3:?missing package filename}"
 
 die() {
   echo "analog-obsession updater: $*" >&2

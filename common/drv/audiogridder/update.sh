@@ -9,7 +9,7 @@ die() {
 }
 
 repo_root="$(git rev-parse --show-toplevel)"
-package_file="$repo_root/hosts/main/usr/drv/audiogridder/default.nix"
+package_file="$repo_root/common/drv/audiogridder/default.nix"
 
 [[ -f "$package_file" ]] || die "package file not found: $package_file"
 

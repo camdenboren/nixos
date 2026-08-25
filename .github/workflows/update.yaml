@@ -7,7 +7,7 @@ on:
 
 jobs:
   pkgs:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
@@ -43,7 +43,7 @@ jobs:
           )
           for entry in "${PKGS[@]}"; do
             set -- $entry
-            nix-update darwinConfigurations.mac.pkgs."$@" \
+            nix-update nixosConfigurations.main.pkgs."$@" \
               --flake --use-update-script
             fd -t f -e nix . . -x nixfmt '{}'
             git add -A

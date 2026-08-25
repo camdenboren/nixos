@@ -13,6 +13,8 @@ jobs:
 
       - uses: cachix/install-nix-action@v31
         with:
+          # nix-update seems to be reliant on it for some pkgs
+          nix_path: nixpkgs=channel:nixos-unstable
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
@@ -46,7 +48,11 @@ jobs:
             nix-update nixosConfigurations.main.pkgs."$@" --flake
             fd -t f -e nix . . -x nixfmt '{}'
             git add -A
-            git commit -m "update: bump ${entry%% *}"
+            if ! git diff --cached --quiet; then
+              git commit -m "update: bump ${entry%% *}"
+            else
+              echo "No changes for $entry, skipping commit"
+            fi
           done
 
       - name: Create pull request

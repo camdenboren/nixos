@@ -1,5 +1,5 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p coreutils curl htmlq jq nix perl gitMinimal
+#!/usr/bin/env nix
+#!nix shell nixpkgs#coreutils nixpkgs#curl nixpkgs#htmlq nixpkgs#jq nixpkgs#perl nixpkgs#gitMinimal --command bash
 
 set -Eeuo pipefail
 

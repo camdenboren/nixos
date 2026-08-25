@@ -1,5 +1,5 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p curl htmlq innoextract jq nix perl gitMinimal
+#!/usr/bin/env nix
+#!nix shell nixpkgs#curl nixpkgs#htmlq inixpkgs#nnoextract nixpkgs#jq nixpkgs#perl nixpkgs#gitMinimal --command bash
 
 set -Eeuo pipefail
 

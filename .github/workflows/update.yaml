@@ -53,7 +53,7 @@ jobs:
             else
               echo "No changes for ${entry%% *}, skipping commit"
             fi
-            echo -e "\n"
+            echo ----------------------------------------
           done
 
       - name: Create pull request

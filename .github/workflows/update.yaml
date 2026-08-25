@@ -51,8 +51,9 @@ jobs:
             if ! git diff --cached --quiet; then
               git commit -m "update: bump ${entry%% *}"
             else
-              echo "No changes for $entry, skipping commit"
+              echo "No changes for ${entry%% *}, skipping commit"
             fi
+            echo -e "\n"
           done
 
       - name: Create pull request

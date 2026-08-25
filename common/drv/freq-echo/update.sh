@@ -9,7 +9,7 @@ die() {
 }
 
 repo_root="$(git rev-parse --show-toplevel)"
-package_file="$repo_root/common/freq-echo/default.nix"
+package_file="$repo_root/common/drv/freq-echo/default.nix"
 
 [[ -f "$package_file" ]] || die "package file not found: $package_file"
 

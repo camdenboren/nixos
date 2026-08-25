@@ -37,6 +37,7 @@ jobs:
             "freq-echo -u"
             "kotelnikov -u"
             "loudmax -u"
+            "maudioplugins -u"
             "neural-amp-modeler-lv2"
             "nova -u"
             "rare -u"
@@ -53,7 +54,7 @@ jobs:
             else
               echo "No changes for ${entry%% *}, skipping commit"
             fi
-            echo ----------------------------------------
+            echo ------------------------------------------
           done
 
       - name: Create pull request

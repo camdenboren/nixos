@@ -135,7 +135,9 @@ in
       }
 
       updatePkg () {
-        $NH_FLAKE/common/usr/scr/updatePkg.sh "$@"
+        ${pkgs.nix-update}/bin/nix-update \
+          nixosConfigurations.main.pkgs.$1 \
+          --flake --use-update-script
       }
     '';
   };

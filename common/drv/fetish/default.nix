@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   '';
 
   passthru.updateScript = [
-    ../../../../../common/usr/scr/updateScriptAO.sh
+    ../updateScriptAO.sh
     "51962024"
     "FETish"
     "fetish/default.nix"

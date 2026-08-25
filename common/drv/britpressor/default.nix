@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   '';
 
   passthru.updateScript = [
-    ../../../../../common/usr/scr/updateScriptAO.sh
+    ../updateScriptAO.sh
     "79798060"
     "Britpressor"
     "britpressor/default.nix"

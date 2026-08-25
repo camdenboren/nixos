@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   '';
 
   passthru.updateScript = [
-    ../../../../../common/usr/scr/updateScriptTDR.sh
+    ../updateScriptTDR.sh
     "tdr-kotelnikov"
     "Kotelnikov"
     "kotelnikov/default.nix"

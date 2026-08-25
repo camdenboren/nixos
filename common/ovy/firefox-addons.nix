@@ -13,7 +13,7 @@
       in
       {
         firefox-addons = inputs.firefox-addons.packages.${system} // {
-          vimium-new-tab-page = prev.callPackage ../../../../drv/vimium-new-tab-page {
+          vimium-new-tab-page = prev.callPackage ../drv/vimium-new-tab-page {
             inherit buildFirefoxXpiAddon;
           };
         };

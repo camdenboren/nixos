@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   '';
 
   passthru.updateScript = [
-    ../../../../../common/usr/scr/updateScriptAO.sh
+    ../updateScriptAO.sh
     "54598496"
     "SSQ"
     "ssq/default.nix"

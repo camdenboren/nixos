@@ -44,11 +44,13 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 - Firstly, pinning our system inputs, `flake.nix` is a parent
 - Beneath this, various `hosts` are defined with `sys` and `usr` (think `configuration.nix` and `home-manager.nix`)
 - `sys` and `usr` are further divided into modules within their corresponding directories
-- Modules used by more than one host are stored in `common`
+- Modules used by more than one host are stored in `common`, as are all overlays and custom packages
 
   ```
   flake
   ├── common
+  │   ├── drv
+  │   ├── ovy
   │   ├── sys
   │   └── usr
   └── hosts

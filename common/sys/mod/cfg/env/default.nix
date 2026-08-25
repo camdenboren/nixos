@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./nix-settings.nix
+    ../../../../ovy
   ]
   ++ lib.optionals isLinux [
     ./sessionVariables.nix

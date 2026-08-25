@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   '';
 
   passthru.updateScript = [
-    ../../../../../common/usr/scr/updateScriptTDR.sh
+    ../updateScriptTDR.sh
     "tdr-nova"
     "Nova"
     "nova/default.nix"

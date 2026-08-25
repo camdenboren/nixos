@@ -11,12 +11,6 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
-  # media uses the streamable http version since open-webui
-  # needs it anyway
-  imports = lib.optionals (hostname != "media") [
-    ../../../cfg/env/overlays/kiwix-mcp.nix
-  ];
-
   programs.zed-editor = {
     enable = true;
 
@@ -168,11 +162,6 @@ in
             {
               url = "http://localhost:8000/mcp";
             };
-
-        mcp-nixos = {
-          command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
-          env.MCP_NIXOS_PORT = "9050";
-        };
       };
     };
   };

@@ -7,7 +7,6 @@
     ../../../../../common/sys/mod/cfg/env
 
     # Host-specific
-    ./env
     ./hw
   ];
 }

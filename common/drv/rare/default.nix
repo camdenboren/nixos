@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   '';
 
   passthru.updateScript = [
-    ../../../../../common/usr/scr/updateScriptAO.sh
+    ../updateScriptAO.sh
     "90832098"
     "RB_Rare"
     "rare/default.nix"

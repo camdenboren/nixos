@@ -54,7 +54,7 @@ jobs:
             else
               echo "No changes for ${entry%% *}, skipping commit"
             fi
-            echo -------------------------------------------
+            echo --------------------------------------------
           done
 
       - name: Create pull request
@@ -62,4 +62,5 @@ jobs:
         with:
           branch: updatePkgs-test
           title: Update custom packages
+          body: Automatically generated PR to update the versions and hashes of one or more custom derivations via nix-update
           token: ${{ secrets.WORKFLOW_TOKEN }}

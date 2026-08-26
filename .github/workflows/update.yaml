@@ -54,7 +54,7 @@ jobs:
             else
               echo "No changes for ${entry%% *}, skipping commit"
             fi
-            echo ------------------------------------------
+            echo -------------------------------------------
           done
 
       - name: Create pull request
@@ -62,3 +62,4 @@ jobs:
         with:
           branch: updatePkgs-test
           title: Update custom packages
+          token: ${{ secrets.WORKFLOW_TOKEN }}

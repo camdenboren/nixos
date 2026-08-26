@@ -27,6 +27,7 @@ let
     dex = "dex.${baseDomain}";
     box = "box.${baseDomain}";
     car = "car.${baseDomain}";
+    mcp = "mcp.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";

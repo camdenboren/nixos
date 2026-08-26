@@ -18,6 +18,7 @@ in
       deadnix
       nixd
       nixfmt
+      nix-update
       harper
       fd
       lynx

@@ -14,6 +14,7 @@ in
     ./files.nix
     ./home-manager.nix
     ./nix-settings.nix
+    ../../../../ovy
   ]
   ++ lib.optionals isLinux [
     ./sessionVariables.nix

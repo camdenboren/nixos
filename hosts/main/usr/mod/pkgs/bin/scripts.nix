@@ -12,7 +12,6 @@
 
     # Host-specific
     (import ../../../scr/installPlugins.nix { inherit pkgs; })
-    (import ../../../scr/refreshPlugins.nix { inherit pkgs; })
     (import ../../../scr/replaceConfigs.nix { inherit pkgs; })
   ];
 }

@@ -24,7 +24,7 @@
     freq-echo
     span
     ssd # needs dxvk via winetricks
-    maudioplugins # needs music/Plugin\ Data/MeldaProduction put in ~/.wine/drive_c/ProgramData
+    maudioplugins
     abstract-vox
     # Plugins - packs
     distrho-ports

@@ -1,0 +1,148 @@
+{
+  "manager": {
+    "hash": "sha256-1gpMeO6y0LDrijGHdaclneja4nAmvhxyKDG2p14Jc3g=",
+    "setupName": "MPluginManager_02_29_setup.exe",
+    "time": "2026-08-25 14:41:24",
+    "version": "02.29"
+  },
+  "packages": {
+    "BINEffects_binkernel": {
+      "folder": "PKG/BINEffects/binkernel",
+      "hash": "sha256-y84JVxAPXIVJMNrTHEkJ4zkJqDjaJcziOkYipUKHXRI=",
+      "md5": "0577aa0e945152caa34225d48eee9ef2",
+      "version": "17.09.02"
+    },
+    "BINEffects_binkernel_avx2": {
+      "folder": "PKG/BINEffects/binkernel_avx2",
+      "hash": "sha256-qKnfP3K3yOTAh+l08Jy0/gwNElVfILznMiYRbUCg2QI=",
+      "md5": "6f568d154d27c6abf4a55a5cfa48ff53",
+      "version": "17.09.02"
+    },
+    "BINEffects_binx64": {
+      "folder": "PKG/BINEffects/binx64",
+      "hash": "sha256-MHSXFlK2XvEToAc54J/b43feaAv0C1HB91dYp91WQTE=",
+      "md5": "774724901d7b7aea35c2aaead54e7fbd",
+      "version": "17.09.00"
+    },
+    "GLOBAL": {
+      "folder": "PKG/GLOBAL",
+      "hash": "sha256-gqfroAGjBfi1SM3P+jWXpFYvdmsrTd1xXTM+fnyMXhc=",
+      "md5": "658e064cff9cc9461373feeba7112c43",
+      "version": "17.07.00"
+    },
+    "GLOBAL_BYPLUGIN": {
+      "folder": "PKG/GLOBAL_BYPLUGIN",
+      "hash": "sha256-rdM2dH0HFMBPUr8trGrYyQrdESB/2ikSYKJyaZM6FDA=",
+      "md5": "7b087cfb44b7fccd2de51607cb9abc33",
+      "version": "17.06.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MAutopanMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MAutopanMB",
+      "hash": "sha256-GI33NBTlPSRZ2fzns5N0686mWO1f/l9CqoN8fLpAjQ4=",
+      "md5": "aa288704139479b7df794f27b2c55269",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MCombMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MCombMB",
+      "hash": "sha256-ZFQU5ykT2mIkiZW9BW7SMqw7Gf0nuKvefaLgNaIdmpI=",
+      "md5": "058f54ff0cdbc4ea2f26f01b8bbc2132",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MDelayMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MDelayMB",
+      "hash": "sha256-bKcNJD2i6DWFTxtut7IPRGWKZbGoDoY9lQkqSqnXBCk=",
+      "md5": "799a482dbe122c7baa63b4b01e996698",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MFlangerMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MFlangerMB",
+      "hash": "sha256-Zx/MxtPCZ6wDsJYUm7jBjTrcY4lbaCRv4A5EDjuPKY8=",
+      "md5": "65c4b08e378b9adad8e0e1b9c6e92126",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MFreqShifterMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MFreqShifterMB",
+      "hash": "sha256-Rx0EYV/czyyAR9SjiCymKFjpf9OqLcx9eIk6LDpEud8=",
+      "md5": "ad271da16ac2b0c51e97db08ce8ac3bc",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MMetronome": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MMetronome",
+      "hash": "sha256-MyOB2fTMxLSk7oyB5qJDwgjnSqBkADYM/igO8tsDpLA=",
+      "md5": "53fc341eb3c413d65040e2d8913ec706",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MPhaserMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MPhaserMB",
+      "hash": "sha256-NG9znmeGpujhBqMULrQdKd7agj9L2jru5kNYQDPIm48=",
+      "md5": "8a5eb713b7793d30ac5d70075057da67",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MRatioMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MRatioMB",
+      "hash": "sha256-SXXIeJS5bU3ZG1lt+783Zo/sTkldxgc2LYRYFxBy2Zc=",
+      "md5": "00af17bb86ffdc0ec3a2b942c79ed269",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MRingModulatorMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MRingModulatorMB",
+      "hash": "sha256-oHtBEHdd8QBUUUh9+Y92+LAKhLwHTb62q78hHsNmK2U=",
+      "md5": "75751ee92b7bd0e1225636297995427f",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MSaturatorMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MSaturatorMB",
+      "hash": "sha256-3f8DJn7ni+ZIz+RCkJWc44+RGPvCvSi2MfC+NkhvdUI=",
+      "md5": "ed525dafee24740847f52d62c4ceb430",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MTremoloMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MTremoloMB",
+      "hash": "sha256-0g5I65hOMePYcydy51YRcp1C3Na9YpXtiCfHGf856po=",
+      "md5": "1e975ccc13a9c9a4065cfd66183bcee8",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MVibratoMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MVibratoMB",
+      "hash": "sha256-1zOwIr7aa1w4sR/Q4d2mjRZf8w2ztKQcvEge3eDWaY8=",
+      "md5": "8a87914a70b1e47e44a7ae516a73abb1",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MWaveFolderMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MWaveFolderMB",
+      "hash": "sha256-ehR9cPacY9PNbed+vK8F65vmVz4XHxsyS+iNDYY+R/c=",
+      "md5": "34c16874a6b19b0568033b5b5aeebc68",
+      "version": "17.00.00"
+    },
+    "GLOBAL_BYPLUGINFOLDER_GLOBAL_MWaveShaperMB": {
+      "folder": "PKG/GLOBAL_BYPLUGINFOLDER/GLOBAL_MWaveShaperMB",
+      "hash": "sha256-LK+AohTfTtddS+EtSPJtvcUFmXN1hkpVJsYDlV8oakA=",
+      "md5": "ff386dbbefe56ab7bb40f75ee94a71c6",
+      "version": "17.00.00"
+    },
+    "GLOBAL_IR": {
+      "folder": "PKG/GLOBAL_IR",
+      "hash": "sha256-lZCkl8PR2WgQ97YYBenEBv98N/gHQwlmQiocIuQFQY4=",
+      "md5": "9d5ef588fc2ac99020baeecd822b3139",
+      "version": "17.00.00"
+    },
+    "USER_MSOUNDFACTORY_OPTIONAL": {
+      "folder": "PKG/USER_MSOUNDFACTORY_OPTIONAL",
+      "hash": "sha256-EUDkJiN7JUQYes9VR6/7yw/5hUGIXPaIS1UQ8lROaTU=",
+      "md5": "97d967ff40293bc2db5de41999b24955",
+      "version": "17.09.01"
+    },
+    "USER_PRESETS": {
+      "folder": "PKG/USER_PRESETS",
+      "hash": "sha256-5xaEx/3pHF5PGneknQFWTC4OsdBM1TXuw5soeeJzamk=",
+      "md5": "4bf8e9cfde4110a75ade65bdbef08c95",
+      "version": "17.09.00"
+    },
+    "USER_PRESETS_BYPLUGIN": {
+      "folder": "PKG/USER_PRESETS_BYPLUGIN",
+      "hash": "sha256-Ibj2A7RdgZ3+DGaNIuTqsWYyyH3Cjpvf57Mea3TNi8Y=",
+      "md5": "f7da322c0b17cdd064e3b729c6f32cec",
+      "version": "17.08.00"
+    }
+  }
+}

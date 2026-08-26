@@ -7,6 +7,5 @@
 
     # Host-specific
     ./activation.nix
-    ./files.nix
   ];
 }

@@ -1,0 +1,99 @@
+name: update
+
+on:
+  schedule:
+    - cron: "45 11 5 * *" # Monthly on the 5th at 8am CST
+
+jobs:
+  inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare git
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Update flake inputs
+        run: nix flake update
+
+      - name: Commit changes
+        run: |
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "update: bump flake inputs"
+          else
+            echo "No inputs updated, skipping commit"
+          fi
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: update
+          title: Update flake inputs
+          body: Automatically generated PR to update the flake inputs
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+
+  pkgs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          # nix-update seems to be reliant on it for some pkgs
+          nix_path: nixpkgs=channel:nixos-unstable
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: nix profile add nixpkgs#nix-update nixpkgs#nixfmt nixpkgs#fd
+
+      - name: Prepare git
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Update derivations and commit each change
+        run: |
+          PKGS=(
+            "drawio"
+            "kiwix-mcp"
+            "codex-acp"
+            "audiogridder -u"
+            "britpressor -u"
+            "fetish -u"
+            "freq-echo -u"
+            "kotelnikov -u"
+            "loudmax -u"
+            "maudioplugins -u"
+            "neural-amp-modeler-lv2"
+            "nova -u"
+            "rare -u"
+            "span -u"
+            "ssq -u"
+          )
+          for entry in "${PKGS[@]}"; do
+            set -- $entry
+            nix-update nixosConfigurations.main.pkgs."$@" --flake
+            fd -t f -e nix . . -x nixfmt '{}'
+            git add -A
+            if ! git diff --cached --quiet; then
+              git commit -m "update: bump ${entry%% *}"
+            else
+              echo "No changes for ${entry%% *}, skipping commit"
+            fi
+            echo --------------------------------------------
+          done
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: updatePkgs
+          title: Update custom packages
+          body: Automatically generated PR to update the versions and hashes of one or more custom derivations via nix-update
+          token: ${{ secrets.WORKFLOW_TOKEN }}

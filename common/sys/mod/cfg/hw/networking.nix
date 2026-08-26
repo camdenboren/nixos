@@ -11,8 +11,6 @@ let
   isLinux = !isDarwin;
   ports = [
     22 # SSH
-    1900 # Rygel
-    8000 # Plugins, Ionic
     11434 # Ollama
     53317 # Localsend
   ]

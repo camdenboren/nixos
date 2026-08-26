@@ -1,25 +1,39 @@
 { pkgs }:
 
 pkgs.writeShellScriptBin "installPlugins" ''
-  if ! test -d ~/.wine; then
+  oldPath=$(yabridgectl list)
+  melda_pkg=${pkgs.maudioplugins}
+  melda_source="$melda_pkg/share/maudioplugins/programdata/MeldaProduction"
+  melda_target="/home/camdenboren/.wine/drive_c/ProgramData/MeldaProduction"
+
+  if ! [[ -z "$oldPath" ]]; then
+    echo "Removing old store location..."
+    yabridgectl rm "$oldPath"
+
+    echo "Syncing..."
+    yabridgectl sync
+  fi
+
+  if ! test -d /home/camdenboren/.wine; then
     echo "Calling wineboot for fresh prefix setup..."
-    wineboot -u
+    env WINEDLLOVERRIDES=mscoree=d wineboot -u
     echo -e "\nCalling 'winetricks dxvk' for fresh prefix setup...\n"
     winetricks dxvk
     echo -e "\nSetting DPI to 120 with regedit...\n"
     regedit ~/etc/nixos/hosts/main/usr/dot/wine/logpixels.reg
   fi
-  if ! test -d ~/.wine/drive_c/ProgramData/MeldaProduction; then
-    echo -e "Melda plugin kernels missing from prefix..."
-    if test -d ~/Music/music/Plugins/Plugin\ Data/MeldaProduction; then
-      echo -e "Linking Melda plugin kernels to prefix...\n"
-      ln -s ~/Music/music/Plugins/Plugin\ Data/MeldaProduction ~/.wine/drive_c/ProgramData/MeldaProduction
-    else
-      echo -e "Melda plugin kernels missing from Music/music/Plugin Data/\n"
-    fi
+
+  if test -d "$melda_target"; then
+    echo "Removing Melda plugin kernels from prefix..."
+    rm -r "$melda_target"
   fi
+
+  echo -e "Linking Melda plugin kernels to prefix...\n"
+  ln -sf "$melda_source" "$melda_target"
+
   echo "Adding new store location..."
   yabridgectl add ~/.nix-profile/lib/winvst3
+
   echo "Syncing..."
   yabridgectl sync --prune
 ''

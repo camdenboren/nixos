@@ -105,8 +105,6 @@ let
   };
 in
 {
-  imports = lib.optionals isLinux [ ../env/overlays/icons.nix ];
-
   options = {
     rice = lib.mkOption {
       default = "skyline";

@@ -44,11 +44,13 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 - Firstly, pinning our system inputs, `flake.nix` is a parent
 - Beneath this, various `hosts` are defined with `sys` and `usr` (think `configuration.nix` and `home-manager.nix`)
 - `sys` and `usr` are further divided into modules within their corresponding directories
-- Modules used by more than one host are stored in `common`
+- Modules used by more than one host are stored in `common`, as are all overlays and custom packages
 
   ```
   flake
   ├── common
+  │   ├── drv
+  │   ├── ovy
   │   ├── sys
   │   └── usr
   └── hosts
@@ -168,14 +170,6 @@ So launch it, clean up config errors, restart</i>
 
 ### Post-Install
 
-- #### VSTs
-  - Install windows vsts on main\
-    _Needs `~/Music/music` sourced from local server first_
-
-    ```shell
-    installPlugins
-    ```
-
 - #### macvm UTM setup
   - Initial
     - '+' sign -> virtualize -> linux<br>
@@ -293,16 +287,10 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
   yabridgectl rm "~/path/to/winvsts"
   ```
 
-- Installs windows vsts from `~/.nix-profile/lib/winvst3` via yabridge into `~/.vst3`
+- Installs windows vsts from `~/.nix-profile/lib/winvst3` via yabridge into `~/.vst3`, handling everything from Wine prefix initialization to yabridgectl syncing (this is also an activation script, so manual invocation generally shouldn't be needed)
 
   ```shell
   installPlugins
-  ```
-
-- Installs added windows vsts, purges removed windows vsts
-
-  ```shell
-  refreshPlugins
   ```
 
 - Shows audio limits
@@ -323,12 +311,6 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 
   ```shell
   find . -type f -exec md5sum {} + | LC_ALL=C sort | md5sum >> md5sum.txt
-  ```
-
-- Remove Rygel's ignored media files list (log out to take effect, also need: `shell sqlite`)
-
-  ```shell
-  echo "delete from ignorelist;" | sqlite3 ~/.cache/rygel/media-export.db
   ```
 
 - Mac update\

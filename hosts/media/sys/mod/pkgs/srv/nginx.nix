@@ -26,6 +26,7 @@ let
     dex = "dex.${baseDomain}";
     box = "box.${baseDomain}";
     car = "car.${baseDomain}";
+    mcp = "mcp.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
@@ -56,6 +57,12 @@ in
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
+    # the nginx logs indicated the default of 64 is
+    # insufficient, presumably because i'm hitting a large
+    # number of sites
+    appendHttpConfig = ''
+      proxy_headers_hash_bucket_size 128;
+    '';
 
     virtualHosts = {
       # redirect http -> https

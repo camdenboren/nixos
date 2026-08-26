@@ -11,10 +11,6 @@ let
   };
 in
 {
-  imports = [
-    ../../../cfg/env/overlays/firefox-addons.nix
-  ];
-
   programs.librewolf = {
     enable = true;
     profiles = {

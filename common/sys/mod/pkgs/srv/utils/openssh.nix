@@ -14,15 +14,17 @@ in
     ports = [ 22 ];
   };
 
-  programs.ssh.extraConfig = ''
-    Host main
-      HostName ${ip.main}
-      Port ${port}
-      User ${user}
+  programs.ssh = {
+    extraConfig = ''
+      Host main
+        HostName ${ip.main}
+        Port ${port}
+        User ${user}
 
-    Host media
-      HostName ${ip.media}
-      Port ${port}
-      User ${user}
-  '';
+      Host media
+        HostName ${ip.media}
+        Port ${port}
+        User ${user}
+    '';
+  };
 }

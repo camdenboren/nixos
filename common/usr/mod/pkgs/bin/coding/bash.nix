@@ -133,6 +133,11 @@ in
         done
         nix shell $NIXPKGS_STRING
       }
+
+      updatePkg () {
+        ${pkgs.nix-update}/bin/nix-update \
+          nixosConfigurations.main.pkgs."$@" --flake
+      }
     '';
   };
 }

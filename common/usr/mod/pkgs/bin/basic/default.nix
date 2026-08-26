@@ -54,8 +54,5 @@ in
   ]
   ++ lib.optionals (!isVM) [
     ./freetube.nix
-  ]
-  ++ lib.optionals (!isVM || !isLinux) [
-    ../../../cfg/env/overlays/personal.nix
   ];
 }

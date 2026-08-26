@@ -12,12 +12,12 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "drawio";
-  version = "31.1.5";
+  version = "31.3.2";
   src = fetchFromGitHub {
     owner = "jgraph";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-CdEV0b5nTO8eP8PVn/jkKa8qPmvOFpHuq7vzoTRb2a4=";
+    hash = "sha256-vqEu3UKlMLLEns5uDIU+9ZJ7CjM1MP1G3+q6t9Fqk64=";
   };
 
   nativeBuildInputs = [

@@ -9,7 +9,7 @@
   home.activation = {
     updateCaCert = lib.hm.dag.entryAfter [ "installPackages" ] ''
       if test ~/.config/gam/gam.cfg; then
-        ${pkgs.gnused}/bin/sed -i \
+        run ${pkgs.gnused}/bin/sed -i \
           "s|^\(cacerts_pem\s*=\s*\).*|\1${pkgs-stable.cacert}/etc/ssl/certs/ca-bundle.crt|" \
           ~/.config/gam/gam.cfg
       fi
@@ -17,17 +17,17 @@
 
     replaceConfigs = lib.hm.dag.entryAfter [ "installPackages" ] ''
       if test -d ~/Library/Application\ Support/FreeTube; then
-        $DRY_RUN_CMD echo $VERBOSE_ARG "Removing configs for: freetube"
-        $DRY_RUN_CMD rm -f $VERBOSE_ARG ~/Library/Application\ Support/FreeTube/settings.db
-        $DRY_RUN_CMD echo -e $VERBOSE_ARG "Copying dotfiles for: freetube"
-        $DRY_RUN_CMD cp -r $VERBOSE_ARG ~/.config/FreeTube/settings.db ~/Library/Application\ Support/FreeTube
+        echo "Removing configs for: freetube"
+        run rm -f $VERBOSE_ARG ~/Library/Application\ Support/FreeTube/settings.db
+        echo -e "Copying dotfiles for: freetube"
+        run cp -r $VERBOSE_ARG ~/.config/FreeTube/settings.db ~/Library/Application\ Support/FreeTube
       fi
 
       if test -d ~/.config/linearmouse; then
-        $DRY_RUN_CMD echo $VERBOSE_ARG "Removing configs for: linearmouse"
-        $DRY_RUN_CMD rm -f $VERBOSE_ARG ~/.config/linearmouse/linearmouse.json
-        $DRY_RUN_CMD echo -e $VERBOSE_ARG "Copying dotfiles for: linearmouse"
-        $DRY_RUN_CMD cp -r $VERBOSE_ARG ~/etc/nixos/hosts/mac/usr/dot/linearmouse/linearmouse.json ~/.config/linearmouse
+        echo "Removing configs for: linearmouse"
+        run rm -f $VERBOSE_ARG ~/.config/linearmouse/linearmouse.json
+        echo -e "Copying dotfiles for: linearmouse"
+        run cp -r $VERBOSE_ARG ~/etc/nixos/hosts/mac/usr/dot/linearmouse/linearmouse.json ~/.config/linearmouse
       fi
 
       # replace the app's corresponding workflow via a copied template, patching
@@ -42,24 +42,24 @@
 
         # remove old workflow
         if test -d "$WORKFLOW_PATH"; then
-          $DRY_RUN_CMD rm -rf $VERBOSE_ARG "$WORKFLOW_PATH"
+          run rm -rf $VERBOSE_ARG "$WORKFLOW_PATH"
         fi
 
         # copy workflow template
-        $DRY_RUN_CMD cp -r $VERBOSE_ARG "$TEMPLATE_PATH" "$WORKFLOW_PATH"
+        run cp -r $VERBOSE_ARG "$TEMPLATE_PATH" "$WORKFLOW_PATH"
 
         # patch app path in workflow
-        $DRY_RUN_CMD ${pkgs.gnused}/bin/sed -i $VERBOSE_ARG \
+        run ${pkgs.gnused}/bin/sed -i \
           "s|~/Applications/Home Manager Apps/Application\.app|''${APP_PATH}/Applications/''${APP_NAME}.app|g" \
           "$WORKFLOW_PATH"/Contents/document.wflow
 
         # patch workflow name
-        $DRY_RUN_CMD ${pkgs.gnused}/bin/sed -i $VERBOSE_ARG \
+        run ${pkgs.gnused}/bin/sed -i \
           "s|LaunchApplication|Launch''${APP}|g" \
           "$WORKFLOW_PATH"/Contents/Info.plist
       }
 
-      $DRY_RUN_CMD echo -e $VERBOSE_ARG "Replacing Applications' workflows"
+      echo -e "Replacing Applications' workflows"
       replace_workflow Bitwarden ${pkgs.bitwarden-desktop}
       replace_workflow ClickUp
       replace_workflow FreeTube

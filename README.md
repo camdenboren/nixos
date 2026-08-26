@@ -170,14 +170,6 @@ So launch it, clean up config errors, restart</i>
 
 ### Post-Install
 
-- #### VSTs
-  - Install windows vsts on main\
-    _Needs `~/Music/music` sourced from local server first_
-
-    ```shell
-    installPlugins
-    ```
-
 - #### macvm UTM setup
   - Initial
     - '+' sign -> virtualize -> linux<br>
@@ -295,16 +287,10 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
   yabridgectl rm "~/path/to/winvsts"
   ```
 
-- Installs windows vsts from `~/.nix-profile/lib/winvst3` via yabridge into `~/.vst3`
+- Installs windows vsts from `~/.nix-profile/lib/winvst3` via yabridge into `~/.vst3`, handling everything from Wine prefix initialization to yabridgectl syncing (this is also an activation script, so manual invocation generally shouldn't be needed)
 
   ```shell
   installPlugins
-  ```
-
-- Installs added windows vsts, purges removed windows vsts
-
-  ```shell
-  refreshPlugins
   ```
 
 - Shows audio limits
@@ -325,12 +311,6 @@ _More commands in `./common/usr/mod/pkgs/bin/coding/bash.nix`_
 
   ```shell
   find . -type f -exec md5sum {} + | LC_ALL=C sort | md5sum >> md5sum.txt
-  ```
-
-- Remove Rygel's ignored media files list (log out to take effect, also need: `shell sqlite`)
-
-  ```shell
-  echo "delete from ignorelist;" | sqlite3 ~/.cache/rygel/media-export.db
   ```
 
 - Mac update\

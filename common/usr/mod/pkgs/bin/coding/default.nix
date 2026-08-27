@@ -38,6 +38,7 @@ in
     ]);
 
   imports = [
+    ./agents.nix
     ./bash.nix
     ./ghostty.nix
     ./git.nix

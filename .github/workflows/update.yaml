@@ -73,6 +73,8 @@ jobs:
             "maudioplugins -u"
             "neural-amp-modeler-lv2"
             "nova -u"
+            "pi-acp"
+            "pi-mcp-adapter"
             "rare -u"
             "span -u"
             "ssq -u"

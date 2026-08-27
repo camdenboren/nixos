@@ -125,7 +125,7 @@ in
         sidebar_side = "right";
         default_model = {
           provider = "ollama";
-          model = "gpt-oss:latest";
+          model = "qwen3.6:latest";
         };
       };
       language_models = {
@@ -133,8 +133,14 @@ in
           api_url = "http://192.168.1.88:11434";
           available_models = [
             {
+              name = "qwen3.6:latest";
+              max_tokens = 262144;
+              supports_tools = true;
+              keep_alive = "5m";
+            }
+            {
               name = "gpt-oss:latest";
-              max_tokens = 32768;
+              max_tokens = 65536;
               supports_tools = true;
               keep_alive = "5m";
             }
@@ -143,10 +149,19 @@ in
       };
 
       # add codex on mac
-      agent_servers = lib.mkIf isDarwin {
-        Codex = {
+      agent_servers = {
+        Codex = lib.mkIf isDarwin {
           type = "custom";
           command = "${pkgs.codex-acp}/bin/codex-acp";
+        };
+        OpenCode = {
+          type = "custom";
+          command = "${pkgs.opencode}/bin/opencode";
+          args = [ "acp" ];
+        };
+        Pi = {
+          type = "custom";
+          command = "${pkgs.pi-acp}/bin/pi-acp";
         };
       };
 

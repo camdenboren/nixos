@@ -10,7 +10,6 @@
     ../../../../../../common/usr/mod/pkgs/bin/utils
 
     # Host-specific
-    ./ai.nix
     ./office.nix
     ./scripts.nix
   ];

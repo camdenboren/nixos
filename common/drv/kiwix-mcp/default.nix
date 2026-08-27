@@ -3,6 +3,7 @@
   python314Packages,
   fetchFromGitHub,
   selfSignedCerts ? false,
+  certPath ? null,
 }:
 
 python314Packages.buildPythonApplication rec {
@@ -26,6 +27,6 @@ python314Packages.buildPythonApplication rec {
   build-system = with python314Packages; [ hatchling ];
 
   postPatch = lib.optionals selfSignedCerts ''
-    sed -i 's|httpx.Client(timeout=timeout, follow_redirects=True)|httpx.Client(timeout=timeout, follow_redirects=True, verify="/home/camdenboren/etc/nixos/common/sys/dot/acme/home-local.pem")|' kiwix_client/client.py
+    sed -i 's|httpx.Client(timeout=timeout, follow_redirects=True)|httpx.Client(timeout=timeout, follow_redirects=True, verify="${certPath}")|' kiwix_client/client.py
   '';
 }

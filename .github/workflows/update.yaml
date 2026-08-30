@@ -62,6 +62,7 @@ jobs:
         run: |
           PKGS=(
             "drawio"
+            "dxvk-bin"
             "kiwix-mcp"
             "codex-acp"
             "audiogridder -u"

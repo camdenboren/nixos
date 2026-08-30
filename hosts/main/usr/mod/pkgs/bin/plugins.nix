@@ -3,8 +3,7 @@
 {
   home.packages = with pkgs; [
     # Plugins - deps for winvsts
-    wineWow64Packages.staging
-    winetricks
+    wineWow64Packages.yabridge
     yabridge
     yabridgectl
     # Plugins - custom derivations
@@ -23,7 +22,7 @@
     # Plugins - external
     freq-echo
     span
-    ssd # needs dxvk via winetricks
+    ssd # needs dxvk-bin
     maudioplugins
     abstract-vox
     # Plugins - packs

@@ -8,7 +8,8 @@
   home.activation = {
     installPlugins = lib.hm.dag.entryAfter [ "installPackages" ] ''
       oldPath=$(run ${pkgs.yabridgectl}/bin/yabridgectl list)
-      melda_pkg=${pkgs.maudioplugins} 
+      windows_path="/home/camdenboren/.wine/dosdevices/c:/windows"
+      melda_pkg=${pkgs.maudioplugins}
       melda_source="$melda_pkg/share/maudioplugins/programdata/MeldaProduction"
       melda_target="/home/camdenboren/.wine/drive_c/ProgramData/MeldaProduction"
 
@@ -22,12 +23,18 @@
 
       if ! test -d ~/.wine; then
         echo "Calling wineboot for fresh prefix setup..."
-        run env WINEDLLOVERRIDES=mscoree=d ${pkgs.wineWow64Packages.staging}/bin/wineboot -u
-        echo -e "\nCalling 'winetricks dxvk' for fresh prefix setup...\n"
-        run ${pkgs.winetricks}/bin/winetricks $VERBOSE_ARG dxvk
-        echo -e "\nSetting DPI to 120 with regedit...\n"
-        run ${pkgs.wineWow64Packages.staging}/bin/regedit ~/etc/nixos/hosts/main/usr/dot/wine/logpixels.reg
+        run env WINEDLLOVERRIDES=mscoree=d ${pkgs.wineWow64Packages.yabridge}/bin/wineboot -u
+        echo -e "\nSetting DPI to 120 with regedit..."
+        run ${pkgs.wineWow64Packages.yabridge}/bin/regedit ~/etc/nixos/hosts/main/usr/dot/wine/logpixels.reg
       fi
+
+      echo -e "\nUpdating dxvk dlls to latest..."
+      for dll in dxgi d3d8 d3d9 d3d10core d3d11; do
+        cp -f $VERBOSE_ARG ${pkgs.dxvk-bin}/x32/$dll.dll $windows_path/syswow64/
+        cp -f $VERBOSE_ARG ${pkgs.dxvk-bin}/x64/$dll.dll $windows_path/system32/
+      done
+      run ${pkgs.wineWow64Packages.yabridge}/bin/regedit ~/etc/nixos/hosts/main/usr/dot/wine/override-dll.reg
+      echo ""
 
       if test -d "$melda_target"; then
         echo "Removing Melda plugin kernels from prefix..."

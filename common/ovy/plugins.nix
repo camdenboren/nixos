@@ -10,6 +10,7 @@ _:
       loudmax = prev.callPackage ../drv/loudmax { };
       ssq = prev.callPackage ../drv/ssq { };
       britpressor = prev.callPackage ../drv/britpressor { };
+      dxvk-bin = prev.callPackage ../drv/dxvk-bin { };
       fetish = prev.callPackage ../drv/fetish { };
       rare = prev.callPackage ../drv/rare { };
       kotelnikov = prev.callPackage ../drv/kotelnikov { };

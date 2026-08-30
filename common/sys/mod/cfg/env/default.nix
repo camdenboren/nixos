@@ -14,7 +14,6 @@ in
     ../../../../ovy
   ]
   ++ lib.optionals isLinux [
-    ./activation.nix
     ./sessionVariables.nix
   ]
   ++ lib.optionals (hostname == "main" || hostname == "media") [

@@ -175,10 +175,12 @@ in
           AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
           "com.apple.sound.uiaudio.enabled" = 0;
           CGDisableCursorLocationMagnification = true;
+          NSGlassDiffusionSetting = true;
           NSUserKeyEquivalents = {
             Minimize = "^h";
             "Shut Down" = "@~$d";
           };
+          SLSMenuBarUseBlurredAppearance = true;
         };
 
         pbs.NSServicesStatus = builtins.listToAttrs (map makeShortcutEntry appsNeedingShortcuts);
@@ -266,8 +268,6 @@ in
         SecondClickThreshold = 1;
         Clicking = true;
       };
-
-      universalaccess.reduceTransparency = true; # requires full disk access for terminal
 
       WindowManager.EnableStandardClickToShowDesktop = false;
     };

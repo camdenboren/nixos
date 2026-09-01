@@ -21,6 +21,7 @@ in
   };
   modules = [
     ./sys
+    inputs.fetch-rs.darwinModules.default
     inputs.home-manager.darwinModules.home-manager
     {
       home-manager = {

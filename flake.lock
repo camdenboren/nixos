@@ -59,16 +59,19 @@
     },
     "fetch-rs": {
       "inputs": {
+        "nix-darwin": [
+          "nix-darwin"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1788231922,
-        "narHash": "sha256-Laa7blqCiFLaUFXszLWH2vukU3E+Ll8CJ9JmLnjypBk=",
+        "lastModified": 1788366555,
+        "narHash": "sha256-4fACm5Q/xk4VKW8sBTrsCnZjAOy2M5ZvY9LEtPUwz7M=",
         "owner": "camdenboren",
         "repo": "fetch-rs",
-        "rev": "1e7b3d351617dfa925359cb120be3fdc8c2bd48e",
+        "rev": "5acd84b29a7953b10b959a4b6a39a815924431a6",
         "type": "github"
       },
       "original": {

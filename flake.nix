@@ -30,6 +30,7 @@
     fetch-rs = {
       url = "github:camdenboren/fetch-rs/service";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nix-darwin.follows = "nix-darwin";
     };
     chatbot-util = {
       url = "github:collegiate-edu-nation/chatbot-util";

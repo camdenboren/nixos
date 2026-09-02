@@ -6,5 +6,6 @@ _:
     user = "camdenboren";
     onCalendar = "*-*-* *:15:00";
     flakePath = "/home/camdenboren/etc/nixos";
+    secretsFile = "/var/lib/secrets/fetch-rs";
   };
 }

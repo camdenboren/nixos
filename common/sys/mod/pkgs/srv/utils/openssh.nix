@@ -34,6 +34,9 @@ in
     settings.KbdInteractiveAuthentication = false;
   };
 
+  # Use GNOME Keyring's ssh-agent so keys are unlocked at GDM login.
+  services.gnome.gnome-keyring.enable = true;
+
   programs.ssh = {
     extraConfig = lib.optionals (hostname != "macvm") ''
       Host ${sshServer}

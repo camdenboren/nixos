@@ -15,6 +15,7 @@
     ./kiwix.nix
     ./lubelogger.nix
     ./nginx.nix
+    ./ntfy-sh.nix
     ./open-webui.nix
     ./outline.nix
     ./penpot.nix

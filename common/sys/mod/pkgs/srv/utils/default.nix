@@ -8,6 +8,7 @@ in
     ./openssh.nix
   ]
   ++ lib.optionals (!isVM) [
+    ./fetch-rs.nix
     ./mullvad.nix
     ./shutdown.nix
   ];

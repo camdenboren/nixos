@@ -13,6 +13,7 @@ let
     chat = "https://chat.${baseDomain}/";
     sync = "https://sync.${baseDomain}/";
     draw = "https://draw.${baseDomain}/";
+    ntfy = "https://ntfy.${baseDomain}/";
     notes = "https://notes.${baseDomain}/";
     media = "https://media.${baseDomain}/";
     image = "https://image.${baseDomain}/";
@@ -198,6 +199,13 @@ in
               icon = "outline";
               href = URLs.notes;
               siteMonitor = URLs.notes;
+            };
+          }
+          {
+            Ntfy = {
+              icon = "ntfy";
+              href = URLs.ntfy;
+              siteMonitor = URLs.ntfy;
             };
           }
           {

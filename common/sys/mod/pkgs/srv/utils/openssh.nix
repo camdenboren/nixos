@@ -17,7 +17,7 @@ let
   authorizedKeys = {
     main = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBrva9LWtBQwBUbc6HxC1DPzPsx32eAP83GS0qNe4M3w camdenboren@media"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMPdyUS3btUZMY5wcmheWwPuHenD8mTYuU402N9L+meO camdenboren@mainvm"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvC11NW3BDZv08SFfucWPDkKmcPL3B0+Abp2iDvIKCy camdenboren@mainvm"
     ];
     media = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK8GvQ8ynrx87GuJf/9QPwQZLkVrOfb2jEUIU2I8jgsV camdenboren@main"

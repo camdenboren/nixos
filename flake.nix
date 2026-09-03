@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     fetch-rs = {
-      url = "github:camdenboren/fetch-rs/service";
+      url = "github:camdenboren/fetch-rs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nix-darwin.follows = "nix-darwin";
     };

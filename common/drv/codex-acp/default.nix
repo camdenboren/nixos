@@ -9,16 +9,16 @@
 
 buildNpmPackage (finalAttrs: {
   pname = "codex-acp";
-  version = "1.2.0";
+  version = "1.10.0";
 
   src = fetchFromGitHub {
     owner = "agentclientprotocol";
     repo = "codex-acp";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-RLspxhj5PTCKhRhlxhL4vALWED+qILfN6AdIyWetIHE=";
+    hash = "sha256-D8uYd30NRXQYUSBFCi66Oq0iRZXpl8P7nWv2m3+KBig=";
   };
 
-  npmDepsHash = "sha256-JeRtgB7tDlshLeRGoRd1XSvW2QuKIOyJcc1aWUdt/3s=";
+  npmDepsHash = "sha256-df1/kPiZFBEq9Um26Qbo9XaYj2J8BOXQmunCQWquDTo=";
 
   nativeBuildInputs = [ makeBinaryWrapper ];
 

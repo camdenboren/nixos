@@ -8,15 +8,15 @@
 
 buildNpmPackage rec {
   pname = "pi-mcp-adapter";
-  version = "2.29.0";
+  version = "2.32.1";
   src = fetchFromGitHub {
     owner = "nicobailon";
     repo = "pi-mcp-adapter";
     tag = "v${version}";
-    hash = "sha256-T8prXgJdPYmJVHPofokNFxA4Q473MuOLIWCE+LLvOjg=";
+    hash = "sha256-/NrC8cVEdhswKEQcuVugNSOCGJ3/c6k2Qg8o6hg0X14=";
   };
 
-  npmDepsHash = "sha256-AEtz2AaswUSHj10rBh7GfSYZXbA7uFyS5DHYxKpRE0o=";
+  npmDepsHash = "sha256-qq+WROZiSFCvTDYL1FCGi1U2OCOmv+UL/x5JEJDpK/A=";
   npmDepsFetcherVersion = 2;
   npmDeps = fetchNpmDeps {
     inherit src;

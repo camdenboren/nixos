@@ -15,19 +15,7 @@ in
     with pkgs;
     lib.optionals (!isVM) [
       alc-calc
-      (bitwarden-desktop.overrideAttrs {
-        desktopItems = [
-          (makeDesktopItem {
-            name = "bitwarden";
-            exec = "env XDG_CURRENT_DESKTOP=KDE bitwarden %U";
-            icon = "bitwarden";
-            comment = "Secure and free password manager for all of your devices";
-            desktopName = "Bitwarden";
-            categories = [ "Utility" ];
-            mimeTypes = [ "x-scheme-handler/bitwarden" ];
-          })
-        ];
-      })
+      bitwarden-desktop
       mpv
       yt-x
     ]

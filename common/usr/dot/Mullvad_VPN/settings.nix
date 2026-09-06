@@ -111,7 +111,7 @@
   };
   relay_overrides = [ ];
   show_beta_releases = false;
-  settings_version = 15;
+  settings_version = 17;
   recents = [ ];
   rollout_threshold_seed = 3738083069;
 }

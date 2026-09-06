@@ -8,7 +8,7 @@
   startMinimized = true;
   unpinnedWindow = true;
   browsedForSplitTunnelingApplications = [ ];
-  changelogDisplayedForVersion = "2026.3";
+  changelogDisplayedForVersion = "2026.4";
   updateDismissedForVersion = "";
   animateMap = true;
 }

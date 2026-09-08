@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   system,
   hostname,
@@ -12,7 +11,6 @@ in
 {
   programs.freetube = {
     enable = true;
-    package = if isDarwin then null else pkgs.freetube;
 
     # doesn't put settings.db in correct location on mac, so it's copied in replaceConfigs.nix
     settings = {

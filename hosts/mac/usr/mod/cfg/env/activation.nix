@@ -62,7 +62,7 @@
       echo -e "Replacing Applications' workflows"
       replace_workflow Bitwarden ${pkgs.bitwarden-desktop}
       replace_workflow ClickUp
-      replace_workflow FreeTube
+      replace_workflow FreeTube ${pkgs.freetube}
       replace_workflow Ghostty ${pkgs.ghostty-bin}
       replace_workflow LibreWolf ${pkgs.librewolf}
       replace_workflow Mullvad "" "Mullvad VPN"

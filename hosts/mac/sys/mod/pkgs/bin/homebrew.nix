@@ -9,7 +9,6 @@ _:
       "clickup"
       "ungoogled-chromium"
       "freecad"
-      "freetube"
       "gimp"
       "inkscape"
       "intellij-idea"

@@ -39,16 +39,19 @@
     },
     "chatbot-util": {
       "inputs": {
+        "nix-darwin": [
+          "nix-darwin"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1786562457,
-        "narHash": "sha256-QbTGUM3ORdY0tgdNwdcDmjLvycN7DmU5rYRdU9JzkCk=",
+        "lastModified": 1788974809,
+        "narHash": "sha256-whCL6/sNXNkWX8axRJggYoDJjPtFCo10CEi97tsAGWE=",
         "owner": "collegiate-edu-nation",
         "repo": "chatbot-util",
-        "rev": "55672bd16deee39323a9e88e26e4919adaae6978",
+        "rev": "3e941e7fd78755f4cefef3ebb00bb41a8fc0672c",
         "type": "github"
       },
       "original": {

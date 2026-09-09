@@ -3,6 +3,7 @@
 let
   baseDomain = "home.local";
   baseURL = "http://127.0.0.1";
+  macURL = "http://192.168.1.93";
   mainURL = "http://192.168.1.88";
   ports = {
     homepage = toString 8082;
@@ -13,6 +14,7 @@ let
     sync = toString 8384;
     draw = toString 9040;
     ntfy = toString 2586;
+    util = toString 8080;
     notes = toString 3000;
     media = toString 8096;
     image = toString 9090;
@@ -33,6 +35,7 @@ let
     sync = "sync.${baseDomain}";
     draw = "draw.${baseDomain}";
     ntfy = "ntfy.${baseDomain}";
+    util = "util.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
@@ -259,6 +262,20 @@ in
 
               client_max_body_size 0; # Stream request body to backend
             '';
+          };
+        };
+      };
+
+      "${domains.util}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${macURL}:${ports.util}";
+            extraConfig = proxyHeaders;
+            # generate hash w/ the following (you'll be prompted for the password after running)
+            # $(nix-shell --packages apacheHttpd --run 'htpasswd -B -c OUTPUT_FILENAME admin')
+            basicAuthFile = pkgs.writeText "util-secret" "admin:$2y$05$74lBSfOkE.5UODcfvLDfiuqtiamXf4LG3/XJbdTU848Qnp.Pgg1gW";
           };
         };
       };

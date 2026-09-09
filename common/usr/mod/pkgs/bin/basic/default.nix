@@ -26,7 +26,6 @@ in
       vlc
     ]
     ++ lib.optionals (!isLinux) [
-      chatbot-util
       vlc-bin
     ]
     ++ lib.optionals (hostname == "media") [

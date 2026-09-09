@@ -1,4 +1,9 @@
-{ pkgs, rice, ... }:
+{
+  pkgs,
+  inputs,
+  rice,
+  ...
+}:
 
 let
   coral = rice == "coral";
@@ -14,6 +19,7 @@ let
     sync = "https://sync.${baseDomain}/";
     draw = "https://draw.${baseDomain}/";
     ntfy = "https://ntfy.${baseDomain}/";
+    util = "https://util.${baseDomain}/";
     notes = "https://notes.${baseDomain}/";
     media = "https://media.${baseDomain}/";
     image = "https://image.${baseDomain}/";
@@ -23,15 +29,21 @@ let
     torrent = "https://torrent.${baseDomain}/";
     archive = "https://archive.${baseDomain}/";
   };
+  icons = {
+    centhia = "${inputs.chatbot-util}/front/src/assets/logo.png";
+  };
   backgrounds = {
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
     nothin = ../../../../../../common/usr/rice/wallpapers/nothin.jpg;
     skyline = ../../../../../../common/usr/rice/wallpapers/skyline.jpg;
   };
+  homepageIconsURI = "$out/share/homepage/public/icons";
   homepageImagesURI = "$out/share/homepage/public/images";
   package = pkgs.homepage-dashboard.overrideAttrs (oldAttrs: {
     postInstall = oldAttrs.postInstall or "" + ''
-      mkdir -p $out/share/homepage/public/images
+      mkdir -p ${homepageIconsURI}
+      mkdir -p ${homepageImagesURI}
+      ln -s ${icons.centhia} ${homepageIconsURI}/centhia.png
       ln -s ${backgrounds.coral} ${homepageImagesURI}/coral.jpg
       ln -s ${backgrounds.nothin} ${homepageImagesURI}/nothin.jpg
       ln -s ${backgrounds.skyline} ${homepageImagesURI}/skyline.jpg
@@ -120,6 +132,13 @@ in
               icon = "invoke-ai";
               href = URLs.image;
               siteMonitor = URLs.image;
+            };
+          }
+          {
+            Util = {
+              icon = "/icons/centhia.png";
+              href = URLs.util;
+              siteMonitor = URLs.util;
             };
           }
         ];

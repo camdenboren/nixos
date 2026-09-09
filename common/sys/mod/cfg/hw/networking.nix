@@ -29,6 +29,7 @@ let
     "chat.home.local"
     "draw.home.local"
     "ntfy.home.local"
+    "util.home.local"
     "notes.home.local"
     "image.home.local"
     "money.home.local"

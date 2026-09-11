@@ -28,7 +28,7 @@ in
       mainColor = if (hostname == "media") then "Teal" else "Red";
       secColor = if (hostname == "media") then "CatppuccinFrappeTeal" else "Red";
       autoplayVideos = true;
-      defaultQuality = "1080";
+      defaultQuality = if (hostname == "main") then "1440" else "1080";
       fetchSubscriptionsAutomatically = false;
       saveWatchedProgress = false;
       rememberHistory = false;

@@ -29,9 +29,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `image`                 | `192.168.1.88:9090`                                 | Remote backend on `main`                                                                     |
 | `util`                  | `192.168.1.93:8080`                                 | Remote backend on `mac`, with Nginx basic auth                                               |
 
-`kiwix.nix` also starts a separate `kiwix-mcp` systemd service using streamable HTTP
-and `KIWIX_BASE_URL=http://localhost:9095`. Although `mcp.home.local` appears in the
-Nginx certificate domain list, this file defines no MCP virtual host.
+`kiwix.nix` also starts a separate `kiwix-mcp` systemd service using streamable HTTP and `KIWIX_BASE_URL=http://localhost:9095`.
 
 ## DNS, TLS, and runtime files
 

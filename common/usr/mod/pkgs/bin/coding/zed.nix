@@ -148,7 +148,6 @@ in
         };
       };
 
-      # add codex on mac
       agent_servers = {
         Codex = lib.mkIf isDarwin {
           type = "custom";

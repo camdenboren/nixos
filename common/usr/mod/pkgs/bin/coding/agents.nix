@@ -9,29 +9,42 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
-  home.packages =
-    with pkgs;
-    lib.optionals isDarwin [
-      # enables usage w/in zed via acp
-      codex-acp
-      # enables usage w/in opencode while I wait on the below issue
-      kiwix-mcp
-    ];
-
   programs = {
     codex = {
       enable = isDarwin;
-      # waiting on
-      # https://github.com/nix-community/home-manager/issues/9397
-      /*
-        settings = {
-        model_reasoning_effort = "xhigh";
-        // [mcp_servers.kiwix-mcp]
-        // command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp"
-        // [mcp_servers.kiwix-mcp.env]
-        // KIWIX_BASE_URL = "https://archive.home.local"
+      package = pkgs.codex.overrideAttrs rec {
+        pname = "codex";
+        version = "0.154.0";
+        src = pkgs.fetchFromGitHub {
+          owner = "openai";
+          repo = "codex";
+          tag = "rust-v${version}";
+          hash = "sha256-Nm+61N6YHxGhjLsm/giVSEg4QvJmIgWxyTQ1L89kpCs=";
         };
-      */
+        sourceRoot = "${src.name}/codex-rs";
+        cargoHash = "sha256-9F8dyEiVkhelrIyfQ9ZkvuxfIYNN6akbpadREa4A1n0=";
+        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+          inherit src sourceRoot;
+          hash = cargoHash;
+        };
+      };
+      # This breaks CLI usage due to
+      # https://github.com/nix-community/home-manager/issues/9397
+      # BUT, I primarily use it via ACP so I instead just bank on Zed's SANE
+      # approach of separating state from configuration (OpenAI has CLEARLY
+      # hit AGI...)
+      settings = {
+        model_reasoning_effort = "medium";
+        mcp_servers.kiwix-mcp = {
+          command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
+          env.KIWIX_BASE_URL = "https://archive.home.local";
+          tools = {
+            kiwix_list_books.approval_mode = "approve";
+            kiwix_search.approval_mode = "approve";
+            kiwix_fetch_article.approval_mode = "approve";
+          };
+        };
+      };
     };
 
     opencode = {

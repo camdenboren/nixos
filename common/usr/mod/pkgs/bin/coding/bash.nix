@@ -42,6 +42,11 @@ in
       clean = if (isDarwin || isVM) then "nh clean all" else "nh clean all -k 2";
       ddg = "lynx -vikeys start.duckduckgo.com/lite/";
       fmt = "fd -t f -e nix . $NH_FLAKE -x nixfmt '{}'";
+      i =
+        if isDarwin then
+          "ifconfig | awk '/inet / && $2 ~ /^192/ {print $2}'"
+        else
+          "ip addr | awk '/inet 192/ { sub(/\\/.*/, \"\", $2); print $2 }'";
       lg = "lazygit";
       lgf = "lazygit -p $NH_FLAKE";
       ls = "ls -a";

@@ -140,17 +140,7 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
    }
    ```
 
-4. Download Notes to `~/Documents/Repos/Notes`\
-   _Not needed on mac or vm's_
-
-   ```shell
-   {
-   cd ~/Documents
-   git clone https://github.com/camdenboren/Notes.git
-   }
-   ```
-
-5. Update hardware UUID's in hardware-config. Use as needed\
+4. Update hardware UUID's in hardware-config. Use as needed\
    _UUID and sd\* can be found in Gnome Disks_
 
    ```shell

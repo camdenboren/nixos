@@ -29,6 +29,7 @@ in
     #   scan - run vulnxscan on the current host
     #   sw - rebuild system and switch immediately
     #   bo - rebuild system and switch on boot
+    #   dp - rebuild media (on main) and switch immediately
 
     shellAliases = {
       bld = "nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'";
@@ -82,6 +83,7 @@ in
     // (
       if (hostname == "main") then
         {
+          dp = "nh os switch --target-host media";
           nixos = "quickemu --vm ~/vm/nixos-24.05-gnome.conf --status-quo";
           ubuntu = "quickemu --vm ~/vm/ubuntu-24.04.conf --status-quo";
           windows = "quickemu --vm ~/vm/windows-11.conf --display spice --fullscreen --status-quo";

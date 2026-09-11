@@ -108,7 +108,7 @@ in
     );
 
     initExtra =
-      lib.optionals isOllamaServer ''
+      lib.optionalString isOllamaServer ''
         export OLLAMA_NOHISTORY=1
       ''
       + ''

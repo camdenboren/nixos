@@ -10,6 +10,7 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
   cfgKey = if isDarwin then "darwin" else "nixos";
   isVM = lib.hasSuffix "vm" hostname;
+  isOllamaServer = hostname == "main" || hostname == "media";
   needsBuilder = system == "x86_64-linux" && hostname != "main";
 in
 {
@@ -101,45 +102,49 @@ in
         { }
     );
 
-    initExtra = ''
-      if (( SHLVL > 1 )); then
-        export PS1="\n\[\033[1;31m\][shell:\w]\$\[\033[0m\] "
-      fi
+    initExtra =
+      lib.optionals isOllamaServer ''
+        export OLLAMA_NOHISTORY=1
+      ''
+      + ''
+        if (( SHLVL > 1 )); then
+          export PS1="\n\[\033[1;31m\][shell:\w]\$\[\033[0m\] "
+        fi
 
-      mkcd () {
-        mkdir $1
-        cd $1
-      }
+        mkcd () {
+          mkdir $1
+          cd $1
+        }
 
-      nix () {
-        case "$1" in
-          build|shell|develop|copy|flake)
-            ${pkgs.nix-output-monitor}/bin/nom "$@"
-          ;;
-          *)
-            command nix "$@"
-          ;;
-        esac
-      }
+        nix () {
+          case "$1" in
+            build|shell|develop|copy|flake)
+              ${pkgs.nix-output-monitor}/bin/nom "$@"
+            ;;
+            *)
+              command nix "$@"
+            ;;
+          esac
+        }
 
-      run () {
-        nix run nixpkgs#$1
-      }
+        run () {
+          nix run nixpkgs#$1
+        }
 
-      shell () {
-        NIXPKGS_STRING=""
-        for var in "$@"
-        do
-          VAR_STRING="nixpkgs#''${var} "
-          NIXPKGS_STRING+=$VAR_STRING
-        done
-        nix shell $NIXPKGS_STRING
-      }
+        shell () {
+          NIXPKGS_STRING=""
+          for var in "$@"
+          do
+            VAR_STRING="nixpkgs#''${var} "
+            NIXPKGS_STRING+=$VAR_STRING
+          done
+          nix shell $NIXPKGS_STRING
+        }
 
-      updatePkg () {
-        ${pkgs.nix-update}/bin/nix-update \
-          nixosConfigurations.main.pkgs."$@" --flake
-      }
-    '';
+        updatePkg () {
+          ${pkgs.nix-update}/bin/nix-update \
+            nixosConfigurations.main.pkgs."$@" --flake
+        }
+      '';
   };
 }

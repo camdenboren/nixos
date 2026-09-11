@@ -12,7 +12,9 @@ This is a cross-platform config for multiple hosts of varying degrees of specifi
 - [Overlays]
 - [DevShells]
 
-You probably won't want to try installing any of these hosts directly due to UUID discrepancies in `hardware-configuration.nix`, so this repo primarily serves as a reference in creating your own config
+The hosts cumulatively form a [Homelab] of every-increasing scope, w/ `media` acting as the primary server, though auxiliary tasks are delegated out (e.g., `main` handles virtually all local AI inference)
+
+_You probably won't want to try installing any of these hosts directly due to UUID discrepancies in `hardware-configuration.nix`, so this repo primarily serves as a reference in creating your own config_
 
 Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/configs were massively helpful for learning the basics of NixOS, flakes, home-manager, and Linux audio
 
@@ -53,7 +55,7 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 ## Systems
 
 - ### mac
-  - Development and Productivity
+  - Development + Productivity
   - 2023 MacBook Pro 14"
   - M2 Pro
   - 1tb storage
@@ -68,7 +70,7 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
   - 32gb memory
 
 - ### media
-  - Media, Gaming
+  - Server, Gaming
   - 2011 Dell Inspiron 660
   - Intel i7 2600k
   - AMD Radeon RX 570
@@ -84,6 +86,7 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 [Derivations]: common/drv/README.md
 [Overlays]: common/ovy/README.md
 [DevShells]: common/usr/dev/README.md
+[Homelab]: hosts/media/sys/mod/pkgs/srv/README.md
 [vimjoyer]: https://github.com/vimjoyer/
 [ryan4yin]: https://github.com/ryan4yin/
 [PowerUser64]: https://github.com/poweruser64/

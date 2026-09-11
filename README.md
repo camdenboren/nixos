@@ -6,11 +6,11 @@
 
 This is a cross-platform config for multiple hosts of varying degrees of specificity and includes examples of
 
-- Custom Modules
-- Custom Scripts
-- Derivations
-- Overlays
-- DevShells
+- [Modules]
+- [Scripts]
+- [Derivations]
+- [Overlays]
+- [DevShells]
 
 You probably won't want to try installing any of these hosts directly due to UUID discrepancies in `hardware-configuration.nix`, so this repo primarily serves as a reference in creating your own config
 
@@ -79,6 +79,11 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 
 [GPLv3]
 
+[Modules]: common/usr/mod/cfg/def/README.md
+[Scripts]: common/usr/scr/README.md
+[Derivations]: common/drv/README.md
+[Overlays]: common/ovy/README.md
+[DevShells]: common/usr/dev/README.md
 [vimjoyer]: https://github.com/vimjoyer/
 [ryan4yin]: https://github.com/ryan4yin/
 [PowerUser64]: https://github.com/poweruser64/

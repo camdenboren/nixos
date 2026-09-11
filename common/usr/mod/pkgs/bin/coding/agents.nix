@@ -2,10 +2,12 @@
   pkgs,
   lib,
   system,
+  hostname,
   ...
 }:
 
 let
+  isVM = lib.hasSuffix "vm" hostname;
   isDarwin = lib.hasSuffix "-darwin" system;
 in
 {
@@ -93,6 +95,69 @@ in
             ];
           };
         };
+      };
+    };
+
+    zed-editor.userSettings = {
+      agent = {
+        enabled = !isVM;
+        button = false;
+        dock = "right";
+        sidebar_side = "right";
+        default_model = {
+          provider = "ollama";
+          model = "qwen3.6:latest";
+        };
+      };
+
+      language_models = {
+        ollama = {
+          api_url = "http://192.168.1.88:11434";
+          available_models = [
+            {
+              name = "qwen3.6:latest";
+              max_tokens = 262144;
+              supports_tools = true;
+              keep_alive = "5m";
+            }
+            {
+              name = "gpt-oss:latest";
+              max_tokens = 65536;
+              supports_tools = true;
+              keep_alive = "5m";
+            }
+          ];
+        };
+      };
+
+      agent_servers = {
+        Codex = lib.mkIf isDarwin {
+          type = "custom";
+          command = "${pkgs.codex-acp}/bin/codex-acp";
+        };
+        OpenCode = {
+          type = "custom";
+          command = "${pkgs.opencode}/bin/opencode";
+          args = [ "acp" ];
+        };
+        Pi = {
+          type = "custom";
+          command = "${pkgs.pi-acp}/bin/pi-acp";
+        };
+      };
+
+      context_servers = {
+        kiwix-mcp =
+          # avoids conflicting w/ media's service used by open-webui
+          if (hostname != "media") then
+            {
+              command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
+              env.KIWIX_BASE_URL = "https://archive.home.local";
+            }
+          else
+            {
+              url = "http://localhost:8000/mcp";
+            };
       };
     };
   };

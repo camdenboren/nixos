@@ -12,7 +12,7 @@ This is a cross-platform config for multiple hosts of varying degrees of specifi
 - [Overlays]
 - [DevShells]
 
-The hosts cumulatively form a [Homelab] of every-increasing scope, w/ `media` acting as the primary server, though auxiliary tasks are delegated out (e.g., `main` handles virtually all local AI inference)
+The hosts cumulatively form a [Homelab] of ever-increasing scope, w/ `media` acting as the primary server, though auxiliary tasks are delegated out (e.g., `main` handles virtually all local AI inference)
 
 Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/configs were massively helpful for learning the basics of NixOS, flakes, home-manager, and Linux audio
 

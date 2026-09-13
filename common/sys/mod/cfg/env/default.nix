@@ -18,6 +18,5 @@ in
   ]
   ++ lib.optionals (hostname == "main" || hostname == "media") [
     ./etc.nix
-    ./travel.nix
   ];
 }

@@ -76,7 +76,6 @@ in
           systemctl restart unbound
       '';
       tr = if isDarwin then "trash" else "gio trash";
-      travel = "nh os switch -s travel";
       update = "nix flake update --flake $NH_FLAKE";
       zed =
         lib.optionalString isVM (

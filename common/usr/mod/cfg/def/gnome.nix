@@ -54,7 +54,7 @@ in
           1.0;
     };
     "org/gnome/desktop/screensaver" = {
-      lock-enabled = false;
+      lock-enabled = true;
     };
     "org/gnome/shell" = {
       always-show-log-out = true;
@@ -183,10 +183,11 @@ in
     };
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "interactive";
-      sleep-inactive-ac-type = "nothing";
+      sleep-inactive-ac-type = "logout";
+      sleep-inactive-ac-timeout = 43200;
     };
     "org/gnome/desktop/session" = {
-      idle-delay = lib.hm.gvariant.mkUint32 0;
+      idle-delay = lib.hm.gvariant.mkUint32 1800;
     };
   };
 

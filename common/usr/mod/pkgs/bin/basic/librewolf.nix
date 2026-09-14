@@ -2,11 +2,32 @@
 
 let
   localURL = "home.local";
+  nixSearchURL = "https://search.nixos.org";
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
   homepage = "https://vimium.github.io/new-tab/";
+  unstable = {
+    name = "channel";
+    value = "unstable";
+  };
   query = {
     name = "query";
     value = "{searchTerms}";
+  };
+  options = {
+    name = "type";
+    value = "options";
+  };
+  packages = {
+    name = "type";
+    value = "packages";
+  };
+  nix-darwin = {
+    name = "source";
+    value = "darwin";
+  };
+  home-manager = {
+    name = "source";
+    value = "home_manager";
   };
 in
 {
@@ -183,58 +204,70 @@ in
           default = "ddg";
           force = true;
           order = [
-            "Nix Packages"
-            "Nix Options"
-            "Home Manager Options"
+            "Nix packages"
+            "NixOS options"
+            "nix-darwin options"
+            "Home Manager options"
           ];
 
           engines = {
-            "Nix Packages" = {
+            "Nix packages" = {
               icon = nixos-icon;
               definedAliases = [ "@np" ];
               urls = [
                 {
-                  template = "https://search.nixos.org/packages";
+                  template = "${nixSearchURL}/packages";
                   params = [
+                    unstable
                     query
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
+                    packages
                   ];
                 }
               ];
             };
 
-            "Nix Options" = {
+            "NixOS options" = {
               icon = nixos-icon;
               definedAliases = [ "@no" ];
               urls = [
                 {
-                  template = "https://search.nixos.org/options";
+                  template = "${nixSearchURL}/options";
                   params = [
+                    unstable
                     query
-                    {
-                      name = "type";
-                      value = "options";
-                    }
+                    options
                   ];
                 }
               ];
             };
 
-            "Home Manager Options" = {
+            "nix-darwin options" = {
+              icon = nixos-icon;
+              definedAliases = [ "@nd" ];
+              urls = [
+                {
+                  template = "${nixSearchURL}/options";
+                  params = [
+                    unstable
+                    query
+                    nix-darwin
+                    options
+                  ];
+                }
+              ];
+            };
+
+            "Home Manager options" = {
               icon = nixos-icon;
               definedAliases = [ "@hm" ];
               urls = [
                 {
-                  template = "https://home-manager-options.extranix.com";
+                  template = "${nixSearchURL}/options";
                   params = [
+                    unstable
                     query
-                    {
-                      name = "release";
-                      value = "master";
-                    }
+                    home-manager
+                    options
                   ];
                 }
               ];

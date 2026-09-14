@@ -2,7 +2,6 @@
 
 let
   localURL = "home.local";
-  ddg-icon = "https://duckduckgo.com/assets/logo_header.v109.svg";
   nixos-icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
   homepage = "https://vimium.github.io/new-tab/";
   query = {
@@ -181,7 +180,7 @@ in
         };
 
         search = {
-          default = "DuckDuckGo (HTML)";
+          default = "ddg";
           force = true;
           order = [
             "Nix Packages"
@@ -190,23 +189,6 @@ in
           ];
 
           engines = {
-            ddg.metaData.alias = "@d";
-
-            "DuckDuckGo (HTML)" = {
-              icon = ddg-icon;
-              urls = [
-                {
-                  template = "https://html.duckduckgo.com/html/";
-                  params = [
-                    {
-                      name = "q";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-            };
-
             "Nix Packages" = {
               icon = nixos-icon;
               definedAliases = [ "@np" ];

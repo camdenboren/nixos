@@ -1,13 +1,11 @@
 {
   lib,
   system,
-  hostname,
   ...
 }:
 
 let
   isLinux = lib.hasSuffix "-linux" system;
-  isVM = lib.hasSuffix "vm" hostname;
 in
 {
   imports = [
@@ -18,8 +16,6 @@ in
   ]
   ++ lib.optionals isLinux [
     ./sessionVariables.nix
-  ]
-  ++ lib.optionals isVM [
     ./xdg.nix
   ];
 }

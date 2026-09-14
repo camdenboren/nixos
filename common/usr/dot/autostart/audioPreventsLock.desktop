@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=audioPreventsLock
+Exec=sh -c "audioPreventsLock"
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

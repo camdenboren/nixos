@@ -1,7 +1,23 @@
 { lib, hostname, ... }:
 
+let
+  isVM = lib.hasSuffix "vm" hostname;
+in
 {
-  xdg.desktopEntries = {
+  xdg.autostart = {
+    enable = true;
+    entries = [
+      ../../../dot/autostart/audioPreventsLock.desktop
+    ]
+    # hacky fix for the blurred gnome panel improperly defaulting to the left
+    # (vertical) monitor's width. not sure why chaining the commands via `&&`
+    # w/o the `sh -c` call didn't work, but this should do for now
+    ++ lib.optionals (hostname == "main") [
+      ../../../dot/autostart/fixPanel.desktop
+    ];
+  };
+
+  xdg.desktopEntries = lib.mkIf isVM {
     "dev.zed.Zed" = {
       categories = [
         "Utility"

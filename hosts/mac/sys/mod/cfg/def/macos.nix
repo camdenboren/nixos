@@ -28,9 +28,13 @@ let
   };
 in
 {
+  # only affects the AC power source–battery is handled manually via a
+  # `pmset -b` call in the activation script. additionally, the screenLock
+  # delay requires a `sysadminctl` call, so it's relegated to the scripts
+  # well
   power.sleep = {
-    computer = "never";
-    display = "never";
+    computer = 30;
+    display = 30;
   };
 
   system = {

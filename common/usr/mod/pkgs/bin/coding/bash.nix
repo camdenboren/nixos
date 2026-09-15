@@ -147,7 +147,7 @@ in
 
         updatePkg () {
           ${pkgs.nix-update}/bin/nix-update \
-            nixosConfigurations.main.pkgs."$@" --flake
+            ${cfgKey}Configurations.${hostname}.pkgs."$@" --flake
         }
       '';
   };

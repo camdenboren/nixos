@@ -184,7 +184,7 @@ in
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "interactive";
       sleep-inactive-ac-type = "logout";
-      sleep-inactive-ac-timeout = 43200;
+      sleep-inactive-ac-timeout = 28800;
     };
     "org/gnome/desktop/session" = {
       idle-delay = lib.hm.gvariant.mkUint32 1800;

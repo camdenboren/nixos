@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   system,
   hostname,
   ...
@@ -134,6 +135,7 @@ in
         Codex = lib.mkIf isDarwin {
           type = "custom";
           command = "${pkgs.codex-acp}/bin/codex-acp";
+          env.CODEX_PATH = lib.getExe config.programs.codex.package;
         };
         OpenCode = {
           type = "custom";

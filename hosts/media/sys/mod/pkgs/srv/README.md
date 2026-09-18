@@ -2,7 +2,8 @@
 
 [default.nix](default.nix) imports each service module plus shared system utilities.
 Most applications use native NixOS services; Penpot uses Podman containers and
-draw.io is served directly from `pkgs.drawio`.
+draw.io is served directly from `pkgs.drawio`. Vector ships journald logs to
+the OpenObserve observability backend.
 
 ## Routing
 
@@ -27,6 +28,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `sync`                  | Syncthing `:8384`                                   | [Shared Home Manager service](../../../../../../common/usr/mod/pkgs/srv/utils/syncthing.nix) |
 | `torrent`               | qBittorrent `:9080`                                 | Proxy expects its Web UI here; no matching port configuration is declared in this directory  |
 | `image`                 | `192.168.1.88:9090`                                 | Remote backend on `main`                                                                     |
+| `log`                   | OpenObserve `:5080`                                 | [openobserve/default.nix](openobserve/default.nix)                                           |
 | `util`                  | `192.168.1.93:8080`                                 | Remote backend on `mac`, with Nginx basic auth                                               |
 
 `kiwix.nix` also starts a separate `kiwix-mcp` systemd service using streamable HTTP and `KIWIX_BASE_URL=http://localhost:9095`.

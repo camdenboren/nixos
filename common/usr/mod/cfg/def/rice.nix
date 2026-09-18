@@ -15,6 +15,7 @@ let
   red-theme = import ../../../dot/zed/red.nix { inherit lib system; };
   rose-theme = import ../../../dot/zed/rose.nix;
   isVM = lib.hasSuffix "vm" hostname;
+  isMacVM = isVM && lib.hasPrefix "mac" hostname;
   isLinux = lib.hasSuffix "-linux" system;
   zed-variant = if isLinux then "" else " Transparent";
 
@@ -145,8 +146,8 @@ in
               bold-is-bright = true;
               font-family = fonts.mono;
               font-size =
-                if isVM then
-                  10
+                if isMacVM then
+                  12
                 else if isLinux then
                   11
                 else

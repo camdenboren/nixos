@@ -11,5 +11,6 @@ in
     ./fetch-rs.nix
     ./mullvad.nix
     ./ups.nix
+    ./vector.nix
   ];
 }

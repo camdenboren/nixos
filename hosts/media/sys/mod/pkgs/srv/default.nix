@@ -14,6 +14,7 @@
     ./jellyfin.nix
     ./kiwix.nix
     ./lubelogger.nix
+    ./openobserve
     ./nginx.nix
     ./ntfy-sh.nix
     ./open-webui.nix

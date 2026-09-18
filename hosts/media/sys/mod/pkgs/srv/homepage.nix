@@ -15,6 +15,7 @@ let
     pdf = "https://pdf.${baseDomain}/";
     box = "https://box.${baseDomain}/";
     car = "https://car.${baseDomain}/";
+    log = "https://log.${baseDomain}/";
     chat = "https://chat.${baseDomain}/";
     sync = "https://sync.${baseDomain}/";
     draw = "https://draw.${baseDomain}/";
@@ -213,6 +214,13 @@ in
       }
       {
         Utilities = [
+          {
+            Log = {
+              icon = "open-observe";
+              href = URLs.log;
+              siteMonitor = URLs.log;
+            };
+          }
           {
             Notes = {
               icon = "outline";

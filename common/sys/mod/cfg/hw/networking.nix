@@ -25,6 +25,7 @@ let
     "box.home.local"
     "car.home.local"
     "pdf.home.local"
+    "log.home.local"
     "sync.home.local"
     "chat.home.local"
     "draw.home.local"

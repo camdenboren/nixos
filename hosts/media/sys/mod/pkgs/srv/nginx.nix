@@ -10,6 +10,7 @@ let
     dex = toString 5556;
     box = toString 7745;
     car = toString 5000;
+    log = toString 5080;
     chat = toString 8080;
     sync = toString 8384;
     draw = toString 9040;
@@ -29,6 +30,7 @@ let
     dex = "dex.${baseDomain}";
     box = "box.${baseDomain}";
     car = "car.${baseDomain}";
+    log = "log.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
@@ -286,6 +288,16 @@ in
           "/" = {
             proxyPass = "${baseURL}:${ports.box}";
             extraConfig = proxyHeaders;
+          };
+        };
+      };
+
+      "${domains.log}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.log}";
           };
         };
       };

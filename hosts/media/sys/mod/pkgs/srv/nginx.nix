@@ -22,7 +22,6 @@ let
     money = toString 4000;
     photos = toString 2283;
     design = toString 9001;
-    torrent = toString 9080;
     archive = toString 9095;
   };
   domains = {
@@ -42,7 +41,6 @@ let
     money = "money.${baseDomain}";
     photos = "photos.${baseDomain}";
     design = "design.${baseDomain}";
-    torrent = "torrent.${baseDomain}";
     archive = "archive.${baseDomain}";
   };
   proxyHeaders = ''
@@ -190,17 +188,6 @@ in
             proxy_send_timeout   600s;
             send_timeout         600s;
           '';
-        };
-      };
-
-      "${domains.torrent}" = {
-        forceSSL = true;
-        useACMEHost = baseDomain;
-        locations = {
-          "/" = {
-            proxyPass = "${baseURL}:${ports.torrent}";
-            extraConfig = proxyHeaders;
-          };
         };
       };
 

@@ -27,7 +27,6 @@ let
     money = "https://money.${baseDomain}/";
     photos = "https://photos.${baseDomain}/";
     design = "https://design.${baseDomain}/";
-    torrent = "https://torrent.${baseDomain}/";
     archive = "https://archive.${baseDomain}/";
   };
   icons = {
@@ -247,13 +246,6 @@ in
               icon = "syncthing";
               href = URLs.sync;
               siteMonitor = URLs.sync;
-            };
-          }
-          {
-            Torrent = {
-              icon = "qbittorrent";
-              href = URLs.torrent;
-              siteMonitor = URLs.torrent;
             };
           }
         ];

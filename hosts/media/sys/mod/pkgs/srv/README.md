@@ -26,7 +26,6 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `box`, `car`, `money`   | Homebox `:7745`, LubeLogger `:5000`, Actual `:4000` | [homebox.nix](homebox.nix), [lubelogger.nix](lubelogger.nix), [actual.nix](actual.nix)       |
 | `ntfy`                  | ntfy `:2586`                                        | [ntfy-sh.nix](ntfy-sh.nix)                                                                   |
 | `sync`                  | Syncthing `:8384`                                   | [Shared Home Manager service](../../../../../../common/usr/mod/pkgs/srv/utils/syncthing.nix) |
-| `torrent`               | qBittorrent `:9080`                                 | Proxy expects its Web UI here; no matching port configuration is declared in this directory  |
 | `image`                 | `192.168.1.88:9090`                                 | Remote backend on `main`                                                                     |
 | `log`                   | OpenObserve `:5080`                                 | [openobserve/default.nix](openobserve/default.nix)                                           |
 | `util`                  | `192.168.1.93:8080`                                 | Remote backend on `mac`, with Nginx basic auth                                               |

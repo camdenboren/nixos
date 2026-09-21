@@ -104,6 +104,57 @@ let
     mono = "JetBrainsMono Nerd Font";
     serif = "Adwaita Sans";
   };
+
+  containers = {
+    container1.color =
+      if coral then
+        "blue"
+      else if nothin then
+        "purple"
+      else
+        "red";
+    container2.color =
+      if coral then
+        "turquoise"
+      else if nothin then
+        "blue"
+      else
+        "orange";
+    container3.color =
+      if coral then
+        "green"
+      else if nothin then
+        "turquoise"
+      else
+        "yellow";
+    container4.color =
+      if coral then
+        "yellow"
+      else if nothin then
+        "green"
+      else
+        "green";
+    container5.color =
+      if coral then
+        "orange"
+      else if nothin then
+        "yellow"
+      else
+        "turquoise";
+    container6.color =
+      if coral then
+        "red"
+      else if nothin then
+        "red"
+      else
+        "purple";
+  };
+
+  settings = {
+    "font.name.serif.x-western" = fonts.serif;
+    "font.name.sans-serif.x-western" = fonts.serif;
+    "font.name.monospace.x-western" = fonts.mono;
+  };
 in
 {
   options = {
@@ -197,57 +248,9 @@ in
           };
 
           # darwin support is coming soon
-          librewolf.profiles.camdenboren = {
-            containers = {
-              container1.color =
-                if coral then
-                  "blue"
-                else if nothin then
-                  "purple"
-                else
-                  "red";
-              container2.color =
-                if coral then
-                  "turquoise"
-                else if nothin then
-                  "blue"
-                else
-                  "orange";
-              container3.color =
-                if coral then
-                  "green"
-                else if nothin then
-                  "turquoise"
-                else
-                  "yellow";
-              container4.color =
-                if coral then
-                  "yellow"
-                else if nothin then
-                  "green"
-                else
-                  "green";
-              container5.color =
-                if coral then
-                  "orange"
-                else if nothin then
-                  "yellow"
-                else
-                  "turquoise";
-              container6.color =
-                if coral then
-                  "red"
-                else if nothin then
-                  "red"
-                else
-                  "purple";
-            };
-
-            settings = {
-              "font.name.serif.x-western" = fonts.serif;
-              "font.name.sans-serif.x-western" = fonts.serif;
-              "font.name.monospace.x-western" = fonts.mono;
-            };
+          librewolf.profiles = {
+            camdenboren = { inherit containers settings; };
+            webapp = { inherit containers settings; };
           };
         };
 

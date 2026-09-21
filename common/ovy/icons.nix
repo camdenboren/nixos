@@ -50,6 +50,18 @@
 
           rm -f $out/share/icons/Dracula/24/panel/network-vpn-aquiring.svg
           cp -f ${../usr/rice/icons/vpn-status/24/connecting.svg} $out/share/icons/Dracula/24/panel/network-vpn-aquiring.svg
+
+          cp -f ${../usr/rice/icons/chat/chat.svg} $out/share/icons/Dracula/scalable/apps/chat.svg
+
+          cp -f ${../usr/rice/icons/duck/duck.svg} $out/share/icons/Dracula/scalable/apps/duck.svg
+
+          cp -f ${../usr/rice/icons/mailbox/mailbox.svg} $out/share/icons/Dracula/scalable/apps/mailbox.svg
+
+          rm -f $out/share/icons/Dracula/scalable/apps/notes.svg
+          cp -f ${../usr/rice/icons/notes/notes.svg} $out/share/icons/Dracula/scalable/apps/notes.svg
+
+          rm -f $out/share/icons/Dracula/scalable/apps/photos.svg
+          cp -f ${../usr/rice/icons/photos/photos.svg} $out/share/icons/Dracula/scalable/apps/photos.svg
         '';
       });
     })

@@ -62,6 +62,7 @@ in
   # Exclude unwanted apps
   environment.gnome.excludePackages = with pkgs; [
     decibels # audio player
+    epiphany # browser
     gnome-console
     gnome-contacts
     gnome-music

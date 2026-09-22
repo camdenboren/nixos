@@ -33,7 +33,7 @@ keybinds.enable = lib.mkForce false;
 
 `system` determines Darwin versus Linux; `hostname` ending in `vm` limits GNOME
 launcher registration. All Linux hosts register LibreWolf, Ghostty, and Zed.
-Non-VM hosts add FreeTube, VLC, Mullvad, Lollypop, Steam, and EasyEffects; only
+Non-VM hosts add FreeTube, Mullvad, Lollypop, Steam, and EasyEffects; only
 `main` adds Reaper. Launchers use `<Control><Alt>` plus the letter in each entry.
 These commands must be installed separately.
 

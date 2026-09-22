@@ -34,12 +34,12 @@ _:
       "image/x-gimp-gih" = "gimp.desktop";
 
       # Video
-      "video/x-msvideo" = "vlc.desktop";
-      "video/mp4" = "vlc.desktop";
-      "video/mpeg" = "vlc.desktop";
-      "video/webm" = "vlc.desktop";
-      "video/quicktime" = "vlc.desktop";
-      "video/x-matroska" = "vlc.desktop";
+      "video/x-msvideo" = "mpv.desktop";
+      "video/mp4" = "mpv.desktop";
+      "video/mpeg" = "mpv.desktop";
+      "video/webm" = "mpv.desktop";
+      "video/quicktime" = "mpv.desktop";
+      "video/x-matroska" = "mpv.desktop";
     };
   };
 }

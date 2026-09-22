@@ -63,6 +63,7 @@ in
         "librewolf.desktop"
         "dev.zed.Zed.desktop"
         "com.mitchellh.ghostty.desktop"
+        "notes.desktop"
       ]
       ++ lib.optionals (!isVM) [
         "bitwarden.desktop"
@@ -74,7 +75,7 @@ in
         "cockos-reaper.desktop"
       ]
       ++ lib.optionals (hostname == "media") [
-        "vlc.desktop"
+        "media.desktop"
       ]
       ++ lib.optionals (!isVM) [
         "steam.desktop"
@@ -162,11 +163,6 @@ in
       font-size = 11;
       formatter = "01_luxon";
       pattern = "h:mm";
-    };
-    "org/gnome/epiphany" = {
-      start-in-incognito-mode = true;
-      restore-session-policy = "crashed";
-      homepage-url = "about:newtab";
     };
     "org/gnome/Lollypop" = {
       show-sidebar-labels = false;

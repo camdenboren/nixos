@@ -1,5 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="250" cy="250" r="250"/>
-    <path d="m335 150h40v200h-40zm-130 0a100 100 0 1 0 0 200 100 100 0 1 0 0-200zm0 40a60 60 0 1 1 0 120 60 60 0 1 1 0-120z" fill="#fff"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="chat.svg"
+   width="64"
+   height="64"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="11.551296"
+     inkscape:cx="31.857897"
+     inkscape:cy="43.285186"
+     inkscape:window-width="2560"
+     inkscape:window-height="1366"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <circle
+     cx="32"
+     cy="32"
+     id="circle1"
+     style="stroke-width:0.108;fill:#343434;fill-opacity:1"
+     r="27" />
+  <path
+     d="m 41.18,21.2 h 4.32 v 21.6 h -4.32 z m -14.04,0 a 10.8,10.8 0 1 0 0,21.6 10.8,10.8 0 1 0 0,-21.6 z m 0,4.32 a 6.48,6.48 0 1 1 0,12.96 6.48,6.48 0 1 1 0,-12.96 z"
+     fill="#ffffff"
+     id="path1"
+     style="stroke-width:0.108" />
 </svg>

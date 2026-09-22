@@ -220,7 +220,6 @@ in
           "${pkgs.ghostty-bin}/Applications/Ghostty.app"
           "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app"
           "${pkgs.freetube}/Applications/FreeTube.app"
-          "${pkgs.vlc-bin}/Applications/VLC.app"
           "${pkgs.slack}/Applications/Slack.app"
           "/Applications/ClickUp.app"
           "/Applications/zoom.us.app"

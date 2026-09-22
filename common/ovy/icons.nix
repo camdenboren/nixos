@@ -7,7 +7,7 @@
         postInstall = (o.postInstall or "") + ''
           cp -f ${../usr/rice/icons/librewolf/librewolf-${rice}.svg} $out/share/icons/Dracula/scalable/apps/librewolf.svg
 
-          cp -f ${../usr/rice/icons/ghostty/com.mitchellh.ghostty.svg} $out/share/icons/Dracula/scalable/apps/com.mitchellh.ghostty.svg
+          cp -f ${../usr/rice/icons/ghostty/com.mitchellh.ghostty-${rice}.svg} $out/share/icons/Dracula/scalable/apps/com.mitchellh.ghostty.svg
 
           rm -f $out/share/icons/Dracula/scalable/apps/bitwarden.svg
           cp -f ${../usr/rice/icons/bitwarden/bitwarden-${rice}.svg} $out/share/icons/Dracula/scalable/apps/bitwarden.svg
@@ -18,9 +18,6 @@
 
           rm -f $out/share/icons/Dracula/scalable/apps/cockos-reaper.svg
           cp -f ${../usr/rice/icons/cockos-reaper/cockos-reaper.svg} $out/share/icons/Dracula/scalable/apps/cockos-reaper.svg
-
-          rm -f $out/share/icons/Dracula/scalable/apps/vlc.svg
-          cp -f ${../usr/rice/icons/vlc/vlc-${rice}.svg} $out/share/icons/Dracula/scalable/apps/vlc.svg
 
           rm -f $out/share/icons/Dracula/scalable/apps/inkscape.svg
           cp -f ${../usr/rice/icons/inkscape/inkscape.svg} $out/share/icons/Dracula/scalable/apps/inkscape.svg
@@ -53,9 +50,11 @@
 
           cp -f ${../usr/rice/icons/chat/chat.svg} $out/share/icons/Dracula/scalable/apps/chat.svg
 
-          cp -f ${../usr/rice/icons/duck/duck.svg} $out/share/icons/Dracula/scalable/apps/duck.svg
+          cp -f ${../usr/rice/icons/duck/duck-${rice}.svg} $out/share/icons/Dracula/scalable/apps/duck.svg
 
-          cp -f ${../usr/rice/icons/mailbox/mailbox.svg} $out/share/icons/Dracula/scalable/apps/mailbox.svg
+          cp -f ${../usr/rice/icons/mailbox/mailbox-${rice}.svg} $out/share/icons/Dracula/scalable/apps/mailbox.svg
+
+          cp -f ${../usr/rice/icons/media/media-${rice}.svg} $out/share/icons/Dracula/scalable/apps/media.svg
 
           rm -f $out/share/icons/Dracula/scalable/apps/notes.svg
           cp -f ${../usr/rice/icons/notes/notes.svg} $out/share/icons/Dracula/scalable/apps/notes.svg

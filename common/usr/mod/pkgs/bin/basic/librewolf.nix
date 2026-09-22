@@ -45,7 +45,8 @@ let
       icon ? lib.strings.toLower name,
     }:
     pkgs.makeDesktopItem {
-      inherit name icon;
+      inherit icon;
+      name = lib.strings.toLower name;
       desktopName = name;
       exec = ''
         "${pkgs.librewolf}/bin/librewolf" "-taskbar-tab" "${id}" "-new-window" "${url}" "-profile" "${webAppProfileURI}" "-container" "0"
@@ -375,7 +376,6 @@ in
       name = "Media";
       id = "ff3e78e2-5741-4f08-8404-23d307b46284";
       url = "https://media.home.local/web/index.html#/home";
-      icon = "jellyfin";
     })
     (mkWebApp {
       name = "Chat";

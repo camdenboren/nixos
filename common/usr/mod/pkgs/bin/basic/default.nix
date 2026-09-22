@@ -23,10 +23,6 @@ in
       # Basic Apps
       lollypop
       readest
-      vlc
-    ]
-    ++ lib.optionals (!isLinux) [
-      vlc-bin
     ]
     ++ lib.optionals (hostname == "media") [
       jellyfin-ffmpeg

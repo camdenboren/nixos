@@ -47,11 +47,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788974809,
-        "narHash": "sha256-whCL6/sNXNkWX8axRJggYoDJjPtFCo10CEi97tsAGWE=",
+        "lastModified": 1790199317,
+        "narHash": "sha256-d3DCYkVv+lWxfIN/Q2AHSgg5HMSiQnUNDy9ypx4TBc8=",
         "owner": "collegiate-edu-nation",
         "repo": "chatbot-util",
-        "rev": "3e941e7fd78755f4cefef3ebb00bb41a8fc0672c",
+        "rev": "98d00a6bc72c548f283289098df0f73e3098cac1",
         "type": "github"
       },
       "original": {

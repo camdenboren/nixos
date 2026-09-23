@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, hostname, ... }:
 
 {
   home.packages = [
@@ -9,5 +9,6 @@
     (import ../../../../../../common/usr/scr/findVPN.nix { inherit pkgs; })
     (import ../../../../../../common/usr/scr/findVPNDesktop.nix { inherit pkgs; })
     (import ../../../../../../common/usr/scr/hello.nix { inherit pkgs; })
+    (import ../../../../../../common/usr/scr/upsMetrics.nix { inherit pkgs hostname; })
   ];
 }

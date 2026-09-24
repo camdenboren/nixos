@@ -382,6 +382,11 @@ in
       id = "598680e9-2877-49f0-80f4-9d180ef18413";
       url = "https://chat.home.local/";
     })
+    (mkWebApp {
+      name = "Sports";
+      id = "c045e69b-9a08-415a-97ca-9079698aa811";
+      url = "https://fmhy.net/video#live-sports";
+    })
   ];
 
   home.file = lib.mkIf isLinux {
@@ -425,6 +430,12 @@ in
             hostname = "chat.home.local";
             startUrl = "https://chat.home.local/";
             id = "598680e9-2877-49f0-80f4-9d180ef18413";
+          })
+          (mkTaskbarEntry {
+            name = "Sports";
+            hostname = "fmhy.net";
+            startUrl = "https://fmhy.net/video#live-sports";
+            id = "c045e69b-9a08-415a-97ca-9079698aa811";
           })
         ];
       });

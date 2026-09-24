@@ -56,6 +56,8 @@
 
           cp -f ${../usr/rice/icons/media/media-${rice}.svg} $out/share/icons/Dracula/scalable/apps/media.svg
 
+          cp -f ${../usr/rice/icons/sports/sports.svg} $out/share/icons/Dracula/scalable/apps/sports.svg
+
           rm -f $out/share/icons/Dracula/scalable/apps/notes.svg
           cp -f ${../usr/rice/icons/notes/notes.svg} $out/share/icons/Dracula/scalable/apps/notes.svg
 

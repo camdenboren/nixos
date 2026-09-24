@@ -1,5 +1,8 @@
 {
-  # in order: Compressor, Pioneer, Bass
+  # in order: Compressor, Pioneer
+  # pioneer correction paratially from
+  # https://www.hifispecs.com/pioneer-sp-fs52/
+  # though i largely corrected the ~70Hz by ear
   output = {
     blocklist = [ ];
 
@@ -38,11 +41,11 @@
     "equalizer#0" = {
       balance = 0.0;
       bypass = false;
-      input-gain = 0.0;
+      input-gain = -7.0;
       left = {
         band0 = {
-          frequency = 175.0;
-          gain = -5.0;
+          frequency = 70.0;
+          gain = 7.0;
           mode = "APO (DR)";
           mute = false;
           q = 4.0630998611450195;
@@ -52,44 +55,11 @@
           width = 4.0;
         };
         band1 = {
-          frequency = 80.0;
-          gain = 3.0;
+          frequency = 7000.0;
+          gain = 1.0;
           mode = "APO (DR)";
           mute = false;
-          q = 0.6666666865348816;
-          slope = "x1";
-          solo = false;
-          type = "Lo-shelf";
-          width = 4.0;
-        };
-        band2 = {
-          frequency = 1139.5;
-          gain = -2.049999952316284;
-          mode = "APO (DR)";
-          mute = false;
-          q = 1.5399999618530273;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band3 = {
-          frequency = 2469.0;
-          gain = -2.4800000190734863;
-          mode = "APO (DR)";
-          mute = false;
-          q = 2.930000066757202;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band4 = {
-          frequency = 8084.0;
-          gain = 1.9500000476837158;
-          mode = "APO (DR)";
-          mute = false;
-          q = 5.699999809265137;
+          q = 1.5;
           slope = "x1";
           solo = false;
           type = "Bell";
@@ -97,14 +67,14 @@
         };
       };
       mode = "IIR";
-      num-bands = 5;
+      num-bands = 2;
       output-gain = 0.0;
       pitch-left = 0.0;
       pitch-right = 0.0;
       right = {
         band0 = {
-          frequency = 175.0;
-          gain = -5.0;
+          frequency = 70.0;
+          gain = 7.0;
           mode = "APO (DR)";
           mute = false;
           q = 4.0630998611450195;
@@ -114,126 +84,11 @@
           width = 4.0;
         };
         band1 = {
-          frequency = 80.0;
-          gain = 3.0;
+          frequency = 7000.0;
+          gain = 1.0;
           mode = "APO (DR)";
           mute = false;
-          q = 0.6666666865348816;
-          slope = "x1";
-          solo = false;
-          type = "Lo-shelf";
-          width = 4.0;
-        };
-        band2 = {
-          frequency = 1139.5;
-          gain = -2.049999952316284;
-          mode = "APO (DR)";
-          mute = false;
-          q = 1.5399999618530273;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band3 = {
-          frequency = 2469.0;
-          gain = -2.4800000190734863;
-          mode = "APO (DR)";
-          mute = false;
-          q = 2.930000066757202;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band4 = {
-          frequency = 8084.0;
-          gain = 1.9500000476837158;
-          mode = "APO (DR)";
-          mute = false;
-          q = 5.699999809265137;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-      };
-      split-channels = false;
-    };
-
-    "equalizer#1" = {
-      balance = 0.0;
-      bypass = false;
-      input-gain = -6.62;
-      left = {
-        band0 = {
-          frequency = 79.0;
-          gain = -7.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 16.4768009185791;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band1 = {
-          frequency = 100.0;
-          gain = 4.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 9.180500030517578;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band2 = {
-          frequency = 160.0;
-          gain = 4.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 10.0;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-      };
-      mode = "IIR";
-      num-bands = 3;
-      output-gain = 0.0;
-      pitch-left = 0.0;
-      pitch-right = 0.0;
-      right = {
-        band0 = {
-          frequency = 79.0;
-          gain = -7.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 16.4768009185791;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band1 = {
-          frequency = 100.0;
-          gain = 4.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 9.180500030517578;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band2 = {
-          frequency = 160.0;
-          gain = 4.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 10.0;
+          q = 1.5;
           slope = "x1";
           solo = false;
           type = "Bell";
@@ -246,7 +101,6 @@
     plugins_order = [
       "compressor#0"
       "equalizer#0"
-      "equalizer#1"
     ];
   };
 }

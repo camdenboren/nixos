@@ -1,11 +1,7 @@
-{ pkgs, ... }:
+_:
 
 {
-  # Enables support for Bluetooth
+  # ertm is also disabled in `boot.nix`, which may help w/
+  # xbox one controller connectivity
   hardware.bluetooth.enable = true;
-
-  # Bluetooth driver for ASUS USB-BT500 chip (RTL8761b)
-  hardware.firmware = with pkgs; [
-    rtl8761b-firmware
-  ];
 }

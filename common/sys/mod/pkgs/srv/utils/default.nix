@@ -10,6 +10,7 @@ in
   ++ lib.optionals (!isVM) [
     ./fetch-rs.nix
     ./mullvad.nix
+    ./shutdown.nix
     ./ups.nix
     ./vector.nix
   ];

@@ -1,9 +1,6 @@
 # Homelab
 
-[default.nix](default.nix) imports each service module plus shared system utilities.
-Most applications use native NixOS services; Penpot uses Podman containers and
-draw.io is served directly from `pkgs.drawio`. Vector ships journald logs to
-the OpenObserve observability backend.
+[default.nix](default.nix) imports each service module plus shared system utilities. Most applications use native NixOS services; Penpot uses Podman containers and draw.io is served directly from `pkgs.drawio`. Vector ships journald logs and a variety of hardware metrics (including the UPSs via the [upsMetrics](../../../../../../common/usr/scr/upsMetrics.nix) script) to the OpenObserve observability backend.
 
 ## Routing
 

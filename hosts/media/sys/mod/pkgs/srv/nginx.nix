@@ -274,6 +274,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.box}";
+            proxyWebsockets = true;
             extraConfig = proxyHeaders;
           };
         };

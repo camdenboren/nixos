@@ -21,7 +21,14 @@ in
       sources = {
         journald.type = "journald";
         vector_metrics.type = "internal_metrics";
-        host_metrics.type = "host_metrics";
+        host_metrics = {
+          type = "host_metrics";
+          collectors = [
+            "cpu"
+            "filesystem"
+            "memory"
+          ];
+        };
         ups_metrics_json = {
           type = "exec";
           command = [ "${upsMetrics}/bin/upsMetrics" ];
@@ -77,7 +84,6 @@ in
           inherit auth;
           type = "prometheus_remote_write";
           inputs = [
-            "vector_metrics"
             "host_metrics"
             "ups_metrics"
           ];

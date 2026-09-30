@@ -14,7 +14,7 @@ _:
       # allows private ntfy alerts via `127.0.0.1`
       # remove this in lieu of `ZO_SKIOP_SSRF_CHECKS` onc you update
       ZO_SSRF_ALLOW_LOOPBACK = true;
-      ZO_COMPACT_DATA_RETENTION_DAYS = 30;
+      ZO_COMPACT_DATA_RETENTION_DAYS = 7;
     };
   };
 }

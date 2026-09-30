@@ -4,18 +4,20 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1788530885,
-        "narHash": "sha256-Pjo8XvvELaUzqy60BXZG98FHk3MdYTtHSXBA+36sTMk=",
+        "lastModified": 1790778315,
+        "narHash": "sha256-Eh5x/pF8bvR6GzvHHtheUQYlSnib/e4JUciWW9aiNvQ=",
         "owner": "camdenboren",
         "repo": "alc-calc",
-        "rev": "8295d72c2e6ffc7218436aec1b4916f8fd78d4a6",
+        "rev": "af8e67b3572c92fb9af5cff5ecd155fb5fda46c9",
         "type": "github"
       },
       "original": {
         "owner": "camdenboren",
+        "ref": "feat/web",
         "repo": "alc-calc",
         "type": "github"
       }
@@ -203,16 +205,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1788531059,
-        "narHash": "sha256-hLD4l3QOGBQhkVp3mQ2lJ/YbEi99qUgKapb40KovZ88=",
-        "owner": "nixos",
+        "lastModified": 1744536153,
+        "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "801bef6abd86b91e51083066b83fb354a11fc640",
+        "rev": "18dd725c29603f582cf1900e0d25f9f1063dbf11",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -233,6 +235,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1788531059,
+        "narHash": "sha256-hLD4l3QOGBQhkVp3mQ2lJ/YbEi99qUgKapb40KovZ88=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "801bef6abd86b91e51083066b83fb354a11fc640",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "alc-calc": "alc-calc",
@@ -243,9 +261,27 @@
         "musnix": "musnix",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
         "yt-x": "yt-x"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1790407471,
+        "narHash": "sha256-M8elY2UShg4ZuLTiRLEHO+ae5xQFp3/ReQdxp/R+1UU=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "4e9bb05a9ab6c37dc74c22974ebed6e36dc73eb2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "systems": {

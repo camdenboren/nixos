@@ -16,6 +16,7 @@ let
     box = "https://box.${baseDomain}/";
     car = "https://car.${baseDomain}/";
     log = "https://log.${baseDomain}/";
+    alc = "https://alc.${baseDomain}/";
     chat = "https://chat.${baseDomain}/";
     sync = "https://sync.${baseDomain}/";
     draw = "https://draw.${baseDomain}/";
@@ -30,6 +31,7 @@ let
     archive = "https://archive.${baseDomain}/";
   };
   icons = {
+    alc-calc = "${pkgs.alc-calc-web}/app-icon.png";
     centhia = "${inputs.chatbot-util}/front/src/assets/logo.png";
   };
   backgrounds = {
@@ -43,6 +45,7 @@ let
     postInstall = oldAttrs.postInstall or "" + ''
       mkdir -p ${homepageIconsURI}
       mkdir -p ${homepageImagesURI}
+      ln -s ${icons.alc-calc} ${homepageIconsURI}/alc-calc.png
       ln -s ${icons.centhia} ${homepageIconsURI}/centhia.png
       ln -s ${backgrounds.coral} ${homepageImagesURI}/coral.jpg
       ln -s ${backgrounds.nothin} ${homepageImagesURI}/nothin.jpg
@@ -213,6 +216,13 @@ in
       }
       {
         Utilities = [
+          {
+            alc-calc = {
+              icon = "/icons/alc-calc.png";
+              href = URLs.alc;
+              siteMonitor = URLs.alc;
+            };
+          }
           {
             Log = {
               icon = "open-observe";

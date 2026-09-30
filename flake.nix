@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     alc-calc = {
-      url = "github:camdenboren/alc-calc";
+      url = "github:camdenboren/alc-calc/feat/web";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chatbot-util = {

@@ -25,7 +25,10 @@
     "sr_mod"
   ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "bluetooth"
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

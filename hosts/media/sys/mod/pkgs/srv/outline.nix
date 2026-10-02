@@ -21,6 +21,7 @@ in
         "openid"
         "email"
         "profile"
+        "offline_access"
       ];
       usernameClaim = "preferred_username";
       displayName = "Dex";
@@ -32,7 +33,13 @@ in
 
     settings = {
       issuer = dexURL;
-      storage.type = "sqlite3";
+      storage = {
+        type = "sqlite3";
+        # persists refresh_tokens on disk to prevent logging users out during
+        # daily server shutdowns. also requires setting `StateDirectory` for
+        # the systemd unit
+        config.file = "/var/lib/dex/dex.db";
+      };
       web.http = "127.0.0.1:5556";
       enablePasswordDB = true;
       staticClients = [
@@ -59,4 +66,7 @@ in
 
   # allow self-signed certs via adding NODE_TLS_REJECT_UNAUTHORIZED
   systemd.services.outline.serviceConfig.Environment = "NODE_TLS_REJECT_UNAUTHORIZED=0";
+
+  # create the database directory for dex to enable persisting `refresh_token`
+  systemd.services.dex.serviceConfig.StateDirectory = "dex";
 }

@@ -4,18 +4,20 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1788530885,
-        "narHash": "sha256-Pjo8XvvELaUzqy60BXZG98FHk3MdYTtHSXBA+36sTMk=",
+        "lastModified": 1790978973,
+        "narHash": "sha256-PzzNGTA/rQtEfY1BfGXKyHFgJal+dJKVmi34M5vC0Jo=",
         "owner": "camdenboren",
         "repo": "alc-calc",
-        "rev": "8295d72c2e6ffc7218436aec1b4916f8fd78d4a6",
+        "rev": "91ba03732fcba844c038aa6ee1f7b4715c18c48a",
         "type": "github"
       },
       "original": {
         "owner": "camdenboren",
+        "ref": "feat/web",
         "repo": "alc-calc",
         "type": "github"
       }
@@ -246,6 +248,27 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "yt-x": "yt-x"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "alc-calc",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790407471,
+        "narHash": "sha256-M8elY2UShg4ZuLTiRLEHO+ae5xQFp3/ReQdxp/R+1UU=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "4e9bb05a9ab6c37dc74c22974ebed6e36dc73eb2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "systems": {

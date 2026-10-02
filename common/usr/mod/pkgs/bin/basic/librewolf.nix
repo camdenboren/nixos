@@ -74,7 +74,7 @@ let
   mkSettings =
     {
       id ? 0,
-      clearCookies,
+      webapp ? false,
     }:
     {
       inherit id;
@@ -97,7 +97,7 @@ let
         "privacy.resistFingerprinting" = true;
         "privacy.sanitize.sanitizeOnShutdown" = true;
         "privacy.clearOnShutdown_v2.cache" = true;
-        "privacy.clearOnShutdown_v2.cookiesAndStorage" = clearCookies;
+        "privacy.clearOnShutdown_v2.cookiesAndStorage" = !webapp;
         "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = true;
         "browser.formfill.enable" = false;
         "privacy.userContext.newTabContainerOnLeftClick.enabled" = true;
@@ -142,7 +142,7 @@ let
         "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
         "sidebar.revamp" = true;
         "sidebar.main.tools" = [ ];
-        "sidebar.visibility" = "always-show";
+        "sidebar.visibility" = if webapp then "hide-sidebar" else "always-show";
         "browser.uiCustomization.state" = {
           placements = {
             widget-overflow-fixed-list = [ ];
@@ -325,7 +325,7 @@ in
     enable = true;
     profiles = {
       camdenboren = {
-        inherit (mkSettings { clearCookies = true; })
+        inherit (mkSettings { })
           id
           settings
           extensions
@@ -338,7 +338,7 @@ in
         inherit
           (mkSettings {
             id = 1;
-            clearCookies = false;
+            webapp = true;
           })
           id
           settings

@@ -76,6 +76,9 @@ _:
         diagnostics = false;
         metrics = false;
       };
+      vim = {
+        use_regex_search = false;
+      };
 
       # language configs
       languages = {

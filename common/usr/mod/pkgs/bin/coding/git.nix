@@ -16,6 +16,10 @@
         email = "9UtEfABpSSrV3g.code@mailbox.org";
       };
 
+      init = {
+        defaultBranch = "main";
+      };
+
       alias = {
         find = "log --name-status -i --grep";
       };

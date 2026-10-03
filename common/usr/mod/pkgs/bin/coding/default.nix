@@ -23,6 +23,8 @@ in
       fd
       jq
       lynx
+      unzip
+      zip
       # unstable is broken on darwin - https://hydra.nixos.org/build/333610201
       #statix
     ]

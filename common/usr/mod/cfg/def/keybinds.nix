@@ -180,9 +180,10 @@ in
                   "/${keybindingsPath}custom7/"
                   "/${keybindingsPath}custom8/"
                   "/${keybindingsPath}custom9/"
+                  "/${keybindingsPath}custom10/"
                 ]
                 ++ lib.optionals (hostname == "main") [
-                  "/${keybindingsPath}custom10/"
+                  "/${keybindingsPath}custom11/"
                 ];
               };
               "${keybindingsPath}custom0" = {
@@ -236,6 +237,11 @@ in
                 binding = "<Control><Alt>e";
               };
               "${keybindingsPath}custom10" = {
+                name = "Bitwarden";
+                command = "bitwarden";
+                binding = "<Control><Alt>b";
+              };
+              "${keybindingsPath}custom11" = {
                 name = "Reaper";
                 command = "reaper";
                 binding = "<Control><Alt>r";

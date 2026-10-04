@@ -20,6 +20,9 @@ in
       color-scheme = "prefer-dark";
       text-scaling-factor = if (lib.hasPrefix "main" hostname) then 1.15 else 1.25;
     };
+    "org/gnome/desktop/notifications" = {
+      show-in-lock-screen = false;
+    };
     "org/gnome/desktop/sound" = {
       event-sounds = false;
     };

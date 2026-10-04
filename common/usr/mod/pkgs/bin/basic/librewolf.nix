@@ -351,6 +351,13 @@ in
     };
   };
 
+  # easiest way to add a new webapp is to
+  # 1. install it via the default profile
+  # 2. copy the id, url, and name below
+  # 3. delete the files in
+  #   a. `.local/share/applications/`
+  #   b. `.librewolf/camdenboren/taskbartabs/`
+  # 4. as needed, add riced icons w/ overlay integration for icon theme
   home.packages = lib.optionals isLinux [
     (mkWebApp {
       name = "Notes";
@@ -386,6 +393,11 @@ in
       name = "Sports";
       id = "c045e69b-9a08-415a-97ca-9079698aa811";
       url = "https://fmhy.net/video#live-sports";
+    })
+    (mkWebApp {
+      name = "Money";
+      id = "aaed0213-3c18-44c6-a002-2a0a819df9d3";
+      url = "https://money.home.local/";
     })
   ];
 
@@ -436,6 +448,12 @@ in
             hostname = "fmhy.net";
             startUrl = "https://fmhy.net/video#live-sports";
             id = "c045e69b-9a08-415a-97ca-9079698aa811";
+          })
+          (mkTaskbarEntry {
+            name = "Money";
+            hostname = "money.home.local";
+            startUrl = "https://money.home.local/";
+            id = "aaed0213-3c18-44c6-a002-2a0a819df9d3";
           })
         ];
       });

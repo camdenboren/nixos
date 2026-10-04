@@ -63,6 +63,8 @@
 
           rm -f $out/share/icons/Dracula/scalable/apps/photos.svg
           cp -f ${../usr/rice/icons/photos/photos.svg} $out/share/icons/Dracula/scalable/apps/photos.svg
+
+          cp -f ${../usr/rice/icons/money/money-${rice}.svg} $out/share/icons/Dracula/scalable/apps/money.svg
         '';
       });
     })

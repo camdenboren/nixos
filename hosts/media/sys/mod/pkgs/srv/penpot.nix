@@ -9,7 +9,7 @@
 
 let
   url = "https://design.home.local";
-  secretsFile = /var/lib/secrets/penpot;
+  secretsFile = "/var/lib/secrets/penpot";
 in
 {
   # Runtime

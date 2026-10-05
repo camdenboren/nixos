@@ -3,6 +3,7 @@ name: update
 on:
   schedule:
     - cron: "45 11 5 * *" # Monthly on the 5th at 8am CST
+  workflow_dispatch:
 
 jobs:
   inputs:

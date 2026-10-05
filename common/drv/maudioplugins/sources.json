@@ -1,28 +1,28 @@
 {
   "manager": {
-    "hash": "sha256-1gpMeO6y0LDrijGHdaclneja4nAmvhxyKDG2p14Jc3g=",
-    "setupName": "MPluginManager_02_29_setup.exe",
-    "time": "2026-08-25 14:41:24",
-    "version": "02.29"
+    "hash": "sha256-uzsfhOaVobJlG6Y685z3HknRMJmypAAMKdxpl3Pp+V4=",
+    "setupName": "MPluginManager_02_30_setup.exe",
+    "time": "2026-09-09 12:46:52",
+    "version": "02.30"
   },
   "packages": {
     "BINEffects_binkernel": {
       "folder": "PKG/BINEffects/binkernel",
-      "hash": "sha256-y84JVxAPXIVJMNrTHEkJ4zkJqDjaJcziOkYipUKHXRI=",
-      "md5": "0577aa0e945152caa34225d48eee9ef2",
-      "version": "17.09.02"
+      "hash": "sha256-4fc93m8rcALMabX6WVaAeLCpt0Fsp/pHXxq0gHYj0Fg=",
+      "md5": "199106509484f9e512c4c211c39e89ab",
+      "version": "17.10.01"
     },
     "BINEffects_binkernel_avx2": {
       "folder": "PKG/BINEffects/binkernel_avx2",
-      "hash": "sha256-qKnfP3K3yOTAh+l08Jy0/gwNElVfILznMiYRbUCg2QI=",
-      "md5": "6f568d154d27c6abf4a55a5cfa48ff53",
-      "version": "17.09.02"
+      "hash": "sha256-JK3M0d87yGsPcS+8VqCY4/rQXBDiFL6ndWyi6MQgUlQ=",
+      "md5": "1a462e1892a44e83e0fae18e2fe677dd",
+      "version": "17.10.01"
     },
     "BINEffects_binx64": {
       "folder": "PKG/BINEffects/binx64",
-      "hash": "sha256-MHSXFlK2XvEToAc54J/b43feaAv0C1HB91dYp91WQTE=",
-      "md5": "774724901d7b7aea35c2aaead54e7fbd",
-      "version": "17.09.00"
+      "hash": "sha256-hmJTAYs3kmUup+6V2EGko1WfX7habDIG0D7qufCIhYA=",
+      "md5": "fec4a639cf22615f7745a493afbf7b63",
+      "version": "17.10.00"
     },
     "GLOBAL": {
       "folder": "PKG/GLOBAL",
@@ -134,15 +134,15 @@
     },
     "USER_PRESETS": {
       "folder": "PKG/USER_PRESETS",
-      "hash": "sha256-5xaEx/3pHF5PGneknQFWTC4OsdBM1TXuw5soeeJzamk=",
-      "md5": "4bf8e9cfde4110a75ade65bdbef08c95",
-      "version": "17.09.00"
+      "hash": "sha256-QMJCAMA2by2oC6jxLahVasNksTR5AQQpVwZjrupmd00=",
+      "md5": "7e71e12a5ed13dec76c8a56ecc90a76d",
+      "version": "17.10.01"
     },
     "USER_PRESETS_BYPLUGIN": {
       "folder": "PKG/USER_PRESETS_BYPLUGIN",
-      "hash": "sha256-Ibj2A7RdgZ3+DGaNIuTqsWYyyH3Cjpvf57Mea3TNi8Y=",
-      "md5": "f7da322c0b17cdd064e3b729c6f32cec",
-      "version": "17.08.00"
+      "hash": "sha256-5GNI4sVJu8llf0X4YNRWEsPqN5fqh9DUAunxbGx2EVg=",
+      "md5": "7ab3785fa708a887a35e582ee0092e7c",
+      "version": "17.10.00"
     }
   }
 }

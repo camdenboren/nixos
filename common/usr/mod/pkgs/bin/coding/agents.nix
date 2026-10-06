@@ -89,7 +89,6 @@ in
         enabled = !isVM;
         button = false;
         dock = "right";
-        sidebar_side = "right";
         default_model = {
           provider = "ollama";
           model = "qwen3.6:latest";

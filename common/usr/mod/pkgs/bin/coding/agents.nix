@@ -15,22 +15,7 @@ in
   programs = {
     codex = {
       enable = isDarwin;
-      package = pkgs.codex.overrideAttrs rec {
-        pname = "codex";
-        version = "0.154.0";
-        src = pkgs.fetchFromGitHub {
-          owner = "openai";
-          repo = "codex";
-          tag = "rust-v${version}";
-          hash = "sha256-Nm+61N6YHxGhjLsm/giVSEg4QvJmIgWxyTQ1L89kpCs=";
-        };
-        sourceRoot = "${src.name}/codex-rs";
-        cargoHash = "sha256-9F8dyEiVkhelrIyfQ9ZkvuxfIYNN6akbpadREa4A1n0=";
-        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
-          inherit src sourceRoot;
-          hash = cargoHash;
-        };
-      };
+
       # This breaks CLI usage due to
       # https://github.com/nix-community/home-manager/issues/9397
       # BUT, I primarily use it via ACP so I instead just bank on Zed's SANE

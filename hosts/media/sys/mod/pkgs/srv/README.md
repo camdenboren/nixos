@@ -38,10 +38,13 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   maps local hosts to `192.168.1.78` (loopback on media), opens HTTP/HTTPS on media
   and DNS on its Tailscale interface, and installs `home-local.pem` in Linux trust.
   Its comments describe manual macOS Keychain trust.
-- Nginx requests the base certificate through `security.acme` and reuses it for
-  most subdomains; BentoPDF enables ACME for its own vhost. The config also relies
-  on a checked-in local certificate. Certificate issuance/provisioning is not
-  fully described here; keep the served certificate and client trust aligned.
+- [minica.nix](minica.nix) disables the NixOS ACME order services and timers while
+  preserving the module's minica certificate implementation and the
+  `security.acme.certs` interface used by Nginx. Its timer checks certificate
+  expiry and restarts the upstream minica service when renewal is due. Dependent
+  services reload after certificate generation, and the timer retries failed
+  reloads; no ACME client starts. The checked-in `home-local.pem` must remain
+  aligned with the persistent root in `/var/lib/acme/.minica` for client trust.
 - Runtime secret paths are `/var/lib/secrets/tailscale`, `/var/lib/secrets/dex`,
   `/var/lib/secrets/homebox`, and `/var/lib/secrets/penpot`. Provision them for their
   consumers; the Penpot file supplies container environment variables. Outline

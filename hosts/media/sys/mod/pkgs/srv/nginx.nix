@@ -339,9 +339,11 @@ in
     };
   };
 
+  # exclusively enabled for the minica implementation as
+  # public CA renewal fails due to the domain being invalid.
+  # see `./minica.nix` for the additional wiring
   security.acme = {
     acceptTerms = true;
-    defaults.email = "9UtEfABpSSrV3g.code@mailbox.org";
     certs."${baseDomain}" = {
       extraDomainNames = builtins.attrValues domains;
       inherit (config.services.nginx) group;

@@ -260,7 +260,6 @@ in
               proxy_connect_timeout 3m;
               proxy_send_timeout 3m;
               proxy_read_timeout 3m;
-
               client_max_body_size 0; # Stream request body to backend
             '';
           };

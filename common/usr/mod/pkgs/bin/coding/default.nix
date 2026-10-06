@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
   lib,
   system,
   hostname,
@@ -25,8 +24,7 @@ in
       lynx
       unzip
       zip
-      # unstable is broken on darwin - https://hydra.nixos.org/build/333610201
-      #statix
+      statix
     ]
     ++ lib.optionals (hostname == "main") [
       quickemu
@@ -35,10 +33,7 @@ in
       #jetbrains.idea-oss - now uses jetbrains jdk which has been broken on darwin for years
       utm
       wireshark
-    ]
-    ++ (with pkgs-stable; [
-      statix
-    ]);
+    ];
 
   imports = [
     ./agents.nix

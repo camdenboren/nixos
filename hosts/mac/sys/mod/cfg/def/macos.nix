@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
 
 let
-  # these workflows are created in `hosts/mac/usr/mod/cfg/env/activation.nix`
+  # these workflows are created by the `replace-configs` launchd agent in
+  # `hosts/mac/usr/mod/pkgs/srv/replace-configs.nix`
   # the first letter of the app is used as the shortcut (i.e., "Bitwarden" ->
   # cmd-alt-b)
   appsNeedingShortcuts = [

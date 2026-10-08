@@ -33,14 +33,23 @@ let
       ${pkgs.systemd}/bin/systemctl --no-block start ${lib.escapeShellArg "minica-reload-${cert}.service"}
     '';
 
-  mkReloadService = cert: data: {
-    description = "Reload services after renewing minica certificate for ${cert}";
-    after = [ "acme-${cert}.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = toString (mkReloadScript cert data);
+  mkReloadService =
+    cert: data:
+    let
+      certDir = "/var/lib/acme/${cert}";
+    in
+    {
+      description = "Reload services after renewing minica certificate for ${cert}";
+      after = [ "acme-${cert}.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = toString (mkReloadScript cert data);
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = [ certDir ];
+      };
     };
-  };
 
   mkRenewService =
     cert: data:
@@ -58,7 +67,15 @@ let
         pkgs.systemd
       ];
 
-      serviceConfig.Type = "oneshot";
+      serviceConfig = {
+        Type = "oneshot";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectSystem = "strict";
+        # `ProtectSystem=strict` mounts the whole hierarchy read-only, so
+        # explicitly allow writes to this cert's directory.
+        ReadWritePaths = [ certDir ];
+      };
 
       script = ''
         set -euo pipefail

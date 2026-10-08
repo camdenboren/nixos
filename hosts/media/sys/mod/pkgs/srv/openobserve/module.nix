@@ -113,6 +113,10 @@ in
         EnvironmentFile = lib.mkIf (cfg.environmentFile != null) [ cfg.environmentFile ];
         DynamicUser = true;
         StateDirectory = "openobserve";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
         Restart = "on-failure";
         RestartSec = 5;
       };

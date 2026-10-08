@@ -16,10 +16,11 @@ installing a package still requires a host package list or service reference.
 | Agent adapters | `codex-acp`, `pi-acp`, and `pi-mcp-adapter` use `buildNpmPackage`; `kiwix-mcp` uses `buildPythonApplication`.                                                                                       |
 | Browser        | `vimium-new-tab-page` requires `buildFirefoxXpiAddon`, supplied by the Firefox overlay.                                                                                                             |
 
-Windows plugins are connected to the Wine prefix by
-[installPlugins.nix](../../hosts/main/usr/scr/installPlugins.nix), including
-Melda's ProgramData and DXVK. Extracting a package alone does not perform that setup.
-Binary archives have platform constraints even where package metadata is permissive.
+Windows plugins are connected to the Wine prefix by the `install-plugins`
+user service in [install-plugins.nix](../../hosts/main/usr/mod/pkgs/srv/install-plugins.nix),
+including Melda's ProgramData and DXVK. Extracting a package alone does not
+perform that setup. Binary archives have platform constraints even where
+package metadata is permissive.
 
 ## Build and update
 

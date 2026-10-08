@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
 
 let
-  # these workflows are created in `hosts/mac/usr/mod/cfg/env/activation.nix`
+  # these workflows are created by the `replace-configs` launchd agent in
+  # `hosts/mac/usr/mod/pkgs/srv/replace-configs.nix`
   # the first letter of the app is used as the shortcut (i.e., "Bitwarden" ->
   # cmd-alt-b)
   appsNeedingShortcuts = [
@@ -28,10 +29,9 @@ let
   };
 in
 {
-  # only affects the AC power source–battery is handled manually via a
-  # `pmset -b` call in the activation script. additionally, the screenLock
-  # delay requires a `sysadminctl` call, so it's relegated to the scripts
-  # well
+  # only affects the AC power source–battery is handled via the
+  # `macos-settings` launchd daemon. additionally, the screenLock
+  # delay requires a `sysadminctl` call, so it's handled there as well
   power.sleep = {
     computer = 30;
     display = 30;

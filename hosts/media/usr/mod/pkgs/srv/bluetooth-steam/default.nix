@@ -16,6 +16,10 @@ in
         ExecStart = "${python}/bin/python ${./listener.py} ${mac} ${pkgs.systemd}/bin/systemctl --user --no-block start bluetooth-steam-launch.service";
         Restart = "always";
         RestartSec = 5;
+        # light hardening only: the Steam client itself needs full session
+        # access, so the launcher unit is intentionally left unconfined
+        NoNewPrivileges = true;
+        PrivateTmp = true;
       };
       Install.WantedBy = [ "graphical-session.target" ];
     };

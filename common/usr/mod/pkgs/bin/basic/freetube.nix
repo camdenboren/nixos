@@ -12,7 +12,7 @@ in
   programs.freetube = {
     enable = true;
 
-    # doesn't put settings.db in correct location on mac, so it's copied in replaceConfigs.nix
+    # doesn't put settings.db in correct location on mac, so it's copied by the replace-configs agent
     settings = {
       bounds = {
         x = if isDarwin then 136 else 925;

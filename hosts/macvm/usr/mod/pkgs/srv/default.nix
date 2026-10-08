@@ -2,10 +2,6 @@
 
 {
   imports = [
-    # Host-specific
-    ./replace-configs.nix
-    ./update-ca-cert.nix
-
     # Common
     ../../../../../../common/usr/mod/pkgs/srv/utils
   ];

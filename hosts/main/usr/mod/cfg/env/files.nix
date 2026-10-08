@@ -7,7 +7,7 @@ _:
       source = ../../../dot/pipewire;
     };
 
-    # REAPER - most settings set in replaceConfigs (and activ.)
+    # REAPER - most settings set by the replace-configs service
     ".config/REAPER/Effects/jsfx" = {
       source = ../../../dot/reaper/jsfx;
     };

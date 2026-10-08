@@ -23,6 +23,10 @@
       Restart = "always";
       ExecStart = "${pkgs.kiwix-mcp}/bin/kiwix-mcp --transport streamable-http";
       DynamicUser = true;
+      NoNewPrivileges = true;
+      PrivateTmp = true;
+      ProtectHome = true;
+      ProtectSystem = "strict";
       UMask = "0027";
     };
   };

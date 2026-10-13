@@ -135,6 +135,7 @@ let
         "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
         "browser.newtabpage.activity-stream.feeds.topsites" = false;
         "browser.taskbarTabs.enabled" = true;
+        "browser.uidensity" = 1;
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
         "signon.rememberSignons" = false;

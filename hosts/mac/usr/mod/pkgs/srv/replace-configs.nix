@@ -50,6 +50,7 @@ let
     echo -e "Replacing Applications' workflows"
     replace_workflow Bitwarden ${pkgs.bitwarden-desktop}
     replace_workflow ClickUp
+    replace_workflow Duck ~
     replace_workflow FreeTube ${pkgs.freetube}
     replace_workflow Ghostty ${pkgs.ghostty-bin}
     replace_workflow LibreWolf ${pkgs.librewolf}

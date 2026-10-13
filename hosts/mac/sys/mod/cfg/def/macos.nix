@@ -8,6 +8,7 @@ let
   appsNeedingShortcuts = [
     "Bitwarden"
     "ClickUp"
+    "Duck"
     "FreeTube"
     "Ghostty"
     "LibreWolf"
@@ -43,7 +44,8 @@ in
       CustomUserPreferences = {
         "com.apple.finder" = {
           NSUserKeyEquivalents = {
-            Downloads = "@~d";
+            # use control-option-d to leave command-option-d free for Duck
+            Downloads = "^~d";
             "Hide Sidebar" = "~^s";
             "New Finder Window" = "@$n";
           };
@@ -73,6 +75,20 @@ in
             # ACTION: https://github.com/NUIKit/CGSInternal/blob/master/CGSHotKeys.h
             # KEY_CODE: https://eastmanreference.com/complete-list-of-applescript-key-codes
             # MODIFIERS: https://gist.github.com/stephancasas/74c4621e2492fb875f0f42778d432973
+
+            # disable kCGSHotKeyToggleDockAutohide on command-option-d
+            # so Duck can use it
+            "52" = {
+              enabled = false;
+              value = {
+                parameters = [
+                  100 # d
+                  2 # d
+                  1572864 # command-option
+                ];
+                type = "standard";
+              };
+            };
 
             # remap kCGSHotKeyDecreaseDisplayBrightness to F1
             "53" = {

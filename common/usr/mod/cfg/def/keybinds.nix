@@ -172,18 +172,19 @@ in
                   "/${keybindingsPath}custom1/"
                   "/${keybindingsPath}custom2/"
                   "/${keybindingsPath}custom3/"
+                  "/${keybindingsPath}custom4/"
                 ]
                 ++ lib.optionals (!isVM) [
-                  "/${keybindingsPath}custom4/"
                   "/${keybindingsPath}custom5/"
                   "/${keybindingsPath}custom6/"
                   "/${keybindingsPath}custom7/"
                   "/${keybindingsPath}custom8/"
                   "/${keybindingsPath}custom9/"
                   "/${keybindingsPath}custom10/"
+                  "/${keybindingsPath}custom11/"
                 ]
                 ++ lib.optionals (hostname == "main") [
-                  "/${keybindingsPath}custom11/"
+                  "/${keybindingsPath}custom12/"
                 ];
               };
               "${keybindingsPath}custom0" = {
@@ -207,41 +208,46 @@ in
                 binding = "<Control><Alt>n";
               };
               "${keybindingsPath}custom4" = {
+                name = "Duck";
+                command = "gtk-launch duck";
+                binding = "<Control><Alt>d";
+              };
+              "${keybindingsPath}custom5" = {
                 name = "FreeTube";
                 command = "freetube";
                 binding = "<Control><Alt>f";
               };
-              "${keybindingsPath}custom5" = {
+              "${keybindingsPath}custom6" = {
                 name = "Media";
                 command = "gtk-launch media";
                 binding = "<Control><Alt>v";
               };
-              "${keybindingsPath}custom6" = {
+              "${keybindingsPath}custom7" = {
                 name = "MullvadVPN";
                 command = "mullvad-gui";
                 binding = "<Control><Alt>m";
               };
-              "${keybindingsPath}custom7" = {
+              "${keybindingsPath}custom8" = {
                 name = "Lollypop";
                 command = "lollypop";
                 binding = "<Control><Alt>t";
               };
-              "${keybindingsPath}custom8" = {
+              "${keybindingsPath}custom9" = {
                 name = "Steam";
                 command = "steam";
                 binding = "<Control><Alt>s";
               };
-              "${keybindingsPath}custom9" = {
+              "${keybindingsPath}custom10" = {
                 name = "EasyEffects";
                 command = "easyeffects";
                 binding = "<Control><Alt>e";
               };
-              "${keybindingsPath}custom10" = {
+              "${keybindingsPath}custom11" = {
                 name = "Bitwarden";
                 command = "bitwarden";
                 binding = "<Control><Alt>b";
               };
-              "${keybindingsPath}custom11" = {
+              "${keybindingsPath}custom12" = {
                 name = "Reaper";
                 command = "reaper";
                 binding = "<Control><Alt>r";

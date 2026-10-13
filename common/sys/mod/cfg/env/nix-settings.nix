@@ -11,9 +11,9 @@ let
 in
 {
   nix = {
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     registry.nixpkgs.flake = inputs.nixpkgs;
     settings = {
+      nix-path = [ "nixpkgs=${inputs.nixpkgs}" ];
       experimental-features = [
         "nix-command"
         "flakes"

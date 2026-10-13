@@ -195,7 +195,7 @@ in
         tilesize = 54;
         magnification = false;
 
-        orientation = "right";
+        orientation = "left";
         mineffect = "genie";
         minimize-to-application = false;
 

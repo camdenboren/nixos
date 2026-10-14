@@ -1,7 +1,7 @@
 { hostname, ... }:
 
 let
-  preset = if (hostname == "main") then "HF_KEF_AKG" else "Pioneer";
+  preset = if (hostname == "main") then "hf-kef-akg" else "pioneer";
   extraPresets =
     if (hostname == "main") then
       {

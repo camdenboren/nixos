@@ -10,7 +10,7 @@
       attack = 20.0;
       boost-amount = 6.0;
       boost-threshold = -72.0;
-      bypass = false;
+      bypass = true;
       dry = -100.0;
       hpf-frequency = 10.0;
       hpf-mode = "off";

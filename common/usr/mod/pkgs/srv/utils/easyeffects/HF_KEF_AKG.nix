@@ -305,8 +305,8 @@
       input-gain = 0.0;
       left = {
         band0 = {
-          frequency = 85.0;
-          gain = 12.0;
+          frequency = 95.0;
+          gain = 11.0;
           mode = "APO (DR)";
           mute = false;
           q = 4.36;
@@ -316,17 +316,6 @@
           width = 4.0;
         };
         band1 = {
-          frequency = 110.0;
-          gain = -18.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 4.36;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band2 = {
           frequency = 2000.0;
           gain = 2.5;
           mode = "APO (DR)";
@@ -339,14 +328,14 @@
         };
       };
       mode = "IIR";
-      num-bands = 3;
+      num-bands = 2;
       output-gain = -11.0;
       pitch-left = 0.0;
       pitch-right = 0.0;
       right = {
         band0 = {
-          frequency = 85.0;
-          gain = 12.0;
+          frequency = 95.0;
+          gain = 11.0;
           mode = "APO (DR)";
           mute = false;
           q = 4.36;
@@ -356,17 +345,6 @@
           width = 4.0;
         };
         band1 = {
-          frequency = 110.0;
-          gain = -18.0;
-          mode = "APO (DR)";
-          mute = false;
-          q = 4.36;
-          slope = "x1";
-          solo = false;
-          type = "Bell";
-          width = 4.0;
-        };
-        band2 = {
           frequency = 2000.0;
           gain = 2.5;
           mode = "APO (DR)";

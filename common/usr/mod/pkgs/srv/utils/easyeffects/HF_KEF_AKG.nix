@@ -316,6 +316,17 @@
           width = 4.0;
         };
         band1 = {
+          frequency = 130.0;
+          gain = -1.0;
+          mode = "APO (DR)";
+          mute = false;
+          q = 4.36;
+          slope = "x1";
+          solo = false;
+          type = "Lo-shelf";
+          width = 4.0;
+        };
+        band2 = {
           frequency = 2000.0;
           gain = 2.5;
           mode = "APO (DR)";
@@ -328,7 +339,7 @@
         };
       };
       mode = "IIR";
-      num-bands = 2;
+      num-bands = 3;
       output-gain = -11.0;
       pitch-left = 0.0;
       pitch-right = 0.0;
@@ -345,6 +356,17 @@
           width = 4.0;
         };
         band1 = {
+          frequency = 130.0;
+          gain = -1.0;
+          mode = "APO (DR)";
+          mute = false;
+          q = 4.36;
+          slope = "x1";
+          solo = false;
+          type = "Lo-shelf";
+          width = 4.0;
+        };
+        band2 = {
           frequency = 2000.0;
           gain = 2.5;
           mode = "APO (DR)";

@@ -11,6 +11,5 @@
     ./graphics.nix
     ./hardware-configuration.nix
     ./processor.nix
-    ./swap.nix
   ];
 }

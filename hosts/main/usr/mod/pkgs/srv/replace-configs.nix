@@ -14,7 +14,6 @@ in
     Unit.Description = "Install default REAPER config if missing";
     Service = {
       Type = "oneshot";
-      RemainAfterExit = true;
       ExecStart = "${script}/bin/replace-configs";
       NoNewPrivileges = true;
       PrivateTmp = true;

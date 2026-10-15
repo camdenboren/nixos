@@ -56,7 +56,9 @@ in
     };
     Service = {
       Type = "oneshot";
-      RemainAfterExit = true;
+      # wineboot leaves wineserver/winedevice running; only signal the main
+      # process so stops never hang on (or SIGKILL) the wine session.
+      KillMode = "process";
       # yabridgectl locates its chainloaders via NIX_PROFILES
       Environment = "NIX_PROFILES=\"/run/current-system/sw /nix/var/nix/profiles/default /etc/profiles/per-user/camdenboren /home/camdenboren/.nix-profile\"";
       ExecStart = "${script}/bin/install-plugins";

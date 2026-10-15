@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./openssh.nix
+    ./home-manager-restart.nix
   ]
   ++ lib.optionals (!isVM) [
     ./fetch-rs.nix

@@ -48,6 +48,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       nixpkgs-stable,
       nix-darwin,
@@ -59,6 +60,7 @@
           import ./hosts/main {
             inherit
               inputs
+              self
               nixpkgs
               nixpkgs-stable
               ;
@@ -68,6 +70,7 @@
           import ./hosts/mainvm {
             inherit
               inputs
+              self
               nixpkgs
               nixpkgs-stable
               ;
@@ -77,6 +80,7 @@
           import ./hosts/macvm {
             inherit
               inputs
+              self
               nixpkgs
               nixpkgs-stable
               ;
@@ -86,6 +90,7 @@
           import ./hosts/media {
             inherit
               inputs
+              self
               nixpkgs
               nixpkgs-stable
               ;
@@ -97,6 +102,7 @@
           import ./hosts/mac {
             inherit
               inputs
+              self
               nixpkgs
               nixpkgs-stable
               nix-darwin

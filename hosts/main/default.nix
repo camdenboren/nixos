@@ -1,5 +1,6 @@
 {
   inputs,
+  self,
   nixpkgs-stable,
   ...
 }:
@@ -14,6 +15,7 @@ in
   specialArgs = {
     inherit
       inputs
+      self
       hostname
       system
       pkgs-stable
@@ -28,6 +30,7 @@ in
         extraSpecialArgs = {
           inherit
             inputs
+            self
             hostname
             system
             pkgs-stable

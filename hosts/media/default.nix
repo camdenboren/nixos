@@ -1,5 +1,6 @@
 {
   inputs,
+  self,
   nixpkgs-stable,
   ...
 }:
@@ -14,6 +15,7 @@ in
   specialArgs = {
     inherit
       inputs
+      self
       hostname
       system
       rice
@@ -29,6 +31,7 @@ in
         extraSpecialArgs = {
           inherit
             inputs
+            self
             hostname
             system
             rice

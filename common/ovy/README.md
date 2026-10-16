@@ -8,7 +8,7 @@ import this directory, so their package sets receive the same customizations.
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | [agents.nix](agents.nix)                 | Local `codex-acp`, `kiwix-mcp`, `pi-acp`, and `pi-mcp-adapter` packages. Enables Kiwix's certificate patch when `hostname != "media"`. |
 | [firefox-addons.nix](firefox-addons.nix) | `pkgs.firefox-addons` from the flake input, extended with `vimium-new-tab-page`; supplies the input's `buildFirefoxXpiAddon` helper.   |
-| [homelab.nix](homelab.nix)               | Local `drawio` static web package.                                                                                                     |
+| [homelab.nix](homelab.nix)               | Local `actual-cli`, `drawio`, and `outline-export` packages, none in nixpkgs.                                                          |
 | [icons.nix](icons.nix)                   | Overrides Dracula's `postInstall` to replace application/VPN icons and `index.theme`; several filenames depend on `rice`.              |
 | [personal.nix](personal.nix)             | `alc-calc` and `yt-x` from their inputs' `packages.${system}.default`.                                                                 |
 | [plugins.nix](plugins.nix)               | Audio packages and `dxvk-bin` from [../drv](../drv/README.md).                                                                         |

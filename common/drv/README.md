@@ -12,7 +12,7 @@ installing a package still requires a host package list or service reference.
 | Windows audio  | Most remaining audio packages extract binaries into `lib/winvst3` for Wine/yabridge. This directory also holds Abstract Vox's DLL and instrument data.                                              |
 | Melda          | `maudioplugins` reads component versions/hashes from `sources.json`; `extract.py` extracts selected free plugins and shared ProgramData.                                                            |
 | Wine graphics  | `dxvk-bin` preserves the upstream `x32`/`x64` DLL layout.                                                                                                                                           |
-| Homelab        | `drawio` builds static web assets with Ant/JDK and embeds `https://draw.home.local` in its preconfiguration.                                                                                        |
+| Homelab        | `drawio` builds web assets with Ant/JDK and embeds `https://draw.home.local` in preconfiguration. `actual-cli` builds `@actual-app/cli` with `yarn-berry`; `outline-export` uses `buildGoModule`.   |
 | Agent adapters | `codex-acp`, `pi-acp`, and `pi-mcp-adapter` use `buildNpmPackage`; `kiwix-mcp` uses `buildPythonApplication`.                                                                                       |
 | Browser        | `vimium-new-tab-page` requires `buildFirefoxXpiAddon`, supplied by the Firefox overlay.                                                                                                             |
 
@@ -39,20 +39,24 @@ For custom package updates, use the `updatePkg` Bash function from
 
 ```sh
 updatePkg nova
-# Equivalent to:
+# On main, equivalent to:
 nix-update nixosConfigurations.main.pkgs.nova --flake
 ```
 
-Pass the package's overlay attribute name. The function always targets `main`'s
-package set, regardless of the current host, and delegates the update to
-`nix-update`. Review the resulting diff and build the package afterward.
+Pass the package's overlay attribute name. The function targets the package set
+of the host that generated your shell (`hostname` in
+[bash.nix](../usr/mod/pkgs/bin/coding/bash.nix)). Review the
+resulting diff and build the package afterward.
 
 - Update `version`, the source URL/revision, and the matching source hash together.
   npm packages also carry `npmDepsHash`; `pi-mcp-adapter` repairs its lockfile before
-  dependency fetching and reuses that repaired lockfile during the build.
+  dependency fetching and reuses that repaired lockfile during the build. Yarn Berry
+  packages instead carry an `offlineCache` hash plus `missing-hashes.json`, both
+  refreshed by the package's updater.
 - Packages with `passthru.updateScript` use either a local `update.sh` or shared
   `updateScriptAO.sh` / `updateScriptTDR.sh` with arguments declared in the derivation.
-  Run these from within the checkout. For example:
+  Run these from within the checkout, or through `nix-update` with `-u` so the script
+  handles version, hashes, and generated files together. For example:
 
   ```sh
   ./common/drv/updateScriptTDR.sh tdr-nova Nova nova/default.nix

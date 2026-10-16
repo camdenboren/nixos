@@ -53,3 +53,33 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   `/mnt/media/Archives/library.xml`; add archives with `kiwix-manage library.xml add
 file.zim` from that directory. Penpot persists assets and PostgreSQL data in
   `penpot_penpot_assets` and `penpot_penpot_postgres_v15` Podman volumes.
+
+## Backups
+
+- [backup.nix](backup.nix) defines the `backup.service` (root) oneshot, mirroring media, documents,
+  and service exports/dumps to the offline USB drive. Ntfy reports
+  success/failure; secrets live in `/var/lib/secrets/backup`.
+- Hotplugging the drive fires a udev rule on its hardware `ID_SERIAL`
+  (`backupSerial`) → `backup.service`. Fill that in from
+  `udevadm info --query=property --name=/dev/sdX | grep '^ID_SERIAL'` on media
+  with the drive plugged in, using the full `ID_SERIAL` rather than
+  `ID_SERIAL_SHORT`. Matching the disk rather than a filesystem UUID keeps the
+  trigger working across a reformat and needs no partition table, but it does
+  depend on the drive reporting a serial — if that value is left as the
+  placeholder, backups silently never run. The scripts don't assume the udisks2
+  mountpoint: since udev fires before the automount lands, they poll ~30s and
+  resolve the drive's mount by the same `ID_SERIAL`. So a surcharged
+  `backup` volume landing at `backup-1` is still found. The drive is
+  deliberately not declared to systemd, since udisks2 mounts it out-of-band and
+  a `.mount` requirement would fail the job.
+- On media, `/var/lib/backup/armed` is a local opt-in (`install -d -m 0755
+  /var/lib/backup && touch /var/lib/backup/armed`); leave it absent on a fresh
+  media, or the `rsync --delete` mirrors wipe the drive from empty sources. Arm
+  after restoring, `rm` before re-imaging.
+- Mirror-only; snapshots are future work. Reformatting the drive keeps its
+  serial, so the trigger stays live and the scripts re-seed the fresh volume.
+- The `main` music rsync uses a passphrase-less root key at
+  `/root/.ssh/backup-main` (never check it in), restricted on `main` to `from=`
+  + `rrsync -ro`, so theft costs a music-dir read, not a shell. The client pulls
+  `camdenboren@main:.` — not `:/` — with
+  `-e "ssh -i /root/.ssh/backup-main -o BatchMode=yes"`.

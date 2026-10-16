@@ -22,8 +22,6 @@ in
       fd
       jq
       lynx
-      unzip
-      zip
       statix
     ]
     ++ lib.optionals (hostname == "main") [

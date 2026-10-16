@@ -62,6 +62,7 @@ jobs:
       - name: Update derivations and commit each change
         run: |
           PKGS=(
+            "actual-cli -u"
             "drawio"
             "dxvk-bin"
             "kiwix-mcp"
@@ -75,6 +76,7 @@ jobs:
             "maudioplugins -u"
             "neural-amp-modeler-lv2"
             "nova -u"
+            "outline-export"
             "pi-acp"
             "pi-mcp-adapter"
             "rare -u"

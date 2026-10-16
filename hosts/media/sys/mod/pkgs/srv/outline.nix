@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 let
   baseDomain = "home.local";
@@ -27,6 +27,8 @@ in
       displayName = "Dex";
     };
   };
+
+  environment.systemPackages = [ pkgs.outline-export ];
 
   services.dex = {
     enable = true;

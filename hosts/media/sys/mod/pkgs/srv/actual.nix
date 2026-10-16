@@ -1,4 +1,4 @@
-_:
+{ pkgs, ... }:
 
 {
   services.actual = {
@@ -8,4 +8,6 @@ _:
       port = 4000;
     };
   };
+
+  environment.systemPackages = [ pkgs.actual-cli ];
 }

@@ -53,3 +53,23 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   `/mnt/media/Archives/library.xml`; add archives with `kiwix-manage library.xml add
 file.zim` from that directory. Penpot persists assets and PostgreSQL data in
   `penpot_penpot_assets` and `penpot_penpot_postgres_v15` Podman volumes.
+
+## Backups
+
+- [backup.nix](backup.nix) defines the `backup.service` (`root`) and
+  `backup-postgres.service` (`postgres`) oneshots, mirroring media, documents,
+  and service exports/dumps to the offline USB drive at
+  `/run/media/camdenboren/backup`. Ntfy reports success/failure; secrets live in
+  `/var/lib/secrets/backup`.
+- Plugging the drive in starts both services via the `backup-autorun.path` unit,
+  which watches for the `.backup-marker` sentinel on the drive and activates the
+  `backup-all.target`. `backup.service` is ordered after
+  `backup-postgres.service`, and both require the mount.
+- One-time setup: `touch /run/media/camdenboren/backup/.backup-marker` so the
+  trigger (and the scripts' mount guard) can tell the backup drive apart from any
+  other disk. Mirror-only for now; snapshots are future work.
+- The `main` music rsync uses a dedicated passphrase-less root key at
+  `/root/.ssh/backup-main` (provision out-of-band; never check it in). On `main`
+  the public key is scoped with `from=`, `restrict`, and a forced read-only
+  `rrsync` command, so theft costs at most a music-dir read, never a shell.
+  Rotate by replacing the keypair; revoke by deleting the line and rebuilding.

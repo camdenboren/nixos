@@ -11,6 +11,8 @@ in
 {
   environment.systemPackages = with pkgs; [
     sqlite
+    unzip
+    zip
   ];
 
   imports = lib.optionals (!isDarwin) [

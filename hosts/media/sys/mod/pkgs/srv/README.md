@@ -61,15 +61,26 @@ file.zim` from that directory. Penpot persists assets and PostgreSQL data in
   and service exports/dumps to the offline USB drive at
   `/run/media/camdenboren/backup`. Ntfy reports success/failure; secrets live in
   `/var/lib/secrets/backup`.
-- Plugging the drive in starts both services via the `backup-autorun.path` unit,
-  which watches for the `.backup-marker` sentinel on the drive and activates the
-  `backup-all.target`. `backup.service` is ordered after
-  `backup-postgres.service`, and both require the mount.
-- One-time setup: `touch /run/media/camdenboren/backup/.backup-marker` so the
-  trigger (and the scripts' mount guard) can tell the backup drive apart from any
-  other disk. Mirror-only for now; snapshots are future work.
-- The `main` music rsync uses a dedicated passphrase-less root key at
-  `/root/.ssh/backup-main` (provision out-of-band; never check it in). On `main`
-  the public key is scoped with `from=`, `restrict`, and a forced read-only
-  `rrsync` command, so theft costs at most a music-dir read, never a shell.
-  Rotate by replacing the keypair; revoke by deleting the line and rebuilding.
+- Hotplugging the drive fires a udev rule on its hardware `ID_SERIAL`
+  (`backupSerial`) → `backup-all.target` → both services. Fill that in from
+  `udevadm info --query=property --name=/dev/sdX | grep '^ID_SERIAL'` on media
+  with the drive plugged in, using the full `ID_SERIAL` rather than
+  `ID_SERIAL_SHORT`. Matching the disk rather than a filesystem UUID keeps the
+  trigger working across a reformat and needs no partition table, but it does
+  depend on the drive reporting a serial — if that value is left as the
+  placeholder, backups silently never run. udev fires before udisks2 automounts,
+  so the scripts poll ~30s for the mount to land; the drive is deliberately not
+  declared to systemd, since udisks2 mounts it out-of-band and a `.mount`
+  requirement would fail the job.
+- Two gates must both pass. On the drive, `.backup-marker` identifies the
+  target. On media, `/var/lib/backup/armed` is a local opt-in (`install -d -m
+  0755 /var/lib/backup && touch /var/lib/backup/armed`); leave it absent on a
+  fresh media, or the `rsync --delete` mirrors wipe the drive from empty
+  sources. Arm after restoring, `rm` before re-imaging.
+- Mirror-only; snapshots are future work. Reformatting the drive drops
+  `.backup-marker`, so restore it.
+- The `main` music rsync uses a passphrase-less root key at
+  `/root/.ssh/backup-main` (never check it in), restricted on `main` to `from=`
+  + `rrsync -ro`, so theft costs a music-dir read, not a shell. The client pulls
+  `camdenboren@main:.` — not `:/` — with
+  `-e "ssh -i /root/.ssh/backup-main -o BatchMode=yes"`.

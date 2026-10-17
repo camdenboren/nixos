@@ -8,6 +8,11 @@
 # so it's better than nothing
 let
   backupPath = "/run/media/camdenboren/backup";
+  # local opt-in, so a fresh media can't wipe the drive with `--delete`
+  armPath = "/var/lib/backup/armed";
+  # drive's ID_SERIAL (full form, not ID_SERIAL_SHORT), from
+  # `udevadm info --query=property --name=/dev/sdX`
+  backupSerial = "SET_ME_TO_THE_DRIVES_ID_SERIAL";
   script = ''
     set -euo pipefail
     failed() {
@@ -23,6 +28,17 @@ let
     MAIN_IP=192.168.1.88
     USER_PATH=/home/camdenboren
 
+    if [[ ! -f "${armPath}" ]]; then
+      echo $'\e[33m[backup] Not armed at ${armPath}, skipping.\e[0m' >&2
+      exit 0
+    fi
+
+    # udev fires before udisks2 automounts, so give the mount a moment
+    for _ in {1..30}; do
+      [[ -f "$BACKUP_PATH/.backup-marker" ]] && break
+      sleep 1
+    done
+
     if [[ ! -f "$BACKUP_PATH/.backup-marker" ]]; then
       echo "backup drive marker missing at $BACKUP_PATH, skipping" >&2
       exit 0
@@ -34,7 +50,8 @@ let
 
     echo $'\e[36m[backup:media] Starting...\e[0m'
     ${pkgs.rsync}/bin/rsync -cavuP --delete \
-      camdenboren@"$MAIN_IP":"$USER_PATH"/Music/music/ \
+      -e "ssh -i /root/.ssh/backup-main -o BatchMode=yes -o IdentitiesOnly=yes" \
+      camdenboren@"$MAIN_IP":. \
       "$BACKUP_PATH"/backups/music/
     ${pkgs.rsync}/bin/rsync -cavuP --delete \
       "$HDD_PATH"/Pictures/ \
@@ -187,6 +204,16 @@ let
     }
     trap 'failed' ERR
 
+    if [[ ! -f "${armPath}" ]]; then
+      echo $'\e[33m[backup-postgres] Not armed at ${armPath}, skipping.\e[0m' >&2
+      exit 0
+    fi
+
+    for _ in {1..30}; do
+      [[ -f ${backupPath}/.backup-marker ]] && break
+      sleep 1
+    done
+
     if [[ ! -f ${backupPath}/.backup-marker ]]; then
       echo "backup drive marker missing at ${backupPath}, skipping" >&2
       exit 0
@@ -213,12 +240,8 @@ in
       backup = {
         description = "Backup all Homelab services and files";
         inherit script;
-        after = [
-          "run-media-camdenboren-backup.mount"
-          "backup-postgres.service"
-        ];
+        after = [ "backup-postgres.service" ];
 
-        unitConfig.RequiresMountsFor = [ backupPath ];
         serviceConfig = {
           Type = "oneshot";
           User = "root";
@@ -232,9 +255,7 @@ in
       backup-postgres = {
         description = "Backup all Homelab postgres dbs";
         script = pgScript;
-        after = [ "run-media-camdenboren-backup.mount" ];
 
-        unitConfig.RequiresMountsFor = [ backupPath ];
         serviceConfig = {
           Type = "oneshot";
           User = "postgres";
@@ -248,20 +269,18 @@ in
 
     targets.backup-all = {
       description = "Run all Homelab backups";
-      wantedBy = [ "multi-user.target" ];
       wants = [
         "backup.service"
         "backup-postgres.service"
       ];
     };
-
-    paths.backup-autorun = {
-      description = "Run backups when backup drive is connected";
-      wantedBy = [ "multi-user.target" ];
-      pathConfig = {
-        PathExists = "${backupPath}/.backup-marker";
-        Unit = "backup-all.target";
-      };
-    };
   };
+
+  # Hotplug trigger. udev fires before udisks2 automounts, so the scripts poll
+  # for the mount; .backup-marker's job is to identify the volume.
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", \
+      ENV{ID_SERIAL}=="${backupSerial}", \
+      TAG+="systemd", ENV{SYSTEMD_WANTS}+="backup-all.target"
+  '';
 }

@@ -2,7 +2,7 @@ name: update
 
 on:
   schedule:
-    - cron: "45 11 5 * *" # Monthly on the 5th at 8am CST
+    - cron: "45 11 5,19 * *" # Biweekly on the 5th and 19th at 8am CST
   workflow_dispatch:
 
 jobs:

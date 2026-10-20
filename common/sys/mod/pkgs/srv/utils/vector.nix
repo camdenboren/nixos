@@ -1,4 +1,9 @@
-{ pkgs, hostname, ... }:
+{
+  pkgs,
+  pkgs-stable,
+  hostname,
+  ...
+}:
 
 let
   baseURL = "https://log.home.local/api/default";
@@ -16,6 +21,7 @@ in
   services.vector = {
     enable = true;
     journaldAccess = true;
+    package = pkgs-stable.vector;
 
     settings = {
       sources = {

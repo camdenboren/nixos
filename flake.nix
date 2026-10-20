@@ -25,7 +25,6 @@
     };
     alc-calc = {
       url = "github:camdenboren/alc-calc/feat/web";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     chatbot-util = {
       url = "github:collegiate-edu-nation/chatbot-util";

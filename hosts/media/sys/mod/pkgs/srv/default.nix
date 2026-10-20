@@ -7,6 +7,7 @@
   imports = [
     # Host-specific
     ./actual.nix
+    ./alc-calc.nix
     ./backup.nix
     ./bentopdf.nix
     ./homebox.nix

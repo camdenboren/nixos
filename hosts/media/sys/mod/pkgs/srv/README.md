@@ -20,6 +20,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `design`                | Penpot frontend `:9001`                             | [penpot.nix](penpot.nix)                                                                     |
 | `draw`                  | Static `pkgs.drawio`                                | `nginx.nix`; the declared `9040` port is unused                                              |
 | `pdf`                   | BentoPDF-managed Nginx vhost                        | [bentopdf.nix](bentopdf.nix); separate from `nginx.nix`'s domain map                         |
+| `alc`                   | alc-calc-managed Nginx vhost                        | [alc-calc.nix](alc-calc.nix); separate from `nginx.nix`'s domain map, like BentoPDF          |
 | `box`, `car`, `money`   | Homebox `:7745`, LubeLogger `:5000`, Actual `:4000` | [homebox.nix](homebox.nix), [lubelogger.nix](lubelogger.nix), [actual.nix](actual.nix)       |
 | `ntfy`                  | ntfy `:2586`                                        | [ntfy-sh.nix](ntfy-sh.nix)                                                                   |
 | `sync`                  | Syncthing `:8384`                                   | [Shared Home Manager service](../../../../../../common/usr/mod/pkgs/srv/utils/syncthing.nix) |
@@ -73,13 +74,13 @@ file.zim` from that directory. Penpot persists assets and PostgreSQL data in
   deliberately not declared to systemd, since udisks2 mounts it out-of-band and
   a `.mount` requirement would fail the job.
 - On media, `/var/lib/backup/armed` is a local opt-in (`install -d -m 0755
-  /var/lib/backup && touch /var/lib/backup/armed`); leave it absent on a fresh
+/var/lib/backup && touch /var/lib/backup/armed`); leave it absent on a fresh
   media, or the `rsync --delete` mirrors wipe the drive from empty sources. Arm
   after restoring, `rm` before re-imaging.
 - Mirror-only; snapshots are future work. Reformatting the drive keeps its
   serial, so the trigger stays live and the scripts re-seed the fresh volume.
 - The `main` music rsync uses a passphrase-less root key at
   `/root/.ssh/backup-main` (never check it in), restricted on `main` to `from=`
-  + `rrsync -ro`, so theft costs a music-dir read, not a shell. The client pulls
-  `camdenboren@main:.` — not `:/` — with
-  `-e "ssh -i /root/.ssh/backup-main -o BatchMode=yes"`.
+  - `rrsync -ro`, so theft costs a music-dir read, not a shell. The client pulls
+    `camdenboren@main:.` — not `:/` — with
+    `-e "ssh -i /root/.ssh/backup-main -o BatchMode=yes"`.

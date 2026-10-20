@@ -24,6 +24,7 @@ in
   };
   modules = [
     ./sys
+    inputs.alc-calc.nixosModules.default
     inputs.fetch-rs.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     {

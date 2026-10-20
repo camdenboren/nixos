@@ -11,7 +11,6 @@ let
     box = toString 7745;
     car = toString 5000;
     log = toString 5080;
-    alc = toString 6080;
     chat = toString 8080;
     sync = toString 8384;
     draw = toString 9040;
@@ -31,7 +30,6 @@ let
     box = "box.${baseDomain}";
     car = "car.${baseDomain}";
     log = "log.${baseDomain}";
-    alc = "alc.${baseDomain}";
     notes = "notes.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
@@ -232,17 +230,6 @@ in
         useACMEHost = baseDomain;
         locations."/" = {
           root = "${pkgs.drawio}";
-          index = "index.html";
-          tryFiles = "$uri $uri/ /index.html";
-        };
-        extraConfig = staticHeaders;
-      };
-
-      "${domains.alc}" = {
-        forceSSL = true;
-        useACMEHost = baseDomain;
-        locations."/" = {
-          root = "${pkgs.alc-calc-web}";
           index = "index.html";
           tryFiles = "$uri $uri/ /index.html";
         };

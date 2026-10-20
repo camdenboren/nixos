@@ -28,7 +28,6 @@ in
     ++ lib.optionals (hostname == "main") [
       blender
       darktable
-      handbrake
     ]
     ++ lib.optionals (isDarwin || hostname == "main") [
       reaper

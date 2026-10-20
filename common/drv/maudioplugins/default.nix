@@ -173,7 +173,7 @@ stdenvNoCC.mkDerivation {
       --output-dir manager \
       ${managerSource}
     install -Dm755 \
-      'manager/C$/ProgramData/MeldaProduction/LIB/MPluginManager.exe' \
+      'manager/tmp/MeldaLIB/MPluginManager.exe' \
       "$program_data/LIB/MPluginManager.exe"
 
     chmod +x "$out/lib/winvst3"/*.vst3 "$program_data/LIB"/*.dll

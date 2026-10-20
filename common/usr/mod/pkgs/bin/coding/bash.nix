@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   lib,
   hostname,
   system,
@@ -54,7 +55,7 @@ in
       repl = "nix repl -f '<nixpkgs>'";
       scan = ''
         cd $NH_FLAKE && \
-        ${pkgs.sbomnix}/bin/vulnxscan \
+        ${pkgs-stable.sbomnix}/bin/vulnxscan \
           .#${cfgKey}Configurations.${hostname}.config.system.build.toplevel && \
           ${pkgs.python3Minimal}/bin/python ./common/usr/scr/vulnxscan.py
       '';

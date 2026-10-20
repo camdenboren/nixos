@@ -1,9 +1,9 @@
 {
   "manager": {
-    "hash": "sha256-uzsfhOaVobJlG6Y685z3HknRMJmypAAMKdxpl3Pp+V4=",
-    "setupName": "MPluginManager_02_30_setup.exe",
-    "time": "2026-09-09 12:46:52",
-    "version": "02.30"
+    "hash": "sha256-/pdLQfKRbjryRWk5gzGoup4kXzgdUeCHvCBfYC51oxI=",
+    "setupName": "MPluginManager_03_00_setup.exe",
+    "time": "2026-10-14 13:36:19",
+    "version": "03.00"
   },
   "packages": {
     "BINEffects_binkernel": {

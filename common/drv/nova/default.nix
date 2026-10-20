@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   pname = "nova";
-  version = "2.2.2";
+  version = "2.2.3";
 
   src = fetchzip {
     url = "https://www.tokyodawn.net/labs/Nova/${version}/TDR%20Nova%20(no%20installer).zip";
-    hash = "sha256-L/QuTyNJ4X7WlpQkI8Bpl0FvTv9eGHibqoPEEM84UZQ=";
+    hash = "sha256-54Og8Fgk+nwKLeiPmhhmXbeApwcVVEf8kiX9RfmH25g=";
   };
 
   installPhase = ''

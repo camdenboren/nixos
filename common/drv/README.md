@@ -13,7 +13,7 @@ installing a package still requires a host package list or service reference.
 | Melda          | `maudioplugins` reads component versions/hashes from `sources.json`; `extract.py` extracts selected free plugins and shared ProgramData.                                                            |
 | Wine graphics  | `dxvk-bin` preserves the upstream `x32`/`x64` DLL layout.                                                                                                                                           |
 | Homelab        | `drawio` builds web assets with Ant/JDK and embeds `https://draw.home.local` in preconfiguration. `actual-cli` builds `@actual-app/cli` with `yarn-berry`; `outline-export` uses `buildGoModule`.   |
-| Agent adapters | `codex-acp`, `pi-acp`, and `pi-mcp-adapter` use `buildNpmPackage`; `kiwix-mcp` uses `buildPythonApplication`.                                                                                       |
+| Agent adapters | `pi-acp`, and `pi-mcp-adapter` use `buildNpmPackage`; `kiwix-mcp` uses `buildPythonApplication`.                                                                                       |
 | Browser        | `vimium-new-tab-page` requires `buildFirefoxXpiAddon`, supplied by the Firefox overlay.                                                                                                             |
 
 Windows plugins are connected to the Wine prefix by the `install-plugins`

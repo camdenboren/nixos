@@ -9,6 +9,5 @@ _:
     ./icons.nix
     ./personal.nix
     ./plugins.nix
-    ./rectangle.nix
   ];
 }

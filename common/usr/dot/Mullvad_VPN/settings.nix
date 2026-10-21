@@ -1,4 +1,4 @@
-{ hostname, ... }:
+_:
 
 {
   relay_settings = {
@@ -79,7 +79,7 @@
   update_default_location = false;
   allow_lan = true;
   lockdown_mode = false;
-  auto_connect = hostname == "main";
+  auto_connect = true;
   tunnel_options = {
     wireguard = {
       mtu = null;

@@ -32,6 +32,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 
 ## DNS, TLS, and runtime files
 
+- [tailscale.nix](tailscale.nix) allows Tailscale alongside Mullvad using nftables split-tunnel marks.
 - [unbound.nix](unbound.nix) resolves the `home.local` zone to `100.99.5.32` on the
   Tailscale interface, after `tailscaled-autoconnect.service`. Tailnet clients must
   use this resolver for the zone; client DNS setup is outside this directory.

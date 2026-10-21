@@ -1,8 +1,8 @@
-{ hostname, ... }:
+_:
 
 {
   preferredLocale = "system";
-  autoConnect = hostname == "main";
+  autoConnect = true;
   enableSystemNotifications = true;
   monochromaticIcon = true;
   startMinimized = true;

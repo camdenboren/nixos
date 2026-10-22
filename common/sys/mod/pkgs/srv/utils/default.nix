@@ -9,6 +9,7 @@ in
     ./home-manager-restart.nix
   ]
   ++ lib.optionals (!isVM) [
+    ./clamav.nix
     ./fetch-rs.nix
     ./mullvad.nix
     ./shutdown.nix

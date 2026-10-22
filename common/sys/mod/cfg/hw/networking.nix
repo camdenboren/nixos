@@ -40,12 +40,21 @@ let
     "design.home.local"
     "archive.home.local"
   ];
+  # emudhra ca mitigation - this covers things like `curl` on linux, though
+  # `mac` also has to manually edit the roots associated w/ its cli tooling
+  caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    "emSign ECC Root CA - G3"
+  ];
 in
 lib.recursiveUpdate
   # linux-only
   (lib.optionalAttrs isLinux {
     # trust this cert on all devices
-    security.pki.certificateFiles = [ ../../../dot/acme/home-local.pem ];
+    security.pki = {
+      certificateFiles = [ ../../../dot/acme/home-local.pem ];
+      inherit caCertificateBlacklist;
+    };
 
     networking = {
       hostName = hostname;
@@ -85,6 +94,10 @@ lib.recursiveUpdate
           ::1             localhost
           192.168.1.78    ${lib.strings.concatStringsSep " " domains}
         '';
+      };
+
+      security.pki = {
+        inherit caCertificateBlacklist;
       };
     }
   )

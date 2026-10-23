@@ -35,7 +35,7 @@ in
   services.tailscale = {
     enable = true;
     # comment this out on first run
-    authKeyFile = "/var/lib/secrets/tailscale";
+    authKeyFile = config.sops.secrets.tailscale.path;
     extraDaemonFlags = [ "--no-logs-no-support" ];
 
     # Avoid Mullvad mark and DNS conflicts.

@@ -1,4 +1,4 @@
-{ hostname, ... }:
+{ config, hostname, ... }:
 
 let
   name = if hostname == "media" then "smart1500lcd" else "bn1500m2";
@@ -15,7 +15,7 @@ in
     };
 
     users.upsmon = {
-      passwordFile = "/var/lib/secrets/nut";
+      passwordFile = config.sops.secrets.nut.path;
       upsmon = "primary";
     };
 

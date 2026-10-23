@@ -1,11 +1,11 @@
-_:
+{ config, ... }:
 
 {
   # unmerged module from https://github.com/NixOS/nixpkgs/pull/555962
   imports = [ ./module.nix ];
   services.openobserve = {
     enable = true;
-    environmentFile = "/var/lib/secrets/openobserve";
+    environmentFile = config.sops.secrets.openobserve.path;
     settings = {
       ZO_TELEMETRY = false;
       # allows private ntfy alerts via proxied https address once I update

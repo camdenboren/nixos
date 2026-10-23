@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../../common/secrets
     ./mod/cfg
     ./mod/pkgs
   ];

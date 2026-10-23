@@ -10,7 +10,9 @@
     with pkgs;
     [
       # Utilities
-      cachix
+      age
+      sops
+      ssh-to-age
       localsend
     ]
     ++ lib.optionals (lib.hasSuffix "-linux" system) [

@@ -1,4 +1,4 @@
-_:
+{ config, ... }:
 
 {
   services.fetch-rs = {
@@ -6,6 +6,6 @@ _:
     user = "camdenboren";
     startCalendarInterval.Minute = 15;
     flakePath = "/Users/camdenboren/etc/nixos";
-    secretsFile = "/var/lib/secrets/fetch-rs";
+    secretsFile = config.sops.secrets.fetch-rs.path;
   };
 }

@@ -47,10 +47,11 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   services reload after certificate generation, and the timer retries failed
   reloads; no ACME client starts. The checked-in `home-local.pem` must remain
   aligned with the persistent root in `/var/lib/acme/.minica` for client trust.
-- Runtime secret paths are `/var/lib/secrets/tailscale`, `/var/lib/secrets/dex`,
-  `/var/lib/secrets/homebox`, and `/var/lib/secrets/penpot`. Provision them for their
-  consumers; the Penpot file supplies container environment variables. Outline
-  reuses Dex's client secret and currently disables Node TLS verification.
+- Runtime secrets under `/run/secrets` are managed by the
+  [sops-nix configuration](../../../../../../common/secrets/README.md), including Tailscale,
+  Dex/Outline, Homebox, Penpot, OpenObserve, backups, and shared host services.
+  The Penpot file supplies container environment variables. Outline reuses Dex's client
+  secret and currently disables Node TLS verification.
 - Immich stores media at `/mnt/media/Pictures`. Kiwix reads
   `/mnt/media/Archives/library.xml`; add archives with `kiwix-manage library.xml add
 file.zim` from that directory. Penpot persists assets and PostgreSQL data in
@@ -60,7 +61,7 @@ file.zim` from that directory. Penpot persists assets and PostgreSQL data in
 
 - [backup.nix](backup.nix) defines the `backup.service` (root) oneshot, mirroring media, documents,
   and service exports/dumps to the offline USB drive. Ntfy reports
-  success/failure; secrets live in `/var/lib/secrets/backup`.
+  success/failure; secrets live in `/run/secrets/backup`.
 - Hotplugging the drive fires a udev rule on its hardware `ID_SERIAL`
   (`backupSerial`) → `backup.service`. Fill that in from
   `udevadm info --query=property --name=/dev/sdX | grep '^ID_SERIAL'` on media

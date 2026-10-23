@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   pkgs-stable,
   hostname,
@@ -17,7 +18,7 @@ let
   };
 in
 {
-  systemd.services.vector.serviceConfig.EnvironmentFile = "/var/lib/secrets/vector";
+  systemd.services.vector.serviceConfig.EnvironmentFile = config.sops.secrets.vector.path;
   services.vector = {
     enable = true;
     journaldAccess = true;

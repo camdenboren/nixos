@@ -49,7 +49,7 @@ in
           id = "outline";
           name = "Outline Client";
           redirectURIs = [ "${outlineURL}/auth/oidc.callback" ];
-          secretFile = "/var/lib/secrets/dex";
+          secretFile = config.sops.secrets.dex.path;
         }
       ];
       staticPasswords = [

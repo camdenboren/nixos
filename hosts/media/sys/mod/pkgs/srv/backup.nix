@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 # as this is a mirror-only backup, there's significant room for improvement
 # in implementing snapshot-based backups-additional work will also make sense
@@ -255,7 +255,7 @@ in
           Type = "oneshot";
           User = "root";
           # ntfy, outline-export, and actual-cli need several secrets
-          EnvironmentFile = "/var/lib/secrets/backup";
+          EnvironmentFile = config.sops.secrets.backup.path;
           NoNewPrivileges = true;
           PrivateTmp = true;
         };

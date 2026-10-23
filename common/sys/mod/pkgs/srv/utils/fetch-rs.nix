@@ -1,4 +1,4 @@
-_:
+{ config, ... }:
 
 {
   services.fetch-rs = {
@@ -6,6 +6,6 @@ _:
     user = "camdenboren";
     onCalendar = "*-*-* *:15:00";
     flakePath = "/home/camdenboren/etc/nixos";
-    secretsFile = "/var/lib/secrets/fetch-rs";
+    secretsFile = config.sops.secrets.fetch-rs.path;
   };
 }

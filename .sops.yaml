@@ -5,12 +5,12 @@ keys:
   - &mac age166jq2h9vr3g4xyagq5kegtfdkpuecx87x0nptmhtrgce67rjs4pqel8zuk
 
 creation_rules:
-  - path_regex: ^common/secrets/fetch-rs\.yaml$
+  - path_regex: ^common/sec/fetch-rs\.yaml$
     key_groups:
       - age: [*admin, *main, *media, *mac]
-  - path_regex: ^common/secrets/(nut|vector)\.yaml$
+  - path_regex: ^common/sec/(nut|vector)\.yaml$
     key_groups:
       - age: [*admin, *main, *media]
-  - path_regex: ^common/secrets/(backup|dex|homebox|openobserve|penpot|tailscale)\.yaml$
+  - path_regex: ^common/sec/(backup|dex|homebox|openobserve|penpot|tailscale)\.yaml$
     key_groups:
       - age: [*admin, *media]

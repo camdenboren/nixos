@@ -87,7 +87,7 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 [Scripts]: common/usr/scr/README.md
 [Derivations]: common/drv/README.md
 [Overlays]: common/ovy/README.md
-[Secrets]: common/secrets/README.md
+[Secrets]: common/sec/README.md
 [DevShells]: common/usr/dev/README.md
 [Homelab]: hosts/media/sys/mod/pkgs/srv/README.md
 [vimjoyer]: https://github.com/vimjoyer/

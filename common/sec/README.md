@@ -1,6 +1,6 @@
 # Secrets
 
-One host-agnostic YAML file per service: `common/secrets/<service>.yaml`. This
+One host-agnostic YAML file per service: `common/sec/<service>.yaml`. This
 implies some degree of duplication in the secrets files, though simplifies things for consuming services.
 
 [sops-nix](https://github.com/Mic92/sops-nix#usage-example) decrypts the
@@ -41,7 +41,7 @@ Keep private identities outside the repo and back them up.
 Use SOPS to modify real secrets values privately:
 
 ```sh
-sops common/secrets/vector.yaml
+sops common/sec/vector.yaml
 ```
 
 Repeat for every service, preserving each file's YAML keys, then build and switch.

@@ -48,7 +48,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   reloads; no ACME client starts. The checked-in `home-local.pem` must remain
   aligned with the persistent root in `/var/lib/acme/.minica` for client trust.
 - Runtime secrets under `/run/secrets` are managed by the
-  [sops-nix configuration](../../../../../../common/secrets/README.md), including Tailscale,
+  [sops-nix configuration](../../../../../../common/sec/README.md), including Tailscale,
   Dex/Outline, Homebox, Penpot, OpenObserve, backups, and shared host services.
   The Penpot file supplies container environment variables. Outline reuses Dex's client
   secret and currently disables Node TLS verification.

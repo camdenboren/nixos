@@ -10,8 +10,50 @@
 let
   isVM = lib.hasSuffix "vm" hostname;
   isDarwin = lib.hasSuffix "-darwin" system;
+  allowPaths = [
+    "."
+    "/tmp"
+  ];
+  denyPaths = [
+    "~/.ssh"
+    "~/.config"
+    "/var/lib"
+    "/etc/ssh"
+    ".env"
+  ];
+  piSandboxConfig = {
+    enabled = true;
+    permissionPromptTimeoutSeconds = 600;
+
+    network = {
+      disabled = false;
+      allowedDomains = [
+        "*.home.local"
+      ];
+    };
+
+    filesystem = {
+      allowRead = allowPaths;
+      denyRead = denyPaths;
+      allowWrite = allowPaths;
+      denyWrite = denyPaths;
+    };
+  };
 in
 {
+  # needed for + pi + pi-sandbox
+  home.packages =
+    with pkgs;
+    [
+      ripgrep
+    ]
+    ++ lib.optionals (!isDarwin) [
+      bubblewrap
+      socat
+      wl-clipboard # pi
+    ];
+  home.file.".pi/agent/sandbox.json".text = builtins.toJSON piSandboxConfig;
+
   programs = {
     codex = {
       enable = isDarwin;
@@ -61,14 +103,22 @@ in
 
     pi-coding-agent = {
       enable = true;
-      context = ../../../../dot/agents/skills;
+
+      context = ''
+        You’re running in a sandboxed environment with no access to external networks (only *.home.local is allowed) and limited filesystem access—read/write is restricted to the current directory and /tmp. Avoid operations like cloning repos from GitHub, installing packages from npm, or reading network resources; if you need to fetch content, suggest manual alternatives instead.
+      '';
+
+      # Disable Pi's built-in MCP
       settings = {
         defaultModel = "qwen3.6:latest";
         defaultProvider = "ollama";
+        extensions = [ "-builtin:mcp" ];
         packages = [
           "${pkgs.pi-mcp-adapter}/lib/node_modules/pi-mcp-adapter"
+          "${pkgs.pi-sandbox}/lib/pi-sandbox/index.ts"
         ];
       };
+
       models = {
         providers = {
           ollama = {

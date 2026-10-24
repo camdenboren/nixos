@@ -78,6 +78,7 @@ jobs:
             "outline-export"
             "pi-acp"
             "pi-mcp-adapter"
+            "pi-sandbox"
             "rare -u"
             "span -u"
             "ssq -u"

@@ -1,6 +1,9 @@
-_:
+{ pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    package-version-server
+  ];
   programs.zed-editor = {
     enable = true;
 

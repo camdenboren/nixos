@@ -11,7 +11,7 @@ in
     (_final: prev: {
       kiwix-mcp = prev.callPackage ../drv/kiwix-mcp { inherit selfSignedCerts certPath; };
       pi-acp = prev.callPackage ../drv/pi-acp { };
-      pi-mcp-adapter = prev.callPackage ../drv/pi-mcp-adapter { };
+      pi-lsp = prev.callPackage ../drv/pi-lsp { };
       pi-sandbox = prev.callPackage ../drv/pi-sandbox { };
     })
   ];

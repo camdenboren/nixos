@@ -77,7 +77,7 @@ jobs:
             "nova -u"
             "outline-export"
             "pi-acp"
-            "pi-mcp-adapter"
+            "pi-lsp --version-regex '@narumitw/pi-lsp@(.*)' --use-github-releases"
             "pi-sandbox"
             "rare -u"
             "span -u"

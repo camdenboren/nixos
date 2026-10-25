@@ -8,8 +8,10 @@
 }:
 
 let
+  jsonFormat = pkgs.formats.json { };
   isVM = lib.hasSuffix "vm" hostname;
   isDarwin = lib.hasSuffix "-darwin" system;
+  mcp = import ../../../../dot/agents/mcp.nix { inherit pkgs; };
   allowPaths = [
     "."
     "/tmp"
@@ -20,10 +22,14 @@ let
     "/var/lib"
     "/etc/ssh"
     ".env"
+  ]
+  # no reason to directly access this since it's just media and personal data
+  ++ lib.optionals (hostname == "media") [
+    "/mnt/media"
+    "/run/camdenboren/media/backup"
   ];
   piSandboxConfig = {
     enabled = true;
-    permissionPromptTimeoutSeconds = 600;
 
     network = {
       disabled = false;
@@ -41,7 +47,7 @@ let
   };
 in
 {
-  # needed for + pi + pi-sandbox
+  # needed for pi + pi-sandbox
   home.packages =
     with pkgs;
     [
@@ -52,7 +58,30 @@ in
       socat
       wl-clipboard # pi
     ];
-  home.file.".pi/agent/sandbox.json".text = builtins.toJSON piSandboxConfig;
+
+  # needed for pi-sandbox + custom pi review; based on:
+  # `opencode/packages/core/src/plugin/command/review.txt`
+  home.file = {
+    ".pi/agent/prompts".source = ../../../../dot/agents/prompts;
+
+    ".pi/agent/sandbox.json".text = builtins.toJSON piSandboxConfig;
+
+    ".agents/skills" = {
+      source = ../../../../dot/agents/skills;
+    };
+
+    ".codex/skills" = lib.mkIf isDarwin {
+      source = ../../../../dot/agents/skills;
+    };
+
+    ".agents/mcp.json" = {
+      source = jsonFormat.generate "mcp" mcp;
+    };
+
+    ".pi/agent/mcp.json" = {
+      source = jsonFormat.generate "mcp" mcp;
+    };
+  };
 
   programs = {
     codex = {
@@ -105,16 +134,28 @@ in
       enable = true;
 
       context = ''
-        You’re running in a sandboxed environment with no access to external networks (only *.home.local is allowed) and limited filesystem access—read/write is restricted to the current directory and /tmp. Avoid operations like cloning repos from GitHub, installing packages from npm, or reading network resources; if you need to fetch content, suggest manual alternatives instead.
+        You’re running in a sandboxed environment with no access to external
+        networks (only *.home.local is allowed) and limited filesystem access
+        —read/write is restricted to the current directory and /tmp (/nix/store
+        is read-only). Avoid operations like cloning repos from GitHub,
+        installing packages from npm, or reading network resources; if you need
+        to fetch content, suggest manual alternatives instead.
+
+        Default to pi-lsp for checking most file edits since targeted LSP
+        diagnostics/fixes on a few edited files would be faster than a
+        full-project lint/typecheck — e.g., for exact-range diagnostics or a
+        source action like source.fixAll/source.organizeImports. As needed, run
+        the repo's authoritative lint/typecheck/build/test commands before
+        considering a task done; pi-lsp is a fast intermediate signal, not a
+        replacement for CI.
       '';
 
-      # Disable Pi's built-in MCP
       settings = {
         defaultModel = "qwen3.6:latest";
         defaultProvider = "ollama";
-        extensions = [ "-builtin:mcp" ];
+        defaultThinkingLevel = "medium";
         packages = [
-          "${pkgs.pi-mcp-adapter}/lib/node_modules/pi-mcp-adapter"
+          "${pkgs.pi-lsp}/lib/pi-lsp"
           "${pkgs.pi-sandbox}/lib/pi-sandbox/index.ts"
         ];
       };
@@ -126,8 +167,14 @@ in
             apiKey = "ollama";
             baseUrl = "http://192.168.1.88:11434/v1";
             models = [
-              { id = "qwen3.6:latest"; }
-              { id = "gpt-oss:latest"; }
+              {
+                id = "qwen3.6:latest";
+                reasoning = true;
+              }
+              {
+                id = "gpt-oss:latest";
+                reasoning = true;
+              }
             ];
           };
         };
@@ -153,13 +200,13 @@ in
               name = "qwen3.6:latest";
               max_tokens = 262144;
               supports_tools = true;
-              keep_alive = "5m";
+              keep_alive = "30m";
             }
             {
               name = "gpt-oss:latest";
               max_tokens = 65536;
               supports_tools = true;
-              keep_alive = "5m";
+              keep_alive = "30m";
             }
           ];
         };

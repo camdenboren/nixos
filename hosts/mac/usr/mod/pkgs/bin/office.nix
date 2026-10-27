@@ -1,14 +1,9 @@
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, ... }:
 
 {
-  home.packages =
-    with pkgs;
-    [
-      # Office
-      slack
-      #zoom-us - screensharing doesn't work
-    ]
-    ++ (with pkgs-stable; [
-      gam
-    ]);
+  home.packages = with pkgs; [
+    # Office
+    gam
+    #zoom-us - screensharing doesn't work
+  ];
 }

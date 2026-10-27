@@ -55,7 +55,6 @@ let
     replace_workflow Ghostty ${pkgs.ghostty-bin}
     replace_workflow LibreWolf ${pkgs.librewolf}
     replace_workflow Mullvad "" "Mullvad VPN"
-    replace_workflow Slack ${pkgs.slack}
     replace_workflow UTM ${pkgs.utm}
     replace_workflow Zed ${pkgs.zed-editor}
   '';

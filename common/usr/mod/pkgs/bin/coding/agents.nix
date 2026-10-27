@@ -15,6 +15,9 @@ let
   allowPaths = [
     "."
     "/tmp"
+    "~/Documents/Repos/nixpkgs"
+    "~/Documents/Repos/nix-darwin"
+    "~/Documents/Repos/home-manager"
   ];
   denyPaths = [
     "~/.ssh"
@@ -28,7 +31,7 @@ let
     "/mnt/media"
     "/run/camdenboren/media/backup"
   ];
-  piSandboxConfig = {
+  sandbox = {
     enabled = true;
 
     network = {
@@ -52,6 +55,7 @@ in
     with pkgs;
     [
       ripgrep
+      xerj-bin
     ]
     ++ lib.optionals (!isDarwin) [
       bubblewrap
@@ -59,28 +63,19 @@ in
       wl-clipboard # pi
     ];
 
-  # needed for pi-sandbox + custom pi review; based on:
-  # `opencode/packages/core/src/plugin/command/review.txt`
   home.file = {
+    # needed for pi-sandbox + custom pi review; latter based on:
+    # `opencode/packages/core/src/plugin/command/review.txt`
     ".pi/agent/prompts".source = ../../../../dot/agents/prompts;
+    ".pi/agent/sandbox.json".source = jsonFormat.generate "sandbox" sandbox;
 
-    ".pi/agent/sandbox.json".text = builtins.toJSON piSandboxConfig;
+    # skills
+    ".agents/skills".source = ../../../../dot/agents/skills;
+    ".codex/skills" = lib.mkIf isDarwin { source = ../../../../dot/agents/skills; };
 
-    ".agents/skills" = {
-      source = ../../../../dot/agents/skills;
-    };
-
-    ".codex/skills" = lib.mkIf isDarwin {
-      source = ../../../../dot/agents/skills;
-    };
-
-    ".agents/mcp.json" = {
-      source = jsonFormat.generate "mcp" mcp;
-    };
-
-    ".pi/agent/mcp.json" = {
-      source = jsonFormat.generate "mcp" mcp;
-    };
+    # mcp
+    ".agents/mcp.json".source = jsonFormat.generate "mcp" mcp;
+    ".pi/agent/mcp.json".source = jsonFormat.generate "mcp" mcp;
   };
 
   programs = {
@@ -94,13 +89,24 @@ in
       # hit AGI...)
       settings = {
         model_reasoning_effort = "medium";
-        mcp_servers.kiwix-mcp = {
-          command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
-          env.KIWIX_BASE_URL = "https://archive.home.local";
-          tools = {
-            kiwix_list_books.approval_mode = "approve";
-            kiwix_search.approval_mode = "approve";
-            kiwix_fetch_article.approval_mode = "approve";
+        mcp_servers = {
+          kiwix-mcp = {
+            command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
+            env.KIWIX_BASE_URL = "https://archive.home.local";
+            tools = {
+              kiwix_list_books.approval_mode = "approve";
+              kiwix_search.approval_mode = "approve";
+              kiwix_fetch_article.approval_mode = "approve";
+            };
+          };
+          xerj = {
+            command = "${pkgs.xerj-bin}/bin/xerj";
+            args = [ "mcp" ];
+            tools = {
+              xerj_map.approval_mode = "approve";
+              xerj_search.approval_mode = "approve";
+              xerj_def.approval_mode = "approve";
+            };
           };
         };
       };
@@ -109,8 +115,25 @@ in
     opencode = {
       enable = true;
       skills = ../../../../dot/agents/skills;
+      tui.theme = "system";
       settings = {
-        mcp.kiwix-mcp.enabled = true;
+        mcp = {
+          kiwix-mcp = {
+            enabled = true;
+            type = if (hostname == "media") then "remote" else "local";
+            command = lib.mkIf (hostname != "media") [ "${pkgs.kiwix-mcp}/bin/kiwix-mcp" ];
+            environment.KIWIX_BASE_URL = lib.mkIf (hostname != "media") "https://archive.home.local";
+            url = lib.mkIf (hostname == "media") "http://localhost:8000/mcp";
+          };
+          xerj = {
+            enabled = !isVM;
+            type = "local";
+            command = [
+              "${pkgs.xerj-bin}/bin/xerj"
+              "mcp"
+            ];
+          };
+        };
         model = "ollama/qwen3.6";
         permission = {
           webfetch = "deny";
@@ -136,10 +159,10 @@ in
       context = ''
         You’re running in a sandboxed environment with no access to external
         networks (only *.home.local is allowed) and limited filesystem access
-        —read/write is restricted to the current directory and /tmp (/nix/store
-        is read-only). Avoid operations like cloning repos from GitHub,
-        installing packages from npm, or reading network resources; if you need
-        to fetch content, suggest manual alternatives instead.
+        —read/write is restricted to the current directory, a few repos, and
+        /tmp (/nix/store is read-only). Avoid operations like cloning repos from
+        GitHub, installing packages from npm, or reading network resources; if
+        you need to fetch content, suggest manual alternatives instead.
 
         Default to pi-lsp for checking most file edits since targeted LSP
         diagnostics/fixes on a few edited files would be faster than a
@@ -241,6 +264,10 @@ in
             {
               url = "http://localhost:8000/mcp";
             };
+        xerj = lib.mkIf (!isVM) {
+          command = "${pkgs.xerj-bin}/bin/xerj";
+          args = [ "mcp" ];
+        };
       };
     };
   };

@@ -13,6 +13,7 @@ in
       pi-acp = prev.callPackage ../drv/pi-acp { };
       pi-lsp = prev.callPackage ../drv/pi-lsp { };
       pi-sandbox = prev.callPackage ../drv/pi-sandbox { };
+      xerj-bin = prev.callPackage ../drv/xerj-bin { };
     })
   ];
 }

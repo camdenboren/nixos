@@ -14,6 +14,9 @@ in
     lib.optionals (!isDarwin) [
       ./audio-prevents-lock.nix
     ]
+    ++ lib.optionals (!isVM) [
+      ./refresh-references.nix
+    ]
     ++ lib.optionals (!isDarwin && !isVM) [
       ./easyeffects
       ./ollama.nix

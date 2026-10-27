@@ -18,6 +18,7 @@ in
       nixd
       nixfmt
       nix-update
+      gh
       harper
       fd
       jq

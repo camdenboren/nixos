@@ -82,6 +82,7 @@ jobs:
             "rare -u"
             "span -u"
             "ssq -u"
+            "xerj-bin -u"
           )
           FAILED=()
           for entry in "${PKGS[@]}"; do

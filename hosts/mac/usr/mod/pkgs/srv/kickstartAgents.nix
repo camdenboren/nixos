@@ -1,11 +1,14 @@
 { config, lib, ... }:
 
 let
-  agents = lib.filterAttrs (_: agent: agent.enable) config.launchd.agents;
+  agents = lib.filterAttrs (
+    _: agent: agent.enable && agent.config.StartCalendarInterval == null
+  ) config.launchd.agents;
 in
 {
   # ensure configs are kept in sync by rerunning unchanged, loaded agents; HM
-  # automatically restarts changed agents, so that case is ignored
+  # automatically restarts changed agents, so that case is ignored. Scheduled
+  # agents are left to their calendar triggers
   home.activation.kickstartAgents =
     lib.hm.dag.entryBetween
       [ "setupLaunchAgents" ]

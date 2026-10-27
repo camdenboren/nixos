@@ -15,5 +15,6 @@ in
     ./shutdown.nix
     ./ups.nix
     ./vector.nix
+    ./xerj.nix
   ];
 }

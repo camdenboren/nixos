@@ -6,7 +6,7 @@ import this directory, so their package sets receive the same customizations.
 
 | Module                                   | Exposes or changes                                                                                                                     |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| [agents.nix](agents.nix)                 | Local `kiwix-mcp`, `pi-acp`, `pi-mcp-adapter`, and `pi-sandbox` packages. Enables Kiwix's certificate patch when `hostname != "media"`. |
+| [agents.nix](agents.nix)                 | Local `kiwix-mcp`, `pi-acp`, `pi-mcp-adapter`, `pi-sandbox`, and `xerj-bin` packages. Enables Kiwix's certificate patch when `hostname != "media"`. |
 | [firefox-addons.nix](firefox-addons.nix) | `pkgs.firefox-addons` from the flake input, extended with `vimium-new-tab-page`; supplies the input's `buildFirefoxXpiAddon` helper.   |
 | [homelab.nix](homelab.nix)               | Local `actual-cli`, `drawio`, and `outline-export` packages, none in nixpkgs.                                                          |
 | [icons.nix](icons.nix)                   | Overrides Dracula's `postInstall` to replace application/VPN icons and `index.theme`; several filenames depend on `rice`.              |

@@ -22,6 +22,9 @@ including Melda's ProgramData and DXVK. Extracting a package alone does not
 perform that setup. Binary archives have platform constraints even where
 package metadata is permissive.
 
+`xerj-bin` uses upstream Linux/macOS binaries, patches Linux library paths, and
+includes Git on `PATH`. Update all platform hashes with `updatePkg xerj-bin -u`.
+
 ## Build and update
 
 From the repository root, build through a host's overlaid, flake-pinned package set:

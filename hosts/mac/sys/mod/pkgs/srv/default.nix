@@ -5,5 +5,6 @@ _:
     ./chatbot-util.nix
     ./fetch-rs.nix
     ./ssh.nix
+    ./xerj.nix
   ];
 }

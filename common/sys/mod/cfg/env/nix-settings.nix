@@ -11,7 +11,11 @@ let
 in
 {
   nix = {
-    registry.nixpkgs.flake = inputs.nixpkgs;
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+      nixpkgs-stable.flake = inputs.nixpkgs-stable;
+    };
+
     settings = {
       nix-path = [ "nixpkgs=${inputs.nixpkgs}" ];
       experimental-features = [

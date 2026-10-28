@@ -44,8 +44,27 @@ let
       value = "git_panel::ToggleFocus";
     }
     {
-      name = "${ctrl}-e";
+      name = "${ctrl}-s";
       value = "file_finder::Toggle";
+    }
+    # clobbers shortcut for `agent::ToggleFocus`, but I wasn't relying on that
+    # behavior much to begin with–keeps things relatively simple as well w.r.t. new
+    # threads, as i just `ctrl-?` anytime i need a new pi thread and use the typical
+    # `shift-{left,right} nav to get back to the editor
+    {
+      name = "${ctrl}-?";
+      value = [
+        "agent::NewExternalAgentThread"
+        { agent.custom.name = "Pi"; }
+      ];
+    }
+    {
+      name = "shift-left";
+      value = "workspace::ActivatePaneLeft";
+    }
+    {
+      name = "shift-right";
+      value = "workspace::ActivatePaneRight";
     }
   ];
   # 0x700000000 or'd w/ hex codes from:

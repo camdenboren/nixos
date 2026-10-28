@@ -24,14 +24,19 @@ let
   denyPaths = [
     "~/.ssh"
     "~/.config"
+    "~/.local"
     "/var/lib"
     "/etc/ssh"
-    ".env"
+    "~/.bash_history"
   ]
   # no reason to directly access this since it's just media and personal data
   ++ lib.optionals (hostname == "media") [
     "/mnt/media"
     "/run/camdenboren/media/backup"
+  ]
+  ++ lib.optionals isDarwin [
+    "/Library"
+    "~/Library"
   ];
 
   sandbox = {
@@ -60,10 +65,36 @@ let
         "*" = "allow";
         # i want this, but it confuses the heck out of qwen
         #"rm *" = "deny";
+        "history" = "deny";
+        "history *" = "deny";
+        "gh *" = "ask";
         "git *" = "ask";
         "git status" = "allow";
+        "git status *" = "allow";
         "git diff" = "allow";
+        "git diff *" = "allow";
+        "git log" = "allow";
         "git log *" = "allow";
+      };
+
+      path = {
+        "*.env" = "deny";
+        "*.env.*" = "deny";
+        "*.pem" = "deny";
+        "*.key" = "deny";
+        "*.p8" = "deny";
+        "*.p12" = "deny";
+        "*.pfx" = "deny";
+        "*.jks" = "deny";
+        "*.keystore" = "deny";
+        "*credentials*" = "deny";
+        "*secret*" = "deny";
+        "*token*" = "ask";
+        "*ssh_host_*_key" = "deny";
+        "*id_rsa*" = "deny";
+        "*id_ed25519*" = "deny";
+        "*id_ecdsa*" = "deny";
+        "*service-account*" = "deny";
       };
 
       special = {
@@ -200,8 +231,8 @@ in
       '';
 
       settings = {
-        defaultModel = "qwen3.6:latest";
-        defaultProvider = "ollama";
+        defaultModel = if isDarwin then "gpt-6.1-sol" else "qwen3.6:latest";
+        defaultProvider = if isDarwin then "openai-codex" else "ollama";
         defaultThinkingLevel = "medium";
         packages = [
           "${pkgs.pi-lsp}/lib/pi-lsp"

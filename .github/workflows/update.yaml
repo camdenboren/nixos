@@ -78,6 +78,7 @@ jobs:
             "outline-export"
             "pi-acp"
             "pi-lsp --version-regex '@narumitw/pi-lsp@(.*)' --use-github-releases"
+            "pi-permission-system --version-regex 'pi-permission-system-v(.*)' --use-github-releases"
             "pi-sandbox"
             "rare -u"
             "span -u"

@@ -12,6 +12,7 @@ let
   isVM = lib.hasSuffix "vm" hostname;
   isDarwin = lib.hasSuffix "-darwin" system;
   mcp = import ../../../../dot/agents/mcp.nix { inherit pkgs; };
+
   allowPaths = [
     "."
     "/tmp"
@@ -19,6 +20,7 @@ let
     "~/Documents/Repos/nix-darwin"
     "~/Documents/Repos/home-manager"
   ];
+
   denyPaths = [
     "~/.ssh"
     "~/.config"
@@ -31,6 +33,7 @@ let
     "/mnt/media"
     "/run/camdenboren/media/backup"
   ];
+
   sandbox = {
     enabled = true;
 
@@ -46,6 +49,26 @@ let
       denyRead = denyPaths;
       allowWrite = allowPaths;
       denyWrite = denyPaths;
+    };
+  };
+
+  pi-permissions = {
+    permission = {
+      "*" = "allow";
+
+      bash = {
+        "*" = "allow";
+        # i want this, but it confuses the heck out of qwen
+        #"rm *" = "deny";
+        "git *" = "ask";
+        "git status" = "allow";
+        "git diff" = "allow";
+        "git log *" = "allow";
+      };
+
+      special = {
+        doom_loop = "deny";
+      };
     };
   };
 in
@@ -64,10 +87,12 @@ in
     ];
 
   home.file = {
-    # needed for pi-sandbox + custom pi review; latter based on:
+    # needed for pi packages + custom pi review; latter based on:
     # `opencode/packages/core/src/plugin/command/review.txt`
     ".pi/agent/prompts".source = ../../../../dot/agents/prompts;
     ".pi/agent/sandbox.json".source = jsonFormat.generate "sandbox" sandbox;
+    ".pi/agent/extensions/pi-permission-system/config.json".source =
+      jsonFormat.generate "pi-permissions" pi-permissions;
 
     # skills
     ".agents/skills".source = ../../../../dot/agents/skills;
@@ -163,6 +188,7 @@ in
         /tmp (/nix/store is read-only). Avoid operations like cloning repos from
         GitHub, installing packages from npm, or reading network resources; if
         you need to fetch content, suggest manual alternatives instead.
+        Additionally, note that your access to some `git` commands is restricted.
 
         Default to pi-lsp for checking most file edits since targeted LSP
         diagnostics/fixes on a few edited files would be faster than a
@@ -180,6 +206,7 @@ in
         packages = [
           "${pkgs.pi-lsp}/lib/pi-lsp"
           "${pkgs.pi-sandbox}/lib/pi-sandbox/index.ts"
+          "${pkgs.pi-permission-system}/lib/pi-permission-system/index.ts"
         ];
       };
 

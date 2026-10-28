@@ -12,6 +12,7 @@ This is a cross-platform config for multiple hosts of varying degrees of specifi
 - [Overlays]
 - [Secrets]
 - [DevShells]
+- [Tests]
 
 The hosts cumulatively form a [Homelab] of ever-increasing scope, w/ `media` acting as the primary server, though auxiliary tasks are delegated out (e.g., `main` handles virtually all local AI inference)
 
@@ -89,6 +90,7 @@ Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/co
 [Overlays]: common/ovy/README.md
 [Secrets]: common/sec/README.md
 [DevShells]: common/usr/dev/README.md
+[Tests]: tests/README.md
 [Homelab]: hosts/media/sys/mod/pkgs/srv/README.md
 [vimjoyer]: https://github.com/vimjoyer/
 [ryan4yin]: https://github.com/ryan4yin/

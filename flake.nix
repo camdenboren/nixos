@@ -57,6 +57,21 @@
       nix-darwin,
       ...
     }@inputs:
+    let
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      forEachSupportedSystem =
+        function:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          function {
+            pkgs = nixpkgs.legacyPackages.${system};
+          }
+        );
+    in
     {
       nixosConfigurations = {
         main = nixpkgs.lib.nixosSystem (
@@ -101,6 +116,10 @@
         );
       };
       darwinConfigurations = {
+        ci = import ./tests/mac.nix {
+          darwinConfiguration = self.darwinConfigurations.mac;
+          activate = true;
+        };
         mac = nix-darwin.lib.darwinSystem (
           import ./hosts/mac {
             inherit
@@ -113,5 +132,63 @@
           }
         );
       };
+      checks = forEachSupportedSystem (
+        { pkgs, ... }:
+        nixpkgs.lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "x86_64-linux") {
+          main = import ./tests/main.nix {
+            inherit pkgs;
+            nixosConfiguration = import ./hosts/main {
+              inherit
+                inputs
+                self
+                nixpkgs
+                nixpkgs-stable
+                ;
+            };
+          };
+          mainvm = import ./tests/mainvm.nix {
+            inherit pkgs;
+            nixosConfiguration = import ./hosts/mainvm {
+              inherit
+                inputs
+                self
+                nixpkgs
+                nixpkgs-stable
+                ;
+            };
+          };
+          media = import ./tests/media.nix {
+            inherit pkgs;
+            nixosConfiguration = import ./hosts/media {
+              inherit
+                inputs
+                self
+                nixpkgs
+                nixpkgs-stable
+                ;
+            };
+          };
+        }
+        // nixpkgs.lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "aarch64-linux") {
+          macvm = import ./tests/macvm.nix {
+            inherit pkgs;
+            nixosConfiguration = import ./hosts/macvm {
+              inherit
+                inputs
+                self
+                nixpkgs
+                nixpkgs-stable
+                ;
+            };
+          };
+        }
+        # Darwin testing approach from https://github.com/Mic92/fast-nix-gc
+        // nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+          mac =
+            (import ./tests/mac.nix {
+              darwinConfiguration = self.darwinConfigurations.mac;
+            }).system;
+        }
+      );
     };
 }

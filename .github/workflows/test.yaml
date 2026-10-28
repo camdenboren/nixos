@@ -1,0 +1,93 @@
+name: test
+
+on:
+  push:
+    branches-ignore: ["update*"]
+  pull_request:
+
+jobs:
+  linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host-name: main
+            system: x86_64-linux
+            os-label: ubuntu-latest
+          - host-name: mainvm
+            system: x86_64-linux
+            os-label: ubuntu-latest
+          - host-name: media
+            system: x86_64-linux
+            os-label: ubuntu-latest
+          - host-name: macvm
+            system: aarch64-linux
+            os-label: ubuntu-24.04-arm
+
+    name: ${{ matrix.host-name }}
+    runs-on: ${{ matrix.os-label }}
+    steps:
+      - if: ${{ matrix.host-name == 'main' }}
+        uses: insightsengineering/disk-space-reclaimer@v1
+
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
+
+      - name: Enable KVM access
+        run: |
+          if [[ ! -e /dev/kvm ]]; then
+            echo "This runner does not expose /dev/kvm; VM tests require KVM." >&2
+            exit 1
+          fi
+          sudo chmod a+rw /dev/kvm
+
+      - name: Run the host's VM smoke tests
+        run: nix build .#checks.${{ matrix.system }}.${{ matrix.host-name }}
+
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build the Mac host integration configuration
+        run: nix build .#checks.aarch64-darwin.mac
+
+      - name: Build the activation configuration
+        run: nix build .#darwinConfigurations.ci.system --out-link result-ci
+
+      - name: Prepare nix-darwin activation
+        run: |
+          for file in /etc/hosts /etc/bashrc /etc/zshrc /etc/zshenv /etc/bash.bashrc; do
+            if [[ -e "$file" ]]; then
+              sudo mv "$file" "$file.before-nix-darwin"
+            fi
+          done
+
+      - name: Activate the Mac host on the ephemeral runner
+        run: |
+          set -o pipefail
+          mkdir -p smoke-artifacts
+          rm -f "$HOME/.local/state/nixos-smoke/activated"
+          sudo env PATH="$PATH" ./result-ci/sw/bin/darwin-rebuild switch --flake .#ci \
+            2>&1 | tee smoke-artifacts/activation.log
+
+      - name: Verify host integration and app startup
+        run: /run/current-system/sw/bin/testScript
+
+      - name: Upload smoke logs and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: darwin-smoke
+          path: smoke-artifacts/
+          if-no-files-found: ignore

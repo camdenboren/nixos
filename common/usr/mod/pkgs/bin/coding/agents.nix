@@ -16,9 +16,23 @@ let
   allowPaths = [
     "."
     "/tmp"
+    "${config.xdg.cacheHome}/nix"
     "~/Documents/Repos/nixpkgs"
     "~/Documents/Repos/nix-darwin"
     "~/Documents/Repos/home-manager"
+  ];
+
+  allowReadPaths = [
+    ".agents/skills"
+    "~/.config/git/config"
+    "/nix/store"
+    "~/.nix-profile"
+    "/nix/var/nix/daemon-socket"
+    "/nix/var/nix/profiles"
+    "/etc/nix"
+    "${config.xdg.configHome}/nix"
+    "${config.xdg.stateHome}/nix"
+    "${config.xdg.cacheHome}/nix"
   ];
 
   denyPaths = [
@@ -44,13 +58,14 @@ let
 
     network = {
       disabled = false;
-      allowedDomains = [
-        "*.home.local"
-      ];
+      allowedDomains = [ "*.home.local" ];
+      allowUnixSockets = [ "/nix/var/nix/daemon-socket/socket" ];
+      # above is insufficient for linux hosts
+      allowAllUnixSockets = !isDarwin;
     };
 
     filesystem = {
-      allowRead = allowPaths;
+      allowRead = allowPaths ++ allowReadPaths;
       denyRead = denyPaths;
       allowWrite = allowPaths;
       denyWrite = denyPaths;
@@ -65,10 +80,13 @@ let
         "*" = "allow";
         # i want this, but it confuses the heck out of qwen
         #"rm *" = "deny";
+        "sudo *" = "deny";
         "history" = "deny";
         "history *" = "deny";
         "gh *" = "ask";
         "git *" = "ask";
+        "git add" = "allow";
+        "git add *" = "allow";
         "git status" = "allow";
         "git status *" = "allow";
         "git diff" = "allow";
@@ -216,10 +234,9 @@ in
         You’re running in a sandboxed environment with no access to external
         networks (only *.home.local is allowed) and limited filesystem access
         —read/write is restricted to the current directory, a few repos, and
-        /tmp (/nix/store is read-only). Avoid operations like cloning repos from
-        GitHub, installing packages from npm, or reading network resources; if
-        you need to fetch content, suggest manual alternatives instead.
-        Additionally, note that your access to some `git` commands is restricted.
+        /tmp (nix-related directories are largely read-only). Avoid operations like
+        cloning repos from GitHub, installing packages from npm, or reading network
+        resources; if you need to fetch content, suggest manual alternatives instead.
 
         Default to pi-lsp for checking most file edits since targeted LSP
         diagnostics/fixes on a few edited files would be faster than a

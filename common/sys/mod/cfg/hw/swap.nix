@@ -1,7 +1,13 @@
 { hostname, ... }:
 
 let
-  gb = if (hostname == "main") then 32 else 8;
+  gb =
+    if (hostname == "main") then
+      32
+    else if (hostname == "media") then
+      16
+    else
+      4;
 in
 {
   swapDevices = [

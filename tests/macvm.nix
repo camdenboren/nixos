@@ -13,4 +13,8 @@ pkgs.testers.runNixOSTest {
       inherit pkgs nixosConfiguration;
     })
   ];
+
+  # no kvm on gh runner
+  requiredFeatures.kvm = false;
+  qemu.forceAccel = false;
 }

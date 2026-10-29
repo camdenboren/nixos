@@ -24,6 +24,9 @@ pkgs.testers.runNixOSTest {
           "--version"
         ]
       ];
+      extraApps = [
+        [ "bitwarden" ]
+      ];
       checkOllama = true;
     })
   ];

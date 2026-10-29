@@ -21,10 +21,8 @@ pkgs.testers.runNixOSTest {
         ]
       ];
       extraApps = [
-        [
-          "reaper"
-          "bitwarden"
-        ]
+        [ "bitwarden" ]
+        [ "reaper" ]
       ];
       checkOllama = true;
     })

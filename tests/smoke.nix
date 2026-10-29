@@ -151,7 +151,7 @@ if isLinux then
     '';
   }
 else
-  rec {
+  let
     config = darwinConfiguration.config;
     user = config.system.primaryUser;
     home = config.home-manager.users.${user};
@@ -378,6 +378,7 @@ else
       smoke /Applications/zoom.us.app
       exit "$failed"
     '';
-
+  in
+  {
     environment.systemPackages = [ testScript ];
   }

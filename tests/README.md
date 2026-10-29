@@ -12,9 +12,11 @@ nix build .#checks.x86_64-linux.media
 nix build .#checks.aarch64-linux.macvm
 ```
 
-Every host tests LibreWolf, Zed, Ghostty, and Bitwarden. `main` additionally
+Every host tests LibreWolf, Zed, and Ghostty. `main` additionally
 checks REAPER and Steam; `media` additionally checks Steam. `main` and `media`
-also run `gh --version` as the configured user.
+also run `gh --version` as the configured user, verify the Home Manager
+`ollama.service` starts, and wait for its local `/api/version` endpoint. This
+checks Ollama startup without downloading models or requiring GPU inference.
 
 `media` additionally checks nginx startup, its HTTP-to-HTTPS redirect, and static
 HTTPS content at `draw.home.local`. TLS is verified against the VM-generated
@@ -24,6 +26,28 @@ The test workflow runs a CI matrix job for each host, using x86 Linux runners
 for `main`, `mainvm`, and `media`, and an ARM Linux runner for `macvm`. Each runner
 must expose `/dev/kvm`; the workflow enables access before running the VM test.
 Only checks matching the selected system's architecture are exposed.
+
+### Test credentials
+
+The Linux branch of `tests/smoke.nix` derives `isVM` from the host's `vm` suffix.
+Shared physical-host overrides and the `tests/secrets.nix` import apply only when
+`!isVM` (`main` and `media`); host-specific settings remain in their test files.
+
+`tests/secrets.nix` disables SOPS decryption and
+build-time ciphertext validation, but retains each host's secret declarations
+and their consumer paths, owners, groups, and modes. A `test-fixtures.service`
+installs public fake plaintext values under `/run/secrets` before `sysinit.target`
+and normal services start, and is ordered before `sysinit-reactivation.target`.
+Files are recreated on each boot.
+
+Environment-file consumers receive `NAME=value` contents; password, pepper, and
+OIDC secret consumers receive raw strings, not YAML. The fixture values also
+exist in the Nix store and are **not real credentials**. No production keys are
+needed, and these fixtures must never be imported by a production host.
+
+Add an explicit fixture when declaring a new secret. Early user-creation secrets
+and SOPS templates are deliberately unsupported and fail evaluation. These tests
+exercise services reading credentials, not SOPS decryption or external logins.
 
 ## Darwin
 

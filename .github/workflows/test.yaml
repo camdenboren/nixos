@@ -39,16 +39,15 @@ jobs:
             trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
 
-      - name: Enable KVM access
-        run: |
-          if [[ ! -e /dev/kvm ]]; then
-            echo "This runner does not expose /dev/kvm; VM tests require KVM." >&2
-            exit 1
-          fi
-          sudo chmod a+rw /dev/kvm
-
       - name: Run the host's VM smoke tests
         run: nix build .#checks.${{ matrix.system }}.${{ matrix.host-name }}
+
+      - name: Upload test screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-${{ matrix.host-name }}
+          path: result/**/*.png
+          if-no-files-found: ignore
 
   mac:
     runs-on: macos-latest
@@ -67,10 +66,8 @@ jobs:
 
       - name: Prepare nix-darwin activation
         run: |
-          for file in /etc/hosts /etc/bashrc /etc/zshrc /etc/zshenv /etc/bash.bashrc; do
-            if [[ -e "$file" ]]; then
-              sudo mv "$file" "$file.before-nix-darwin"
-            fi
+          for f in /etc/bashrc /etc/zshrc /etc/zshenv /etc/bash.bashrc; do
+            [ -e "$f" ] && sudo mv "$f" "$f.before-nix-darwin" || true
           done
 
       - name: Activate the Mac host on the ephemeral runner

@@ -80,7 +80,9 @@ let
         "*" = "allow";
         # i want this, but it confuses the heck out of qwen
         #"rm *" = "deny";
+        "ssh *" = "deny";
         "sudo *" = "deny";
+        "sops *" = "deny";
         "history" = "deny";
         "history *" = "deny";
         "gh *" = "ask";
@@ -93,6 +95,8 @@ let
         "git diff *" = "allow";
         "git log" = "allow";
         "git log *" = "allow";
+        "git ls-files" = "allow";
+        "git ls-files *" = "allow";
       };
 
       path = {

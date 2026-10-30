@@ -32,6 +32,7 @@ let
     "draw.home.local"
     "ntfy.home.local"
     "util.home.local"
+    "omdb.home.local"
     "notes.home.local"
     "image.home.local"
     "money.home.local"

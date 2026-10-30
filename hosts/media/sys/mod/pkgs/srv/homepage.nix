@@ -22,6 +22,7 @@ let
     draw = "https://draw.${baseDomain}/";
     ntfy = "https://ntfy.${baseDomain}/";
     util = "https://util.${baseDomain}/";
+    omdb = "https://omdb.${baseDomain}/";
     notes = "https://notes.${baseDomain}/";
     media = "https://media.${baseDomain}/";
     image = "https://image.${baseDomain}/";
@@ -33,6 +34,10 @@ let
   icons = {
     alc-calc = "${pkgs.alc-calc-web}/app-icon.png";
     centhia = "${inputs.chatbot-util}/front/src/assets/logo.png";
+    omdb-lookup = "${pkgs.fetchurl {
+      url = "https://www.omdb.org/images/layout/omdb-logo.png";
+      hash = "sha256-k1+qdwNZ1C2Oji5r49pvOuw6YcGZnWT/gKMaFGstE9k=";
+    }}";
   };
   backgrounds = {
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
@@ -47,6 +52,7 @@ let
       mkdir -p ${homepageImagesURI}
       ln -s ${icons.alc-calc} ${homepageIconsURI}/alc-calc.png
       ln -s ${icons.centhia} ${homepageIconsURI}/centhia.png
+      ln -s ${icons.omdb-lookup} ${homepageIconsURI}/omdb-lookup.png
       ln -s ${backgrounds.coral} ${homepageImagesURI}/coral.jpg
       ln -s ${backgrounds.nothin} ${homepageImagesURI}/nothin.jpg
       ln -s ${backgrounds.skyline} ${homepageImagesURI}/skyline.jpg
@@ -160,6 +166,13 @@ in
               icon = "jellyfin";
               href = URLs.media;
               siteMonitor = URLs.media;
+            };
+          }
+          {
+            OMDb = {
+              icon = "/icons/omdb-lookup.png";
+              href = URLs.omdb;
+              siteMonitor = URLs.omdb;
             };
           }
           {

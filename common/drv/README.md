@@ -6,24 +6,21 @@ installing a package still requires a host package list or service reference.
 
 ## Package layout
 
-| Area           | Implementation                                                                                                                                                                                      |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Linux audio    | `audiogridder` installs into `lib/vst`, `loudmax` into `lib/ladspa`, and `neural-amp-modeler-lv2` builds with CMake into `lib/lv2`. `sitala` unpacks a Debian package and patches ELF dependencies. |
-| Windows audio  | Most remaining audio packages extract binaries into `lib/winvst3` for Wine/yabridge. This directory also holds Abstract Vox's DLL and instrument data.                                              |
-| Melda          | `maudioplugins` reads component versions/hashes from `sources.json`; `extract.py` extracts selected free plugins and shared ProgramData.                                                            |
-| Wine graphics  | `dxvk-bin` preserves the upstream `x32`/`x64` DLL layout.                                                                                                                                           |
-| Homelab        | `drawio` builds web assets with Ant/JDK and embeds `https://draw.home.local` in preconfiguration. `actual-cli` builds `@actual-app/cli` with `yarn-berry`; `outline-export` uses `buildGoModule`.   |
-| Agent adapters | `pi-acp`, and `pi-mcp-adapter` use `buildNpmPackage`; `kiwix-mcp` uses `buildPythonApplication`; `pi-sandbox` uses `pnpm` with `nodejs`.                                         |
-| Browser        | `vimium-new-tab-page` requires `buildFirefoxXpiAddon`, supplied by the Firefox overlay.                                                                                                             |
+| Area          | Implementation                                                                                                                                                                                                                                 |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Linux audio   | `audiogridder` installs into `lib/vst`, `loudmax` into `lib/ladspa`, and `neural-amp-modeler-lv2` builds with CMake into `lib/lv2`. `sitala` unpacks a Debian package and patches ELF dependencies.                                            |
+| Windows audio | Most remaining audio packages extract binaries into `lib/winvst3` for Wine/yabridge. This directory also holds Abstract Vox's DLL and instrument data.                                                                                         |
+| Melda         | `maudioplugins` reads component versions/hashes from `sources.json`; `extract.py` extracts selected free plugins and shared ProgramData.                                                                                                       |
+| Wine graphics | `dxvk-bin` preserves the upstream `x32`/`x64` DLL layout.                                                                                                                                                                                      |
+| Homelab       | `drawio`, `actual-cli`, and `outline-export` build web assets with JDK, Yarn Berry, and Go respectively. `omdb-lookup` serves an OMDb widget; `workerd` provides the Cloudflare Workers runtime.                                               |
+| Agents        | `pi-acp`, `pi-lsp`, `xerj-bin`, and `pi-mcp-adapter` provide AI agent tooling via `buildNpmPackage` or native binaries; `pi-permission-system` uses `pnpm`; `kiwix-mcp` uses `buildPythonApplication`; `pi-sandbox` uses `pnpm` with `nodejs`. |
+| Browser       | `vimium-new-tab-page` requires `buildFirefoxXpiAddon`, supplied by the Firefox overlay.                                                                                                                                                        |
 
 Windows plugins are connected to the Wine prefix by the `install-plugins`
 user service in [install-plugins.nix](../../hosts/main/usr/mod/pkgs/srv/install-plugins.nix),
 including Melda's ProgramData and DXVK. Extracting a package alone does not
 perform that setup. Binary archives have platform constraints even where
 package metadata is permissive.
-
-`xerj-bin` uses upstream Linux/macOS binaries, patches Linux library paths, and
-includes Git on `PATH`. Update all platform hashes with `updatePkg xerj-bin -u`.
 
 ## Build and update
 

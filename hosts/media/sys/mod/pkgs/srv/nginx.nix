@@ -16,6 +16,7 @@ let
     draw = toString 9040;
     ntfy = toString 2586;
     util = toString 8080;
+    omdb = toString 6000;
     notes = toString 3000;
     media = toString 8096;
     image = toString 9090;
@@ -36,6 +37,7 @@ let
     draw = "draw.${baseDomain}";
     ntfy = "ntfy.${baseDomain}";
     util = "util.${baseDomain}";
+    omdb = "omdb.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
@@ -50,8 +52,10 @@ let
     proxy_set_header X-Forwarded-Protocol $scheme;
     proxy_set_header X-Forwarded-Host $http_host;
   '';
+  # `SAMEORIGIN` worked, but `frame-ancestors` enables embeds in outline for any
+  # static site
   staticHeaders = ''
-    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Content-Security-Policy "frame-ancestors 'self' https://${domains.notes}" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-XSS-Protection "1; mode=block" always;
   '';
@@ -234,6 +238,23 @@ in
           tryFiles = "$uri $uri/ /index.html";
         };
         extraConfig = staticHeaders;
+      };
+
+      "${domains.omdb}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            root = "${pkgs.omdb-lookup}";
+            index = "index.html";
+            tryFiles = "$uri $uri/ /index.html";
+            extraConfig = staticHeaders;
+          };
+          "/api/" = {
+            proxyPass = "${baseURL}:${ports.omdb}/";
+            extraConfig = proxyHeaders;
+          };
+        };
       };
 
       "${domains.ntfy}" = {

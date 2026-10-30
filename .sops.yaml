@@ -11,6 +11,6 @@ creation_rules:
   - path_regex: ^common/sec/(nut|vector)\.yaml$
     key_groups:
       - age: [*admin, *main, *media]
-  - path_regex: ^common/sec/(backup|dex|homebox|openobserve|penpot|tailscale)\.yaml$
+  - path_regex: ^common/sec/(backup|dex|homebox|omdb-lookup|openobserve|penpot|tailscale)\.yaml$
     key_groups:
       - age: [*admin, *media]

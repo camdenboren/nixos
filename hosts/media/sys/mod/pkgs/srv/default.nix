@@ -20,6 +20,7 @@
     ./openobserve
     ./nginx.nix
     ./ntfy-sh.nix
+    ./omdb-lookup.nix
     ./open-webui.nix
     ./outline.nix
     ./penpot.nix

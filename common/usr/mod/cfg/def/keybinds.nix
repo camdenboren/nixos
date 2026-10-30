@@ -14,6 +14,7 @@ let
   ctrl = if isDarwin then "cmd" else "ctrl";
   alt = if isDarwin then "opt" else "alt";
   keybindingsPath = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/";
+
   bindings = builtins.listToAttrs [
     {
       name = "${ctrl}-p";
@@ -47,10 +48,12 @@ let
       name = "${ctrl}-s";
       value = "file_finder::Toggle";
     }
-    # clobbers shortcut for `agent::ToggleFocus`, but I wasn't relying on that
-    # behavior much to begin with–keeps things relatively simple as well w.r.t. new
-    # threads, as i just `ctrl-?` anytime i need a new pi thread and use the typical
-    # `shift-{left,right} nav to get back to the editor
+    # can't combine `/` w/ `?` behavior since zed doesn't provide an option for
+    # setting an external agent as the default
+    {
+      name = "${ctrl}-/";
+      value = "agent::Toggle";
+    }
     {
       name = "${ctrl}-?";
       value = [
@@ -67,6 +70,7 @@ let
       value = "workspace::ActivatePaneRight";
     }
   ];
+
   # 0x700000000 or'd w/ hex codes from:
   # https://developer.apple.com/library/archive/technotes/tn2450/_index.html
   #

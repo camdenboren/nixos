@@ -17,6 +17,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `photos`                | Immich `:2283`                                      | [immich.nix](immich.nix)                                                                     |
 | `archive`               | Kiwix `:9095`                                       | [kiwix.nix](kiwix.nix)                                                                       |
 | `notes`, `dex`          | Outline `:3000`, Dex `:5556`                        | [outline.nix](outline.nix); OIDC login                                                       |
+| `omdb`                  | OMDb lookup workerd backend (`:6000`)               | [omdb-lookup.nix](omdb-lookup.nix)                                                           |
 | `design`                | Penpot frontend `:9001`                             | [penpot.nix](penpot.nix)                                                                     |
 | `draw`                  | Static `pkgs.drawio`                                | `nginx.nix`; the declared `9040` port is unused                                              |
 | `pdf`                   | BentoPDF-managed Nginx vhost                        | [bentopdf.nix](bentopdf.nix); separate from `nginx.nix`'s domain map                         |

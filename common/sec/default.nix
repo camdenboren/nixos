@@ -37,6 +37,7 @@ let
           key = "pepper";
           restartUnits = [ "homebox.service" ];
         };
+        omdb-lookup.restartUnits = [ "omdb-lookup.service" ];
         openobserve.restartUnits = [ "openobserve.service" ];
         penpot.restartUnits = [
           "podman-penpot-penpot-backend.service"

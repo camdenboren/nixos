@@ -15,7 +15,7 @@
       OLLAMA_MAX_LOADED_MODELS = "3";
       OLLAMA_NUM_PARALLEL = "4";
       OLLAMA_MAX_QUEUE = "512";
-      OLLAMA_CONTEXT_LENGTH = "65536";
+      OLLAMA_CONTEXT_LENGTH = "131072";
       OLLAMA_KEEP_ALIVE = "30m";
       # `OLLAMA_NOHISTORY=1` is also set in `bash.nix` since it only applies
       # to CLI invocations of `ollama run`

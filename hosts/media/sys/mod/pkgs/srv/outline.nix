@@ -66,8 +66,9 @@ in
     };
   };
 
-  # allow self-signed certs via adding NODE_TLS_REJECT_UNAUTHORIZED
-  systemd.services.outline.serviceConfig.Environment = "NODE_TLS_REJECT_UNAUTHORIZED=0";
+  # allow self-signed cert
+  systemd.services.outline.serviceConfig.Environment =
+    "NODE_EXTRA_CA_CERTS=${../../../../../../common/sys/dot/acme/home-local.pem}";
 
   # create the database directory for dex to enable persisting `refresh_token`
   systemd.services.dex.serviceConfig.StateDirectory = "dex";

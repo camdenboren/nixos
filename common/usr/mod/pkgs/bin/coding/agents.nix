@@ -80,7 +80,9 @@ let
         "*" = "allow";
         # i want this, but it confuses the heck out of qwen
         #"rm *" = "deny";
+        "ssh *" = "deny";
         "sudo *" = "deny";
+        "sops *" = "deny";
         "history" = "deny";
         "history *" = "deny";
         "gh *" = "ask";
@@ -93,6 +95,8 @@ let
         "git diff *" = "allow";
         "git log" = "allow";
         "git log *" = "allow";
+        "git ls-files" = "allow";
+        "git ls-files *" = "allow";
       };
 
       path = {
@@ -284,6 +288,7 @@ in
         enabled = !isVM;
         button = false;
         dock = "right";
+        threads_sidebar.position = "right";
         default_model = {
           provider = "ollama";
           model = "qwen3.6:latest";
@@ -296,13 +301,13 @@ in
           available_models = [
             {
               name = "qwen3.6:latest";
-              max_tokens = 262144;
+              max_tokens = 131072;
               supports_tools = true;
               keep_alive = "30m";
             }
             {
               name = "gpt-oss:latest";
-              max_tokens = 65536;
+              max_tokens = 131072;
               supports_tools = true;
               keep_alive = "30m";
             }

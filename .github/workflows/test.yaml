@@ -39,6 +39,11 @@ jobs:
             trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
 
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
+          save: false
+
       - name: Run the host's VM smoke tests
         run: nix build .#checks.${{ matrix.system }}.${{ matrix.host-name }}
 
@@ -57,6 +62,11 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-mac-${{ hashFiles('**/flake.lock') }}
+          save: false
 
       - name: Build the Mac host integration configuration
         run: nix build .#checks.aarch64-darwin.mac

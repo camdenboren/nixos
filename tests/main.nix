@@ -20,11 +20,19 @@ pkgs.testers.runNixOSTest {
           "--version"
         ]
       ];
-      extraApps = [
-        [ "bitwarden" ]
+      checkExtraApps = true;
+      appChecks = [
         [ "reaper" ]
       ];
       checkOllama = true;
+      serviceChecks = [
+        "install-plugins"
+        "replace-configs"
+        "xerj"
+      ];
+      extraServiceChecks = ''
+        machine.succeed("test -s /home/camdenboren/.config/REAPER/reaper.ini")
+      '';
     })
   ];
 
@@ -40,18 +48,4 @@ pkgs.testers.runNixOSTest {
       podman-build-invokeai-invokeai-cuda.enable = mkForce false;
     };
   };
-
-  testScript = pkgs.lib.mkAfter ''
-    machine.wait_for_unit("default.target", user="camdenboren")
-
-    for unit in ["install-plugins.service", "replace-configs.service"]:
-        with subtest(unit + " completed successfully"):
-            info = machine.get_unit_info(unit, user="camdenboren")
-            assert info["ExecMainStartTimestampMonotonic"] != "0", info
-            assert info["ActiveState"] == "inactive", info
-            assert info["Result"] == "success", info
-            assert info["ExecMainStatus"] == "0", info
-
-    machine.succeed("test -s /home/camdenboren/.config/REAPER/reaper.ini")
-  '';
 }

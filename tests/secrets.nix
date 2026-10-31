@@ -28,6 +28,9 @@ let
       ACTUAL_PASSWORD=smoke-test-only
       ACTUAL_SYNC_ID=00000000-0000-0000-0000-000000000000
     '';
+    omdb-lookup = ''
+      API_KEY=abcdefghi
+    '';
     openobserve = ''
       ZO_ROOT_USER_EMAIL=smoke@example.invalid
       ZO_ROOT_USER_PASSWORD=Smoke-test-only-password-123!

@@ -24,10 +24,43 @@ pkgs.testers.runNixOSTest {
           "--version"
         ]
       ];
-      extraApps = [
-        [ "bitwarden" ]
-      ];
+      checkExtraApps = true;
       checkOllama = true;
+      serviceChecks = [
+        "actual"
+        "dex"
+        "homebox"
+        "homepage-dashboard"
+        "immich-machine-learning"
+        "immich-server"
+        "jellyfin"
+        "kiwix-mcp"
+        "kiwix-serve"
+        "lubelogger"
+        "nginx"
+        "ntfy-sh"
+        "omdb-lookup"
+        "open-webui"
+        "openobserve"
+        "outline"
+        "postgresql"
+        "redis-immich"
+        "redis-outline"
+        "xerj"
+      ];
+      extraServiceChecks = ''
+        with subtest("nginx serves Draw.io over HTTPS"):
+            machine.wait_for_unit("nginx.service")
+            machine.wait_for_open_port(443)
+            machine.succeed(
+                "curl --fail --silent --show-error --max-time 30 "
+                "--noproxy '*' "
+                "--resolve draw.home.local:443:127.0.0.1 "
+                "--cacert /var/lib/acme/home.local/chain.pem "
+                "https://draw.home.local/ --output /tmp/draw-smoke.html"
+            )
+            machine.succeed("test -s /tmp/draw-smoke.html")
+      '';
     })
   ];
 
@@ -62,56 +95,4 @@ pkgs.testers.runNixOSTest {
       podman-volume-penpot_penpot_postgres_v15.enable = mkForce false;
     };
   };
-
-  # in addition to non-service items in smoke.nix
-  testScript = pkgs.lib.mkAfter (
-    { nodes, ... }:
-    let
-      candidates = [
-        "actual"
-        "dex"
-        "homebox"
-        "homepage-dashboard"
-        "immich-machine-learning"
-        "immich-server"
-        "jellyfin"
-        "kiwix-mcp"
-        "kiwix-serve"
-        "lubelogger"
-        "nginx"
-        "ntfy-sh"
-        "open-webui"
-        "openobserve"
-        "outline"
-        "postgresql"
-        "redis-immich"
-        "redis-outline"
-        "xerj"
-      ];
-
-      enabled = builtins.filter (name: nodes.machine.systemd.services.${name}.enable or false) candidates;
-    in
-    ''
-      import datetime
-
-      for name in ${builtins.toJSON enabled}:
-          with subtest(name + " starts"):
-              machine.wait_for_unit(
-                  name + ".service",
-                  timeout=datetime.timedelta(minutes=3),
-              )
-
-      with subtest("nginx serves Draw.io over HTTPS"):
-          machine.wait_for_unit("nginx.service")
-          machine.wait_for_open_port(443)
-          machine.succeed(
-              "curl --fail --silent --show-error --max-time 30 "
-              "--noproxy '*' "
-              "--resolve draw.home.local:443:127.0.0.1 "
-              "--cacert /var/lib/acme/home.local/chain.pem "
-              "https://draw.home.local/ --output /tmp/draw-smoke.html"
-          )
-          machine.succeed("test -s /tmp/draw-smoke.html")
-    ''
-  );
 }

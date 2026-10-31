@@ -17,6 +17,7 @@ in
       deadnix
       nixd
       nixfmt
+      nix-init
       nix-update
       gh
       harper

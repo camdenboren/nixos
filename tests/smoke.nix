@@ -6,8 +6,11 @@
   nixosConfiguration ? null,
   darwinConfiguration ? null,
   activationMarker ? null,
-  extraApps ? [ ],
+  appChecks ? [ ],
+  checkExtraApps ? false,
   cliChecks ? [ ],
+  serviceChecks ? [ ],
+  extraServiceChecks ? null,
   checkOllama ? false,
 }:
 
@@ -61,96 +64,120 @@ if isLinux then
       ];
     };
 
-    testScript = ''
-      import shlex
+    testScript =
+      { nodes, ... }:
+      let
+        enabledServices = builtins.filter (
+          name: nodes.machine.systemd.services.${name}.enable or false
+        ) serviceChecks;
+      in
+      ''
+        import shlex
 
-      machine.start()
-      machine.wait_for_unit("multi-user.target")
+        machine.start()
+        machine.wait_for_unit("multi-user.target")
 
-      user = "camdenboren"
+        user = "camdenboren"
 
-      def as_user(command):
-          return "su -l " + user + " --shell /bin/sh -c " + shlex.quote(
-              'export XDG_RUNTIME_DIR="/run/user/$(id -u)"; ' + command
+        def as_user(command):
+            return "su -l " + user + " --shell /bin/sh -c " + shlex.quote(
+                'export XDG_RUNTIME_DIR="/run/user/$(id -u)"; ' + command
+            )
+
+        machine.wait_for_unit("home-manager-" + user + ".service")
+        profile_path = "/home/" + user + "/.nix-profile/bin:/etc/profiles/per-user/" + user + "/bin:/run/current-system/sw/bin"
+        for argv in ${builtins.toJSON cliChecks}:
+            with subtest(shlex.join(argv)):
+                machine.succeed(as_user(shlex.join(["env", "PATH=" + profile_path] + argv)))
+
+        machine.wait_for_unit("display-manager.service")
+        machine.wait_until_succeeds(as_user(
+            "systemctl --user is-active graphical-session.target"
+        ))
+        # GNOME imports its display environment into the user manager on login.
+        machine.wait_until_succeeds(as_user(
+            "systemctl --user show-environment | grep -q '^WAYLAND_DISPLAY='"
+        ))
+
+        apps = ${
+          builtins.toJSON (
+            [
+              [
+                "librewolf"
+                "--no-remote"
+                "about:blank"
+              ]
+              [
+                "zeditor"
+                "--foreground"
+              ]
+              [ "ghostty" ]
+              [ "nautilus" ]
+            ]
+            ++ appChecks
+            ++ lib.optionals checkExtraApps [
+              [ "bitwarden" ]
+              #[ "easyeffects" ]
+              [ "freetube" ]
+              [ "lollypop" ]
+            ]
           )
+        }
 
-      machine.wait_for_unit("home-manager-" + user + ".service")
-      profile_path = "/home/" + user + "/.nix-profile/bin:/etc/profiles/per-user/" + user + "/bin:/run/current-system/sw/bin"
-      for argv in ${builtins.toJSON cliChecks}:
-          with subtest(shlex.join(argv)):
-              machine.succeed(as_user(shlex.join(["env", "PATH=" + profile_path] + argv)))
-
-      machine.wait_for_unit("display-manager.service")
-      machine.wait_until_succeeds(as_user(
-          "systemctl --user is-active graphical-session.target"
-      ))
-      # GNOME imports its display environment into the user manager on login.
-      machine.wait_until_succeeds(as_user(
-          "systemctl --user show-environment | grep -q '^WAYLAND_DISPLAY='"
-      ))
-
-      apps = ${
-        builtins.toJSON (
-          [
-            [
-              "librewolf"
-              "--no-remote"
-              "about:blank"
-            ]
-            [
-              "zeditor"
-              "--foreground"
-            ]
-            [ "ghostty" ]
-          ]
-          ++ extraApps
-        )
-      }
-
-      ${lib.optionalString checkOllama ''
-        with subtest("Ollama user service and API are ready"):
-            try:
-                machine.wait_for_unit("ollama.service", user=user)
-                machine.wait_until_succeeds(
-                    "curl --fail --silent --show-error --max-time 5 --noproxy '*' "
-                    "http://127.0.0.1:11434/api/version",
-                    timeout=120,
-                )
-            finally:
-                print(machine.execute(as_user("journalctl --user -u ollama.service --no-pager"))[1])
-      ''}
-
-      for argv in apps:
-          name = argv[0]
-          unit = "smoke-" + name + ".service"
-          with subtest(name + " starts and stays running"):
-              # Use the installed user profile, not a separate copy from pkgs.
-              command = shlex.join([
-                  "systemd-run", "--user", "--unit=" + unit,
-                  "--service-type=exec", "--",
-                  "/run/current-system/sw/bin/env",
-                  "PATH=" + profile_path,
-                  "LIBGL_ALWAYS_SOFTWARE=1", "ZED_ALLOW_EMULATED_GPU=1",
-              ] + argv)
+        ${lib.optionalString checkOllama ''
+          with subtest("Ollama user service and API are ready"):
               try:
-                  machine.succeed(as_user(command))
-                  machine.wait_for_unit(unit, user=user)
-                  # Catch immediate crashes without relying on a launcher exit code.
-                  for _ in range(10):
-                      machine.sleep(1)
-                      # ocr isn't working for me, so this gives enough time for
-                      # plugins to load
-                      if name == "reaper":
-                          machine.sleep(9)
-                      machine.succeed(as_user("systemctl --user is-active " + unit))
-
+                  machine.wait_for_unit("ollama.service", user=user)
+                  machine.wait_until_succeeds(
+                      "curl --fail --silent --show-error --max-time 5 --noproxy '*' "
+                      "http://127.0.0.1:11434/api/version",
+                      timeout=60,
+                  )
               finally:
-                  print(machine.execute(as_user("journalctl --user -u " + unit + " --no-pager"))[1])
-                  machine.screenshot("smoke-" + name)
-                  machine.execute(as_user("systemctl --user stop " + unit))
-    '';
+                  print(machine.execute(as_user("journalctl --user -u ollama.service --no-pager"))[1])
+        ''}
+
+        ${lib.optionalString (serviceChecks != [ ]) ''
+          import datetime
+
+          for name in ${builtins.toJSON enabledServices}:
+              with subtest(name + " starts"):
+                  machine.wait_for_unit(
+                      name + ".service",
+                      timeout=datetime.timedelta(minutes=3),
+                  )
+        ''}
+
+        ${lib.optionalString (extraServiceChecks != null) extraServiceChecks}
+
+        for argv in apps:
+            name = argv[0]
+            unit = "smoke-" + name + ".service"
+            with subtest(name + " starts and stays running"):
+                # Use the installed user profile, not a separate copy from pkgs.
+                command = shlex.join([
+                    "systemd-run", "--user", "--unit=" + unit,
+                    "--service-type=exec", "--",
+                    "/run/current-system/sw/bin/env",
+                    "PATH=" + profile_path,
+                    "LIBGL_ALWAYS_SOFTWARE=1", "ZED_ALLOW_EMULATED_GPU=1",
+                ] + argv)
+                try:
+                    machine.succeed(as_user(command))
+                    machine.wait_for_unit(unit, user=user)
+                    # Catch immediate crashes without relying on a launcher exit code.
+                    for _ in range(10):
+                        machine.sleep(1)
+                        machine.succeed(as_user("systemctl --user is-active " + unit))
+
+                finally:
+                    print(machine.execute(as_user("journalctl --user -u " + unit + " --no-pager"))[1])
+                    machine.screenshot("smoke-" + name)
+                    machine.execute(as_user("systemctl --user stop " + unit))
+      '';
   }
 else
+  # darwin
   let
     config = darwinConfiguration.config;
     user = config.system.primaryUser;

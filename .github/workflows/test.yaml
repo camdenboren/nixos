@@ -76,8 +76,8 @@ jobs:
 
       - name: Prepare nix-darwin activation
         run: |
-          for f in /etc/bashrc /etc/zshrc /etc/zshenv /etc/bash.bashrc; do
-            [ -e "$f" ] && sudo mv "$f" "$f.before-nix-darwin" || true
+          for f in /etc/hosts /etc/bashrc /etc/zshrc /etc/zshenv /etc/bash.bashrc; do
+            [ -e "$f" ] && sudo mv "$f" "$f.before-nix-darwin"
           done
 
       - name: Activate the Mac host on the ephemeral runner

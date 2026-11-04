@@ -45,6 +45,9 @@ jobs:
   pkgs:
     runs-on: ubuntu-latest
     steps:
+      # container-images prefetches (downloads) whole images
+      - uses: insightsengineering/disk-space-reclaimer@v1
+
       - uses: actions/checkout@v6
 
       - uses: cachix/install-nix-action@v31
@@ -120,6 +123,29 @@ jobs:
               echo "These derivations could not be updated and were skipped."
             } >> summary.md
           fi
+
+      - name: Update container images
+        run: |
+          if ./common/drv/container-images/update.sh; then
+            git add common/drv/container-images/sources.json
+            if ! git diff --cached --quiet; then
+              git commit -m "update: bump container images"
+            else
+              echo "No changes for container images, skipping commit"
+            fi
+          else
+            echo "::warning::Update failed for container images, skipping"
+            git checkout -- common/drv/container-images
+            {
+              echo "### Failed Container Images"
+              echo
+              echo "- container-images (see the job log)"
+            } >> summary.md
+          fi
+          echo --------------------------------------------
+
+      - name: Write PR body and job summary
+        run: |
           {
             echo "Automatically generated PR to update the versions and hashes of one or more custom derivations via nix-update"
             if [ -f summary.md ]; then
@@ -127,10 +153,9 @@ jobs:
               cat summary.md
             fi
           } > pr-body.md
-
-      - name: Cat update results to the job summary
-        if: ${{ hashFiles('summary.md') != '' }}
-        run: cat summary.md | tee $GITHUB_STEP_SUMMARY
+          if [ -f summary.md ]; then
+            cat summary.md | tee $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v8

@@ -1,0 +1,110 @@
+name: test
+
+on:
+  push:
+    branches-ignore: ["update*"]
+  pull_request:
+
+jobs:
+  linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host-name: main
+            system: x86_64-linux
+            # without invokeai, so ci doesn't pull its 10GB image
+            build-name: mainci
+            os-label: ubuntu-latest
+
+          - host-name: mainvm
+            system: x86_64-linux
+            os-label: ubuntu-latest
+
+          - host-name: media
+            system: x86_64-linux
+            os-label: ubuntu-latest
+
+          - host-name: macvm
+            system: aarch64-linux
+            os-label: ubuntu-24.04-arm
+
+    name: ${{ matrix.host-name }}
+    runs-on: ${{ matrix.os-label }}
+    steps:
+      - if: ${{ matrix.host-name == 'main' || matrix.host-name == 'media' }}
+        uses: insightsengineering/disk-space-reclaimer@v1
+
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
+
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
+          save: false
+
+      - run: nix build .#checks.${{ matrix.system }}.${{ matrix.build-name || matrix.host-name }}
+
+      - name: Upload test screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-${{ matrix.host-name }}
+          path: result/**/*.png
+          if-no-files-found: ignore
+
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
+
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-mac-${{ hashFiles('**/flake.lock') }}
+          save: false
+
+      - run: nix build .#darwinConfigurations.ci.system
+
+      - name: Prepare nix-darwin activation
+        run: |
+          # nix-darwin restores hosts.before-nix-darwin during networking
+          # activation; use a different backup name to keep our managed hosts.
+          if [ -e /etc/hosts ]; then
+            sudo mv /etc/hosts /etc/hosts.before-smoke
+          fi
+          for f in /etc/bashrc /etc/zshrc /etc/zshenv /etc/bash.bashrc; do
+            [ -e "$f" ] && sudo mv "$f" "$f.before-nix-darwin"
+          done
+          # otherwise conflicts w/ nix-homebrew
+          NONINTERACTIVE=1 \
+            /bin/bash -c \
+            "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
+      - name: Activate the test configuration
+        run: |
+          sudo env PATH="$PATH" ./result/sw/bin/darwin-rebuild switch --flake .#ci
+
+      - name: Run the testScript
+        env:
+          SMOKE_ARTIFACTS_DIR: ${{ runner.temp }}/smoke-artifacts
+        run: /run/current-system/sw/bin/testScript
+
+      - name: Upload test screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-mac
+          path: ${{ runner.temp }}/smoke-artifacts/*.png
+          if-no-files-found: ignore

@@ -4,6 +4,7 @@ let
   linearmouse = ../../../dot/linearmouse/linearmouse.json;
   workflowTemplate = ../../../dot/LaunchApplication.workflow;
   script = pkgs.writeShellScriptBin "replace-configs" ''
+    set -euo pipefail
     if test -d ~/Library/Application\ Support/FreeTube; then
       echo "Removing configs for: freetube"
       rm -f ~/Library/Application\ Support/FreeTube/settings.db

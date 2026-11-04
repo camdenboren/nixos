@@ -12,6 +12,8 @@
   virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
+    # weekly `podman system prune -f --all`: unused images only, never volumes
+    autoPrune.flags = [ "--all" ];
     dockerCompat = true;
   };
 
@@ -28,7 +30,8 @@
 
   # Containers
   virtualisation.oci-containers.containers."invokeai-invokeai-cuda" = {
-    image = "ghcr.io/invoke-ai/invokeai:latest";
+    image = pkgs.container-images.invokeai.passthru.imageRef;
+    imageFile = pkgs.container-images.invokeai;
     environment = {
       "INVOKEAI_ROOT" = "/invokeai";
     };
@@ -77,22 +80,6 @@
     '';
     partOf = [ "podman-compose-invokeai-root.target" ];
     wantedBy = [ "podman-compose-invokeai-root.target" ];
-  };
-
-  # Builds
-  systemd.services."podman-build-invokeai-invokeai-cuda" = {
-    path = [
-      pkgs.podman
-      pkgs.git
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      TimeoutSec = 300;
-    };
-    script = ''
-      cd /home/camdenboren/InvokeAI
-      podman build -t ghcr.io/invoke-ai/invokeai:latest -f docker/Dockerfile .
-    '';
   };
 
   # Root service

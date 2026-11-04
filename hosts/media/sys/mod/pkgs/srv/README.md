@@ -57,6 +57,10 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   `/mnt/media/Archives/library.xml`; add archives with `kiwix-manage library.xml add
 file.zim` from that directory. Penpot persists assets and PostgreSQL data in
   `penpot_penpot_assets` and `penpot_penpot_postgres_v15` Podman volumes.
+- Penpot's containers run images from digest pins in
+  [container-images](../../../../../../common/drv/container-images/), loaded with `imageFile`, so
+  podman never pulls at runtime. Bump them with `updatePkg container-images.<name> -u`, then
+  rebuild `media`. Note that [penpot.nix](penpot.nix) is still marked as compose2nix output.
 
 ## Backups
 

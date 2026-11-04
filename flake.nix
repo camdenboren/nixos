@@ -1,6 +1,5 @@
 {
   inputs = {
-    # find time-traveling refs at www.nixhub.io and append after nixpkgs/
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
@@ -57,61 +56,117 @@
       nix-darwin,
       ...
     }@inputs:
+    let
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      forEachSupportedSystem =
+        function:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          function {
+            pkgs = nixpkgs.legacyPackages.${system};
+          }
+        );
+      mainCfg = import ./hosts/main {
+        inherit
+          inputs
+          self
+          nixpkgs
+          nixpkgs-stable
+          ;
+      };
+      # without invokeai, so ci doesn't pull its 10GB image
+      mainciCfg = mainCfg // {
+        modules = mainCfg.modules ++ [
+          { disabledModules = [ ./hosts/main/sys/mod/pkgs/srv/invokeai.nix ]; }
+        ];
+      };
+      mainvmCfg = import ./hosts/mainvm {
+        inherit
+          inputs
+          self
+          nixpkgs
+          nixpkgs-stable
+          ;
+      };
+      macvmCfg = import ./hosts/macvm {
+        inherit
+          inputs
+          self
+          nixpkgs
+          nixpkgs-stable
+          ;
+      };
+      mediaCfg = import ./hosts/media {
+        inherit
+          inputs
+          self
+          nixpkgs
+          nixpkgs-stable
+          ;
+      };
+      macCfg = import ./hosts/mac {
+        inherit
+          inputs
+          self
+          nixpkgs
+          nixpkgs-stable
+          nix-darwin
+          ;
+      };
+    in
     {
       nixosConfigurations = {
-        main = nixpkgs.lib.nixosSystem (
-          import ./hosts/main {
-            inherit
-              inputs
-              self
-              nixpkgs
-              nixpkgs-stable
-              ;
-          }
-        );
-        mainvm = nixpkgs.lib.nixosSystem (
-          import ./hosts/mainvm {
-            inherit
-              inputs
-              self
-              nixpkgs
-              nixpkgs-stable
-              ;
-          }
-        );
-        macvm = nixpkgs.lib.nixosSystem (
-          import ./hosts/macvm {
-            inherit
-              inputs
-              self
-              nixpkgs
-              nixpkgs-stable
-              ;
-          }
-        );
-        media = nixpkgs.lib.nixosSystem (
-          import ./hosts/media {
-            inherit
-              inputs
-              self
-              nixpkgs
-              nixpkgs-stable
-              ;
-          }
-        );
+        main = nixpkgs.lib.nixosSystem mainCfg;
+        mainci = nixpkgs.lib.nixosSystem mainciCfg;
+        mainvm = nixpkgs.lib.nixosSystem mainvmCfg;
+        macvm = nixpkgs.lib.nixosSystem macvmCfg;
+        media = nixpkgs.lib.nixosSystem mediaCfg;
       };
       darwinConfigurations = {
-        mac = nix-darwin.lib.darwinSystem (
-          import ./hosts/mac {
-            inherit
-              inputs
-              self
-              nixpkgs
-              nixpkgs-stable
-              nix-darwin
-              ;
-          }
-        );
+        ci = import ./tests/hosts/mac.nix {
+          darwinConfiguration = self.darwinConfigurations.mac;
+          activate = true;
+        };
+        mac = nix-darwin.lib.darwinSystem macCfg;
       };
+      checks = forEachSupportedSystem (
+        { pkgs, ... }:
+        nixpkgs.lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "x86_64-linux") {
+          main = import ./tests/hosts/main.nix {
+            inherit pkgs;
+            nixosConfiguration = mainCfg;
+          };
+          mainci = import ./tests/hosts/main.nix {
+            inherit pkgs;
+            nixosConfiguration = mainciCfg;
+            withInvokeai = false;
+          };
+          mainvm = import ./tests/hosts/mainvm.nix {
+            inherit pkgs;
+            nixosConfiguration = mainvmCfg;
+          };
+          media = import ./tests/hosts/media.nix {
+            inherit pkgs;
+            nixosConfiguration = mediaCfg;
+          };
+        }
+        // nixpkgs.lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "aarch64-linux") {
+          macvm = import ./tests/hosts/macvm.nix {
+            inherit pkgs;
+            nixosConfiguration = macvmCfg;
+          };
+        }
+        # Darwin testing approach from https://github.com/Mic92/fast-nix-gc
+        // nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+          mac =
+            (import ./tests/hosts/mac.nix {
+              darwinConfiguration = self.darwinConfigurations.mac;
+            }).system;
+        }
+      );
     };
 }

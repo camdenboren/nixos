@@ -4,7 +4,9 @@ let
   script = pkgs.writeShellScriptBin "replace-configs" ''
     if ! test -f ~/.config/REAPER/reaper.ini; then
       ${pkgs.coreutils}/bin/mkdir -p ~/.config/REAPER
-      ${pkgs.coreutils}/bin/cp -r ~/etc/nixos/hosts/main/usr/dot/reaper/reaper.ini ~/.config/REAPER
+      ${pkgs.coreutils}/bin/install -m 0644 \
+        ${../../../dot/reaper/reaper.ini} \
+        ~/.config/REAPER/reaper.ini
     fi
   '';
 in

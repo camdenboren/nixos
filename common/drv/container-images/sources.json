@@ -1,0 +1,51 @@
+{
+  "backend": {
+    "hash": "sha256-uZjpBUu+/XxSjYBSqZdHG9aXgaFYV3vS3W5W4Ux9Dvo=",
+    "imageDigest": "sha256:20d2325ec8e00f4be5f65e543d5618b585598facff404cf06446e91b5ead9036",
+    "imageName": "penpotapp/backend",
+    "tag": "2.18.5",
+    "track": "semver"
+  },
+  "exporter": {
+    "hash": "sha256-Y5mViPLzvkHzcQwHuTS/5ymezTaQjdkWi8PPewpZYBg=",
+    "imageDigest": "sha256:8c341d6d40f234d33e4272f87c6f53fdde839546e4c758872cebf175bddb8c71",
+    "imageName": "penpotapp/exporter",
+    "tag": "2.18.5",
+    "track": "semver"
+  },
+  "frontend": {
+    "hash": "sha256-DUe5Uq6nlcZNdurqKtCkfdFe7I3HK0lYfGNg8qGorLc=",
+    "imageDigest": "sha256:9bc0c288985d2d18a2c3e7b849d8edda317e1bfd99ec6dd494e5bfdcfe411f06",
+    "imageName": "penpotapp/frontend",
+    "tag": "2.18.5",
+    "track": "semver"
+  },
+  "invokeai": {
+    "hash": "sha256-4f5+faxe5pHtJ07vMn7nA89kmatPLSVnwZj3yFcOlFY=",
+    "imageDigest": "sha256:528168a7a34c8047c0f3ec1c35b88030fb9d26e37a7a2db56983798ba041a3ec",
+    "imageName": "ghcr.io/invoke-ai/invokeai",
+    "tag": "6.14.3-cuda",
+    "track": "semver",
+    "trackSuffix": "-cuda"
+  },
+  "mailcatch": {
+    "hash": "sha256-XvGc4LqstUyz89nfC2sPxlybkPbRbzSGuiSlliwha+w=",
+    "imageDigest": "sha256:572048324658d2198e0a96785cca4f0260f2c4cadb2cb057bd837b9ee0c60533",
+    "imageName": "sj26/mailcatcher",
+    "tag": "v0.11.0",
+    "track": "semver",
+    "trackPrefix": "v"
+  },
+  "postgres": {
+    "hash": "sha256-cQmVs7Sp1x9mtHS5/QjuruJpUzhlZn2DyjvV8tIDPSM=",
+    "imageDigest": "sha256:40e8c839f86c404f9bd1c456bb83f11b205f2cd95d753b34c2d074e89ecee786",
+    "imageName": "postgres",
+    "tag": "15"
+  },
+  "valkey": {
+    "hash": "sha256-Any0+xdtIgHk2haCI6lb47o/mafesYMbXIp7U+XLTMI=",
+    "imageDigest": "sha256:8f836008e0986c36adf50da714c7060cf689dbb335f61fe077939d90fa650809",
+    "imageName": "valkey/valkey",
+    "tag": "8.1"
+  }
+}

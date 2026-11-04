@@ -16,6 +16,8 @@ in
   virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
+    # weekly `podman system prune -f --all`: unused images only, never volumes
+    autoPrune.flags = [ "--all" ];
     dockerCompat = true;
   };
 
@@ -32,7 +34,8 @@ in
 
   # Containers
   virtualisation.oci-containers.containers."penpot-penpot-backend" = {
-    image = "penpotapp/backend:latest";
+    image = pkgs.container-images.backend.passthru.imageRef;
+    imageFile = pkgs.container-images.backend;
     environment = {
       "PENPOT_DATABASE_PASSWORD" = "penpot";
       "PENPOT_DATABASE_URI" = "postgresql://penpot-postgres/penpot";
@@ -88,7 +91,8 @@ in
     ];
   };
   virtualisation.oci-containers.containers."penpot-penpot-exporter" = {
-    image = "penpotapp/exporter:latest";
+    image = pkgs.container-images.exporter.passthru.imageRef;
+    imageFile = pkgs.container-images.exporter;
     environment = {
       "PENPOT_PUBLIC_URI" = url;
       "PENPOT_REDIS_URI" = "redis://penpot-valkey/0";
@@ -121,7 +125,8 @@ in
     ];
   };
   virtualisation.oci-containers.containers."penpot-penpot-frontend" = {
-    image = "penpotapp/frontend:latest";
+    image = pkgs.container-images.frontend.passthru.imageRef;
+    imageFile = pkgs.container-images.frontend;
     environment = {
       "PENPOT_FLAGS" =
         "disable-registration disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies";
@@ -164,7 +169,8 @@ in
     ];
   };
   virtualisation.oci-containers.containers."penpot-penpot-mailcatch" = {
-    image = "sj26/mailcatcher:latest";
+    image = pkgs.container-images.mailcatch.passthru.imageRef;
+    imageFile = pkgs.container-images.mailcatch;
     ports = [
       "1080:1080/tcp"
     ];
@@ -192,7 +198,8 @@ in
     ];
   };
   virtualisation.oci-containers.containers."penpot-penpot-postgres" = {
-    image = "postgres:15";
+    image = pkgs.container-images.postgres.passthru.imageRef;
+    imageFile = pkgs.container-images.postgres;
     environment = {
       "POSTGRES_DB" = "penpot";
       "POSTGRES_INITDB_ARGS" = "--data-checksums";
@@ -233,7 +240,8 @@ in
     ];
   };
   virtualisation.oci-containers.containers."penpot-penpot-valkey" = {
-    image = "valkey/valkey:8.1";
+    image = pkgs.container-images.valkey.passthru.imageRef;
+    imageFile = pkgs.container-images.valkey;
     environment = {
       "VALKEY_EXTRA_FLAGS" = "--maxmemory 128mb --maxmemory-policy volatile-lfu";
     };

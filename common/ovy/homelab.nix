@@ -9,6 +9,7 @@ _:
       omdb-lookup = prev.callPackage ../drv/omdb-lookup { };
       outline-export = prev.callPackage ../drv/outline-export { };
       workerd = prev.callPackage ../drv/workerd { };
+      container-images = prev.callPackage ../drv/container-images { };
 
       # upstream sets makeWrapperArgs as a single string, which the python
       # wrap hook no longer word-splits; makeWrapper then dies on

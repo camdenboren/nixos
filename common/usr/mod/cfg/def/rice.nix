@@ -105,6 +105,14 @@ let
     serif = "Adwaita Sans";
   };
 
+  wallpaper =
+    if coral then
+      ../../../rice/wallpapers/coral.jpg
+    else if nothin then
+      ../../../rice/wallpapers/nothin.jpg
+    else
+      ../../../rice/wallpapers/skyline.jpg;
+
   containers = {
     container1.color =
       if coral then
@@ -282,7 +290,7 @@ in
           # nix-darwin is needed to set macOS wallpaper
           dconf.settings =
             let
-              uri = "file://" + "/home/camdenboren/etc/nixos/common/usr/rice/wallpapers/${cfg}.jpg";
+              uri = "file://${wallpaper}";
             in
             {
               "org/gnome/desktop/background" = {

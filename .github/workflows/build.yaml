@@ -13,6 +13,8 @@ jobs:
         include:
           - host-name: main
             cfg-key: nixos
+            # without invokeai, so ci doesn't pull its 10GB image
+            build-name: mainci
             os-label: ubuntu-latest
 
           - host-name: mainvm
@@ -34,7 +36,7 @@ jobs:
     name: ${{ matrix.host-name }}
     runs-on: ${{ matrix.os-label }}
     steps:
-      - if: ${{ matrix.host-name == 'main' }}
+      - if: ${{ matrix.host-name == 'main' || matrix.host-name == 'media' }}
         uses: insightsengineering/disk-space-reclaimer@v1
 
       - uses: actions/checkout@v6
@@ -57,4 +59,4 @@ jobs:
           purge-last-accessed: P1DT12H
           purge-primary-key: never
 
-      - run: nix build .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel
+      - run: nix build .#${{ matrix.cfg-key }}Configurations.${{ matrix.build-name || matrix.host-name }}.config.system.build.toplevel

@@ -2,6 +2,7 @@
 
 let
   script = pkgs.writeShellScriptBin "install-plugins" ''
+    set -euo pipefail
     oldPath=$(${pkgs.yabridgectl}/bin/yabridgectl list)
     windows_path="/home/camdenboren/.wine/dosdevices/c:/windows"
     melda_pkg=${pkgs.maudioplugins}

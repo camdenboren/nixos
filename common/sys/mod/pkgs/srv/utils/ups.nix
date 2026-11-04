@@ -21,4 +21,10 @@ in
 
     upsmon.monitor."${name}".user = "upsmon";
   };
+
+  # fixes race condition per https://github.com/NixOS/nixpkgs/issues/525205
+  systemd.services.upsdrv = {
+    after = [ "systemd-udev-settle.service" ];
+    wants = [ "systemd-udev-settle.service" ];
+  };
 }

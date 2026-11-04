@@ -58,7 +58,7 @@ let
 
     network = {
       disabled = false;
-      allowedDomains = [ "*.home.local" ];
+      allowedDomains = [ "archive.home.local" ];
       allowUnixSockets = [ "/nix/var/nix/daemon-socket/socket" ];
       # above is insufficient for linux hosts
       allowAllUnixSockets = !isDarwin;
@@ -83,6 +83,7 @@ let
         "ssh *" = "deny";
         "sudo *" = "deny";
         "sops *" = "deny";
+        "rsync *" = "deny";
         "history" = "deny";
         "history *" = "deny";
         "gh *" = "ask";
@@ -95,6 +96,8 @@ let
         "git diff *" = "allow";
         "git log" = "allow";
         "git log *" = "allow";
+        "git show" = "allow";
+        "git show *" = "allow";
         "git ls-files" = "allow";
         "git ls-files *" = "allow";
       };
@@ -111,6 +114,7 @@ let
         "*.keystore" = "deny";
         "*credentials*" = "deny";
         "*secret*" = "deny";
+        "*auth*.json" = "deny";
         "*token*" = "ask";
         "*ssh_host_*_key" = "deny";
         "*id_rsa*" = "deny";
@@ -149,7 +153,6 @@ in
 
     # skills
     ".agents/skills".source = ../../../../dot/agents/skills;
-    ".codex/skills" = lib.mkIf isDarwin { source = ../../../../dot/agents/skills; };
 
     # mcp
     ".agents/mcp.json".source = jsonFormat.generate "mcp" mcp;
@@ -157,90 +160,17 @@ in
   };
 
   programs = {
-    codex = {
-      enable = isDarwin;
-
-      # This breaks CLI usage due to
-      # https://github.com/nix-community/home-manager/issues/9397
-      # BUT, I primarily use it via ACP so I instead just bank on Zed's SANE
-      # approach of separating state from configuration (OpenAI has CLEARLY
-      # hit AGI...)
-      settings = {
-        model_reasoning_effort = "medium";
-        mcp_servers = {
-          kiwix-mcp = {
-            command = "${pkgs.kiwix-mcp}/bin/kiwix-mcp";
-            env.KIWIX_BASE_URL = "https://archive.home.local";
-            tools = {
-              kiwix_list_books.approval_mode = "approve";
-              kiwix_search.approval_mode = "approve";
-              kiwix_fetch_article.approval_mode = "approve";
-            };
-          };
-          xerj = {
-            command = "${pkgs.xerj-bin}/bin/xerj";
-            args = [ "mcp" ];
-            tools = {
-              xerj_map.approval_mode = "approve";
-              xerj_search.approval_mode = "approve";
-              xerj_def.approval_mode = "approve";
-            };
-          };
-        };
-      };
-    };
-
-    opencode = {
-      enable = true;
-      skills = ../../../../dot/agents/skills;
-      tui.theme = "system";
-      settings = {
-        mcp = {
-          kiwix-mcp = {
-            enabled = true;
-            type = if (hostname == "media") then "remote" else "local";
-            command = lib.mkIf (hostname != "media") [ "${pkgs.kiwix-mcp}/bin/kiwix-mcp" ];
-            environment.KIWIX_BASE_URL = lib.mkIf (hostname != "media") "https://archive.home.local";
-            url = lib.mkIf (hostname == "media") "http://localhost:8000/mcp";
-          };
-          xerj = {
-            enabled = !isVM;
-            type = "local";
-            command = [
-              "${pkgs.xerj-bin}/bin/xerj"
-              "mcp"
-            ];
-          };
-        };
-        model = "ollama/qwen3.6";
-        permission = {
-          webfetch = "deny";
-          websearch = "deny";
-        };
-        provider.ollama = {
-          npm = "@ai-sdk/openai-compatible";
-          name = "Ollama";
-          options = {
-            baseURL = "http://192.168.1.88:11434/v1";
-          };
-          models = {
-            "qwen3.6:latest".name = "qwen3.6";
-            "gpt-oss:latest".name = "gpt-oss";
-          };
-        };
-      };
-    };
-
     pi-coding-agent = {
       enable = true;
 
       context = ''
         You’re running in a sandboxed environment with no access to external
-        networks (only *.home.local is allowed) and limited filesystem access
-        —read/write is restricted to the current directory, a few repos, and
-        /tmp (nix-related directories are largely read-only). Avoid operations like
-        cloning repos from GitHub, installing packages from npm, or reading network
-        resources; if you need to fetch content, suggest manual alternatives instead.
+        networks (only archive.home.local is allowed) and limited filesystem
+        access—read/write is restricted to the current directory, a few repos,
+        and /tmp (nix-related directories are largely read-only). Avoid
+        operations like cloning repos from GitHub, installing packages from
+        npm, or reading network resources; if you need to fetch content,
+        suggest manual alternatives instead.
 
         Default to pi-lsp for checking most file edits since targeted LSP
         diagnostics/fixes on a few edited files would be faster than a
@@ -252,8 +182,8 @@ in
       '';
 
       settings = {
-        defaultModel = if isDarwin then "gpt-6.1-sol" else "qwen3.6:latest";
-        defaultProvider = if isDarwin then "openai-codex" else "ollama";
+        defaultModel = if isDarwin then "gpt-6.1-sol" else "claude-haiku-5-5";
+        defaultProvider = if isDarwin then "openai-codex" else "opencode-go";
         defaultThinkingLevel = "medium";
         packages = [
           "${pkgs.pi-lsp}/lib/pi-lsp"
@@ -316,16 +246,6 @@ in
       };
 
       agent_servers = {
-        Codex = lib.mkIf isDarwin {
-          type = "custom";
-          command = "${pkgs.codex-acp}/bin/codex-acp";
-          env.CODEX_PATH = lib.getExe config.programs.codex.package;
-        };
-        OpenCode = {
-          type = "custom";
-          command = "${pkgs.opencode}/bin/opencode";
-          args = [ "acp" ];
-        };
         Pi = {
           type = "custom";
           command = "${pkgs.pi-acp}/bin/pi-acp";

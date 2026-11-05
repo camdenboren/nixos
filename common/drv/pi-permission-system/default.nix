@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pi-permission-system";
-  version = "41.0.0";
+  version = "42.0.0";
 
   src = fetchFromGitHub {
     owner = "gotgenes";
     repo = "pi-packages";
     tag = "pi-permission-system-v${finalAttrs.version}";
-    hash = "sha256-+8/I2IagzL4dG8CXK2WzcDn4v8FTop27AKBfwVbm4Z8=";
+    hash = "sha256-yK5BYLjV20dS1j7uhiDWEfhWnSY7r1XoAdvw1j3PD5c=";
   };
 
   pnpmDeps =
@@ -26,7 +26,7 @@ stdenv.mkDerivation (finalAttrs: {
       {
         inherit (finalAttrs) pname version src;
         fetcherVersion = 4;
-        hash = "sha256-BBWqbhcEQ1k29qk88IJLVRI5L/ri+YWHVeuBbAk5D3s=";
+        hash = "sha256-aOlC9441Nrusa3E0ffz2iB15CBArRB17GESgDk56oP4=";
       };
 
   nativeBuildInputs = [

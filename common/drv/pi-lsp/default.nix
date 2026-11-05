@@ -6,15 +6,15 @@
 
 buildNpmPackage (finalAttrs: {
   pname = "pi-lsp";
-  version = "0.49.10";
+  version = "0.49.12";
   src = fetchFromGitHub {
     owner = "narumiruna";
     repo = "pi-extensions";
     tag = "@narumitw/pi-lsp@${finalAttrs.version}";
-    hash = "sha256-7GoThvSjC5VY14eTw+Sw8/gFz2LDOcveu4yV9+2PJKg=";
+    hash = "sha256-W+XXL1c8BbH0xuZCiZrv4G4TYlz9SBAbFaxvq/siySE=";
   };
 
-  npmDepsHash = "sha256-9Nwa70IOumPl68bmg0XOLICkIzceVRj1b8n3G4Aj3+o=";
+  npmDepsHash = "sha256-xikjdJxkHUN74weNADG9FSdZS8uBuJRYXGpd9qpmn0E=";
   npmWorkspace = "@narumitw/pi-lsp";
 
   installPhase = ''

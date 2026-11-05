@@ -19,7 +19,7 @@ python314Packages.buildPythonApplication rec {
 
   dependencies = with python314Packages; [
     httpx
-    mcp
+    mcp_1
     defusedxml
     beautifulsoup4
     lxml

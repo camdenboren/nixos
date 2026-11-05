@@ -27,6 +27,7 @@
     initLua = ''
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
+      vim.opt.clipboard = "unnamedplus"
 
       require("nvim-tree").setup()
       require("nvim-web-devicons").setup()

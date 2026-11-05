@@ -12,7 +12,6 @@ let
   isDarwin = lib.hasSuffix "-darwin" system;
   isLinux = !isDarwin;
   ctrl = if isDarwin then "cmd" else "ctrl";
-  alt = if isDarwin then "opt" else "alt";
   keybindingsPath = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/";
 
   bindings = builtins.listToAttrs [
@@ -118,8 +117,14 @@ in
           "${ctrl}+n=next_tab"
           "${ctrl}+p=previous_tab"
           "${ctrl}+t=new_tab"
-          "${ctrl}+${alt}+n=move_tab:1"
-          "${ctrl}+${alt}+p=move_tab:-1"
+          "${ctrl}+super+n=move_tab:1"
+          "${ctrl}+super+p=move_tab:-1"
+          "shift+left=goto_split:left"
+          "shift+right=goto_split:right"
+          "shift+up=goto_split:top"
+          "shift+down=goto_split:bottom"
+          "${ctrl}+shift+r=new_split:right"
+          "${ctrl}+shift+d=new_split:down"
         ]
         ++ lib.optionals isDarwin [
           "${ctrl}+shift+c=copy_to_clipboard"

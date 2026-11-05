@@ -398,7 +398,7 @@ else
 
             ${lib.concatMapStringsSep "\n" (
               name:
-              "sudo -n /bin/launchctl print ${lib.escapeShellArg "system/${config.launchd.daemons.${name}.serviceConfig.Label}"}"
+              "smoke_service ${lib.escapeShellArg "system/${config.launchd.daemons.${name}.serviceConfig.Label}"}"
             ) _serviceChecks}
 
             ${lib.concatMapStringsSep "\n" (

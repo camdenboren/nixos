@@ -17,6 +17,28 @@
     "$@" 2>&1
   }
 
+  smoke_service() {
+    local target="$1" status="" pid="" deadline=$((SECONDS + 60))
+    echo "Checking $target has a running process"
+    while true; do
+      if status="$(sudo -n /bin/launchctl print "$target" 2>&1)"; then
+        pid="$(printf '%s\n' "$status" | awk '$1 == "pid" && $2 == "=" { print $3; exit }')"
+        if printf '%s\n' "$status" | grep -q '^[[:space:]]*state = running$' &&
+           [[ "$pid" =~ ^[1-9][0-9]*$ ]] &&
+           sudo -n /bin/kill -0 "$pid" 2>/dev/null; then
+          printf '%s\n' "$status"
+          return 0
+        fi
+      fi
+      if (( SECONDS >= deadline )); then
+        echo "FAIL: $target has no running process after 60 seconds" >&2
+        printf '%s\n' "$status" >&2
+        return 1
+      fi
+      sleep 1
+    done
+  }
+
   current_pid=""
   cleanup() {
     if [[ -n "$current_pid" ]]; then

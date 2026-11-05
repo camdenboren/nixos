@@ -22,20 +22,22 @@ in
   '';
 
   launchd.daemons.xerj = {
+    # command adds nix-darwin's /bin/sh + wait4path wrapper, so launchd
+    # can start this job before the Nix volume is mounted at boot.
+    command = lib.escapeShellArgs [
+      "${pkgs.xerj-bin}/bin/xerj"
+      "--data-dir"
+      dataDir
+      "--bind"
+      "127.0.0.1"
+      "--port"
+      "9200"
+      "--embed-mode"
+      "lexical"
+      "--insecure"
+      "--disable-feedback"
+    ];
     serviceConfig = {
-      ProgramArguments = [
-        "${pkgs.xerj-bin}/bin/xerj"
-        "--data-dir"
-        dataDir
-        "--bind"
-        "127.0.0.1"
-        "--port"
-        "9200"
-        "--embed-mode"
-        "lexical"
-        "--insecure"
-        "--disable-feedback"
-      ];
       UserName = user;
       GroupName = "staff";
       WorkingDirectory = dataDir;

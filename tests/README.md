@@ -119,7 +119,9 @@ service lists are empty on Darwin. Add individual jobs via `serviceChecks` and
 
 Like the Linux tests, Darwin runs CLI checks, explicitly selected service
 checks, optional `extraChecks`, and then app startup checks. Darwin service
-checks verify launchd registration only. The script requires a logged-in GUI
+checks in `serviceChecks` wait up to 60 seconds for launchd's running state
+and a live PID; they do not perform HTTP health checks. `userServiceChecks`
+verify launchd registration only. The script requires a logged-in GUI
 session and a non-root user; it does not add account, activation-marker,
 configuration-file, or macOS preference assertions. The Mac-specific
 `extraChecks` verifies that `replace-configs` created the Ghostty workflow's

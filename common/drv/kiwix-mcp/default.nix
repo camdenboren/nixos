@@ -8,13 +8,13 @@
 
 python314Packages.buildPythonApplication rec {
   pname = "kiwix-mcp";
-  version = "1.5.2";
+  version = "1.6.0";
   pyproject = true;
   src = fetchFromGitHub {
     repo = pname;
     owner = "OscillateLabsLLC";
     tag = "v${version}";
-    hash = "sha256-WgXZWIGopJKaUeOKpj0Q7Zxj+/DlqC3UhrxR9sOOJNY=";
+    hash = "sha256-H425wqWlPFygnIdXMPcPsDzLpTNkjubnCIlb5+u4+OU=";
   };
 
   dependencies = with python314Packages; [

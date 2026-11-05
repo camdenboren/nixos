@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pi-sandbox";
-  version = "0.7.2";
+  version = "0.8.0";
 
   src = fetchFromGitHub {
     owner = "carderne";
     repo = "pi-sandbox";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-xDsEIW+SKbecCCsAiGU7MlvQ4eHJV82VtDe7/FEU2pM=";
+    hash = "sha256-yTJyhh+MKmoFfYj2kKsfo3/3JXEQ4FTtes3MEdut/wg=";
   };
 
   pnpmDeps =
@@ -26,7 +26,7 @@ stdenv.mkDerivation (finalAttrs: {
       {
         inherit (finalAttrs) pname version src;
         fetcherVersion = 4;
-        hash = "sha256-AG27LaE8sNXbScB+eIWd47mAnaksmtBgPD9FZyocJJE=";
+        hash = "sha256-3u4p8LymmyCoPTS2YzKw9PTvUH9Ve2JNZMw97VGYywc=";
       };
 
   nativeBuildInputs = [

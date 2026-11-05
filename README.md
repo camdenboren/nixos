@@ -4,7 +4,8 @@
 
 ## Introduction
 
-This is a cross-platform config for multiple hosts of varying degrees of specificity and includes examples of
+This is a cross-platform config for multiple hosts of varying degrees of
+specificity and includes examples of
 
 - [Modules]
 - [Scripts]
@@ -14,46 +15,67 @@ This is a cross-platform config for multiple hosts of varying degrees of specifi
 - [DevShells]
 - [Tests]
 
-The hosts cumulatively form a [Homelab] of ever-increasing scope, w/ `media` acting as the primary server, though auxiliary tasks are delegated out (e.g., `main` handles virtually all local AI inference)
+The hosts cumulatively form a [Homelab] of ever-increasing scope, w/ `media`
+acting as the primary server, though auxiliary tasks are delegated out (e.g.,
+`main` handles virtually all local AI inference)
 
-Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content/configs were massively helpful for learning the basics of NixOS, flakes, home-manager, and Linux audio
+Special thanks to [vimjoyer], [ryan4yin], and [PowerUser64], as their content
+/configs were massively helpful for learning the basics of NixOS, flakes,
+home-manager, and Linux audio
 
 > [!NOTE]
-> You probably won't want to try installing any of these hosts directly due to UUID discrepancies in `hardware-configuration.nix`, so this repo primarily serves as a reference in creating your own config
+> You probably won't want to try installing any of these hosts directly due to
+> UUID discrepancies in `hardware-configuration.nix`, so this repo primarily
+> serves as a reference in creating your own config
 
 ## Structure
 
 - Firstly, pinning our system inputs, `flake.nix` is a parent
-- Beneath this, various `hosts` are defined with `sys` and `usr` (think `configuration.nix` and `home-manager.nix`)
-- `sys` and `usr` are further divided into modules within their corresponding directories
-- Modules used by more than one host are stored in `common`, as are all overlays and custom packages
+- Beneath this, various `hosts` are defined with `sys` and `usr` (think
+  `configuration.nix` and `home-manager.nix`)
+- `sys` and `usr` are further divided into modules within their corresponding
+  directories
+- Modules used by more than one host are stored in `common/`, as are all
+  overlays and custom packages
+- The hosts' associated test specs mirror the top-level structure and are
+  leveraged by integration tests in `tests/`
 
   ```
   flake
   ├── common
   │   ├── drv
   │   ├── ovy
+  │   ├── sec
   │   ├── sys
   │   └── usr
-  └── hosts
-          ├── mac
-          │   ├── sys
-          │   └── usr
-          ├── macvm
-          │   ├── sys
-          │   └── usr
-          ├── main
-          │   ├── sys
-          │   └── usr
-          ├── mainvm
-          │   ├── sys
-          │   └── usr
-          └── media
-              ├── sys
-              └── usr
+  ├── hosts
+  │   ├── mac
+  │   │   ├── sys
+  │   │   └── usr
+  │   ├── macvm
+  │   │   ├── sys
+  │   │   └── usr
+  │   ├── main
+  │   │   ├── sys
+  │   │   └── usr
+  │   ├── mainvm
+  │   │   ├── sys
+  │   │   └── usr
+  │   └── media
+  │       ├── sys
+  │       └── usr
+  └── tests
+      ├── hosts
+      │   ├── mac
+      │   ├── macvm
+      │   ├── main
+      │   ├── mainvm
+      │   └── media
+      └── smoke
   ```
 
-  _`usr` also includes subdirectories for dotfiles, custom derivations, development environments, scripts, and theming to enable convenient access_
+  _`usr` also includes subdirectories for dotfiles, custom derivations,
+  development environments, scripts, and theming to enable convenient access_
 
 ## Systems
 

@@ -20,13 +20,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "actual-cli";
-  version = "26.10.0";
+  version = "26.11.0";
   src = fetchFromGitHub {
     name = "actualbudget-actual-source";
     owner = "actualbudget";
     repo = "actual";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-jBh6mrYVVX7dNz5rv/VO766ezIuwBmXbtRSKgUOkahc=";
+    hash = "sha256-AjboUgo74ivnQL8BN72Iko9x+9FsggEXmzWar+Qy/vk=";
   };
 
   nativeBuildInputs = [
@@ -81,7 +81,7 @@ stdenv.mkDerivation (finalAttrs: {
   missingHashes = ./missing-hashes.json;
   offlineCache = yarn-berry.fetchYarnBerryDeps {
     inherit (finalAttrs) src missingHashes;
-    hash = "sha256-NYjJeQWeDsLsEme/gIkZzgwWaqpQNSfLeYgZHaPTuH8=";
+    hash = "sha256-fPL9qx4Y0nW7JhlhyA8P+3qNOE4cVWRgziA0Cs8fIEA=";
   };
 
   installPhase = ''

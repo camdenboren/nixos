@@ -1,30 +1,30 @@
 {
   "backend": {
-    "hash": "sha256-uZjpBUu+/XxSjYBSqZdHG9aXgaFYV3vS3W5W4Ux9Dvo=",
-    "imageDigest": "sha256:20d2325ec8e00f4be5f65e543d5618b585598facff404cf06446e91b5ead9036",
+    "hash": "sha256-6dzR7ndsCreI3k2xplmf+LvcB8F9aAYenZRN1t8DBqA=",
+    "imageDigest": "sha256:121472d0ab4a9bdf450884159bde28805027022a230d14c8f3907c316623aea8",
     "imageName": "penpotapp/backend",
-    "tag": "2.18.5",
+    "tag": "2.18.6",
     "track": "semver"
   },
   "exporter": {
-    "hash": "sha256-Y5mViPLzvkHzcQwHuTS/5ymezTaQjdkWi8PPewpZYBg=",
-    "imageDigest": "sha256:8c341d6d40f234d33e4272f87c6f53fdde839546e4c758872cebf175bddb8c71",
+    "hash": "sha256-jOSvIJpUcjkwPU4lsxoC61GYh4yx2PSesSgf+4L2gQA=",
+    "imageDigest": "sha256:85f1d6eff14b49a131b4245dc3000aa738ac48ca103f1d3aa12228d7473544c0",
     "imageName": "penpotapp/exporter",
-    "tag": "2.18.5",
+    "tag": "2.18.6",
     "track": "semver"
   },
   "frontend": {
-    "hash": "sha256-DUe5Uq6nlcZNdurqKtCkfdFe7I3HK0lYfGNg8qGorLc=",
-    "imageDigest": "sha256:9bc0c288985d2d18a2c3e7b849d8edda317e1bfd99ec6dd494e5bfdcfe411f06",
+    "hash": "sha256-wZoEjGv4Ju7T2jmJgKzJ1nvFO650GY9Cv1VKG7+1kQA=",
+    "imageDigest": "sha256:80f0baff19a275c5aee54956e9c44cce80cb7c0488bb8f27d92df7fe4f100a78",
     "imageName": "penpotapp/frontend",
-    "tag": "2.18.5",
+    "tag": "2.18.6",
     "track": "semver"
   },
   "invokeai": {
-    "hash": "sha256-4f5+faxe5pHtJ07vMn7nA89kmatPLSVnwZj3yFcOlFY=",
-    "imageDigest": "sha256:528168a7a34c8047c0f3ec1c35b88030fb9d26e37a7a2db56983798ba041a3ec",
+    "hash": "sha256-lq2nb2ut7Twi5STsA8yoyYlaKn3GaNHegQAGi7AcMIk=",
+    "imageDigest": "sha256:315cd39086446fa81d0b2ca75615ec4407ca1ba5d1f737d825c57646608b0495",
     "imageName": "ghcr.io/invoke-ai/invokeai",
-    "tag": "6.14.3-cuda",
+    "tag": "6.14.4-cuda",
     "track": "semver",
     "trackSuffix": "-cuda"
   },
@@ -37,8 +37,8 @@
     "trackPrefix": "v"
   },
   "postgres": {
-    "hash": "sha256-cQmVs7Sp1x9mtHS5/QjuruJpUzhlZn2DyjvV8tIDPSM=",
-    "imageDigest": "sha256:40e8c839f86c404f9bd1c456bb83f11b205f2cd95d753b34c2d074e89ecee786",
+    "hash": "sha256-LFw48HE4g6D5SIe8pFTBULs47WqjP77ZWT3xxVn1u04=",
+    "imageDigest": "sha256:1149d80408a63791782d07a0e2bd3b06a7adbcdc86e8dcc18d6ee01bacfe04ab",
     "imageName": "postgres",
     "tag": "15"
   },

@@ -83,8 +83,8 @@ jobs:
             "omdb-lookup --version=branch"
             "outline-export"
             "pi-acp"
-            "pi-lsp --version-regex '@narumitw/pi-lsp@(.*)' --use-github-releases"
-            "pi-permission-system --version-regex 'pi-permission-system-v(.*)' --use-github-releases"
+            "pi-lsp --version-regex @narumitw/pi-lsp@(.*) --use-github-releases"
+            "pi-permission-system --version-regex pi-permission-system-v(.*) --use-github-releases"
             "pi-sandbox"
             "rare -u"
             "span -u"
@@ -94,8 +94,10 @@ jobs:
           )
           FAILED=()
           for entry in "${PKGS[@]}"; do
-            set -- $entry
-            if ! nix-update nixosConfigurations.main.pkgs."$@" --flake; then
+            read -r -a args <<< "$entry"
+            pkg="${args[0]}"
+            if ! nix-update "nixosConfigurations.main.pkgs.${pkg}" \
+              "${args[@]:1}" --flake; then
               FAILED+=("${entry%% *}")
               echo "::warning::Update failed for ${entry%% *}, skipping"
               git checkout -- .

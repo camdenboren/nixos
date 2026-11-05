@@ -24,14 +24,14 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "workerd";
-  version = "1.20261030.1";
+  version = "1.20261104.1";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@cloudflare/workerd-${npmPlatform}/-/workerd-${npmPlatform}-${finalAttrs.version}.tgz";
     hash = selectSystem {
-      x86_64-linux = "sha256-fbEr9eHyCioNBiR8UwjwL14bS3sfo9zf9WLOVChHgSU=";
-      aarch64-linux = "sha256-ud0iV4oM2Zbw12Fip7OB/ErY9pqAopgEPXrhzp937w4=";
-      aarch64-darwin = "sha256-v8Acm3lpuxGzTKl5d5h05IFiQ57kSEa5Xh/9i70w0ug=";
+      x86_64-linux = "sha256-8Oriza72tX7+jEfJZOx1VqOBllfqgOZyT3MUXjqeZEc=";
+      aarch64-linux = "sha256-yFTnFIYtYGZw20Td451mdnnELEHlbh7dYOOoCI8ij0s=";
+      aarch64-darwin = "sha256-Ui4uLzxNOzUrgWuJdBrFnolVoAodI5ZUpOIPwOPZypg=";
     };
   };
 

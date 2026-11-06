@@ -26,9 +26,10 @@ the full homelab.
 `media` also starts the Penpot frontend container (`serviceChecks`), which
 loads its image from a digest-pinned archive (see `common/drv/container-images
 `) and so needs no network. These images are several GB, so the VM disks are
-sized to hold them (12 GB for `media`, 32 GB for `main`). `main` does not test
-InvokeAI: its check (`checks.mainci`) uses the `mainci` configuration, which
-omits the module, so the image is neither built nor loaded there.
+sized to hold them (12 GB for `media`, 32 GB for `main`). `main` also loads
+its InvokeAI image (`podman-invokeai-invokeai-cuda`), so its VM needs ~32 GB
+of disk. Its CI check runs on nixbuild.net (see `.github/workflows/test.yaml`)
+because the GitHub-hosted runners can't hold it.
 
 Linux VM tests enable `enableOCR` (`machine.wait_for_text`) to verify GUI
 windows actually render. App checks in `tests/smoke.nix` are self-contained

@@ -28,6 +28,9 @@ let
       ACTUAL_PASSWORD=smoke-test-only
       ACTUAL_SYNC_ID=00000000-0000-0000-0000-000000000000
     '';
+    nixbuild = ''
+      0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\n
+    '';
     omdb-lookup = ''
       API_KEY=abcdefghi
     '';

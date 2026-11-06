@@ -78,12 +78,6 @@
           nixpkgs-stable
           ;
       };
-      # without invokeai, so ci doesn't pull its 10GB image
-      mainciCfg = mainCfg // {
-        modules = mainCfg.modules ++ [
-          { disabledModules = [ ./hosts/main/sys/mod/pkgs/srv/invokeai.nix ]; }
-        ];
-      };
       mainvmCfg = import ./hosts/mainvm {
         inherit
           inputs
@@ -121,7 +115,6 @@
     {
       nixosConfigurations = {
         main = nixpkgs.lib.nixosSystem mainCfg;
-        mainci = nixpkgs.lib.nixosSystem mainciCfg;
         mainvm = nixpkgs.lib.nixosSystem mainvmCfg;
         macvm = nixpkgs.lib.nixosSystem macvmCfg;
         media = nixpkgs.lib.nixosSystem mediaCfg;
@@ -139,11 +132,6 @@
           main = import ./tests/hosts/main.nix {
             inherit pkgs;
             nixosConfiguration = mainCfg;
-          };
-          mainci = import ./tests/hosts/main.nix {
-            inherit pkgs;
-            nixosConfiguration = mainciCfg;
-            withInvokeai = false;
           };
           mainvm = import ./tests/hosts/mainvm.nix {
             inherit pkgs;

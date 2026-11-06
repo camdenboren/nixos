@@ -1,6 +1,8 @@
 {
   pkgs,
+  config,
   lib,
+  system,
   hostname,
   ...
 }:
@@ -8,6 +10,9 @@
 let
   port = toString 22;
   user = "camdenboren";
+  isVM = lib.hasSuffix "vm" hostname;
+  isDarwin = lib.hasSuffix "-darwin" system;
+  needsNixbuild = !isVM && !isDarwin;
   needsBuilder = hostname == "media" || hostname == "mainvm";
   sshServer = if needsBuilder then "main" else "media";
   ip = if needsBuilder then "192.168.1.88" else "192.168.1.78";
@@ -18,6 +23,11 @@ let
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIII9Jj5lzEGNu4vVmXT9xJINftPnfmObOw5OLZD3r+Ye"
       else
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8gWsB+UZNmn8CDd2FbsoOpTQBGLRg0QXr5t13FPoUP";
+  };
+  nixbuild = {
+    alias = "nixbuild.net";
+    ip = "eu.nixbuild.net";
+    key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
   };
   authorizedKeys = {
     main = [
@@ -44,17 +54,35 @@ in
   services.gnome.gnome-keyring.enable = true;
 
   programs.ssh = {
-    extraConfig = lib.optionals (hostname != "macvm") ''
-      Host ${sshServer}
-        HostName ${ip}
-        Port ${port}
-        User ${user}
-        IdentitiesOnly yes
-        IdentityFile ~/.ssh/${sshServer}
-    '';
-    knownHosts = lib.mkIf (hostname != "macvm") {
-      "${knownHost.ip}".publicKey = knownHost.key;
-    };
+    extraConfig =
+      lib.optionalString (hostname != "macvm") ''
+        Host ${sshServer}
+          HostName ${ip}
+          Port ${port}
+          User ${user}
+          IdentitiesOnly yes
+          IdentityFile ~/.ssh/${sshServer}
+      ''
+      + lib.optionalString needsNixbuild ''
+        Host ${nixbuild.alias}
+          HostName ${nixbuild.ip}
+          IdentitiesOnly yes
+          IdentityFile ~/.ssh/nixbuild-admin
+
+        Host ${nixbuild.ip}
+          ServerAliveInterval 60
+          IdentityFile ${config.sops.secrets.nixbuild.path}
+          IdentitiesOnly yes
+      '';
+
+    knownHosts = lib.mkMerge [
+      (lib.mkIf (hostname != "macvm") {
+        "${knownHost.ip}".publicKey = knownHost.key;
+      })
+      (lib.mkIf needsNixbuild {
+        "${nixbuild.ip}".publicKey = nixbuild.key;
+      })
+    ];
   };
 
   # This places the clients' public keys on the servers, but you still need to copy

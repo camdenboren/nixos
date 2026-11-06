@@ -1,8 +1,6 @@
 {
   nixosConfiguration,
   pkgs,
-  # false when `nixosConfiguration` omits the InvokeAI module (see `mainci` in flake.nix)
-  withInvokeai ? true,
 }:
 
 let
@@ -25,7 +23,10 @@ pkgs.testers.runNixOSTest {
       checkOllama = true;
       checkExtraServices = true;
       checkExtraUserServices = true;
-      serviceChecks = [ "xerj" ] ++ lib.optionals withInvokeai [ "podman-invokeai-invokeai-cuda" ];
+      serviceChecks = [
+        "xerj"
+        "podman-invokeai-invokeai-cuda"
+      ];
       extraChecks = ''
         # oneshot user services create the expected resources
         with subtest("replace-configs prepares `reaper.ini`"):
@@ -45,7 +46,7 @@ pkgs.testers.runNixOSTest {
 
     # the InvokeAI container bind-mounts these host paths, and podman refuses
     # to start if they're missing
-    systemd.tmpfiles.rules = lib.optionals withInvokeai [
+    systemd.tmpfiles.rules = [
       "d /home/camdenboren/.cache 0755 camdenboren users -"
       "d /home/camdenboren/.cache/huggingface 0755 camdenboren users -"
       "d /home/camdenboren/invokeai 0755 camdenboren users -"
@@ -53,15 +54,13 @@ pkgs.testers.runNixOSTest {
 
     # the CUDA device needs the nvidia CDI spec, which this VM lacks; keep in
     # sync with the other options in hosts/main/sys/mod/pkgs/srv/invokeai.nix
-    virtualisation.oci-containers.containers = lib.optionalAttrs withInvokeai {
-      "invokeai-invokeai-cuda".extraOptions = mkForce [
-        "--network-alias=invokeai-cuda"
-        "--network=invokeai_default"
-      ];
-    };
+    virtualisation.oci-containers.containers."invokeai-invokeai-cuda".extraOptions = mkForce [
+      "--network-alias=invokeai-cuda"
+      "--network=invokeai_default"
+    ];
 
     # podman unpacks the ~9.6 GB InvokeAI archive onto the disk while loading
-    # it; <25 GB ran out of space mid-run
-    virtualisation.diskSize = lib.mkIf withInvokeai (32 * 1024);
+    # it; <25 GB ran out of space mid-run. Built on nixbuild.net in CI.
+    virtualisation.diskSize = 32 * 1024;
   };
 }

@@ -7,6 +7,9 @@
 }:
 
 let
+  isVM = lib.hasSuffix "vm" hostname;
+  isDarwin = lib.hasSuffix "-darwin" system;
+  needsNixbuild = !isVM && !isDarwin;
   needsBuilder = system == "x86_64-linux" && hostname != "main";
 in
 {
@@ -39,12 +42,18 @@ in
         "https://camdenboren.cachix.org"
         "https://edu-nation.cachix.org"
         "https://cache.nixos-cuda.org"
+      ]
+      ++ lib.optionals needsNixbuild [
+        "ssh-ng://eu.nixbuild.net?priority=100"
       ];
 
       trusted-public-keys = [
         "camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA="
         "edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0="
         "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+      ]
+      ++ lib.optionals needsNixbuild [
+        "nixbuild.net/5FOERV-1:FdxBYFSv87by/k38eAfjXUZtBgM9+wQwHieCheLMgao="
       ];
     };
   };

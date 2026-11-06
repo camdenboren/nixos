@@ -18,6 +18,7 @@ let
       ];
     };
     vector.restartUnits = [ "vector.service" ];
+    nixbuild.key = "ssh_key";
   };
   secrets =
     {

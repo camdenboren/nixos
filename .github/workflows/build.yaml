@@ -7,14 +7,16 @@ on:
 
 jobs:
   build:
+    env:
+      NIXBUILD_TOKEN: ${{ secrets.NIXBUILD_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
         include:
+          # nixbuild: the VM runs on nixbuild.net due to large closure size
           - host-name: main
             cfg-key: nixos
-            # without invokeai, so ci doesn't pull its 10GB image
-            build-name: mainci
+            nixbuild: true
             os-label: ubuntu-latest
 
           - host-name: mainvm
@@ -23,6 +25,7 @@ jobs:
 
           - host-name: media
             cfg-key: nixos
+            nixbuild: true
             os-label: ubuntu-latest
 
           - host-name: mac
@@ -36,9 +39,6 @@ jobs:
     name: ${{ matrix.host-name }}
     runs-on: ${{ matrix.os-label }}
     steps:
-      - if: ${{ matrix.host-name == 'main' || matrix.host-name == 'media' }}
-        uses: insightsengineering/disk-space-reclaimer@v1
-
       - uses: actions/checkout@v6
 
       - uses: cachix/install-nix-action@v31
@@ -48,7 +48,15 @@ jobs:
             trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
 
-      - uses: nix-community/cache-nix-action@v7
+      # must come after install-nix-action (it writes into NIX_CONFIG)
+      - if: ${{ matrix.nixbuild && env.NIXBUILD_TOKEN != '' }}
+        uses: nixbuild/nixbuild-action@v27
+        with:
+          nixbuild_token: ${{ env.NIXBUILD_TOKEN }}
+          generate_summary_for: job
+
+      - if: ${{ !(matrix.nixbuild && env.NIXBUILD_TOKEN != '') }}
+        uses: nix-community/cache-nix-action@v7
         with:
           primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
           restore-prefixes-first-match: nix-${{ matrix.host-name }}-
@@ -59,4 +67,14 @@ jobs:
           purge-last-accessed: P1DT12H
           purge-primary-key: never
 
-      - run: nix build .#${{ matrix.cfg-key }}Configurations.${{ matrix.build-name || matrix.host-name }}.config.system.build.toplevel
+      - name: Build toplevel on nixbuild.net
+        if: ${{ matrix.nixbuild && env.NIXBUILD_TOKEN != '' }}
+        run: |
+          nix build --print-build-logs --no-link \
+            --eval-store auto --store ssh-ng://nixbuild \
+            --builders "" --max-jobs 2 \
+            .#nixosConfigurations.${{ matrix.host-name }}.config.system.build.toplevel
+
+      - name: Build toplevel locally
+        if: ${{ !(matrix.nixbuild && env.NIXBUILD_TOKEN != '') }}
+        run: nix build .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel

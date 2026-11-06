@@ -7,14 +7,16 @@ on:
 
 jobs:
   linux:
+    env:
+      NIXBUILD_TOKEN: ${{ secrets.NIXBUILD_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
         include:
+          # nixbuild: the VM runs on nixbuild.net due to large closure size
           - host-name: main
             system: x86_64-linux
-            # without invokeai, so ci doesn't pull its 10GB image
-            build-name: mainci
+            nixbuild: true
             os-label: ubuntu-latest
 
           - host-name: mainvm
@@ -23,6 +25,7 @@ jobs:
 
           - host-name: media
             system: x86_64-linux
+            nixbuild: true
             os-label: ubuntu-latest
 
           - host-name: macvm
@@ -32,9 +35,6 @@ jobs:
     name: ${{ matrix.host-name }}
     runs-on: ${{ matrix.os-label }}
     steps:
-      - if: ${{ matrix.host-name == 'main' || matrix.host-name == 'media' }}
-        uses: insightsengineering/disk-space-reclaimer@v1
-
       - uses: actions/checkout@v6
 
       - uses: cachix/install-nix-action@v31
@@ -44,12 +44,32 @@ jobs:
             trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
 
-      - uses: nix-community/cache-nix-action@v7
+      # must come after install-nix-action (it writes into NIX_CONFIG)
+      - if: ${{ matrix.nixbuild && env.NIXBUILD_TOKEN != '' }}
+        uses: nixbuild/nixbuild-action@v27
+        with:
+          nixbuild_token: ${{ env.NIXBUILD_TOKEN }}
+          generate_summary_for: job
+
+      - if: ${{ !(matrix.nixbuild && env.NIXBUILD_TOKEN != '') }}
+        uses: nix-community/cache-nix-action@v7
         with:
           primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
           save: false
 
-      - run: nix build .#checks.${{ matrix.system }}.${{ matrix.build-name || matrix.host-name }}
+      - name: Build checks on nixbuild.net
+        if: ${{ matrix.nixbuild && env.NIXBUILD_TOKEN != '' }}
+        run: |
+          out=$(nix build --no-link --print-build-logs --print-out-paths \
+            --eval-store auto --store ssh-ng://nixbuild \
+            --builders "" --max-jobs 2 \
+            .#checks.${{ matrix.system }}.${{ matrix.host-name }})
+          nix copy --from ssh-ng://nixbuild "$out"
+          ln -sfn "$out" result
+
+      - name: Build checks locally
+        if: ${{ !(matrix.nixbuild && env.NIXBUILD_TOKEN != '') }}
+        run: nix build .#checks.${{ matrix.system }}.${{ matrix.host-name }}
 
       - name: Upload test screenshots
         uses: actions/upload-artifact@v4

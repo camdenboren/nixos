@@ -15,14 +15,18 @@ on:
 
 jobs:
   scan:
+    env:
+      NIXBUILD_TOKEN: ${{ secrets.NIXBUILD_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
         include:
+          # nixbuild: builds run on nixbuild.net, but the toplevel is still copied
+          # back since vulnxscan reads it from the local store (builder mode, not
+          # remote store). Fork PRs have no token and build locally.
           - host-name: main
             cfg-key: nixos
-            # without invokeai, so the scan doesn't realise its 10GB image
-            build-name: mainci
+            nixbuild: true
             os-label: ubuntu-latest
 
           - host-name: mainvm
@@ -31,6 +35,7 @@ jobs:
 
           - host-name: media
             cfg-key: nixos
+            nixbuild: true
             os-label: ubuntu-latest
 
           - host-name: mac
@@ -56,7 +61,16 @@ jobs:
             trusted-public-keys = camdenboren.cachix.org-1:gjOBUYw06+i6CJIjfmVJ+ASrVLoEoOOn/2d6XcQkiFA= edu-nation.cachix.org-1:S2s7ZDuLeFrV2qhfzXWNt+/XlnGxUjvUHv0WI+BvM+0= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://camdenboren.cachix.org https://edu-nation.cachix.org https://cache.nixos-cuda.org https://cache.nixos.org/
 
-      - uses: nix-community/cache-nix-action@v7
+      # must come after install-nix-action (it writes into NIX_CONFIG); it also
+      # routes the nix builds vulnxscan runs internally to nixbuild.net
+      - if: ${{ matrix.nixbuild && env.NIXBUILD_TOKEN != '' }}
+        uses: nixbuild/nixbuild-action@v27
+        with:
+          nixbuild_token: ${{ env.NIXBUILD_TOKEN }}
+          generate_summary_for: job
+
+      - if: ${{ !(matrix.nixbuild && env.NIXBUILD_TOKEN != '') }}
+        uses: nix-community/cache-nix-action@v7
         with:
           primary-key: nix-${{ matrix.host-name }}-${{ hashFiles('**/flake.lock') }}
           save: false
@@ -65,7 +79,7 @@ jobs:
         run: |
           REF="github:nixos/nixpkgs/$(jq -r '.nodes["nixpkgs-stable"].locked.rev' flake.lock)"
           nix shell "$REF#sbomnix" "$REF#python3" --command sh -c \
-            "vulnxscan .#${{ matrix.cfg-key }}Configurations.${{ matrix.build-name || matrix.host-name }}.config.system.build.toplevel && \
+            "vulnxscan .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel && \
             python common/usr/scr/vulnxscan.py >> summary.md"
 
       - name: Cat scan results to the job summary

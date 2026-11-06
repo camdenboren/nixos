@@ -8,6 +8,9 @@ creation_rules:
   - path_regex: ^common/sec/fetch-rs\.yaml$
     key_groups:
       - age: [*admin, *main, *media, *mac]
+  - path_regex: ^common/sec/nixbuild\.yaml$
+    key_groups:
+      - age: [*admin, *main, *media]
   - path_regex: ^common/sec/(nut|vector)\.yaml$
     key_groups:
       - age: [*admin, *main, *media]

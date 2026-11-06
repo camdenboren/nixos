@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   lib,
   system,
   hostname,
@@ -31,9 +32,15 @@ in
     ]
     ++ lib.optionals isDarwin [
       #jetbrains.idea-oss - now uses jetbrains jdk which has been broken on darwin for years
-      utm
+      #utm
       wireshark
-    ];
+    ]
+    ++ lib.optionals isDarwin (
+      with pkgs-stable;
+      [
+        utm
+      ]
+    );
 
   imports = [
     ./agents.nix

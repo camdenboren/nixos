@@ -176,6 +176,16 @@ in
         (-2)
         (-99)
       ];
+      shown-album-lists = [
+        (-8) # no idea
+        (-11) # artists
+        (-16) # playlists
+        (-99) # albums
+        (-101) # playing albums
+        (-103) # search
+        (-104) # lyrics
+      ];
+
     };
     "org/gnome/nautilus/preferences" = {
       show-delete-permanently = true;

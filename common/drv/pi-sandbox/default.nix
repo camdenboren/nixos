@@ -38,8 +38,11 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   # Pi loads this as an extension; it isn't an executable.
+  # only runtime dependencies; devDependencies include pi itself
   installPhase = ''
     runHook preInstall
+
+    pnpm prune --prod
 
     mkdir -p "$out/lib/pi-sandbox"
     cp -r index.ts src package.json node_modules "$out/lib/pi-sandbox/"

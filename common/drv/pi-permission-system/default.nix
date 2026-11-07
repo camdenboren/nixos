@@ -40,6 +40,13 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
+    # only runtime dependencies; the workspace store otherwise keeps every
+    # package's devDependencies (pi itself, vitest, typescript, ...)
+    CI=true pnpm prune --prod
+
+    # the parser loads only `tree-sitter-bash.wasm`; drop the native build
+    rm -rf node_modules/.pnpm/tree-sitter-bash@*/node_modules/tree-sitter-bash/{src,prebuilds,bindings,binding.gyp}
+
     mkdir -p "$out/lib/pi-permission-system"
     cp -a \
       packages/pi-permission-system/{package.json,src,node_modules} \

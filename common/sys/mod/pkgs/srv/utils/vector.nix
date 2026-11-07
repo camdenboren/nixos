@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  pkgs-stable,
   hostname,
   ...
 }:
@@ -22,7 +21,6 @@ in
   services.vector = {
     enable = true;
     journaldAccess = true;
-    package = pkgs-stable.vector;
 
     settings = {
       sources = {

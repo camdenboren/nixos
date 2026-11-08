@@ -131,7 +131,7 @@ let
     ${pkgs.actual-cli}/bin/actual-cli budgets download \
       "$ACTUAL_SYNC_ID" \
       --data-dir "$USER_PATH"/Downloads
-    mv "$USER_PATH"/Downloads/My-Finances-* "$actual_dir"
+    mv "$USER_PATH"/Downloads/[0-9a-f]*-[0-9a-f]*-[0-9a-f]*-[0-9a-f]*-[0-9a-f]* "$actual_dir"
     rm -f "$actual_dir/cache.sqlite"
     cd "$USER_PATH/Downloads"
     rm -f "$actual_zip"

@@ -8,7 +8,7 @@
 let
   hostname = "main";
   system = "x86_64-linux";
-  rice = "nothin";
+  rice = "shinjuku";
   pkgs-stable = nixpkgs-stable.legacyPackages.${system};
 in
 {

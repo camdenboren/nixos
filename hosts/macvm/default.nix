@@ -8,7 +8,7 @@
 let
   hostname = "macvm";
   system = "aarch64-linux";
-  rice = "nothin";
+  rice = "shinjuku";
   pkgs-stable = nixpkgs-stable.legacyPackages.${system};
 in
 {

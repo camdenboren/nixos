@@ -56,7 +56,7 @@ application/context; evaluating the module cannot detect shortcut conflicts.
 ## Rice
 
 [rice.nix](rice.nix) defines the Home Manager `rice` string option, defaulting to
-`"skyline"`. Supported themes are `coral`, `nothin`, and `skyline`.
+`"skyline"`. Supported themes are `coral`, `nothin`, `skyline`, and `shinjuku`.
 [default.nix](default.nix) imports it and sets the option from the host's `rice`
 argument, declared in `hosts/<host>/default.nix` and passed through special args.
 
@@ -75,8 +75,8 @@ directly, rather than `config.rice`.
   palette, Zed fonts/theme selection, and LibreWolf profile colors/fonts.
 - `home.file` generates Zed theme JSON and GTK 3/4 accent CSS.
 - Linux additionally receives GNOME wallpaper and accent settings through dconf.
-  Wallpaper URIs point to
-  `/home/camdenboren/etc/nixos/common/usr/rice/wallpapers/${cfg}.jpg`.
+  Wallpapers come from `common/usr/rice/wallpapers/<theme>.jpg`, with `skyline`
+  as the fallback.
 - `system` controls Linux/macOS differences such as terminal opacity and Zed theme
   variants; a `hostname` ending in `vm` selects smaller Ghostty text.
 

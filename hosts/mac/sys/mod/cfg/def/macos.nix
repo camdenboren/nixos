@@ -191,8 +191,8 @@ in
         };
 
         NSGlobalDomain = {
-          AppleAccentColor = 5;
-          AppleHighlightColor = "0.968627 0.831373 1.000000 purple";
+          AppleAccentColor = -1;
+          AppleHighlightColor = "0.847059 0.847059 0.862745 Graphite";
           "com.apple.sound.uiaudio.enabled" = 0;
           CGDisableCursorLocationMagnification = true;
           NSGlassDiffusionSetting = true;

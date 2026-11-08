@@ -8,6 +8,7 @@
 let
   coral = rice == "coral";
   nothin = rice == "nothin";
+  shinjuku = rice == "shinjuku";
   baseDomain = "home.local";
   tailnetAddress = "100.99.5.32:8082";
   URLs = {
@@ -43,6 +44,7 @@ let
     coral = ../../../../../../common/usr/rice/wallpapers/coral.jpg;
     nothin = ../../../../../../common/usr/rice/wallpapers/nothin.jpg;
     skyline = ../../../../../../common/usr/rice/wallpapers/skyline.jpg;
+    shinjuku = ../../../../../../common/usr/rice/wallpapers/shinjuku.jpg;
   };
   homepageIconsURI = "$out/share/homepage/public/icons";
   homepageImagesURI = "$out/share/homepage/public/images";
@@ -55,6 +57,7 @@ let
       ln -s ${icons.omdb-lookup} ${homepageIconsURI}/omdb-lookup.png
       ln -s ${backgrounds.coral} ${homepageImagesURI}/coral.jpg
       ln -s ${backgrounds.nothin} ${homepageImagesURI}/nothin.jpg
+      ln -s ${backgrounds.shinjuku} ${homepageImagesURI}/shinjuku.jpg
       ln -s ${backgrounds.skyline} ${homepageImagesURI}/skyline.jpg
     '';
   });
@@ -77,6 +80,8 @@ in
           "teal"
         else if nothin then
           "purple"
+        else if shinjuku then
+          "slate"
         else
           "red";
       base = URLs.home;

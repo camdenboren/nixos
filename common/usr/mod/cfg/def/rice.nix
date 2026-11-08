@@ -11,9 +11,11 @@ let
   cfg = config.rice;
   coral = cfg == "coral";
   nothin = cfg == "nothin";
+  shinjuku = cfg == "shinjuku";
   jsonFormat = pkgs.formats.json { };
   red-theme = import ../../../dot/zed/red.nix { inherit lib system; };
   rose-theme = import ../../../dot/zed/rose.nix;
+  gruvbox-theme = import ../../../dot/zed/gruvbox.nix;
   isVM = lib.hasSuffix "vm" hostname;
   isMacVM = isVM && lib.hasPrefix "mac" hostname;
   isLinux = lib.hasSuffix "-linux" system;
@@ -25,6 +27,8 @@ let
         "002b36"
       else if nothin then
         "232136"
+      else if shinjuku then
+        "282828"
       else
         "390000";
     fg = "f8f8f8";
@@ -34,6 +38,8 @@ let
         "2190a4"
       else if nothin then
         "9141ac"
+      else if shinjuku then
+        "83a598"
       else
         "e62d42";
     accent-bg =
@@ -41,6 +47,8 @@ let
         "247c90"
       else if nothin then
         "7d4698"
+      else if shinjuku then
+        "458588"
       else
         "be2f47";
 
@@ -50,6 +58,8 @@ let
           "278ad1"
         else if nothin then
           "9bced6"
+        else if shinjuku then
+          "83a598"
         else
           "970000";
     };
@@ -60,6 +70,8 @@ let
           "2380bd"
         else if nothin then
           "44415a"
+        else if shinjuku then
+          "3e4643"
         else
           "750000";
       fg = "f8f8f8";
@@ -70,6 +82,8 @@ let
         "1;32"
       else if nothin then
         "1;35"
+      else if shinjuku then
+        "1;38;2;184;187;38" # #b8bb26
       else
         "1;33";
     mtx =
@@ -77,6 +91,8 @@ let
         "green"
       else if nothin then
         "magenta"
+      else if shinjuku then
+        "yellow"
       else
         "yellow";
 
@@ -110,6 +126,8 @@ let
       ../../../rice/wallpapers/coral.jpg
     else if nothin then
       ../../../rice/wallpapers/nothin.jpg
+    else if shinjuku then
+      ../../../rice/wallpapers/shinjuku.jpg
     else
       ../../../rice/wallpapers/skyline.jpg;
 
@@ -119,6 +137,8 @@ let
         "blue"
       else if nothin then
         "purple"
+      else if shinjuku then
+        "toolbar"
       else
         "red";
     container2.color =
@@ -126,12 +146,16 @@ let
         "turquoise"
       else if nothin then
         "blue"
+      else if shinjuku then
+        "green"
       else
         "orange";
     container3.color =
       if coral then
         "green"
       else if nothin then
+        "turquoise"
+      else if shinjuku then
         "turquoise"
       else
         "yellow";
@@ -140,6 +164,8 @@ let
         "yellow"
       else if nothin then
         "green"
+      else if shinjuku then
+        "yellow"
       else
         "green";
     container5.color =
@@ -147,12 +173,16 @@ let
         "orange"
       else if nothin then
         "yellow"
+      else if shinjuku then
+        "orange"
       else
         "turquoise";
     container6.color =
       if coral then
         "red"
       else if nothin then
+        "red"
+      else if shinjuku then
         "red"
       else
         "purple";
@@ -170,7 +200,7 @@ in
       default = "skyline";
       type = lib.types.str;
       description = ''
-        Rice to use for the user. One of "coral", "nothin", "skyline"
+        Rice to use for the user. One of "coral", "nothin", "skyline", "shinjuku"
 
         Sets:
         - Wallpaper, accents, and icons on Linux
@@ -242,6 +272,8 @@ in
                   "Zed Legacy: Solarized Dark"
                 else if nothin then
                   "Zed Legacy: Rosé Pine Moon" + zed-variant
+                else if shinjuku then
+                  "Gruvbox Dark" + zed-variant
                 else
                   "Red";
               light = "One Light";
@@ -268,6 +300,9 @@ in
           };
           ".config/zed/themes/rose.json" = {
             source = jsonFormat.generate "rose-theme" rose-theme;
+          };
+          ".config/zed/themes/gruvbox.json" = {
+            source = jsonFormat.generate "gruvbox-theme" gruvbox-theme;
           };
           ".config/gtk-3.0/gtk.css" = {
             text = ''
@@ -304,6 +339,8 @@ in
                     "teal"
                   else if nothin then
                     "purple"
+                  else if shinjuku then
+                    "slate"
                   else
                     "red";
               };

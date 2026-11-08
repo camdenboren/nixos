@@ -82,8 +82,6 @@ let
         "1;32"
       else if nothin then
         "1;35"
-      else if shinjuku then
-        "1;38;2;184;187;38" # #b8bb26
       else
         "1;33";
     mtx =

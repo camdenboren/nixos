@@ -81,6 +81,7 @@ let
         # i want this, but it confuses the heck out of qwen
         #"rm *" = "deny";
         "ssh *" = "deny";
+        "gam *" = "deny";
         "sudo *" = "deny";
         "sops *" = "deny";
         "rsync *" = "deny";
@@ -98,8 +99,11 @@ let
         "git log *" = "allow";
         "git show" = "allow";
         "git show *" = "allow";
+        "git branch" = "allow";
+        "git branch *" = "allow";
         "git ls-files" = "allow";
         "git ls-files *" = "allow";
+        "git rev-parse *" = "allow";
       };
 
       path = {

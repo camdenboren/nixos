@@ -34,10 +34,10 @@
             packages =
               with pkgs;
               [
-                python314
+                python315
                 pyright
               ]
-              ++ (with python314Packages; [
+              ++ (with python315Packages; [
                 ruff
               ]);
 

@@ -8,7 +8,7 @@ templates; the repository's root flake does not export them as dev shells.
 | -------------------------- | -------------------------------------------- | ------------ |
 | [c](c/flake.nix)           | GCC, GDB                                     | `dev -c`     |
 | [java](java/flake.nix)     | JDK 25, Java language server                 | `dev -j`     |
-| [python](python/flake.nix) | Python 3.14, Pyright, Ruff                   | `dev -p`     |
+| [python](python/flake.nix) | Python 3.15, Pyright, Ruff                   | `dev -p`     |
 | [rust](rust/flake.nix)     | rustc, Cargo, rust-analyzer, rustfmt, Clippy | `dev -r`     |
 
 All templates declare `x86_64-linux`, `aarch64-linux`, and `aarch64-darwin` outputs.

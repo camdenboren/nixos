@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  pkgs-stable,
+  ...
+}:
 
 let
   linearmouse = ../../../dot/linearmouse/linearmouse.json;
@@ -56,7 +61,7 @@ let
     replace_workflow Ghostty ${pkgs.ghostty-bin}
     replace_workflow LibreWolf ${pkgs.librewolf}
     replace_workflow Mullvad "" "Mullvad VPN"
-    replace_workflow UTM ${pkgs.utm}
+    replace_workflow UTM ${pkgs-stable.utm}
     replace_workflow Zed ${pkgs.zed-editor}
   '';
   logPath = "${config.home.homeDirectory}/Library/Logs/replace-configs.log";

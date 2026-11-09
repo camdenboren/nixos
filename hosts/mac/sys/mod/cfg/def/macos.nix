@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  pkgs-stable,
+  lib,
+  ...
+}:
 
 let
   # these workflows are created by the `replace-configs` launchd agent in
@@ -238,7 +243,7 @@ in
           "${pkgs.freetube}/Applications/FreeTube.app"
           "/Applications/ClickUp.app"
           "/Applications/zoom.us.app"
-          "${pkgs.utm}/Applications/UTM.app"
+          "${pkgs-stable.utm}/Applications/UTM.app"
         ];
       };
 

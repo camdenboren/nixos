@@ -80,6 +80,44 @@ in
             # KEY_CODE: https://eastmanreference.com/complete-list-of-applescript-key-codes
             # MODIFIERS: https://gist.github.com/stephancasas/74c4621e2492fb875f0f42778d432973
 
+            # use control-shift for screenshots, leaving command-shift-3/4/5
+            # available to LibreWolf. Clipboard shortcuts (29/31) are unchanged.
+            "28" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  51 # 3
+                  20 # 3
+                  393216 # control-shift
+                ];
+                type = "standard";
+              };
+            };
+
+            "30" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  52 # 4
+                  21 # 4
+                  393216 # control-shift
+                ];
+                type = "standard";
+              };
+            };
+
+            "184" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  53 # 5
+                  23 # 5
+                  393216 # control-shift
+                ];
+                type = "standard";
+              };
+            };
+
             # disable kCGSHotKeyToggleDockAutohide on command-option-d
             # so Duck can use it
             "52" = {

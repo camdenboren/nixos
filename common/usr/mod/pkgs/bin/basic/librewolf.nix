@@ -404,62 +404,77 @@ in
     })
   ];
 
-  home.file = lib.mkIf isLinux {
-    ".librewolf/webapp/taskbartabs/taskbartabs.json" = {
-      source = jsonFormat.generate "taskbartabs" (mkTaskbarTabs {
-        taskbarTabs = [
-          (mkTaskbarEntry {
-            name = "Notes";
-            hostname = "notes.home.local";
-            startUrl = "https://notes.home.local/";
-            id = "14286e74-8231-4b2b-ab16-d2137bfa640f";
-          })
-          (mkTaskbarEntry {
-            name = "Duck";
-            hostname = "duck.ai";
-            startUrl = "https://duck.ai/";
-            id = "47d00cad-e4c5-4052-b9bd-287564922433";
-          })
-          (mkTaskbarEntry {
-            name = "Mailbox";
-            hostname = "app.mailbox.org";
-            startUrl = "https://app.mailbox.org/appsuite/#pwa=true";
-            prefix = "/appsuite/";
-            id = "4c1cfa47-ec69-4953-af80-3b485080cf79";
-          })
-          (mkTaskbarEntry {
-            name = "Photos";
-            hostname = "photos.home.local";
-            startUrl = "https://photos.home.local/";
-            id = "e1efc652-60a9-4b16-88ac-1f62961f3a38";
-          })
-          (mkTaskbarEntry {
-            name = "Media";
-            hostname = "media.home.local";
-            startUrl = "https://media.home.local/";
-            prefix = "/web/";
-            id = "ff3e78e2-5741-4f08-8404-23d307b46284";
-          })
-          (mkTaskbarEntry {
-            name = "Chat";
-            hostname = "chat.home.local";
-            startUrl = "https://chat.home.local/";
-            id = "598680e9-2877-49f0-80f4-9d180ef18413";
-          })
-          (mkTaskbarEntry {
-            name = "Sports";
-            hostname = "fmhy.net";
-            startUrl = "https://fmhy.net/video#live-sports";
-            id = "c045e69b-9a08-415a-97ca-9079698aa811";
-          })
-          (mkTaskbarEntry {
-            name = "Money";
-            hostname = "money.home.local";
-            startUrl = "https://money.home.local/";
-            id = "aaed0213-3c18-44c6-a002-2a0a819df9d3";
-          })
-        ];
-      });
-    };
-  };
+  home.file =
+    if isLinux then
+      {
+        ".librewolf/webapp/taskbartabs/taskbartabs.json" = {
+          source = jsonFormat.generate "taskbartabs" (mkTaskbarTabs {
+            taskbarTabs = [
+              (mkTaskbarEntry {
+                name = "Notes";
+                hostname = "notes.home.local";
+                startUrl = "https://notes.home.local/";
+                id = "14286e74-8231-4b2b-ab16-d2137bfa640f";
+              })
+              (mkTaskbarEntry {
+                name = "Duck";
+                hostname = "duck.ai";
+                startUrl = "https://duck.ai/";
+                id = "47d00cad-e4c5-4052-b9bd-287564922433";
+              })
+              (mkTaskbarEntry {
+                name = "Mailbox";
+                hostname = "app.mailbox.org";
+                startUrl = "https://app.mailbox.org/appsuite/#pwa=true";
+                prefix = "/appsuite/";
+                id = "4c1cfa47-ec69-4953-af80-3b485080cf79";
+              })
+              (mkTaskbarEntry {
+                name = "Photos";
+                hostname = "photos.home.local";
+                startUrl = "https://photos.home.local/";
+                id = "e1efc652-60a9-4b16-88ac-1f62961f3a38";
+              })
+              (mkTaskbarEntry {
+                name = "Media";
+                hostname = "media.home.local";
+                startUrl = "https://media.home.local/";
+                prefix = "/web/";
+                id = "ff3e78e2-5741-4f08-8404-23d307b46284";
+              })
+              (mkTaskbarEntry {
+                name = "Chat";
+                hostname = "chat.home.local";
+                startUrl = "https://chat.home.local/";
+                id = "598680e9-2877-49f0-80f4-9d180ef18413";
+              })
+              (mkTaskbarEntry {
+                name = "Sports";
+                hostname = "fmhy.net";
+                startUrl = "https://fmhy.net/video#live-sports";
+                id = "c045e69b-9a08-415a-97ca-9079698aa811";
+              })
+              (mkTaskbarEntry {
+                name = "Money";
+                hostname = "money.home.local";
+                startUrl = "https://money.home.local/";
+                id = "aaed0213-3c18-44c6-a002-2a0a819df9d3";
+              })
+            ];
+          });
+        };
+      }
+    else
+      {
+        # the default values (`cmd-#`) clobber my preferred container
+        # shortcuts
+        "Library/Application Support/LibreWolf/Profiles/camdenboren/customKeys.json".text =
+          builtins.toJSON
+            (
+              lib.genAttrs (map (n: "key_selectTab${toString n}") (lib.range 1 6)) (name: {
+                modifiers = "alt";
+                key = lib.removePrefix "key_selectTab" name;
+              })
+            );
+      };
 }

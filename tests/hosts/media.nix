@@ -64,19 +64,21 @@ pkgs.testers.runNixOSTest {
       "C /var/lib/kiwix/library.xml 0444 root root - ${library}"
     ];
 
-    # podman unpacks the loaded Penpot archives (~3.4 GB) into the disk and
-    # jellyfin requires >2gb for its data dir
-    virtualisation.diskSize = mkForce (12 * 1024);
+    virtualisation = {
+      # podman unpacks the loaded Penpot archives (~3.4 GB) into the disk and
+      # jellyfin requires >2gb for its data dir
+      diskSize = mkForce (12 * 1024);
 
-    # Penpot unpacks while postgres/immich/open-webui initialize; 12 GB would
-    # leave the 27 GB CI builder too little slack
-    virtualisation.memorySize = mkForce (10 * 1024);
+      # Penpot unpacks while postgres/immich/open-webui initialize; 12 GB would
+      # leave the 27 GB CI builder too little slack
+      memorySize = mkForce (10 * 1024);
 
-    # the VM has no DNS, so the frontend's nginx exits resolving its external
-    # upstream at startup and systemd restart-loops it; resolve it locally
-    virtualisation.oci-containers.containers.penpot-penpot-frontend.extraOptions = [
-      "--add-host=raw.githubusercontent.com:127.0.0.1"
-    ];
+      # the VM has no DNS, so the frontend's nginx exits resolving its external
+      # upstream at startup and systemd restart-loops it; resolve it locally
+      oci-containers.containers.penpot-penpot-frontend.extraOptions = [
+        "--add-host=raw.githubusercontent.com:127.0.0.1"
+      ];
+    };
 
     services = {
       # no secondary hard drive

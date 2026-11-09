@@ -124,10 +124,14 @@ if isLinux then
             # prevents covering zed w/ the keyring prompt
             gnome.gnome-keyring.enable = mkForce false;
           };
-          systemd.services."getty@tty1".enable = mkForce false;
-          systemd.services."autovt@tty1".enable = mkForce false;
-          virtualisation.memorySize = 8192;
-          virtualisation.cores = 4;
+          systemd.services = {
+            "getty@tty1".enable = mkForce false;
+            "autovt@tty1".enable = mkForce false;
+          };
+          virtualisation = {
+            memorySize = 8192;
+            cores = 4;
+          };
 
           # sd-switch's 2-minute wait and HM's 5-minute activation cap are both
           # too tight for `main`'s first-run `install-plugins` on CI.

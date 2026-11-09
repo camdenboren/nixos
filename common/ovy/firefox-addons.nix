@@ -13,6 +13,9 @@
       in
       {
         firefox-addons = inputs.firefox-addons.packages.${system} // {
+          nova-ash = prev.callPackage ../drv/nova-ash {
+            inherit buildFirefoxXpiAddon;
+          };
           vimium-new-tab-page = prev.callPackage ../drv/vimium-new-tab-page {
             inherit buildFirefoxXpiAddon;
           };

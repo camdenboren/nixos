@@ -144,6 +144,7 @@ let
         "sidebar.revamp" = true;
         "sidebar.main.tools" = [ ];
         "sidebar.visibility" = if webapp then "hide-sidebar" else "always-show";
+        "extensions.activeThemeID" = "nova-ash@mozilla.org";
         "browser.uiCustomization.state" = {
           placements = {
             widget-overflow-fixed-list = [ ];
@@ -206,6 +207,7 @@ let
         libredirect
         easy-container-shortcuts
         new-tab-override
+        nova-ash
         vimium
         vimium-new-tab-page
         private-grammar-checker-harper

@@ -68,6 +68,10 @@ pkgs.testers.runNixOSTest {
     # jellyfin requires >2gb for its data dir
     virtualisation.diskSize = mkForce (12 * 1024);
 
+    # Penpot unpacks while postgres/immich/open-webui initialize; 12 GB would
+    # leave the 27 GB CI builder too little slack
+    virtualisation.memorySize = mkForce (10 * 1024);
+
     # the VM has no DNS, so the frontend's nginx exits resolving its external
     # upstream at startup and systemd restart-loops it; resolve it locally
     virtualisation.oci-containers.containers.penpot-penpot-frontend.extraOptions = [

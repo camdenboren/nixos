@@ -36,6 +36,11 @@ windows actually render. App checks in `tests/smoke.nix` are self-contained
 records of `{ name, args ? [], ocr ? [] }`; host-specific apps use the same
 shape in `appChecks` (e.g. `reaper` in `tests/hosts/main.nix`).
 
+`serviceChecks` and `userServiceChecks` start each named unit before waiting,
+so a start job dropped by a slow boot is retried instead of reported as
+inactive. `main`'s Home Manager activation also gets a longer timeout, since
+its first-run `install-plugins` outlives sd-switch's two-minute default on CI.
+
 The test workflow runs a CI matrix job for each host, using x86 Linux runners
 for `main`, `mainvm`, and `media`, and an ARM Linux runner for `macvm`.
 Excepting the latter, each runner must expose `/dev/kvm`; the workflow enables

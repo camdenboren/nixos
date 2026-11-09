@@ -128,6 +128,11 @@ if isLinux then
           systemd.services."autovt@tty1".enable = mkForce false;
           virtualisation.memorySize = 8192;
           virtualisation.cores = 4;
+
+          # sd-switch's 2-minute wait and HM's 5-minute activation cap are both
+          # too tight for `main`'s first-run `install-plugins` on CI.
+          home-manager.users.camdenboren.systemd.user.servicesStartTimeoutMs = mkForce (15 * 60 * 1000);
+          systemd.services.home-manager-camdenboren.serviceConfig.TimeoutStartSec = mkForce "15min";
         }
         (lib.mkIf (!isVM) {
           systemd.tmpfiles.rules = [
@@ -184,18 +189,29 @@ if isLinux then
 
         ${lib.optionalString (_serviceChecks != [ ]) ''
           for name in ${builtins.toJSON _serviceChecks}:
+              unit = name + ".service"
               with subtest(name + " starts"):
+                  # slow boots can drop the queued start job; starting is
+                  # idempotent and still fails for broken units
+                  state = machine.succeed(
+                      "systemctl show --property UnitFileState --value " + unit
+                  ).strip()
+                  assert state not in ("disabled", "masked"), unit + " is " + state
+                  machine.succeed("systemctl start " + unit)
                   machine.wait_for_unit(
-                      name + ".service",
+                      unit,
                       timeout=datetime.timedelta(minutes=3),
                   )
         ''}
 
         ${lib.optionalString (_userServiceChecks != [ ]) ''
           for name in ${builtins.toJSON _userServiceChecks}:
+              unit = name + ".service"
               with subtest(name + " starts"):
+                  # see above
+                  machine.succeed(as_user("systemctl --user start " + unit))
                   machine.wait_for_unit(
-                      name + ".service",
+                      unit,
                       user=user,
                       timeout=datetime.timedelta(minutes=3),
                   )

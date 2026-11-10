@@ -71,11 +71,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788901426,
-        "narHash": "sha256-XR3vLAw+fG1/by2ZIOle/UZr5Xd3L6RExpX9FBSnD2k=",
+        "lastModified": 1794321996,
+        "narHash": "sha256-lVV+kWz3cUttQXrCyZ0d7KJjCt34418vfpPP4QFJLwE=",
         "owner": "camdenboren",
         "repo": "fetch-rs",
-        "rev": "da5af0693f058a9563a9ef9414c09f2933a8955d",
+        "rev": "576a8379a161d6ce399a272a926a7c102e0f0348",
         "type": "github"
       },
       "original": {

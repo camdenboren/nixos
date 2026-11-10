@@ -12,10 +12,15 @@ let
   isVM = lib.hasSuffix "vm" hostname;
   isDarwin = lib.hasSuffix "-darwin" system;
   mcp = import ../../../../dot/agents/mcp.nix { inherit pkgs; };
+  rtkEnv = {
+    RTK_TELEMETRY_DISABLED = "true";
+    RTK_DB_PATH = "${config.home.homeDirectory}/rtk/history.db";
+  };
 
   allowPaths = [
     "."
     "/tmp"
+    "~/rtk"
     "${config.xdg.cacheHome}/nix"
     "~/Documents/Repos/nixpkgs"
     "~/Documents/Repos/nix-darwin"
@@ -134,33 +139,43 @@ let
   };
 in
 {
-  # needed for pi + pi-sandbox
-  home.packages =
-    with pkgs;
-    [
-      ripgrep
-      xerj-bin
-    ]
-    ++ lib.optionals (!isDarwin) [
-      bubblewrap
-      socat
-      wl-clipboard # pi
-    ];
+  home = {
+    sessionVariables = rtkEnv;
 
-  home.file = {
-    # needed for pi packages + custom pi review; latter based on:
-    # `opencode/packages/core/src/plugin/command/review.txt`
-    ".pi/agent/prompts".source = ../../../../dot/agents/prompts;
-    ".pi/agent/sandbox.json".source = jsonFormat.generate "sandbox" sandbox;
-    ".pi/agent/extensions/pi-permission-system/config.json".source =
-      jsonFormat.generate "pi-permissions" pi-permissions;
+    # needed for pi + pi-sandbox
+    packages =
+      with pkgs;
+      [
+        ripgrep
+        xerj-bin
+        rtk
+      ]
+      ++ lib.optionals (!isDarwin) [
+        bubblewrap
+        socat
+        wl-clipboard # pi
+      ];
 
-    # skills
-    ".agents/skills".source = ../../../../dot/agents/skills;
+    file = {
+      # creates alternate rtk dir so i don't have to manually migrate it after
+      # first run; RTK_DB_PATH may not populate in shell until restarting,
+      # though acp usage should work immediately
+      "rtk/.init".text = "";
 
-    # mcp
-    ".agents/mcp.json".source = jsonFormat.generate "mcp" mcp;
-    ".pi/agent/mcp.json".source = jsonFormat.generate "mcp" mcp;
+      # needed for pi packages + custom pi review; latter based on:
+      # `opencode/packages/core/src/plugin/command/review.txt`
+      ".pi/agent/prompts".source = ../../../../dot/agents/prompts;
+      ".pi/agent/sandbox.json".source = jsonFormat.generate "sandbox" sandbox;
+      ".pi/agent/extensions/pi-permission-system/config.json".source =
+        jsonFormat.generate "pi-permissions" pi-permissions;
+
+      # skills
+      ".agents/skills".source = ../../../../dot/agents/skills;
+
+      # mcp
+      ".agents/mcp.json".source = jsonFormat.generate "mcp" mcp;
+      ".pi/agent/mcp.json".source = jsonFormat.generate "mcp" mcp;
+    };
   };
 
   programs = {
@@ -174,7 +189,8 @@ in
         and /tmp (nix-related directories are largely read-only). Avoid
         operations like cloning repos from GitHub, installing packages from
         npm, or reading network resources; if you need to fetch content,
-        suggest manual alternatives instead.
+        suggest manual alternatives instead. Additionally, some command
+        sanitation is also applied to preserve tokens.
 
         Default to pi-lsp for checking most file edits since targeted LSP
         diagnostics/fixes on a few edited files would be faster than a
@@ -191,6 +207,7 @@ in
         defaultThinkingLevel = "medium";
         packages = [
           "${pkgs.pi-lsp}/lib/pi-lsp"
+          "${pkgs.rtk.src}/hooks/pi/rtk.ts"
           "${pkgs.pi-sandbox}/lib/pi-sandbox/index.ts"
           "${pkgs.pi-permission-system}/lib/pi-permission-system/index.ts"
         ];
@@ -253,6 +270,7 @@ in
         Pi = {
           type = "custom";
           command = "${pkgs.pi-acp}/bin/pi-acp";
+          env = rtkEnv;
         };
       };
 

@@ -6,6 +6,7 @@ const PADDING: usize = 2;
 const CRITICAL_SCORE: f64 = 9.0;
 const HIGH_SCORE: f64 = 7.0;
 const MEDIUM_SCORE: f64 = 4.0;
+const SCANNERS: [&str; 3] = ["grype", "osv", "vulnix"];
 
 struct Row {
     vuln_id: String,
@@ -109,6 +110,19 @@ fn column(header: &[String], names: &[&str]) -> Result<usize, String> {
         .ok_or_else(|| format!("{VULNS_FILE} is missing the {} column", names[0]))
 }
 
+// sbomnix drops the column for a scanner that failed, so a missing scanner
+// column means the report is degraded rather than clean
+fn present_scanners(header: &[String]) -> Vec<&'static str> {
+    SCANNERS
+        .into_iter()
+        .filter(|scanner| {
+            header
+                .iter()
+                .any(|column| column.eq_ignore_ascii_case(scanner))
+        })
+        .collect()
+}
+
 struct Columns {
     vuln_id: usize,
     url: usize,
@@ -154,9 +168,30 @@ fn load_rows(input: &str) -> Result<Vec<Row>, String> {
         .collect::<Vec<_>>();
 
     let columns = Columns::from_header(&header)?;
+
+    let scanners = present_scanners(&header);
+    let degraded = scanners.len() < SCANNERS.len();
+    if degraded {
+        let missing = SCANNERS
+            .iter()
+            .filter(|scanner| !scanners.contains(scanner))
+            .copied()
+            .collect::<Vec<_>>()
+            .join(", ");
+        eprintln!(
+            "WARNING: degraded scan: only {}/{} scanners reported (missing: {missing}); keeping single-scanner findings",
+            scanners.len(),
+            SCANNERS.len()
+        );
+    }
+
+    // require corroboration only when every scanner ran; otherwise a failed
+    // scanner would hide all findings instead of just lowering confidence
+    let min_sum = if degraded { 1.0 } else { 2.0 };
+
     Ok(records
         .into_iter()
-        .filter(|record| number(record, columns.sum) > 1.0)
+        .filter(|record| number(record, columns.sum) >= min_sum)
         .map(|record| columns.row(&record))
         .collect())
 }
@@ -189,8 +224,11 @@ fn render(rows: &[Row]) -> String {
     let mut widths = Widths {
         cat: "Category".len(),
         count: "Count".len(),
+        pkg: "Package".len(),
+        ver: "Version".len(),
+        cve: "CVE".len(),
         score: "Score".len(),
-        ..Widths::default()
+        link: "Link".len(),
     };
     let mut categories = [
         ("Total", rows.len()),
@@ -218,10 +256,7 @@ fn render(rows: &[Row]) -> String {
             widths.cve = widths.cve.max(row.vuln_id.chars().count());
             widths.link = widths.link.max(row.url.chars().count());
             widths.pkg = widths.pkg.max(row.package.chars().count());
-            widths.ver = widths
-                .ver
-                .max(row.version.chars().count())
-                .max("Version".len());
+            widths.ver = widths.ver.max(row.version.chars().count());
         }
     });
 
@@ -290,9 +325,9 @@ mod tests {
 
     #[test]
     fn uses_sum_column_instead_of_sortcol() {
-        let input = "vuln_id,url,package,version_local,severity,grype,osv,sum,sortcol\n\
-CVE-2026-1,https://example/1,ffmpeg,9.0.2,6.8,1,0,1,2026A0000120247\n\
-CVE-2026-2,https://example/2,ffmpeg,9.0.2,9.8,1,1,2,2026A0000120246\n";
+        let input = "vuln_id,url,package,version_local,severity,grype,osv,vulnix,sum,sortcol\n\
+CVE-2026-1,https://example/1,ffmpeg,9.0.2,6.8,1,0,0,1,2026A0000120247\n\
+CVE-2026-2,https://example/2,ffmpeg,9.0.2,9.8,1,1,0,2,2026A0000120246\n";
         let rows = load_rows(input).unwrap();
         assert_eq!(rows.len(), 1);
         assert_eq!(rows[0].vuln_id, "CVE-2026-2");
@@ -300,13 +335,22 @@ CVE-2026-2,https://example/2,ffmpeg,9.0.2,9.8,1,1,2,2026A0000120246\n";
 
     #[test]
     fn finds_columns_by_name_and_parses_quoted_fields() {
-        let input = "sortcol,sum,url,vuln_id,package,version,severity,grype,osv\n\
-\"2026A0000120247\",2,\"https://example/3,a\",\"CVE-2026-3\",\"pkg,quoted\",\"1.0\",\"9.0\",1,1\n";
+        let input = "sortcol,sum,url,vuln_id,package,version,severity,grype,osv,vulnix\n\
+\"2026A0000120247\",2,\"https://example/3,a\",\"CVE-2026-3\",\"pkg,quoted\",\"1.0\",\"9.0\",1,1,0\n";
         let rows = load_rows(input).unwrap();
         assert_eq!(rows.len(), 1);
         assert_eq!(rows[0].url, "https://example/3,a");
         assert_eq!(rows[0].package, "pkg,quoted");
         assert_eq!(rows[0].severity, 9.0);
+    }
+
+    #[test]
+    fn keeps_single_scanner_rows_when_a_scanner_is_missing() {
+        let input = "vuln_id,url,package,version_local,severity,grype,osv,sum\n\
+CVE-2026-1,https://example/1,ffmpeg,9.0.2,9.8,1,0,1\n";
+        let rows = load_rows(input).unwrap();
+        assert_eq!(rows.len(), 1);
+        assert_eq!(rows[0].vuln_id, "CVE-2026-1");
     }
 
     #[test]

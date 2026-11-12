@@ -20,6 +20,8 @@ jobs:
       NIXBUILD_TOKEN: ${{ secrets.NIXBUILD_TOKEN }}
     strategy:
       fail-fast: false
+      # reduce likelihood of 503s from hitting NVD at once
+      max-parallel: 2
       matrix:
         include:
           # nixbuild: builds run on nixbuild.net, but the toplevel is still copied
@@ -30,10 +32,6 @@ jobs:
             nixbuild: true
             os-label: ubuntu-latest
 
-          - host-name: mainvm
-            cfg-key: nixos
-            os-label: ubuntu-latest
-
           - host-name: media
             cfg-key: nixos
             nixbuild: true
@@ -42,6 +40,10 @@ jobs:
           - host-name: mac
             cfg-key: darwin
             os-label: macos-latest
+
+          - host-name: mainvm
+            cfg-key: nixos
+            os-label: ubuntu-latest
 
           - host-name: macvm
             cfg-key: nixos

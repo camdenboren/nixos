@@ -21,15 +21,16 @@ of every file in this directory.
 | [findVPNDesktop.nix](findVPNDesktop.nix)       | Creates a terminal desktop launcher whose `Exec` is `findVPN`; install the script package alongside it.                                                                                                                                                        |
 | [hello.nix](hello.nix)                         | Prints a greeting through `cowsay` and `lolcat`, both referenced by store path.                                                                                                                                                                                |
 | [upsMetrics.nix](upsMetrics.nix)               | Queries NUT via `upsc` for input/battery voltage and charge; emits one JSON line. Uses smart1500lcd UPS on `media`, bn1500m2 elsewhere.                                                                                                                        |
-| [vulnxscan.py](vulnxscan.py)                   | Reads `vulns.csv` from the working directory and prints Markdown counts and critical findings. Keeps only rows reported by multiple scanners (`row[8] > 1`); assumes the scanner's fixed CSV column order.                                                     |
+| [vulnxscan.rs](vulnxscan.rs)                   | Reads `vulns.csv` from the working directory and prints Markdown counts and critical findings. Keeps only rows reported by multiple scanners (`sum > 1`) and finds columns by header, so scanner/evidence column changes do not break it. No third-party crates. |
 
 All hosts install `check`, `dev`, and `hello`; `main` and `media` additionally install
-the VPN script and launcher. The Python report is invoked by the `scan` alias in
+the VPN script and launcher. The Rust report is invoked by the `scan` alias in
 [bash.nix](../mod/pkgs/bin/coding/bash.nix), after `vulnxscan` scans the current
 host's flake output. It can also process an existing report from the repo root:
 
 ```sh
-python3 common/usr/scr/vulnxscan.py
+nix shell nixpkgs#rustc nixpkgs#stdenv.cc --command sh -c \
+  "rustc --edition 2021 -O -C linker=cc common/usr/scr/vulnxscan.rs -o /tmp/vulnxscan && /tmp/vulnxscan"
 ```
 
 ## Add a command

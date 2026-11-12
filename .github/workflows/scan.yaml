@@ -89,12 +89,13 @@ jobs:
           nix copy --from ssh-ng://nixbuild "$out"
           echo "SCAN_TARGET=$out" >> "$GITHUB_ENV"
 
-      - name: Install deps via nixpkgs and run vulnxscan + script
+      - name: Install deps via nixpkgs and run vulnxscan + report
         run: |
           target="${SCAN_TARGET:-.#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel}"
-          nix shell nixpkgs#sbomnix nixpkgs#python3 --command sh -c \
+          nix shell nixpkgs#sbomnix nixpkgs#rustc nixpkgs#stdenv.cc --command sh -c \
             "vulnxscan '$target' && \
-            python common/usr/scr/vulnxscan.py >> summary.md"
+            rustc --edition 2021 -O -C linker=cc common/usr/scr/vulnxscan.rs -o /tmp/vulnxscan-report && \
+            /tmp/vulnxscan-report >> summary.md"
 
       - name: Cat scan results to the job summary
         run: cat summary.md | tee $GITHUB_STEP_SUMMARY

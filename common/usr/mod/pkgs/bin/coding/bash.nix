@@ -56,7 +56,10 @@ in
         cd $NH_FLAKE && \
         ${pkgs.sbomnix}/bin/vulnxscan \
           .#${cfgKey}Configurations.${hostname}.config.system.build.toplevel && \
-          ${pkgs.python3Minimal}/bin/python ./common/usr/scr/vulnxscan.py
+          tmpdir=$(mktemp -d) && \
+          trap 'rm -rf "$tmpdir"' EXIT && \
+          ${pkgs.rustc}/bin/rustc --edition 2021 -O -C linker=${pkgs.stdenv.cc}/bin/cc ./common/usr/scr/vulnxscan.rs -o "$tmpdir/vulnxscan" && \
+          "$tmpdir/vulnxscan"
       '';
       sw =
         if isDarwin then

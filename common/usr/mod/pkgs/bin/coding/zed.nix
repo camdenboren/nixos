@@ -58,9 +58,6 @@
       terminal = {
         button = false;
       };
-      edit_predictions = {
-        provider = "none";
-      };
       search = {
         button = false;
       };

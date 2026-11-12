@@ -9,6 +9,12 @@
 
 let
   jsonFormat = pkgs.formats.json { };
+  network = {
+    protocol = "http";
+    port = toString 11434;
+    mainIP = "192.168.1.88";
+    api_url = "${network.protocol}://${network.mainIP}:${network.port}";
+  };
   isVM = lib.hasSuffix "vm" hostname;
   isDarwin = lib.hasSuffix "-darwin" system;
   mcp = import ../../../../dot/agents/mcp.nix { inherit pkgs; };
@@ -246,9 +252,20 @@ in
         };
       };
 
+      edit_predictions = {
+        mode = "subtle";
+        provider = "ollama";
+        ollama = {
+          inherit (network) api_url;
+          model = "qwen2.5-coder:14b-base-2k";
+          prompt_format = "infer";
+          max_output_tokens = 8;
+        };
+      };
+
       language_models = {
         ollama = {
-          api_url = "http://192.168.1.88:11434";
+          inherit (network) api_url;
           available_models = [
             {
               name = "qwen3.6:latest";

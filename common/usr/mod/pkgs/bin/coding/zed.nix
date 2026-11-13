@@ -101,6 +101,12 @@
         };
       };
       lsp = {
+        jdtls = {
+          initialization_options.settings.java = {
+            jdt.ls.androidSupport.enabled = true;
+            import.gradle.enabled = true;
+          };
+        };
         basedpyright = {
           settings = {
             python.analysis = {

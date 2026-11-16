@@ -3,6 +3,7 @@
 {
   imports = [
     # Host-specific
+    ./healthcheck.nix
     ./invokeai.nix
 
     # Common

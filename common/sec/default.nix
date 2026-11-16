@@ -22,7 +22,9 @@ let
   };
   secrets =
     {
-      main = shared;
+      main = shared // {
+        healthcheck.restartUnits = [ "healthcheck.service" ];
+      };
       media = shared // {
         backup = { };
         # Outline reads this directly; Dex's privileged setup can also read it.

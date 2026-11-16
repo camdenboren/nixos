@@ -96,11 +96,18 @@ let
     #
 
     echo $'\e[36m[backup:opengist] Starting...\e[0m'
-    ${pkgs.sqlite}/bin/sqlite3 /var/lib/opengist/opengist.db \
-      ".backup '$BACKUP_PATH/backups/Services/opengist.sqlite'"
+    opengist_backup="$(mktemp -d)"
     ${pkgs.gnutar}/bin/tar -C /var/lib/opengist \
       --exclude='./opengist.db*' \
+      -cf - . \
+      | ${pkgs.gnutar}/bin/tar -C "$opengist_backup" -xf -
+    ${pkgs.sqlite}/bin/sqlite3 /var/lib/opengist/opengist.db \
+      ".backup '$opengist_backup/opengist.db'"
+    ${pkgs.coreutils}/bin/chown opengist:opengist \
+      "$opengist_backup/opengist.db"
+    ${pkgs.gnutar}/bin/tar -C "$opengist_backup" \
       -czf "$BACKUP_PATH"/backups/Services/opengist.tar.gz .
+    rm -rf -- "$opengist_backup"
     echo $'\e[32m[backup:opengist] Succeeded.\e[0m'
 
     #

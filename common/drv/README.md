@@ -12,7 +12,7 @@ installing a package still requires a host package list or service reference.
 | Windows audio | Most remaining audio packages extract binaries into `lib/winvst3` for Wine/yabridge. This directory also holds Abstract Vox's DLL and instrument data.                                                                                         |
 | Melda         | `maudioplugins` reads component versions/hashes from `sources.json`; `extract.py` extracts selected free plugins and shared ProgramData.                                                                                                       |
 | Wine graphics | `dxvk-bin` preserves the upstream `x32`/`x64` DLL layout.                                                                                                                                                                                      |
-| Homelab       | `drawio`, `actual-cli`, and `outline-export` build web assets with JDK, Yarn Berry, and Go respectively. `opengist` builds its Vite frontend and embeds it in the Go binary, pinned ahead of nixpkgs; `omdb-lookup` serves an OMDb widget; `workerd` provides the Cloudflare Workers runtime. `container-images` pins the Penpot and InvokeAI container images by digest in `sources.json` (refresh with `updatePkg container-images.<name> -u`).                                               |
+| Homelab       | `drawio`, `actual-cli`, and `outline-export` build web assets with JDK, Yarn Berry, and Go respectively. `omdb-lookup` serves an OMDb widget; `workerd` provides the Cloudflare Workers runtime. `container-images` pins the Penpot and InvokeAI container images by digest in `sources.json` (refresh with `updatePkg container-images.<name> -u`).                                               |
 | Agents        | `pi-acp`, `pi-lsp`, `xerj-bin`, and `pi-mcp-adapter` provide AI agent tooling via `buildNpmPackage` or native binaries; `pi-permission-system` uses `pnpm`; `kiwix-mcp` uses `buildPythonApplication`; `pi-sandbox` uses `pnpm` with `nodejs`. |
 | Browser       | `vimium-new-tab-page` requires `buildFirefoxXpiAddon`, supplied by the Firefox overlay.                                                                                                                                                        |
 
@@ -52,9 +52,7 @@ resulting diff and build the package afterward.
   npm packages also carry `npmDepsHash`; `pi-mcp-adapter` repairs its lockfile before
   dependency fetching and reuses that repaired lockfile during the build. Yarn Berry
   packages instead carry an `offlineCache` hash plus `missing-hashes.json`, both
-  refreshed by the package's updater. Packages with a nested frontend derivation,
-  such as `opengist`, need `--subpackage frontend` so both `npmDepsHash` and the
-  top-level `vendorHash` are refreshed.
+  refreshed by the package's updater.
 - Packages with `passthru.updateScript` use either a local `update.sh` or shared
   `updateScriptAO.sh` / `updateScriptTDR.sh` with arguments declared in the derivation.
   Run these from within the checkout, or through `nix-update` with `-u` so the script

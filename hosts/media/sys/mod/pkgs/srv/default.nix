@@ -22,6 +22,7 @@
     ./ntfy-sh.nix
     ./omdb-lookup.nix
     ./open-webui.nix
+    ./opengist
     ./outline.nix
     ./penpot.nix
     ./tailscale.nix

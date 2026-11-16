@@ -17,6 +17,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `photos`                | Immich `:2283`                                      | [immich.nix](immich.nix)                                                                     |
 | `archive`               | Kiwix `:9095`                                       | [kiwix.nix](kiwix.nix)                                                                       |
 | `notes`, `dex`          | Outline `:3000`, Dex `:5556`                        | [outline.nix](outline.nix); OIDC login                                                       |
+| `gist`                  | Opengist `:6157`                                    | [opengist/default.nix](opengist/default.nix)                                                 |
 | `omdb`                  | OMDb lookup workerd backend (`:6000`)               | [omdb-lookup.nix](omdb-lookup.nix)                                                           |
 | `design`                | Penpot frontend `:9001`                             | [penpot.nix](penpot.nix)                                                                     |
 | `draw`                  | Static `pkgs.drawio`                                | `nginx.nix`; the declared `9040` port is unused                                              |
@@ -52,7 +53,9 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   [sops-nix configuration](../../../../../../common/sec/README.md), including Tailscale,
   Dex/Outline, Homebox, Penpot, OpenObserve, backups, and shared host services.
   The Penpot file supplies container environment variables. Outline reuses Dex's client
-  secret and currently disables Node TLS verification.
+  secret and currently disables Node TLS verification. Opengist generates its
+  session secret in `/var/lib/opengist`, so it needs no entry unless OAuth or
+  SMTP is configured.
 - Immich stores media at `/mnt/media/Pictures`. Kiwix reads
   `/mnt/media/Archives/library.xml`; add archives with `kiwix-manage library.xml add
 file.zim` from that directory. Penpot persists assets and PostgreSQL data in

@@ -18,6 +18,7 @@ let
     util = toString 8080;
     omdb = toString 6000;
     notes = toString 3000;
+    gist = toString 6157;
     media = toString 8096;
     image = toString 9090;
     money = toString 4000;
@@ -32,6 +33,7 @@ let
     car = "car.${baseDomain}";
     log = "log.${baseDomain}";
     notes = "notes.${baseDomain}";
+    gist = "gist.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
     draw = "draw.${baseDomain}";
@@ -167,6 +169,17 @@ in
           proxyWebsockets = true;
           extraConfig = ''
             proxy_set_header X-Scheme $scheme;
+          '';
+        };
+      };
+
+      "${domains.gist}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations."/" = {
+          proxyPass = "${baseURL}:${ports.gist}";
+          extraConfig = proxyHeaders + ''
+            client_max_body_size 50M;
           '';
         };
       };

@@ -92,6 +92,18 @@ let
     echo $'\e[32m[backup:openobserve] Succeeded.\e[0m'
 
     #
+    # Opengist
+    #
+
+    echo $'\e[36m[backup:opengist] Starting...\e[0m'
+    ${pkgs.sqlite}/bin/sqlite3 /var/lib/opengist/opengist.db \
+      ".backup '$BACKUP_PATH/backups/Services/opengist.sqlite'"
+    ${pkgs.gnutar}/bin/tar -C /var/lib/opengist \
+      --exclude='./opengist.db*' \
+      -czf "$BACKUP_PATH"/backups/Services/opengist.tar.gz .
+    echo $'\e[32m[backup:opengist] Succeeded.\e[0m'
+
+    #
     # Outline
     #
 

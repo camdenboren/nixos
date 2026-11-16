@@ -34,6 +34,7 @@ let
     "util.home.local"
     "omdb.home.local"
     "notes.home.local"
+    "gist.home.local"
     "image.home.local"
     "money.home.local"
     "media.home.local"

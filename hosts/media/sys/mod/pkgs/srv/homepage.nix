@@ -31,6 +31,7 @@ let
     photos = "https://photos.${baseDomain}/";
     design = "https://design.${baseDomain}/";
     archive = "https://archive.${baseDomain}/";
+    gist = "https://gist.${baseDomain}/";
   };
   icons = {
     alc-calc = "${pkgs.alc-calc-web}/app-icon.png";
@@ -239,6 +240,13 @@ in
               icon = "/icons/alc-calc.png";
               href = URLs.alc;
               siteMonitor = URLs.alc;
+            };
+          }
+          {
+            Gist = {
+              icon = "opengist";
+              href = URLs.gist;
+              siteMonitor = URLs.gist;
             };
           }
           {

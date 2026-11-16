@@ -36,6 +36,7 @@ pkgs.testers.runNixOSTest {
         "omdb-lookup"
         "open-webui"
         "openobserve"
+        "opengist"
         "outline"
         "podman-penpot-penpot-frontend"
         "postgresql"
@@ -55,6 +56,16 @@ pkgs.testers.runNixOSTest {
                 "https://draw.home.local/ --output /tmp/draw-smoke.html"
             )
             machine.succeed("test -s /tmp/draw-smoke.html")
+        with subtest("Opengist responds through its proxied vhost"):
+            machine.wait_for_unit("opengist.service")
+            machine.wait_for_open_port(6157, "127.0.0.1")
+            machine.succeed(
+                "curl --fail --silent --show-error --max-time 30 "
+                "--noproxy '*' "
+                "--resolve gist.home.local:443:127.0.0.1 "
+                "--cacert /var/lib/acme/home.local/chain.pem "
+                "https://gist.home.local/healthcheck"
+            )
       '';
     })
   ];
@@ -69,7 +80,7 @@ pkgs.testers.runNixOSTest {
       # jellyfin requires >2gb for its data dir
       diskSize = mkForce (12 * 1024);
 
-      # Penpot unpacks while postgres/immich/open-webui initialize; 12 GB would
+      # penpot unpacks while postgres/immich/open-webui initialize; 12 GB would
       # leave the 27 GB CI builder too little slack
       memorySize = mkForce (10 * 1024);
 

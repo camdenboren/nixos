@@ -81,6 +81,7 @@ jobs:
             "neural-amp-modeler-lv2"
             "nova -u"
             "omdb-lookup --version=branch"
+            "opengist --subpackage frontend"
             "outline-export"
             "pi-acp"
             "pi-lsp --version-regex @narumitw/pi-lsp@(.*) --use-github-releases"

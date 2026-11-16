@@ -56,6 +56,7 @@ pkgs.testers.runNixOSTest {
                 "https://draw.home.local/ --output /tmp/draw-smoke.html"
             )
             machine.succeed("test -s /tmp/draw-smoke.html")
+
         with subtest("Opengist responds through its proxied vhost"):
             machine.wait_for_unit("opengist.service")
             machine.wait_for_open_port(6157, "127.0.0.1")

@@ -38,6 +38,9 @@ let
       ZO_ROOT_USER_EMAIL=smoke@example.invalid
       ZO_ROOT_USER_PASSWORD=Smoke-test-only-password-123!
     '';
+    healthcheck = ''
+      NTFY_URL=https://ntfy.example.invalid/smoke-test-only
+    '';
     homebox = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\n";
     penpot = ''
       PENPOT_SECRET_KEY=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef

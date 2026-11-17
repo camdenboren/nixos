@@ -1,0 +1,175 @@
+--- a/src/nam_plugin.h
++++ b/src/nam_plugin.h
+@@ -1,8 +1,10 @@
+ #pragma once
+ 
+ #include <array>
++#include <atomic>
+ #include <cstddef>
+ #include <cstdint>
++#include <mutex>
+ #include <random>
+ #include <string_view>
+ 
+@@ -120,6 +122,19 @@
+ 		LV2_Atom_Forge atom_forge = {};
+ 		LV2_Atom_Forge_Frame sequence_frame;
+ 
++		// Guards currentModelPath, which is written by restore()/work_response()
++		// and read by save()/write_current_path().
++		std::mutex pathMutex;
++
++		// True if the host passed state:threadSafeRestore (restore() may then run
++		// concurrently with audio, so model loading must go through the worker).
++		bool threadSafeRestore = false;
++
++		// Set when the current model path still needs to be reported to the host.
++		// Some hosts call work_response() before they ever call run(), so the
++		// notification has to be (re)sent on the next run() as well.
++		std::atomic<bool> pendingPathNotify { false };
++
+ 		float inputLevel = 0;
+ 		float outputLevel = 0;
+ 		int32_t maxBufferSize = 512;
+--- a/src/nam_plugin.cpp
++++ b/src/nam_plugin.cpp
+@@ -60,6 +60,8 @@
+ 				logger.log = static_cast<LV2_Log_Log*>(features[i]->data);
+ 			else if (std::string(features[i]->URI) == std::string(LV2_OPTIONS__options))
+ 				options = static_cast<LV2_Options_Option*>(features[i]->data);
++			else if (std::string(features[i]->URI) == std::string(LV2_STATE__threadSafeRestore))
++				threadSafeRestore = true;
+ 		}
+ 	
+ 		lv2_log_logger_set_map(&logger, map);
+@@ -186,7 +188,10 @@
+ 
+ 		// swap current model with new one
+ 		nam->currentModel = msg->model;
+-		nam->currentModelPath = msg->path;
++		{
++			std::lock_guard<std::mutex> lock(nam->pathMutex);
++			nam->currentModelPath = msg->path;
++		}
+ 		assert(nam->currentModelPath.capacity() >= MAX_FILE_NAME + 1);
+ 
+ 		if (nam->currentModel != nullptr)
+@@ -219,8 +224,17 @@
+ 
+ 	void Plugin::process(uint32_t n_samples) noexcept
+ 	{
+-		lv2_atom_forge_set_buffer(&atom_forge, (uint8_t*)ports.notify, ports.notify->atom.size);
+-		lv2_atom_forge_sequence_head(&atom_forge, &sequence_frame, uris.units_frame);
++		if (ports.notify != nullptr)
++		{
++			lv2_atom_forge_set_buffer(&atom_forge, (uint8_t*)ports.notify, ports.notify->atom.size);
++			lv2_atom_forge_sequence_head(&atom_forge, &sequence_frame, uris.units_frame);
++		}
++
++		if (pendingPathNotify)
++		{
++			pendingPathNotify = false;
++			write_current_path();
++		}
+ 
+ 		if (*(ports.quality_scale) != loader.GetDefaultQualityScaleFactor())
+ 		{
+@@ -417,7 +431,9 @@
+ 
+ 		lv2_log_trace(&nam->logger, "Saving state\n");
+ 
+-		if (!nam->currentModel)
++		std::lock_guard<std::mutex> lock(nam->pathMutex);
++
++		if (nam->currentModelPath.empty())
+ 		{
+ 			return LV2_STATE_SUCCESS;
+ 		}
+@@ -518,10 +534,56 @@
+ 
+ 		if (result == LV2_STATE_SUCCESS)
+ 		{
+-			// Schedule model to be loaded by the provided worker
+-			nam->schedule->schedule_work(nam->schedule->handle, sizeof(msg), &msg);
++			{
++				std::lock_guard<std::mutex> lock(nam->pathMutex);
++				nam->currentModelPath = msg.path;
++			}
+ 
+-			nam->currentModelPath = msg.path;
++			nam->pendingPathNotify = true;
++
++			if (nam->threadSafeRestore)
++			{
++				// The host may run audio while restoring, so the model has to be
++				// loaded by the worker and applied in the run() context.
++				nam->schedule->schedule_work(nam->schedule->handle, sizeof(msg), &msg);
++			}
++			else
++			{
++				// restore() is in the instantiation threading class here, so it may
++				// block.  Load the model directly instead of using the worker: hosts
++				// such as REAPER do not call run() for a bypassed plugin, which would
++				// leave the worker response pending until (or past) instance
++				// destruction.
++				delete nam->currentModel;
++				nam->currentModel = nullptr;
++
++				if (msg.path[0] != '\0')
++				{
++					try
++					{
++						nam->currentModel = nam->loader.CreateFromFile(msg.path);
++					}
++					catch (const std::exception&)
++					{
++					}
++				}
++
++				if (nam->currentModel != nullptr)
++				{
++					int receptiveFieldSize = nam->currentModel->GetReceptiveFieldSize();
++
++					if (receptiveFieldSize > -1)
++					{
++						// A newly loaded model is prewarmed to have a silent sample history
++						nam->silentSamples = receptiveFieldSize;
++						nam->smartBypassed = true;
++					}
++				}
++				else if (msg.path[0] != '\0')
++				{
++					lv2_log_error(&nam->logger, "Unable to load model from: '%s'\n", msg.path);
++				}
++			}
+ 		}
+ 
+ 		return result;
+@@ -529,6 +591,27 @@
+ 
+ 	void Plugin::write_current_path()
+ 	{
++		std::lock_guard<std::mutex> lock(pathMutex);
++
++		// work_response() may be called before run() has ever been called (some
++		// hosts do this for bypassed plugins).  In that case the forge has no
++		// target buffer yet, so set up the notify port buffer here.
++		if (atom_forge.buf == nullptr)
++		{
++			// There has not been a run() yet, so the notification also has to be
++			// repeated on the next run().
++			pendingPathNotify = true;
++
++			if (ports.notify == nullptr)
++			{
++				// The host has not connected the notify port yet.  Try again on run().
++				return;
++			}
++
++			lv2_atom_forge_set_buffer(&atom_forge, (uint8_t*)ports.notify, ports.notify->atom.size);
++			lv2_atom_forge_sequence_head(&atom_forge, &sequence_frame, uris.units_frame);
++		}
++
+ 		LV2_Atom_Forge_Frame frame;
+ 
+ 		lv2_atom_forge_frame_time(&atom_forge, 0);

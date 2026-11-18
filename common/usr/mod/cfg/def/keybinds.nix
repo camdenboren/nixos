@@ -130,6 +130,9 @@ in
         ++ lib.optionals isDarwin [
           "${ctrl}+shift+c=copy_to_clipboard"
           "${ctrl}+shift+v=paste_from_clipboard"
+          "${ctrl}+left=esc:b"
+          "${ctrl}+right=esc:f"
+          "${ctrl}+backspace=unbind"
         ];
 
         programs.zed-editor.userKeymaps = [
@@ -183,6 +186,11 @@ in
             context = "Editor";
             bindings = {
               ctrl-h = "zed::Minimize";
+              cmd-left = "editor::MoveToPreviousWordStart";
+              cmd-right = "editor::MoveToNextWordEnd";
+              cmd-shift-left = "editor::SelectToPreviousWordStart";
+              cmd-shift-right = "editor::SelectToNextWordEnd";
+              cmd-backspace = "editor::DeleteToPreviousWordStart";
             };
           }
         ];
@@ -306,6 +314,21 @@ in
                   "com.apple.keyboard.modifiermapping.9494-4-0" = modifierMapping;
                 };
               };
+
+              # remap command-left/right and command-shift-left/right
+              # to move words, not lines–helpful since i use opt-left/
+              # right in rectangle to switch displays like i do on linux;
+              # targets.darwin.keybinds didn't work due to xml weirdness
+              # re. the `\` char
+              home.file."Library/KeyBindings/DefaultKeyBinding.dict".text = ''
+                {
+                  "@\UF702" = "moveWordBackward:";
+                  "@\UF703" = "moveWordForward:";
+                  "@\U007F" = "deleteWordBackward:";
+                  "@$\UF702" = "moveWordBackwardAndModifySelection:";
+                  "@$\UF703" = "moveWordForwardAndModifySelection:";
+                }
+              '';
             }
           )
       )

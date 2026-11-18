@@ -209,7 +209,7 @@ in
 
       settings = {
         defaultModel = if isDarwin then "gpt-6.1-sol" else "claude-haiku-5-5";
-        defaultProvider = if isDarwin then "openai-codex" else "opencode-go";
+        defaultProvider = if isDarwin then "openai" else "opencode-go";
         defaultThinkingLevel = "medium";
         packages = [
           "${pkgs.pi-lsp}/lib/pi-lsp"

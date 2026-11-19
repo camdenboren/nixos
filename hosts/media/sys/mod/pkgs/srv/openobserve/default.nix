@@ -1,10 +1,15 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 {
   # unmerged module from https://github.com/NixOS/nixpkgs/pull/555962
   imports = [ ./module.nix ];
   services.openobserve = {
     enable = true;
+    package = pkgs.openobserve.overrideAttrs (old: {
+      # link aws-lc-sys against nixpkgs' AWS-LC instead of building/
+      # vendoring its own
+      buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.aws-lc ];
+    });
     environmentFile = config.sops.secrets.openobserve.path;
     settings = {
       ZO_TELEMETRY = false;

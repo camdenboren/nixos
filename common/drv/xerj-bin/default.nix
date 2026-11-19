@@ -12,15 +12,15 @@ let
   sources = {
     x86_64-linux = {
       target = "x86_64-unknown-linux-gnu";
-      hash = "sha256-Ja7D6EuQTJlb0tWKvk+DutuKb50dVtvi8iGAutqbAMw=";
+      hash = "sha256-yQFUV2y/3uv5T1u4NVJf3M0Xa3BnJJFDIM1hh+wYiOI=";
     };
     aarch64-linux = {
       target = "aarch64-unknown-linux-gnu";
-      hash = "sha256-O8EeROs8srMgz9FsZKxkz4WLTsRax08iP/7mIvwh2rc=";
+      hash = "sha256-twTg+yv8wcRAq1kdA7Zrnw5ZaLDY3Am9YAK8h0yTMuY=";
     };
     aarch64-darwin = {
       target = "aarch64-apple-darwin";
-      hash = "sha256-yI/cuZxBVdL3JgE4w6WJjQ889rB80giJUTf/A8UrnRo=";
+      hash = "sha256-Xxaxfc9Gq7Vm7DOg9HM7RZwPvCKfzQ9YqeataY831Y4=";
     };
   };
   source =
@@ -29,7 +29,7 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "xerj-bin";
-  version = "1.0.0-rc.100";
+  version = "1.0.0-rc.104";
 
   src = fetchurl {
     url = "https://github.com/xerj-org/xerj/releases/download/v${finalAttrs.version}/xerj-${finalAttrs.version}-${source.target}.tar.gz";

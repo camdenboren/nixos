@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pi-permission-system";
-  version = "42.0.0";
+  version = "42.2.0";
 
   src = fetchFromGitHub {
     owner = "gotgenes";
     repo = "pi-packages";
     tag = "pi-permission-system-v${finalAttrs.version}";
-    hash = "sha256-yK5BYLjV20dS1j7uhiDWEfhWnSY7r1XoAdvw1j3PD5c=";
+    hash = "sha256-LvIBHMzoCdCVcDV3FN5sgp0LptuoEURX7iHTila/zOk=";
   };
 
   pnpmDeps =

@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
   lib,
   system,
   hostname,
@@ -31,11 +30,6 @@ in
       darktable
     ]
     ++ lib.optionals (isDarwin || hostname == "main") [
-      (reaper.overrideAttrs (old: {
-        preFixup = (old.preFixup or "") + ''
-          export PATH="${pkgs-stable.patchelf}/bin:$PATH"
-          patchelf --version
-        '';
-      }))
+      reaper
     ];
 }

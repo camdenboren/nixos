@@ -19,7 +19,11 @@ in
       gnomeExtensions.blur-my-shell
       gnomeExtensions.just-perfection
       gnomeExtensions.focus-changer
-      gnomeExtensions.date-menu-formatter
+      (gnomeExtensions.date-menu-formatter.overrideAttrs (prev: {
+        postPatch = (prev.postPatch or "") + ''
+          substituteInPlace metadata.json --replace-fail '"50"' '"50", "51"'
+        '';
+      }))
       adw-gtk3
       dracula-icon-theme
       gnome-tweaks

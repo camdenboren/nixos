@@ -106,7 +106,8 @@ let
     ${pkgs.coreutils}/bin/chown opengist:opengist \
       "$opengist_backup/opengist.db"
     ${pkgs.gnutar}/bin/tar -C "$opengist_backup" \
-      -czf "$BACKUP_PATH"/backups/Services/opengist.tar.gz .
+      --use-compress-program=${pkgs.gzip}/bin/gzip \
+      -cf "$BACKUP_PATH"/backups/Services/opengist.tar.gz .
     rm -rf -- "$opengist_backup"
     echo $'\e[32m[backup:opengist] Succeeded.\e[0m'
 

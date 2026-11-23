@@ -36,9 +36,9 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 ## Healthchecks
 
 - `main` runs a systemd `healthcheck` timer every 5 minutes against
-  `https://log.home.local/healthz`, posting to ntfy on failure. It skips the
-  first five minutes of 05:00 and 06:00 so OpenObserve's startup doesn't trip
-  it.
+  `https://log.home.local/healthz`, posting to the public `ntfy.sh` instance on
+  failure. It skips the first five minutes of 05:00 and 06:00 so OpenObserve's
+  startup doesn't trip it.
 - Additionally, an iOS healthcheck runs every 3 hours over Tailscale and posts
   to ntfy (through the public instance rather than the local one), covering
   the case where the entire lab is down.

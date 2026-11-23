@@ -1,5 +1,6 @@
 ignore = [
   "**/invokeai.nix",
   "**/penpot.nix",
-  "**/hardware-configuration.nix"
+  "**/readest.nix",
+  "**/hardware-configuration.nix",
 ]

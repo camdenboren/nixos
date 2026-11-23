@@ -28,6 +28,13 @@
     "track": "semver",
     "trackSuffix": "-cuda"
   },
+  "kong": {
+    "hash": "sha256-HfNUlY882wyVMpICl6NfWzJ59jiE12J0P4u82YyAdCw=",
+    "imageDigest": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+    "imageName": "kong",
+    "tag": "2.8.1",
+    "track": "semver"
+  },
   "mailcatch": {
     "hash": "sha256-XvGc4LqstUyz89nfC2sPxlybkPbRbzSGuiSlliwha+w=",
     "imageDigest": "sha256:572048324658d2198e0a96785cca4f0260f2c4cadb2cb057bd837b9ee0c60533",
@@ -41,6 +48,45 @@
     "imageDigest": "sha256:10f9e886f772e9d6484350b043bcf990ead67ae5d9988ddce265d72a299055d5",
     "imageName": "postgres",
     "tag": "15"
+  },
+  "postgrest": {
+    "hash": "sha256-I+fMtKeQnCxx8a6qHbIUj45JUSSq5Kr3Zok53UcG1YU=",
+    "imageDigest": "sha256:7c5840727ad683b0fdbfb9810930665b34f8b44884a4dc740aa8844748a2b85e",
+    "imageName": "postgrest/postgrest",
+    "tag": "v14.3",
+    "track": "semver",
+    "trackPrefix": "v",
+    "trackSegments": 2
+  },
+  "readest": {
+    "hash": "sha256-lViBspTKv63NdSOCdlj4K7xmZ8dcA7uGaQ3mOCVyE08=",
+    "imageDigest": "sha256:06c48583843b8a84e0fe489fe6ac875b4884094640001cafc1e77c84de48d404",
+    "imageName": "ghcr.io/readest/readest",
+    "tag": "0.12.20",
+    "track": "semver"
+  },
+  "rustfs": {
+    "hash": "sha256-B1+aAfhpG+tBdO/VgZ9WU1L6sKHbHUfzCsbiBCt3qrM=",
+    "imageDigest": "sha256:ee717072290bec9b11abfc0365f8310b00df1cd9b3639943edae47bdef05044a",
+    "imageName": "rustfs/rustfs",
+    "tag": "1.0.6",
+    "track": "semver"
+  },
+  "supabase-gotrue": {
+    "hash": "sha256-zD12f2x0+hmlUdjfXvO46TwC8Xwf5hJwWBd9ytmdwEQ=",
+    "imageDigest": "sha256:de22ff0811f3e4f7e6d3ba226f75ed8d82310df577bbd61e16fbfd7a50a8c9ce",
+    "imageName": "supabase/gotrue",
+    "tag": "v2.185.0",
+    "track": "semver",
+    "trackPrefix": "v"
+  },
+  "supabase-postgres": {
+    "hash": "sha256-gqs8v9LWwbrEhU/s9/lRLHW4m5yXBCcgRElHAqEhJ6M=",
+    "imageDigest": "sha256:af083ef64d0408c8f098ee6f5c364a59b26f36fbc0f3a334a62c5c1d57362e9b",
+    "imageName": "supabase/postgres",
+    "tag": "15.8.1.085",
+    "track": "semver",
+    "trackPrefix": "15."
   },
   "valkey": {
     "hash": "sha256-+ipLBzaxlpm6tpEaTuxRaNLsNTCinUMwGA2GsfOhYQc=",

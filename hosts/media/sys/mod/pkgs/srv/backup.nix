@@ -187,6 +187,37 @@ let
     echo $'\e[32m[backup:penpot] Succeeded.\e[0m'
 
     #
+    # Readest
+    #
+
+    echo $'\e[36m[backup:readest] Starting...\e[0m'
+    READEST_TMP="$(${pkgs.coreutils}/bin/mktemp -d "$BACKUP_PATH/backups/Services/.readest-tmp.XXXXXX")"
+    ${pkgs.podman}/bin/podman exec -i supabase-db \
+      pg_dump -U supabase_admin -d postgres \
+      > "$READEST_TMP/readest.sql"
+    # db-config holds the pgsodium key created by the Supabase image.
+    ${pkgs.podman}/bin/podman volume export readest_db-config -o \
+      "$READEST_TMP/readest_db-config.tar"
+    rustfs_user="$(${pkgs.podman}/bin/podman exec readest-rustfs printenv MINIO_ROOT_USER)"
+    rustfs_pass="$(${pkgs.podman}/bin/podman exec readest-rustfs printenv MINIO_ROOT_PASSWORD)"
+    RCLONE_CONFIG_RUSTFS_TYPE=s3 \
+    RCLONE_CONFIG_RUSTFS_PROVIDER=Minio \
+    RCLONE_CONFIG_RUSTFS_ENDPOINT=http://127.0.0.1:9000 \
+    RCLONE_CONFIG_RUSTFS_ACCESS_KEY_ID="$rustfs_user" \
+    RCLONE_CONFIG_RUSTFS_SECRET_ACCESS_KEY="$rustfs_pass" \
+    RCLONE_CONFIG_RUSTFS_REGION=us-east-1 \
+      ${pkgs.rclone}/bin/rclone --config /dev/null copy \
+      --checksum \
+      rustfs:readest-files "$READEST_TMP/rustfs"
+    READEST_ARCHIVE_TMP="$BACKUP_PATH/backups/Services/readest.tar.zst.tmp"
+    ${pkgs.gnutar}/bin/tar -C "$READEST_TMP" -cf - . \
+      | ${pkgs.zstd}/bin/zstd -T0 -q -f -o "$READEST_ARCHIVE_TMP"
+    ${pkgs.coreutils}/bin/mv -f "$READEST_ARCHIVE_TMP" \
+      "$BACKUP_PATH/backups/Services/readest.tar.zst"
+    ${pkgs.coreutils}/bin/rm -rf -- "$READEST_TMP"
+    echo $'\e[32m[backup:readest] Succeeded.\e[0m'
+
+    #
     # Postgres dbs
     #
 

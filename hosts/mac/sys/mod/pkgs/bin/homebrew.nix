@@ -17,7 +17,6 @@ _:
       "mullvad-vpn"
       "pearcleaner"
       "qdirstat"
-      "readest"
       "tailscale-app"
       "zoom"
     ];

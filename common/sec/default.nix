@@ -46,6 +46,19 @@ let
           "podman-penpot-penpot-backend.service"
           "podman-penpot-penpot-exporter.service"
         ];
+        readest.restartUnits = [
+          "podman-supabase-db.service"
+          "podman-supabase-auth.service"
+          "podman-supabase-rest.service"
+          "podman-supabase-kong.service"
+          "podman-readest-rustfs.service"
+          "podman-readest-client.service"
+          "readest-migrations.service"
+          "readest-rustfs-setup.service"
+        ];
+        readest-client.restartUnits = [
+          "podman-readest-client.service"
+        ];
         tailscale.key = "auth_key";
       };
       # The macOS wrapper sources the file as this user.

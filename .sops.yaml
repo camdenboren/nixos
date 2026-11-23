@@ -17,6 +17,9 @@ creation_rules:
   - path_regex: ^common/sec/healthcheck\.yaml$
     key_groups:
       - age: [*admin, *main]
+  - path_regex: ^common/sec/(readest|readest-client)\.yaml$
+    key_groups:
+      - age: [*admin, *media]
   - path_regex: ^common/sec/(backup|dex|homebox|omdb-lookup|openobserve|penpot|tailscale)\.yaml$
     key_groups:
       - age: [*admin, *media]

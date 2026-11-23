@@ -33,6 +33,7 @@ let
     "ntfy.home.local"
     "util.home.local"
     "omdb.home.local"
+    "read.home.local"
     "notes.home.local"
     "gist.home.local"
     "image.home.local"

@@ -6,8 +6,10 @@
 # highest x.y.z tag in their registry, so pins follow upstream releases instead
 # of floating tags like :latest. "trackPrefix" (for example "v") and
 # "trackSuffix" (for example "-cuda") match tags with that decoration around
-# the version, and limit it to one variant of a multi-variant image. Other
-# entries keep their tag.
+# the version, and limit it to one variant of a multi-variant image.
+# "trackSegments" (default 3, or 4 for four-part tags) controls the number of
+# numeric components; combine it with a prefix such as "15." to stay inside a
+# Postgres major version. Other entries keep their tag.
 #
 # Usage: update.sh [key]. nix-update sets UPDATE_NIX_ATTR_PATH (for example
 # container-images.invokeai); that key is used when no argument is given.
@@ -84,14 +86,16 @@ tag_version() {
   printf '%s\n' "${t%"$suffix"}"
 }
 
-# Prints the highest x.y.z tag with the given prefix and suffix (empty if none),
-# as the registry spells it. Registry errors exit the script.
+# Prints the highest tag matching the requested number of numeric segments
+# (for example x.y.z, or x.y.z.w with trackSegments = 4), with the given prefix
+# and suffix (empty if none), as the registry spells it. Registry errors exit
+# the script.
 latest_semver_tag() {
-  local registry=$1 repo=$2 prefix=$3 suffix=$4 tags matches version
+  local registry=$1 repo=$2 prefix=$3 suffix=$4 version_re=$5 tags matches version
   tags="$(list_tags "$registry" "$repo")" \
     || die "could not list tags for $registry/$repo"
-  matches="$(grep -E "^${prefix}[0-9]+\.[0-9]+\.[0-9]+${suffix}\$" <<<"$tags" || true)"
-  echo "$registry/$repo: $(wc -l <<<"$tags") tags, $(grep -c . <<<"$matches" || true) matching '${prefix}x.y.z${suffix}'" >&2
+  matches="$(grep -E "^${prefix}${version_re}${suffix}\$" <<<"$tags" || true)"
+  echo "$registry/$repo: $(wc -l <<<"$tags") tags, $(grep -c . <<<"$matches" || true) matching '${prefix}${version_re}${suffix}'" >&2
   [[ -n "$matches" ]] || return 0
   version="$(
     while IFS= read -r t; do tag_version "$t" "$prefix" "$suffix"; done <<<"$matches" \
@@ -133,17 +137,24 @@ for key in $(jq -r 'keys[]' "$sources"); do
   track="$(jq -r '.track // ""' <<<"$entry")"
   prefix="$(jq -r '.trackPrefix // ""' <<<"$entry")"
   suffix="$(jq -r '.trackSuffix // ""' <<<"$entry")"
+  segments="$(jq -r '.trackSegments // 3' <<<"$entry")"
+  [[ "$segments" =~ ^[0-9]+$ ]] || die "$key: trackSegments must be an integer"
+  version_re=""
+  for ((i = 0; i < segments; i++)); do
+    [[ -n "$version_re" ]] && version_re+='\.'
+    version_re+='[0-9]+'
+  done
   new_tag="$tag"
 
   if [[ "$track" == semver ]]; then
     read -r registry repo < <(split_image "$name")
-    candidate="$(latest_semver_tag "$registry" "$repo" "$prefix" "$suffix")"
-    [[ -n "$candidate" ]] || die "$name: no ${prefix}x.y.z${suffix} tags found in $registry"
+    candidate="$(latest_semver_tag "$registry" "$repo" "$prefix" "$suffix" "$version_re")"
+    [[ -n "$candidate" ]] || die "$name: no ${prefix}${version_re}${suffix} tags found in $registry"
 
     # Only move forward. A tag that isn't a version (such as "latest") always
     # takes the candidate, since it doesn't sort against version numbers.
     new_tag="$candidate"
-    if [[ "$tag" =~ ^${prefix}[0-9]+\.[0-9]+\.[0-9]+${suffix}$ ]]; then
+    if [[ "$tag" =~ ^${prefix}${version_re}${suffix}$ ]]; then
       newest="$(printf '%s\n%s\n' "$(tag_version "$tag" "$prefix" "$suffix")" \
         "$(tag_version "$candidate" "$prefix" "$suffix")" | sort -V | tail -1)"
       [[ "$newest" == "$(tag_version "$candidate" "$prefix" "$suffix")" ]] || new_tag="$tag"
@@ -171,6 +182,7 @@ for key in $(jq -r 'keys[]' "$sources"); do
         hash: $e.hash
       } + (if .[$k].track then {track: .[$k].track} else {} end)
         + (if .[$k].trackPrefix then {trackPrefix: .[$k].trackPrefix} else {} end)
+        + (if .[$k].trackSegments then {trackSegments: .[$k].trackSegments} else {} end)
         + (if .[$k].trackSuffix then {trackSuffix: .[$k].trackSuffix} else {} end)' <<<"$updated"
     )"
   elif [[ -n "$track" ]]; then

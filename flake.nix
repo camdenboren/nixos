@@ -46,6 +46,10 @@
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
     };
+    readest-src = {
+      url = "github:readest/readest";
+      flake = false;
+    };
   };
 
   outputs =

@@ -20,6 +20,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `gist`                  | Opengist `:6157`                                    | [opengist/default.nix](opengist/default.nix)                                                 |
 | `omdb`                  | OMDb lookup workerd backend (`:6000`)               | [omdb-lookup.nix](omdb-lookup.nix)                                                           |
 | `design`                | Penpot frontend `:9001`                             | [penpot.nix](penpot.nix)                                                                     |
+| `read`                  | Readest `:3030`, Kong `:8010`, RustFS `:9000`       | [readest.nix](readest.nix); self-hosted Supabase auth/rest, RustFS, and the web client       |
 | `draw`                  | Static `pkgs.drawio`                                | `nginx.nix`; the declared `9040` port is unused                                              |
 | `pdf`                   | BentoPDF-managed Nginx vhost                        | [bentopdf.nix](bentopdf.nix); separate from `nginx.nix`'s domain map                         |
 | `alc`                   | alc-calc-managed Nginx vhost                        | [alc-calc.nix](alc-calc.nix); separate from `nginx.nix`'s domain map, like BentoPDF          |
@@ -70,6 +71,11 @@ defaults, so keep those defaults aligned with this table when changing inputs.
   `/mnt/media/Archives/library.xml`; add archives with `kiwix-manage library.xml add
 file.zim` from that directory. Penpot persists assets and PostgreSQL data in
   `penpot_penpot_assets` and `penpot_penpot_postgres_v15` Podman volumes.
+- Readest persists PostgreSQL in `readest_db-data`, the Supabase pgsodium key in
+  `readest_db-config`, and book files in `readest_rustfs-data`. The
+  `readest-migrations` oneshot applies `readest-src`'s base schema and numbered
+  migrations on boot; run it again after bumping the `readest-src` input or the
+  `ghcr.io/readest/readest` tag.
 - Penpot's containers run images from digest pins in
   [container-images](../../../../../../common/drv/container-images/), loaded with `imageFile`, so
   podman never pulls at runtime. Bump them with `updatePkg container-images.<name> -u`, then

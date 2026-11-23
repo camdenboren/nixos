@@ -1,0 +1,46 @@
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -129,6 +129,10 @@
+ // fallback HTML and crash with `Unexpected token '<'`. All runtime-config
+ // consumers fall back to `NEXT_PUBLIC_*` envs baked at build time on Tauri.
+ const shouldInjectRuntimeConfig = process.env['NEXT_PUBLIC_APP_PLATFORM'] === 'web';
++const selfHostedRuntimeConfigUrl =
++  process.env['NEXT_PUBLIC_SELFHOSTED_RUNTIME_CONFIG_URL'];
++const shouldInjectSelfHostedRuntimeConfig =
++  process.env['NEXT_PUBLIC_APP_PLATFORM'] === 'tauri' && !!selfHostedRuntimeConfigUrl;
+ 
+ export default function RootLayout({ children }: { children: React.ReactNode }) {
+   // Browser extensions can inject attributes on <html> before React hydrates it.
+@@ -142,6 +146,9 @@
+         {shouldInjectRuntimeConfig ? (
+           <Script src='/runtime-config.js' strategy='beforeInteractive' />
+         ) : null}
++        {shouldInjectSelfHostedRuntimeConfig ? (
++          <Script src={selfHostedRuntimeConfigUrl!} strategy='beforeInteractive' />
++        ) : null}
+         {shouldInjectDevHmrPatch ? (
+           <script dangerouslySetInnerHTML={{ __html: devHmrPatchScript }} />
+         ) : null}
+--- a/src/pages/_document.tsx
++++ b/src/pages/_document.tsx
+@@ -3,6 +3,10 @@
+ 
+ // Only the web/Docker build serves `/runtime-config.js`. See app/layout.tsx.
+ const shouldInjectRuntimeConfig = process.env['NEXT_PUBLIC_APP_PLATFORM'] === 'web';
++const selfHostedRuntimeConfigUrl =
++  process.env['NEXT_PUBLIC_SELFHOSTED_RUNTIME_CONFIG_URL'];
++const shouldInjectSelfHostedRuntimeConfig =
++  process.env['NEXT_PUBLIC_APP_PLATFORM'] === 'tauri' && !!selfHostedRuntimeConfigUrl;
+ 
+ export default function Document() {
+   return (
+@@ -14,6 +18,9 @@
+         {shouldInjectRuntimeConfig ? (
+           <Script src='/runtime-config.js' strategy='beforeInteractive' />
+         ) : null}
++        {shouldInjectSelfHostedRuntimeConfig ? (
++          <Script src={selfHostedRuntimeConfigUrl!} strategy='beforeInteractive' />
++        ) : null}
+         <Main />
+         <NextScript />
+       </body>

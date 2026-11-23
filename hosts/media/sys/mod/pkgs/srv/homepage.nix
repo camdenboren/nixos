@@ -32,10 +32,12 @@ let
     design = "https://design.${baseDomain}/";
     archive = "https://archive.${baseDomain}/";
     gist = "https://gist.${baseDomain}/";
+    read = "https://read.${baseDomain}/";
   };
   icons = {
     alc-calc = "${pkgs.alc-calc-web}/app-icon.png";
     centhia = "${inputs.chatbot-util}/front/src/assets/logo.png";
+    readest = "${inputs.readest-src}/data/icons/readest-book.png";
     omdb-lookup = "${pkgs.fetchurl {
       url = "https://www.omdb.org/images/layout/omdb-logo.png";
       hash = "sha256-k1+qdwNZ1C2Oji5r49pvOuw6YcGZnWT/gKMaFGstE9k=";
@@ -55,6 +57,7 @@ let
       mkdir -p ${homepageImagesURI}
       ln -s ${icons.alc-calc} ${homepageIconsURI}/alc-calc.png
       ln -s ${icons.centhia} ${homepageIconsURI}/centhia.png
+      ln -s ${icons.readest} ${homepageIconsURI}/readest.png
       ln -s ${icons.omdb-lookup} ${homepageIconsURI}/omdb-lookup.png
       ln -s ${backgrounds.coral} ${homepageImagesURI}/coral.jpg
       ln -s ${backgrounds.nothin} ${homepageImagesURI}/nothin.jpg
@@ -172,6 +175,13 @@ in
               icon = "jellyfin";
               href = URLs.media;
               siteMonitor = URLs.media;
+            };
+          }
+          {
+            Read = {
+              icon = "/icons/readest.png";
+              href = URLs.read;
+              siteMonitor = URLs.read;
             };
           }
           {

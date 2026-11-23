@@ -46,6 +46,26 @@ let
       PENPOT_SECRET_KEY=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
     '';
     dex = "smoke-test-only-oidc-client-secret\n";
+    readest = ''
+      POSTGRES_PASSWORD=smoke-test-only-postgres
+      PGPASSWORD=smoke-test-only-postgres
+      JWT_SECRET=smoke-test-only-jwt-secret-0123456789abcdef
+      GOTRUE_JWT_SECRET=smoke-test-only-jwt-secret-0123456789abcdef
+      GOTRUE_DB_DATABASE_URL=postgres://supabase_auth_admin:smoke-test-only-postgres@db:5432/postgres
+      PGRST_DB_URI=postgres://authenticator:smoke-test-only-postgres@db:5432/postgres
+      PGRST_JWT_SECRET=smoke-test-only-jwt-secret-0123456789abcdef
+      PGRST_APP_SETTINGS_JWT_SECRET=smoke-test-only-jwt-secret-0123456789abcdef
+      SUPABASE_ANON_KEY=smoke-test-only-anon
+      SUPABASE_SERVICE_KEY=smoke-test-only-service
+      MINIO_ROOT_USER=readest
+      MINIO_ROOT_PASSWORD=smoke-test-only-minio
+    '';
+    readest-client = ''
+      SUPABASE_ANON_KEY=smoke-test-only-anon
+      SUPABASE_ADMIN_KEY=smoke-test-only-service
+      S3_ACCESS_KEY_ID=readest
+      S3_SECRET_ACCESS_KEY=smoke-test-only-minio
+    '';
     tailscale = "tskey-auth-smoke-test-only-not-valid\n";
   };
   declared = config.sops.secrets;

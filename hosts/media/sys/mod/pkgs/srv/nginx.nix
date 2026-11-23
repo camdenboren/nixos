@@ -17,8 +17,9 @@ let
     ntfy = toString 2586;
     util = toString 8080;
     omdb = toString 6000;
-    notes = toString 3000;
     gist = toString 6157;
+    read = toString 3030;
+    notes = toString 3000;
     media = toString 8096;
     image = toString 9090;
     money = toString 4000;
@@ -40,6 +41,7 @@ let
     ntfy = "ntfy.${baseDomain}";
     util = "util.${baseDomain}";
     omdb = "omdb.${baseDomain}";
+    read = "read.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
@@ -47,12 +49,9 @@ let
     design = "design.${baseDomain}";
     archive = "archive.${baseDomain}";
   };
+  # not included in the existing recommendedProxySettings
   proxyHeaders = ''
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-Protocol $scheme;
-    proxy_set_header X-Forwarded-Host $http_host;
   '';
   # `SAMEORIGIN` worked, but `frame-ancestors` enables embeds in outline for any
   # static site
@@ -88,9 +87,7 @@ in
         locations = {
           "/" = {
             proxyPass = "${baseURL}:${ports.homepage}";
-            extraConfig = proxyHeaders + ''
-              proxy_set_header Host $host;
-            '';
+            extraConfig = proxyHeaders;
           };
         };
       };
@@ -132,9 +129,7 @@ in
           "/socket" = {
             proxyPass = "${baseURL}:${ports.media}";
             proxyWebsockets = true;
-            extraConfig = proxyHeaders + ''
-              proxy_set_header Host $host;
-            '';
+            extraConfig = proxyHeaders;
           };
         };
       };
@@ -353,6 +348,43 @@ in
               add_header Cross-Origin-Embedder-Policy "require-corp" always;
               add_header Cross-Origin-Opener-Policy "same-origin" always;
               add_header Origin-Agent-Cluster "?1" always;
+            '';
+          };
+        };
+      };
+
+      "${domains.read}" = {
+        forceSSL = true;
+        useACMEHost = baseDomain;
+        locations = {
+          "/" = {
+            proxyPass = "${baseURL}:${ports.read}";
+            extraConfig = proxyHeaders + ''
+              # Readest accepts inbox files up to 40 MB through next, which
+              # would otw. be truncated by nginx
+              client_max_body_size 64M;
+            '';
+          };
+
+          "/auth/v1/" = {
+            proxyPass = "${baseURL}:8010";
+            extraConfig = proxyHeaders;
+          };
+
+          "/rest/v1/" = {
+            proxyPass = "${baseURL}:8010";
+            extraConfig = proxyHeaders;
+          };
+
+          "/readest-files/" = {
+            proxyPass = "${baseURL}:9000";
+            extraConfig = proxyHeaders + ''
+              proxy_http_version 1.1;
+              proxy_set_header Connection "";
+              proxy_set_header Accept-Encoding "identity";
+              client_max_body_size 0;
+              proxy_request_buffering off;
+              proxy_buffering off;
             '';
           };
         };

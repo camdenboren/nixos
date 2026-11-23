@@ -25,6 +25,7 @@
     ./opengist
     ./outline.nix
     ./penpot.nix
+    ./readest.nix
     ./tailscale.nix
     ./unbound.nix
 

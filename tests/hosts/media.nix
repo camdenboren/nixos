@@ -39,6 +39,7 @@ pkgs.testers.runNixOSTest {
         "opengist"
         "outline"
         "podman-penpot-penpot-frontend"
+        "podman-readest-client"
         "postgresql"
         "redis-immich"
         "redis-outline"
@@ -67,6 +68,19 @@ pkgs.testers.runNixOSTest {
                 "--cacert /var/lib/acme/home.local/chain.pem "
                 "https://gist.home.local/healthcheck"
             )
+
+        with subtest("Readest responds through its proxied vhost"):
+            machine.wait_for_unit("podman-readest-client.service")
+            machine.wait_for_open_port(443)
+            machine.wait_until_succeeds(
+                "curl --fail --silent --show-error --max-time 30 "
+                "--noproxy '*' "
+                "--resolve read.home.local:443:127.0.0.1 "
+                "--cacert /var/lib/acme/home.local/chain.pem "
+                "https://read.home.local/runtime-config.js "
+                "| grep -q 'read.home.local'",
+                timeout=180,
+            )
       '';
     })
   ];
@@ -77,9 +91,9 @@ pkgs.testers.runNixOSTest {
     ];
 
     virtualisation = {
-      # podman unpacks the loaded Penpot archives (~3.4 GB) into the disk and
-      # jellyfin requires >2gb for its data dir
-      diskSize = mkForce (12 * 1024);
+      # podman unpacks the loaded Penpot archives (~3.4 GB), the Readest
+      # Supabase/RustFS/client images, and Jellyfin's data onto the disk.
+      diskSize = mkForce (20 * 1024);
 
       # penpot unpacks while postgres/immich/open-webui initialize; 12 GB would
       # leave the 27 GB CI builder too little slack

@@ -271,6 +271,22 @@
         "type": "github"
       }
     },
+    "readest-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795451174,
+        "narHash": "sha256-f6D3Pim3nkJo2iXE6fKJui6SmHUkiZMDn3CTpg8XJ2E=",
+        "owner": "readest",
+        "repo": "readest",
+        "rev": "7afc010aff2d34c22f54e49c41fe24b7016a2525",
+        "type": "github"
+      },
+      "original": {
+        "owner": "readest",
+        "repo": "readest",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "alc-calc": "alc-calc",
@@ -283,6 +299,7 @@
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
+        "readest-src": "readest-src",
         "sops-nix": "sops-nix",
         "yt-x": "yt-x"
       }

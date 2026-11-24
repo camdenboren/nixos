@@ -8,6 +8,8 @@ let
     melda_pkg=${pkgs.maudioplugins}
     melda_source="$melda_pkg/share/maudioplugins/programdata/MeldaProduction"
     melda_target="/home/camdenboren/.wine/drive_c/ProgramData/MeldaProduction"
+    ssd_source="${pkgs.ssd}/${pkgs.ssd.samplesPath}"
+    ssd_target="/home/camdenboren/.wine/drive_c/ProgramData/samples/SSD5Library"
 
     if ! [[ -z "$oldPath" ]]; then
       echo "Removing old store location..."
@@ -39,6 +41,15 @@ let
 
     echo -e "Linking Melda plugin kernels to prefix...\n"
     ${pkgs.coreutils}/bin/ln -sf "$melda_source" "$melda_target"
+
+    if test -d "$ssd_target"; then
+      echo "Removing SSD sample library from prefix..."
+      ${pkgs.coreutils}/bin/rm -r "$ssd_target"
+    fi
+
+    ${pkgs.coreutils}/bin/mkdir -p "$(dirname "$ssd_target")"
+    echo -e "Linking SSD sample library to prefix...\n"
+    ${pkgs.coreutils}/bin/ln -sfn "$ssd_source" "$ssd_target"
 
     echo "Adding new store location..."
     ${pkgs.yabridgectl}/bin/yabridgectl add ~/.nix-profile/lib/winvst3

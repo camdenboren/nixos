@@ -17,7 +17,9 @@ _:
       nova = prev.callPackage ../drv/nova { };
       freq-echo = prev.callPackage ../drv/freq-echo { };
       span = prev.callPackage ../drv/span { };
-      ssd = prev.callPackage ../drv/ssd { };
+      ssd = prev.callPackage ../drv/ssd {
+        kits = [ ../../hosts/main/usr/dot/reaper/tight_loud_cymbals.ssd5kit ];
+      };
       maudioplugins = prev.callPackage ../drv/maudioplugins { };
       abstract-vox = prev.callPackage ../drv/abstract-vox { };
     })

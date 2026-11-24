@@ -36,6 +36,7 @@ pkgs.testers.runNixOSTest {
             machine.succeed("test -d /home/camdenboren/.wine/drive_c/windows/system32")
             machine.succeed("test -f /home/camdenboren/.wine/drive_c/windows/system32/dxgi.dll")
             machine.succeed("test -L /home/camdenboren/.wine/drive_c/ProgramData/MeldaProduction")
+            machine.succeed("test -L /home/camdenboren/.wine/drive_c/ProgramData/samples/SSD5Library")
       '';
     })
   ];

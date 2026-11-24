@@ -33,6 +33,16 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 
 `kiwix.nix` also starts a separate `kiwix-mcp` systemd service using streamable HTTP and `KIWIX_BASE_URL=http://localhost:9095`.
 
+## Live TV guide
+
+[epg.nix](epg.nix) regenerates an XMLTV guide for the iptv-org playlists on a
+daily timer, following playlist changes by re-reading them each run. In Jellyfin,
+run `systemctl start epg-guide` once, then add
+`https://media.home.local/epg/guide.xml` as an XMLTV provider and enable it for
+the tuners; its 24h `Refresh Guide` task picks up new guides and channels match
+by `tvg-id`. Unmatched channels (local affiliates, some Tubi-only) are logged and
+skipped.
+
 ## Healthchecks
 
 - `main` runs a systemd `healthcheck` timer every 5 minutes against

@@ -10,6 +10,7 @@
     ./alc-calc.nix
     ./backup.nix
     ./bentopdf.nix
+    ./epg.nix
     ./homebox.nix
     ./homepage.nix
     ./immich.nix

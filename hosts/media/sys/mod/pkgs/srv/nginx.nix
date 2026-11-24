@@ -131,6 +131,15 @@ in
             proxyWebsockets = true;
             extraConfig = proxyHeaders;
           };
+
+          # XMLTV guide written by `epg-guide`, so Jellyfin (and other clients)
+          # can consume it by URL
+          "/epg/" = {
+            alias = "/var/lib/epg/";
+            extraConfig = ''
+              add_header Cache-Control "public, max-age=300" always;
+            '';
+          };
         };
       };
 

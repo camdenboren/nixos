@@ -6,6 +6,7 @@ _:
       # not in nixpkgs
       actual-cli = prev.callPackage ../drv/actual-cli { };
       drawio = prev.callPackage ../drv/drawio { };
+      epg = prev.callPackage ../drv/epg { };
       omdb-lookup = prev.callPackage ../drv/omdb-lookup { };
       outline-export = prev.callPackage ../drv/outline-export { };
       workerd = prev.callPackage ../drv/workerd { };

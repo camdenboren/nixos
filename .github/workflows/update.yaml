@@ -68,6 +68,7 @@ jobs:
             "actual-cli -u"
             "drawio"
             "dxvk-bin"
+            "epg --version=branch"
             "kiwix-mcp"
             "audiogridder -u"
             "britpressor -u"

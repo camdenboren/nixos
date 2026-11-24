@@ -32,11 +32,34 @@ let
         meta.position = "${toString ./default.nix}:1";
       }
       (
-        dockerTools.pullImage {
+        # Some upstream images embed /nix/store path strings (e.g.
+        # supabase/postgres), and Nix rejects fixed-output derivations whose
+        # output refers to other store paths unless those references are
+        # discarded. They're inert bytes inside the archive, so dropping them is
+        # safe and leaves the pinned output hash unchanged.
+        #
+        # `unsafeDiscardReferences` is only honoured in structured-attrs mode,
+        # which stops passing pullImage's non-standard attributes through as
+        # environment variables, so inline the handful its builder needs.
+        (dockerTools.pullImage {
           inherit (src) imageName imageDigest hash;
           finalImageName = src.imageName;
           finalImageTag = src.tag;
-        }
+        }).overrideAttrs
+          (old: {
+            __structuredAttrs = true;
+            unsafeDiscardReferences.out = true;
+            buildCommand = ''
+              imageDigest=${lib.escapeShellArg old.imageDigest}
+              imageName=${lib.escapeShellArg old.imageName}
+              imageTag=${lib.escapeShellArg old.imageTag}
+              sourceURL=${lib.escapeShellArg old.sourceURL}
+              destNameTag=${lib.escapeShellArg old.destNameTag}
+              SSL_CERT_FILE=${lib.escapeShellArg old.SSL_CERT_FILE}
+              export SSL_CERT_FILE
+              ${old.buildCommand}
+            '';
+          })
       );
 in
 lib.mapAttrs (_: mkImage) sources

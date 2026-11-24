@@ -18,6 +18,21 @@ jobs:
   scan:
     env:
       NIXBUILD_TOKEN: ${{ secrets.NIXBUILD_TOKEN }}
+      # main pins media's closure via system.extraDependencies; scan main
+      # without those so media's findings stay attributed to media
+      MAIN_SCAN_EXPR: |
+        let
+          flake = builtins.getFlake (toString ./.);
+          host = builtins.getEnv "HOST";
+          configuration = flake.nixosConfigurations.${host}.extendModules {
+            modules = [
+              ({ lib, ... }: {
+                system.extraDependencies = lib.mkForce [ ];
+              })
+            ];
+          };
+        in
+        configuration.config.system.build.toplevel
     strategy:
       fail-fast: false
       matrix:
@@ -81,17 +96,39 @@ jobs:
       # reads the target from the local store
       - name: Build toplevel on nixbuild.net
         if: ${{ matrix.nixbuild && env.NIXBUILD_TOKEN != '' }}
+        env:
+          HOST: ${{ matrix.host-name }}
         run: |
-          out=$(nix build --no-link --print-build-logs --print-out-paths \
-            --eval-store auto --store ssh-ng://nixbuild \
-            --builders "" --max-jobs 2 \
-            .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel)
+          if [[ "$HOST" == "main" ]]; then
+            out=$(nix build --no-link --print-build-logs --print-out-paths \
+              --eval-store auto --store ssh-ng://nixbuild \
+              --builders "" --max-jobs 2 \
+              --impure --expr "$MAIN_SCAN_EXPR")
+          else
+            out=$(nix build --no-link --print-build-logs --print-out-paths \
+              --eval-store auto --store ssh-ng://nixbuild \
+              --builders "" --max-jobs 2 \
+              .#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel)
+          fi
           nix copy --from ssh-ng://nixbuild "$out"
           echo "SCAN_TARGET=$out" >> "$GITHUB_ENV"
 
+      - name: Resolve scan target
+        if: ${{ matrix.host-name == 'mac' || !(matrix.nixbuild && env.NIXBUILD_TOKEN != '') }}
+        env:
+          HOST: ${{ matrix.host-name }}
+        run: |
+          if [[ "$HOST" == "main" ]]; then
+            target=$(nix build --no-link --print-out-paths \
+              --impure --expr "$MAIN_SCAN_EXPR")
+          else
+            target=.#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel
+          fi
+          echo "SCAN_TARGET=$target" >> "$GITHUB_ENV"
+
       - name: Install deps via nixpkgs and run vulnxscan + report
         run: |
-          target="${SCAN_TARGET:-.#${{ matrix.cfg-key }}Configurations.${{ matrix.host-name }}.config.system.build.toplevel}"
+          target="$SCAN_TARGET"
           nix shell nixpkgs#sbomnix nixpkgs#rustc nixpkgs#stdenv.cc --command sh -c \
             "vulnxscan '$target' && \
             rustc --edition 2021 -O -C linker=cc common/usr/scr/vulnxscan.rs -o /tmp/vulnxscan-report && \

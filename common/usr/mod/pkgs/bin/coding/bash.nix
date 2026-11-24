@@ -9,6 +9,26 @@
 let
   isDarwin = lib.hasSuffix "-darwin" system;
   cfgKey = if isDarwin then "darwin" else "nixos";
+  # main pins media's closure via system.extraDependencies; scan its runtime
+  # closure without those so media's findings stay attributed to media
+  scanTarget =
+    if hostname == "main" then
+      ''
+        $(nix build --no-link --print-out-paths --impure --expr '
+          let
+            flake = builtins.getFlake (toString ./.);
+            configuration = flake.nixosConfigurations.${hostname}.extendModules {
+              modules = [
+                ({ lib, ... }: {
+                  system.extraDependencies = lib.mkForce [ ];
+                })
+              ];
+            };
+          in
+          configuration.config.system.build.toplevel
+        ')''
+    else
+      ".#${cfgKey}Configurations.${hostname}.config.system.build.toplevel";
   isVM = lib.hasSuffix "vm" hostname;
   isOllamaServer = hostname == "main" || hostname == "media";
   needsBuilder = system == "x86_64-linux" && hostname != "main";
@@ -55,7 +75,7 @@ in
       scan = ''
         cd $NH_FLAKE && \
         ${pkgs.sbomnix}/bin/vulnxscan \
-          .#${cfgKey}Configurations.${hostname}.config.system.build.toplevel && \
+          ${scanTarget} && \
           tmpdir=$(mktemp -d) && \
           trap 'rm -rf "$tmpdir"' EXIT && \
           ${pkgs.rustc}/bin/rustc --edition 2021 -O -C linker=${pkgs.stdenv.cc}/bin/cc ./common/usr/scr/vulnxscan.rs -o "$tmpdir/vulnxscan" && \

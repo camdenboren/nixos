@@ -6,7 +6,6 @@ let
   macURL = "http://192.168.1.93";
   mainURL = "http://192.168.1.88";
   ports = {
-    homepage = toString 8082;
     dex = toString 5556;
     box = toString 7745;
     car = toString 5000;
@@ -26,6 +25,7 @@ let
     photos = toString 2283;
     design = toString 9001;
     archive = toString 9095;
+    homepage = toString 8082;
   };
   domains = {
     www = "www.${baseDomain}";
@@ -33,7 +33,6 @@ let
     box = "box.${baseDomain}";
     car = "car.${baseDomain}";
     log = "log.${baseDomain}";
-    notes = "notes.${baseDomain}";
     gist = "gist.${baseDomain}";
     chat = "chat.${baseDomain}";
     sync = "sync.${baseDomain}";
@@ -42,6 +41,7 @@ let
     util = "util.${baseDomain}";
     omdb = "omdb.${baseDomain}";
     read = "read.${baseDomain}";
+    notes = "notes.${baseDomain}";
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
@@ -74,14 +74,8 @@ in
     '';
 
     virtualHosts = {
-      # redirect http -> https
-      "_" = {
-        extraConfig = ''
-          return 301 https://$host$request_uri;
-        '';
-      };
-
       "${baseDomain}" = {
+        default = true;
         forceSSL = true;
         enableACME = true;
         locations = {
@@ -94,13 +88,9 @@ in
 
       # redirect wwwDomain -> baseDomain
       "${domains.www}" = {
-        locations = {
-          "/" = {
-            extraConfig = ''
-              return 301 $scheme://${baseDomain}$request_uri;
-            '';
-          };
-        };
+        addSSL = true;
+        useACMEHost = baseDomain;
+        globalRedirect = baseDomain;
       };
 
       "${domains.chat}" = {

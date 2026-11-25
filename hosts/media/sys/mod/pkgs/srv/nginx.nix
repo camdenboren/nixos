@@ -22,6 +22,7 @@ let
     media = toString 8096;
     image = toString 9090;
     money = toString 4000;
+    vault = toString 8222;
     photos = toString 2283;
     design = toString 9001;
     archive = toString 9095;
@@ -45,6 +46,7 @@ let
     media = "media.${baseDomain}";
     image = "image.${baseDomain}";
     money = "money.${baseDomain}";
+    vault = "vault.${baseDomain}";
     photos = "photos.${baseDomain}";
     design = "design.${baseDomain}";
     archive = "archive.${baseDomain}";
@@ -350,6 +352,12 @@ in
             '';
           };
         };
+      };
+
+      # vaultwarden's module creates the vhost
+      "${domains.vault}" = {
+        useACMEHost = baseDomain;
+        extraConfig = proxyHeaders;
       };
 
       "${domains.read}" = {

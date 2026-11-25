@@ -34,6 +34,9 @@ let
     omdb-lookup = ''
       API_KEY=abcdefghi
     '';
+    vaultwarden = ''
+      ADMIN_TOKEN=abcdefghi
+    '';
     openobserve = ''
       ZO_ROOT_USER_EMAIL=smoke@example.invalid
       ZO_ROOT_USER_PASSWORD=Smoke-test-only-password-123!

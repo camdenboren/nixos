@@ -24,15 +24,16 @@ let
     ntfy = "https://ntfy.${baseDomain}/";
     util = "https://util.${baseDomain}/";
     omdb = "https://omdb.${baseDomain}/";
+    gist = "https://gist.${baseDomain}/";
+    read = "https://read.${baseDomain}/";
     notes = "https://notes.${baseDomain}/";
     media = "https://media.${baseDomain}/";
     image = "https://image.${baseDomain}/";
     money = "https://money.${baseDomain}/";
+    vault = "https://vault.${baseDomain}/";
     photos = "https://photos.${baseDomain}/";
     design = "https://design.${baseDomain}/";
     archive = "https://archive.${baseDomain}/";
-    gist = "https://gist.${baseDomain}/";
-    read = "https://read.${baseDomain}/";
   };
   icons = {
     alc-calc = "${pkgs.alc-calc-web}/app-icon.png";
@@ -165,7 +166,7 @@ in
         Content = [
           {
             Archive = {
-              icon = "kiwix";
+              icon = "kiwix-light";
               href = URLs.archive;
               siteMonitor = URLs.archive;
             };
@@ -292,6 +293,13 @@ in
               icon = "syncthing";
               href = URLs.sync;
               siteMonitor = URLs.sync;
+            };
+          }
+          {
+            Vault = {
+              icon = "vaultwarden-light";
+              href = URLs.vault;
+              siteMonitor = URLs.vault;
             };
           }
         ];

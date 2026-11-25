@@ -20,6 +20,6 @@ creation_rules:
   - path_regex: ^common/sec/(readest|readest-client)\.yaml$
     key_groups:
       - age: [*admin, *media]
-  - path_regex: ^common/sec/(backup|dex|homebox|omdb-lookup|openobserve|penpot|tailscale)\.yaml$
+  - path_regex: ^common/sec/(backup|dex|homebox|omdb-lookup|openobserve|penpot|tailscale|vaultwarden)\.yaml$
     key_groups:
       - age: [*admin, *media]

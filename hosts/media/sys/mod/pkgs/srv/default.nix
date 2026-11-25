@@ -29,6 +29,7 @@
     ./readest.nix
     ./tailscale.nix
     ./unbound.nix
+    ./vaultwarden.nix
 
     # Common
     ../../../../../../common/sys/mod/pkgs/srv/utils

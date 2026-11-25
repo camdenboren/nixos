@@ -112,6 +112,21 @@ let
     echo $'\e[32m[backup:opengist] Succeeded.\e[0m'
 
     #
+    # Vaultwarden
+    #
+
+    echo $'\e[36m[backup:vaultwarden] Starting...\e[0m'
+    vw_backup="$(mktemp -d)"
+    ${pkgs.gnutar}/bin/tar -C /var/lib/bitwarden_rs \
+      -cf - . \
+      | ${pkgs.gnutar}/bin/tar -C "$vw_backup" -xf -
+    ${pkgs.gnutar}/bin/tar -C "$vw_backup" \
+      --use-compress-program=${pkgs.gzip}/bin/gzip \
+      -cf "$BACKUP_PATH"/backups/Services/vaultwarden.tar.gz .
+    ${pkgs.coreutils}/bin/rm -rf -- "$vw_backup"
+    echo $'\e[32m[backup:vaultwarden] Succeeded.\e[0m'
+
+    #
     # Outline
     #
 
@@ -231,6 +246,9 @@ let
     ${pkgs.util-linux}/bin/runuser -u postgres -- \
       ${pkgs.postgresql}/bin/pg_dump -U postgres outline \
       > "$BACKUP_PATH"/backups/Services/outline.sql
+    ${pkgs.util-linux}/bin/runuser -u postgres -- \
+      ${pkgs.postgresql}/bin/pg_dump -U postgres vaultwarden \
+      > "$BACKUP_PATH"/backups/Services/vaultwarden.sql
     echo $'\e[32m[backup:postgres] Succeeded.\e[0m'
 
     #

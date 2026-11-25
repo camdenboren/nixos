@@ -43,6 +43,7 @@ pkgs.testers.runNixOSTest {
         "postgresql"
         "redis-immich"
         "redis-outline"
+        "vaultwarden"
         "xerj"
       ];
       extraChecks = ''

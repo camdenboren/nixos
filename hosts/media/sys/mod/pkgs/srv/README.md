@@ -25,6 +25,7 @@ defaults, so keep those defaults aligned with this table when changing inputs.
 | `pdf`                   | BentoPDF-managed Nginx vhost                        | [bentopdf.nix](bentopdf.nix); separate from `nginx.nix`'s domain map                         |
 | `alc`                   | alc-calc-managed Nginx vhost                        | [alc-calc.nix](alc-calc.nix); separate from `nginx.nix`'s domain map, like BentoPDF          |
 | `box`, `car`, `money`   | Homebox `:7745`, LubeLogger `:5000`, Actual `:4000` | [homebox.nix](homebox.nix), [lubelogger.nix](lubelogger.nix), [actual.nix](actual.nix)       |
+| `vault`                 | Vaultwarden `:8222`                                 | [vaultwarden.nix](vaultwarden.nix); Nginx vhost and PostgreSQL from the module            |
 | `ntfy`                  | ntfy `:2586`                                        | [ntfy-sh.nix](ntfy-sh.nix)                                                                   |
 | `sync`                  | Syncthing `:8384`                                   | [Shared Home Manager service](../../../../../../common/usr/mod/pkgs/srv/utils/syncthing.nix) |
 | `image`                 | `192.168.1.88:9090`                                 | Remote backend on `main`                                                                     |
@@ -72,7 +73,7 @@ skipped.
   aligned with the persistent root in `/var/lib/acme/.minica` for client trust.
 - Runtime secrets under `/run/secrets` are managed by the
   [sops-nix configuration](../../../../../../common/sec/README.md), including Tailscale,
-  Dex/Outline, Homebox, Penpot, OpenObserve, backups, and shared host services.
+  Dex/Outline, Homebox, Penpot, OpenObserve, Vaultwarden, backups, and shared host services.
   The Penpot file supplies container environment variables. Outline reuses Dex's client
   secret and currently disables Node TLS verification. Opengist generates its
   session secret in `/var/lib/opengist`, so it needs no entry unless OAuth or

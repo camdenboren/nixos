@@ -60,6 +60,7 @@ let
           "podman-readest-client.service"
         ];
         tailscale.key = "auth_key";
+        vaultwarden.restartUnits = [ "vaultwarden.service" ];
       };
       # The macOS wrapper sources the file as this user.
       mac.fetch-rs.owner = "camdenboren";

@@ -208,7 +208,7 @@ in
       '';
 
       settings = {
-        defaultModel = if isDarwin then "gpt-6.1-sol" else "claude-haiku-5-5";
+        defaultModel = if isDarwin then "gpt-6.2-sol" else "deepseek-v4.1-flash";
         defaultProvider = if isDarwin then "openai" else "opencode-go";
         defaultThinkingLevel = "medium";
         packages = [
